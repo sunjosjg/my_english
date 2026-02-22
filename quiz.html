@@ -77,11 +77,30 @@
 
     .cele-emoji-wrap { margin-bottom: 4px; }
     .cele-main-emoji { font-size: 90px; display: block; animation: emojiSpin 1s linear infinite; }
-    .cele-thumbs { font-size: 80px; display: flex; gap: 8px; }
-    .cele-thumbs span { display: inline-block; animation: thumbsBounce 0.35s ease-in-out infinite alternate; }
-    .cele-thumbs span:nth-child(2) { animation-delay: 0.18s; }
-    @keyframes emojiSpin    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    @keyframes thumbsBounce { from{transform:scale(1) rotate(-18deg)} to{transform:scale(1.45) rotate(18deg)} }
+    @keyframes emojiSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    /* ── 100점 전용 ── */
+    .cele-100-wrap { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
+    .cele-main-big { font-size: 110px; z-index: 2; position: relative;
+      animation: wildSpin100 0.9s ease-in-out infinite; }
+    @keyframes wildSpin100 {
+      0%   { transform: rotate(0deg)   scale(1.0); }
+      12%  { transform: rotate(72deg)  scale(2.1); }
+      25%  { transform: rotate(144deg) scale(0.45); }
+      37%  { transform: rotate(216deg) scale(2.3); }
+      50%  { transform: rotate(360deg) scale(0.55); }
+      62%  { transform: rotate(432deg) scale(1.9); }
+      75%  { transform: rotate(504deg) scale(0.4); }
+      87%  { transform: rotate(576deg) scale(2.2); }
+      100% { transform: rotate(720deg) scale(1.0); }
+    }
+    .cele-crowd { position: absolute; inset: 0; }
+    .crowd-thumb { position: absolute; font-size: 30px;
+      animation: crowdCheer 0.38s ease-in-out infinite alternate; }
+    @keyframes crowdCheer {
+      from { transform: scale(0.7) rotate(-20deg); opacity: 0.75; }
+      to   { transform: scale(1.5) rotate(20deg);  opacity: 1.0;  }
+    }
 
     .cele-msg { font-size: 40px; font-weight: 900; color: #fff; text-align: center; padding: 0 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.4); margin: 14px 0 8px; }
     .tier-100 .cele-msg { font-size: 46px; animation: heartbeat 0.45s ease-in-out infinite alternate; }
@@ -197,6 +216,13 @@ function startQuiz() {
   quizWords = shuffle([...words]);
   showScreen('screen-quiz');
   renderQuizCard();
+  // ?fill=1 이면 정답 자동 채움 (테스트용)
+  if (params.get('fill') === '1') {
+    setTimeout(() => {
+      const inp = document.getElementById('quiz-input');
+      if (inp) inp.value = quizWords[0].answer;
+    }, 300);
+  }
 }
 
 function renderQuizCard() {
@@ -209,6 +235,7 @@ function renderQuizCard() {
   document.getElementById('qc-sentence').innerHTML = w.sentence.replace('___', '<span class="blank">___</span>');
   const inp = document.getElementById('quiz-input');
   inp.value = ''; inp.className = 'quiz-input'; inp.disabled = false; inp.focus();
+  if (params.get('fill') === '1') setTimeout(() => { inp.value = w.answer; }, 100);
   const fb = document.getElementById('feedback');
   fb.className = 'feedback'; fb.textContent = '';
   document.getElementById('submit-btn').textContent = '확인';
@@ -339,7 +366,21 @@ function triggerCelebration(pct, isPerfect) {
   // 이모지
   const wrap = document.getElementById('cele-emoji-wrap');
   if (data.emoji === 'thumbs') {
-    wrap.innerHTML = '<div class="cele-thumbs"><span>👍</span><span>👍</span></div>';
+    wrap.innerHTML = '<div class="cele-100-wrap"><div class="cele-crowd"></div><div class="cele-main-big">👍</div></div>';
+    const crowd = wrap.querySelector('.cele-crowd');
+    for (let i = 0; i < 10; i++) {
+      const angle = (i / 10) * Math.PI * 2;
+      const r = 105;
+      const x = 140 + r * Math.cos(angle) - 15;
+      const y = 140 + r * Math.sin(angle) - 15;
+      const sp = document.createElement('span');
+      sp.className = 'crowd-thumb';
+      sp.textContent = '👍';
+      sp.style.left = x + 'px';
+      sp.style.top  = y + 'px';
+      sp.style.animationDelay = (i * 0.038) + 's';
+      crowd.appendChild(sp);
+    }
   } else {
     wrap.innerHTML = `<span class="cele-main-emoji">${data.emoji}</span>`;
   }
