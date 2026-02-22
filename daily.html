@@ -37,6 +37,12 @@
     .wr-input:focus { border-color: var(--primary); }
 
     /* ── STEP 3: SENTENCE CARDS ── */
+    .step3-layout { display: grid; grid-template-columns: 1fr 130px; gap: 14px; align-items: start; }
+    .step3-wordbank { position: sticky; top: 16px; background: var(--card); border-radius: var(--radius); border: 2px solid var(--primary); padding: 12px 10px; }
+    .wb-title { font-size: 11px; font-weight: 800; color: var(--primary); margin-bottom: 10px; text-align: center; letter-spacing: 0.05em; }
+    .wb-item { padding: 8px 10px; font-size: 14px; font-weight: 700; border-radius: 8px; margin-bottom: 6px; background: var(--primary-bg); color: var(--primary); text-align: center; transition: all 0.2s; }
+    .wb-item.used { background: var(--border); color: var(--muted); text-decoration: line-through; opacity: 0.5; }
+
     .sentence-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 18px 20px; margin-bottom: 12px; }
     .sc-no       { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
     .sc-sentence { font-size: 19px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
@@ -155,7 +161,13 @@
       </div>
       <div class="step-badge">3 / 3</div>
     </div>
-    <div id="step3-list"></div>
+    <div class="step3-layout">
+      <div id="step3-list"></div>
+      <div class="step3-wordbank">
+        <div class="wb-title">📝 정답 목록</div>
+        <div id="wordbank-list"></div>
+      </div>
+    </div>
     <button class="complete-btn" onclick="completeStep3()">✅ 완료 — 결과 보기</button>
   </div>
 </div>
@@ -250,6 +262,17 @@ function renderStep2() {
 function renderStep3() {
   step3Order = shuffle([...words]);
   const list = document.getElementById('step3-list');
+
+  // 정답 목록 (섞어서 오른쪽에 표시)
+  const bankEl = document.getElementById('wordbank-list');
+  shuffle([...step3Order]).forEach(w => {
+    const item = document.createElement('div');
+    item.className = 'wb-item';
+    item.dataset.answer = w.answer;
+    item.textContent = w.answer;
+    bankEl.appendChild(item);
+  });
+
   step3Order.forEach((w, i) => {
     const card = document.createElement('div');
     card.className = 'sentence-card';
@@ -258,9 +281,31 @@ function renderStep3() {
       <div class="sc-no">${i + 1}번</div>
       <div class="sc-sentence">${sentHtml}</div>
       <input class="sc-input" type="text" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">`;
+    card.querySelector('.sc-input').addEventListener('input', updateWordBank);
     list.appendChild(card);
   });
   addEnterNav('#step3-list .sc-input');
+}
+
+function updateWordBank() {
+  const inputs = [...document.querySelectorAll('#step3-list .sc-input')];
+  // 현재 입력된 값들 수집 (사용된 answer 추적)
+  const usedAnswers = [];
+  inputs.forEach((inp, i) => {
+    const val = normEn(inp.value);
+    if (val) usedAnswers.push(val);
+  });
+  // 단어 목록에서 사용된 것 표시
+  document.querySelectorAll('#wordbank-list .wb-item').forEach(item => {
+    const ans = normEn(item.dataset.answer);
+    const idx = usedAnswers.indexOf(ans);
+    if (idx !== -1) {
+      item.classList.add('used');
+      usedAnswers.splice(idx, 1); // 하나씩만 소비 (중복 단어 대응)
+    } else {
+      item.classList.remove('used');
+    }
+  });
 }
 
 
