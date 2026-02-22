@@ -8,6 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="찬희하이">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -16,28 +17,29 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    button, input, select, textarea { font-family: inherit; }
     .page { padding: 16px; max-width: 860px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
+    .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
     .chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { padding: 8px 18px; border: 2px solid var(--border); border-radius: 30px; background: var(--card); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; user-select: none; }
+    .chip { padding: 8px 18px; border: 2px solid var(--border); border-radius: 30px; background: var(--card); font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.15s; user-select: none; }
     .chip:hover { border-color: var(--primary-light); }
     .chip.on { background: var(--primary); color: #fff; border-color: var(--primary); }
     .app-header { text-align: center; padding: 24px 0 8px; }
     .app-title { font-size: 26px; font-weight: 800; color: var(--primary); }
-    .app-sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
+    .app-sub { font-size: 15px; color: var(--muted); margin-top: 4px; }
     .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
     .unit-card { padding: 14px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); cursor: pointer; transition: all 0.15s; position: relative; }
     .unit-card:hover { border-color: var(--primary-light); transform: translateY(-1px); }
     .unit-card.on { border-color: var(--primary); background: var(--primary-bg); }
     .unit-card.done { border-color: var(--green); background: var(--green-bg); opacity: 0.75; }
     .unit-card.done.on { border-color: var(--green); background: var(--green-bg); opacity: 1; }
-    .unit-card .uc-id { font-weight: 700; color: var(--primary); font-size: 15px; }
+    .unit-card .uc-id { font-weight: 700; color: var(--primary); font-size: 16px; }
     .unit-card.done .uc-id { color: var(--green); }
-    .unit-card .uc-label { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+    .unit-card .uc-label { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
     .unit-done-btn {
       position: absolute; top: 7px; right: 8px;
-      background: none; border: none; font-size: 18px;
+      background: none; border: none; font-size: 20px;
       cursor: pointer; padding: 2px; line-height: 1;
       opacity: 0.35; transition: opacity 0.15s, transform 0.15s;
     }
@@ -48,14 +50,14 @@
     .mode-card:hover { border-color: var(--primary-light); }
     .mode-card.on { border-color: var(--primary); background: var(--primary-bg); }
     .mode-card .mc-icon { font-size: 28px; display: block; margin-bottom: 6px; }
-    .mode-card .mc-label { font-size: 13px; font-weight: 700; }
-    .mode-card .mc-desc { font-size: 11px; color: var(--muted); margin-top: 3px; }
-    .start-btn { width: 100%; padding: 16px; margin-top: 20px; margin-bottom: 32px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .mode-card .mc-label { font-size: 14px; font-weight: 700; }
+    .mode-card .mc-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .start-btn { width: 100%; padding: 16px; margin-top: 20px; margin-bottom: 32px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 18px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
     .start-btn:hover { background: var(--primary-light); }
     .start-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
-    .check-btn { width: 100%; padding: 14px; margin-top: 8px; margin-bottom: 32px; background: var(--card); border: 2px solid #10b981; color: #10b981; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .check-btn { width: 100%; padding: 14px; margin-top: 8px; margin-bottom: 32px; background: var(--card); border: 2px solid #10b981; color: #10b981; border-radius: var(--radius); font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
     .check-btn:hover { background: #ecfdf5; }
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 15px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
     .toast.show { opacity: 1; }
 
 

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>플래시카드 — 찬희 영어 단어장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -11,7 +12,8 @@
       --green: #10b981; --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff;
       --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    button, input, select, textarea { font-family: inherit; }
 
     /* LAYOUT */
     html, body { height: 100%; }
@@ -20,12 +22,12 @@
 
     /* HEADER */
     .screen-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-shrink: 0; }
-    .back-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .back-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
     .back-btn:hover { background: var(--border); }
     .progress-wrap { flex: 1; }
     .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
     .progress-fill { height: 100%; background: var(--primary); border-radius: 4px; transition: width 0.3s; }
-    .progress-text { font-size: 13px; color: var(--muted); white-space: nowrap; }
+    .progress-text { font-size: 14px; color: var(--muted); white-space: nowrap; }
 
     /* FLASHCARD */
     .study-fixed { flex-shrink: 0; }
@@ -34,11 +36,11 @@
     .fc-nav-zone { position: absolute; bottom: 0; left: 0; right: 0; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; z-index: 10; }
     .fc-nav-zone-left  { display: flex; gap: 8px; }
     .fc-nav-zone-right { display: flex; gap: 8px; }
-    .fc-nav-btn { width: 56px; height: 48px; border-radius: 14px; border: none; background: rgba(255,255,255,0.28); color: #fff; font-size: 22px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; backdrop-filter: blur(6px); }
+    .fc-nav-btn { width: 56px; height: 48px; border-radius: 14px; border: none; background: rgba(255,255,255,0.28); color: #fff; font-size: 24px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; backdrop-filter: blur(6px); }
     .fc-nav-btn:hover  { background: rgba(255,255,255,0.48); }
     .fc-nav-btn:active { transform: scale(0.92); }
     [data-tip] { position: relative; }
-    [data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: rgba(30,41,59,0.9); color: #fff; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 8px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 100; }
+    [data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: rgba(30,41,59,0.9); color: #fff; font-size: 13px; font-weight: 500; padding: 4px 10px; border-radius: 8px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 100; }
     [data-tip]:hover::after { opacity: 1; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.55s cubic-bezier(.4,0,.2,1); transform-style: preserve-3d; }
     .flashcard-wrap.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -46,19 +48,19 @@
     .fc-front { background: linear-gradient(135deg, #5b4fcf, #7c71e0); color: #fff; }
     .fc-back  { background: linear-gradient(135deg, #10b981, #34d399); color: #fff; transform: rotateY(180deg); }
     .fc-word { font-size: 34px; font-weight: 800; margin-bottom: 6px; }
-    .fc-pos  { font-size: 13px; opacity: 0.75; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 20px; }
+    .fc-pos  { font-size: 14px; opacity: 0.75; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 20px; }
     .fc-korean { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
-    .fc-definition { font-size: 14px; opacity: 0.9; line-height: 1.55; max-width: 480px; }
-    .fc-reveal { display: none; background: rgba(255,255,255,0.2); border: 2px dashed rgba(255,255,255,0.6); color: #fff; border-radius: 12px; padding: 12px 28px; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: background 0.2s; }
+    .fc-definition { font-size: 15px; opacity: 0.9; line-height: 1.55; max-width: 480px; }
+    .fc-reveal { display: none; background: rgba(255,255,255,0.2); border: 2px dashed rgba(255,255,255,0.6); color: #fff; border-radius: 12px; padding: 12px 28px; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: background 0.2s; }
     .fc-reveal:hover { background: rgba(255,255,255,0.38); }
-    .speak-btn { margin-top: 14px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5); color: #fff; border-radius: 50px; padding: 8px 20px; font-size: 18px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .speak-btn { margin-top: 14px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5); color: #fff; border-radius: 50px; padding: 8px 20px; font-size: 20px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
     .speak-btn:hover { background: rgba(255,255,255,0.4); }
     .speak-btn.speaking { background: rgba(255,255,255,0.5); animation: pulse 0.6s infinite alternate; }
     @keyframes pulse { from { opacity: 1; } to { opacity: 0.6; } }
 
     /* CTRL BAR */
     .ctrl-bar { display: flex; gap: 8px; justify-content: center; margin: 8px 0 4px; flex-shrink: 0; }
-    .ctrl-btn { padding: 8px 16px; font-size: 13px; font-weight: 600; border: 2px solid var(--border); border-radius: 20px; background: var(--card); cursor: pointer; transition: all 0.15s; }
+    .ctrl-btn { padding: 8px 16px; font-size: 14px; font-weight: 600; border: 2px solid var(--border); border-radius: 20px; background: var(--card); cursor: pointer; transition: all 0.15s; }
     .ctrl-btn:hover { border-color: var(--primary-light); }
     .ctrl-btn.on { background: var(--primary); color: #fff; border-color: var(--primary); }
     .ctrl-btn.shuffle { border-color: var(--yellow); color: var(--yellow); }
@@ -80,18 +82,18 @@
     .study-word-row.result-correct .swr-kr { color: var(--text) !important; user-select: auto !important; }
     .study-word-row.result-correct .swr-pos,
     .study-word-row.result-correct .swr-speak { visibility: visible !important; }
-    .swr-result { font-size: 13px; min-width: 18px; text-align: center; }
-    .swr-no { font-size: 12px; color: var(--muted); min-width: 20px; }
-    .swr-star { font-size: 12px; color: #f59e0b; font-weight: 800; flex-shrink: 0; letter-spacing: -1px; }
+    .swr-result { font-size: 14px; min-width: 18px; text-align: center; }
+    .swr-no { font-size: 13px; color: var(--muted); min-width: 20px; }
+    .swr-star { font-size: 13px; color: #f59e0b; font-weight: 800; flex-shrink: 0; letter-spacing: -1px; }
     .swr-en-wrap { flex: 1; display: flex; align-items: center; gap: 5px; min-width: 0; }
-    .swr-en { font-weight: 700; font-size: 15px; }
-    .swr-pos { font-size: 11px; color: var(--muted); background: var(--border); padding: 1px 6px; border-radius: 10px; }
-    .swr-kr { font-size: 14px; color: var(--muted); }
-    .swr-speak { background: none; border: none; font-size: 16px; cursor: pointer; padding: 2px 4px; border-radius: 6px; opacity: 0.5; transition: opacity 0.15s; }
+    .swr-en { font-weight: 700; font-size: 16px; }
+    .swr-pos { font-size: 12px; color: var(--muted); background: var(--border); padding: 1px 6px; border-radius: 10px; }
+    .swr-kr { font-size: 15px; color: var(--muted); }
+    .swr-speak { background: none; border: none; font-size: 17px; cursor: pointer; padding: 2px 4px; border-radius: 6px; opacity: 0.5; transition: opacity 0.15s; }
     .swr-speak:hover { opacity: 1; background: var(--primary-bg); }
 
     /* UNIT TITLE */
-    .unit-title { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 4px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .unit-title { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 4px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .unit-title strong { color: var(--primary); }
 
     /* MIC / VOICE */
@@ -99,9 +101,9 @@
     .ctrl-btn.mic-btn:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
     .ctrl-btn.mic-btn.listening { background: #ef4444; color: #fff; border-color: #ef4444; animation: micPulse 1s infinite; }
     @keyframes micPulse { 0%,100% { opacity:1; } 50% { opacity:0.55; } }
-    .voice-feedback { display: none; padding: 10px 16px; border-radius: 12px; font-size: 15px; font-weight: 700; text-align: center; color: #fff; margin: 6px 0 2px; flex-shrink: 0; transition: background 0.2s; }
+    .voice-feedback { display: none; padding: 10px 16px; border-radius: 12px; font-size: 16px; font-weight: 700; text-align: center; color: #fff; margin: 6px 0 2px; flex-shrink: 0; transition: background 0.2s; }
 
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 15px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
     .toast.show { opacity: 1; }
 
     /* CELEBRATION */
@@ -130,8 +132,8 @@
     @keyframes heartbeat { 0%{transform:scale(1)} 60%{transform:scale(1.18)} 100%{transform:scale(1.06)} }
     @keyframes pulse     { from{transform:scale(1)} to{transform:scale(1.09)} }
 
-    .cele-sub { font-size: 19px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 24px; line-height: 1.5; }
-    .cele-tap { position: absolute; bottom: 28px; font-size: 15px; color: rgba(255,255,255,0.65); }
+    .cele-sub { font-size: 21px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 24px; line-height: 1.5; }
+    .cele-tap { position: absolute; bottom: 28px; font-size: 16px; color: rgba(255,255,255,0.65); }
     .fly-emoji { position: absolute; font-size: 36px; pointer-events: none; animation: flyUp linear forwards; }
     @keyframes flyUp { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 100%{transform:translateY(-110vh) rotate(720deg) scale(0.5);opacity:0} }
     .flash-overlay { position: fixed; inset: 0; background: #fff; pointer-events: none; z-index: 10000; animation: screenFlash 0.7s ease forwards; }
@@ -483,7 +485,7 @@ function resultIcon(english) {
   const attempts = voiceAttempts.get(english) || 1;
   if (result === 'correct') {
     return attempts > 1
-      ? `✅<span style="color:#ef4444;font-size:11px;font-weight:700">(${attempts})</span>`
+      ? `✅<span style="color:#ef4444;font-size: 12px;font-weight:700">(${attempts})</span>`
       : '✅';
   }
   return '❌';

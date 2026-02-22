@@ -25,23 +25,23 @@
     }
     #nav-overlay.open #nav-drawer { transform: translateX(0); }
     .nav-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .nav-title { font-size: 19px; font-weight: 800; color: var(--primary, #5b4fcf); }
+    .nav-title { font-size: 21px; font-weight: 800; color: var(--primary, #5b4fcf); }
     .nav-close-btn { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--muted, #64748b); line-height: 1; padding: 4px; }
     .nav-unit-info {
       background: var(--primary-bg, #eef2ff); border-radius: 10px;
       padding: 12px 14px; margin-bottom: 16px;
-      font-size: 13px; color: var(--primary, #5b4fcf); font-weight: 600; line-height: 1.6;
+      font-size: 14px; color: var(--primary, #5b4fcf); font-weight: 600; line-height: 1.6;
     }
     .nav-btn {
       width: 100%; padding: 14px 16px; text-align: left;
       background: var(--bg, #f1f5f9); border: 2px solid var(--border, #e2e8f0);
-      border-radius: var(--radius, 14px); font-size: 15px; font-weight: 700;
+      border-radius: var(--radius, 14px); font-size: 16px; font-weight: 700;
       cursor: pointer; margin-bottom: 8px; display: flex; align-items: center;
       gap: 10px; transition: all 0.15s; font-family: inherit; color: var(--text, #1e293b);
     }
     .nav-btn:hover { border-color: var(--primary, #5b4fcf); background: var(--primary-bg, #eef2ff); }
     .nav-btn.nav-cur { border-color: var(--primary, #5b4fcf); background: var(--primary-bg, #eef2ff); color: var(--primary, #5b4fcf); }
-    .nav-no-unit { text-align: center; padding: 48px 16px; color: var(--muted, #64748b); font-size: 16px; font-weight: 600; line-height: 1.8; }
+    .nav-no-unit { text-align: center; padding: 48px 16px; color: var(--muted, #64748b); font-size: 17px; font-weight: 600; line-height: 1.8; }
   `;
   document.head.appendChild(styleEl);
 
@@ -107,7 +107,7 @@
     }
 
     if (!unit) {
-      return `<div class="nav-no-unit">📖 단원을 먼저 선택하세요<br><span style="font-size:13px;font-weight:400">메인 화면에서 단원을 선택하면<br>여기서 바로 학습할 수 있어요!</span></div>`;
+      return `<div class="nav-no-unit">📖 단원을 먼저 선택하세요<br><span style="font-size: 14px;font-weight:400">메인 화면에서 단원을 선택하면<br>여기서 바로 학습할 수 있어요!</span></div>`;
     }
 
     const unitInfoHtml = (unit.courseLabel && unit.unitShort)

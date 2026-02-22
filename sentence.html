@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>문장 완성 — 찬희 영어 단어장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -11,35 +12,40 @@
       --green: #10b981; --yellow: #f59e0b; --red: #ef4444;
       --bg: #f1f5f9; --card: #ffffff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    button, input, select, textarea { font-family: inherit; }
     html, body { height: 100%; }
     #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
     .page { height: 100%; display: flex; flex-direction: column; overflow: hidden; padding: 16px; padding-bottom: 0; max-width: 860px; margin: 0 auto; width: 100%; }
 
     /* HEADER */
     .screen-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-shrink: 0; }
-    .back-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .back-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
     .back-btn:hover { background: var(--border); }
-    .header-title { flex: 1; font-size: 16px; font-weight: 700; }
-    .progress-text { font-size: 13px; color: var(--muted); white-space: nowrap; font-weight: 600; }
+    .header-title { flex: 1; font-size: 17px; font-weight: 700; }
+    .progress-text { font-size: 14px; color: var(--muted); white-space: nowrap; font-weight: 600; }
 
     /* UNIT TITLE */
-    .unit-title { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 8px; flex-shrink: 0; }
+    .unit-title { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 8px; flex-shrink: 0; }
     .unit-title strong { color: var(--primary); }
 
+    /* CONTENT LAYOUT */
+    .content-wrap { flex: 1; display: flex; gap: 12px; min-height: 0; overflow: hidden; }
+
     /* WORD BANK */
-    .word-bank-wrap { flex-shrink: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px 12px; margin-bottom: 12px; }
-    .word-bank-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
-    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; min-height: 34px; }
+    .word-bank-wrap { flex-shrink: 0; width: 230px; background: var(--card); border: 2px solid var(--primary); border-radius: var(--radius); padding: 10px 8px 12px; align-self: flex-start; position: sticky; top: 0; }
+    .word-bank-label { font-size: 12px; font-weight: 800; letter-spacing: .04em; color: var(--primary); text-transform: uppercase; margin-bottom: 8px; text-align: center; }
+    .word-bank { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .word-tile {
-      display: inline-flex; align-items: center; padding: 6px 14px;
-      background: var(--primary); color: #fff; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 4px; text-align: center; word-break: break-all;
+      background: var(--primary); color: #fff; border-radius: 10px;
       font-size: 14px; font-weight: 700; cursor: grab;
-      box-shadow: 0 2px 8px rgba(91,79,207,0.25);
-      transition: transform 0.12s, opacity 0.2s, box-shadow 0.12s;
+      box-shadow: 0 2px 6px rgba(91,79,207,0.22);
+      transition: transform 0.12s, opacity 0.2s;
       user-select: none; -webkit-user-select: none; touch-action: none;
     }
-    .word-tile:hover  { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(91,79,207,0.35); }
+    .word-tile:hover  { transform: translateY(-2px); }
     .word-tile:active { cursor: grabbing; transform: scale(0.95); }
     .word-tile.used   { opacity: 0.2; pointer-events: none; }
     .word-tile.dragging { opacity: 0.35; }
@@ -48,7 +54,7 @@
     #drag-ghost {
       position: fixed; pointer-events: none; z-index: 9998;
       background: var(--primary); color: #fff; border-radius: 20px;
-      padding: 6px 16px; font-size: 14px; font-weight: 700;
+      padding: 6px 16px; font-size: 15px; font-weight: 700;
       box-shadow: 0 6px 20px rgba(91,79,207,0.45);
       opacity: 0.92; transform: scale(1.08);
       display: none; white-space: nowrap;
@@ -58,7 +64,7 @@
     .sentences-wrap { flex: 1; overflow-y: auto; padding-bottom: 16px; }
     .sentence-row {
       background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
-      padding: 14px 16px; margin-bottom: 10px; font-size: 16px; line-height: 2;
+      padding: 14px 16px; margin-bottom: 10px; font-size: 17px; line-height: 2;
       transition: border-color 0.2s, background 0.2s;
     }
     .sentence-row.done { border-color: var(--green); background: rgba(16,185,129,0.05); }
@@ -72,8 +78,8 @@
       80%      { transform: translateX(5px); }
     }
     .sentence-row.wrong { animation: rowShake 0.4s ease; }
-    .s-no { font-size: 12px; font-weight: 700; color: var(--muted); margin-right: 6px; }
-    .s-kr  { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; padding-left: 22px; line-height: 1.5; }
+    .s-no { font-size: 13px; font-weight: 700; color: var(--muted); margin-right: 6px; }
+    .s-kr  { display: block; font-size: 14px; color: var(--muted); margin-top: 2px; padding-left: 22px; line-height: 1.5; }
 
     /* BLANK */
     .s-blank {
@@ -82,7 +88,7 @@
       margin: 0 3px; vertical-align: middle;
       border-radius: 6px 6px 0 0;
       text-align: center; line-height: 30px;
-      font-weight: 700; font-size: 15px;
+      font-weight: 700; font-size: 16px;
       transition: background 0.15s, border-color 0.15s;
       cursor: pointer;
     }
@@ -98,7 +104,7 @@
     }
 
     /* EMPTY STATE */
-    .empty-msg { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 15px; line-height: 1.8; }
+    .empty-msg { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 16px; line-height: 1.8; }
 
     /* CELEBRATION (same as study.html) */
     #celebration { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6, #3b82f6); background-size: 400% 400%; animation: bgShift 2s ease infinite; }
@@ -107,13 +113,13 @@
     .cele-main-emoji { font-size: 90px; animation: spin 1s linear infinite; display: block; }
     @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
     .cele-msg { font-size: 46px; font-weight: 900; color: #fff; text-align: center; padding: 0 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.4); animation: cpulse 0.45s ease-in-out infinite alternate; margin: 16px 0 8px; }
-    .cele-sub { font-size: 22px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 20px; animation: cpulse 0.45s 0.2s ease-in-out infinite alternate; }
-    .cele-tap { position: absolute; bottom: 30px; font-size: 15px; color: rgba(255,255,255,0.7); }
+    .cele-sub { font-size: 24px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 20px; animation: cpulse 0.45s 0.2s ease-in-out infinite alternate; }
+    .cele-tap { position: absolute; bottom: 30px; font-size: 16px; color: rgba(255,255,255,0.7); }
     @keyframes cpulse { from{transform:scale(1)} to{transform:scale(1.1)} }
     .fly-emoji { position: absolute; font-size: 36px; pointer-events: none; animation: flyUp linear forwards; }
     @keyframes flyUp { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(-110vh) rotate(720deg);opacity:0} }
 
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 15px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
     .toast.show { opacity: 1; }
   </style>
 </head>
@@ -127,12 +133,13 @@
     </div>
     <div class="unit-title" id="unit-title"></div>
 
-    <div class="word-bank-wrap">
-      <div class="word-bank-label">📦 단어 목록 — 드래그해서 빈칸에 넣으세요</div>
-      <div class="word-bank" id="word-bank"></div>
+    <div class="content-wrap">
+      <div class="sentences-wrap" id="sentences-wrap"></div>
+      <div class="word-bank-wrap">
+        <div class="word-bank-label">📦 단어 목록</div>
+        <div class="word-bank" id="word-bank"></div>
+      </div>
     </div>
-
-    <div class="sentences-wrap" id="sentences-wrap"></div>
   </div>
 </div>
 

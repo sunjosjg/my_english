@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>사진 채점 — 찬희 영어 단어장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -12,18 +13,19 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    button, input, select, textarea { font-family: inherit; }
     .page { padding: 16px; max-width: 760px; margin: 0 auto; padding-bottom: 48px; }
 
     /* HEADER */
     .header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .back-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
-    .header-title { font-size: 20px; font-weight: 800; color: var(--primary); }
-    .unit-badge { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .back-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .header-title { font-size: 22px; font-weight: 800; color: var(--primary); }
+    .unit-badge { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
     /* MODE TABS */
     .mode-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: var(--radius); overflow: hidden; border: 2px solid var(--border); }
-    .mode-tab { flex: 1; padding: 14px 8px; text-align: center; font-size: 14px; font-weight: 700; cursor: pointer; background: var(--card); color: var(--muted); border: none; transition: all 0.15s; }
+    .mode-tab { flex: 1; padding: 14px 8px; text-align: center; font-size: 15px; font-weight: 700; cursor: pointer; background: var(--card); color: var(--muted); border: none; transition: all 0.15s; }
     .mode-tab.on { background: var(--primary); color: #fff; }
 
     /* ANSWER CARD */
@@ -32,70 +34,70 @@
     .ans-item:last-child { border-bottom: none; }
     .ans-item.marked-ok   { background: var(--green-bg); }
     .ans-item.marked-fail { background: var(--red-bg); }
-    .ai-no   { font-size: 13px; color: var(--muted); font-weight: 700; }
+    .ai-no   { font-size: 14px; color: var(--muted); font-weight: 700; }
     .ai-body { }
-    .ai-answer { font-size: 17px; font-weight: 800; color: var(--primary); }
-    .ai-sent   { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+    .ai-answer { font-size: 18px; font-weight: 800; color: var(--primary); }
+    .ai-sent   { font-size: 13px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
     .ai-btns { display: flex; gap: 6px; justify-content: flex-end; }
-    .ai-btn { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--border); background: var(--card); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .ai-btn { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--border); background: var(--card); font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
     .ai-btn.ok   { border-color: var(--green); background: var(--green-bg); }
     .ai-btn.fail { border-color: var(--red);   background: var(--red-bg); }
-    .ans-summary { background: var(--card); border-radius: var(--radius); border: 2px solid var(--primary); padding: 16px; text-align: center; margin-bottom: 16px; font-size: 18px; font-weight: 800; color: var(--primary); display: none; }
+    .ans-summary { background: var(--card); border-radius: var(--radius); border: 2px solid var(--primary); padding: 16px; text-align: center; margin-bottom: 16px; font-size: 20px; font-weight: 800; color: var(--primary); display: none; }
 
     /* API KEY SECTION */
     .api-section { background: #fff8e1; border: 2px dashed #f59e0b; border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
-    .api-title { font-size: 15px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
-    .api-desc { font-size: 13px; color: #78350f; margin-bottom: 12px; line-height: 1.6; }
+    .api-title { font-size: 16px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+    .api-desc { font-size: 14px; color: #78350f; margin-bottom: 12px; line-height: 1.6; }
     .api-row { display: flex; gap: 8px; }
-    .api-input { flex: 1; padding: 10px 14px; border: 2px solid #f59e0b; border-radius: 10px; font-size: 14px; font-family: monospace; outline: none; }
+    .api-input { flex: 1; padding: 10px 14px; border: 2px solid #f59e0b; border-radius: 10px; font-size: 15px; font-family: monospace; outline: none; }
     .api-input:focus { border-color: #d97706; }
-    .api-save-btn { padding: 10px 18px; background: #f59e0b; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
-    .api-ok { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 8px; display: none; }
+    .api-save-btn { padding: 10px 18px; background: #f59e0b; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .api-ok { font-size: 14px; color: var(--green); font-weight: 600; margin-top: 8px; display: none; }
 
     /* PHOTO SECTION */
     .photo-section { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
-    .photo-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-    .photo-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+    .photo-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .photo-desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
     .photo-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-    .photo-btn { flex: 1; min-width: 140px; padding: 16px 10px; border: 2px solid var(--primary); border-radius: var(--radius); background: var(--primary-bg); color: var(--primary); font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; }
+    .photo-btn { flex: 1; min-width: 140px; padding: 16px 10px; border: 2px solid var(--primary); border-radius: var(--radius); background: var(--primary-bg); color: var(--primary); font-size: 16px; font-weight: 700; cursor: pointer; text-align: center; }
     .photo-btn:active { background: var(--primary); color: #fff; }
     input[type="file"] { display: none; }
     .preview-wrap { margin-top: 16px; display: none; }
     .preview-img { width: 100%; max-height: 320px; object-fit: contain; border-radius: 10px; border: 2px solid var(--border); }
-    .grade-btn { width: 100%; margin-top: 14px; padding: 16px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: none; }
+    .grade-btn { width: 100%; margin-top: 14px; padding: 16px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 18px; font-weight: 700; cursor: pointer; display: none; }
     .grade-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
 
     /* LOADING */
     .loading { text-align: center; padding: 40px 20px; display: none; }
     .loading-spinner { font-size: 48px; animation: spin 1s linear infinite; display: block; margin-bottom: 12px; }
     @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    .loading-msg { font-size: 16px; color: var(--muted); font-weight: 600; }
+    .loading-msg { font-size: 17px; color: var(--muted); font-weight: 600; }
 
     /* RESULTS */
     .results { display: none; }
     .result-header { background: linear-gradient(135deg, #5b4fcf, #7c71e0); color: #fff; border-radius: var(--radius); padding: 20px; text-align: center; margin-bottom: 16px; }
     .rh-score { font-size: 42px; font-weight: 900; }
-    .rh-detail { font-size: 15px; opacity: 0.9; margin-top: 4px; }
+    .rh-detail { font-size: 16px; opacity: 0.9; margin-top: 4px; }
     .result-list { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; }
     .result-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: start; padding: 12px 16px; border-bottom: 1px solid var(--border); }
     .result-item:last-child { border-bottom: none; }
     .result-item.correct { background: var(--green-bg); }
     .result-item.wrong   { background: var(--red-bg); }
-    .ri-no     { font-size: 12px; color: var(--muted); padding-top: 2px; }
-    .ri-body   { font-size: 14px; line-height: 1.6; }
-    .ri-word   { font-weight: 700; font-size: 15px; }
-    .ri-user   { font-size: 13px; }
+    .ri-no     { font-size: 13px; color: var(--muted); padding-top: 2px; }
+    .ri-body   { font-size: 15px; line-height: 1.6; }
+    .ri-word   { font-weight: 700; font-size: 16px; }
+    .ri-user   { font-size: 14px; }
     .ri-user .user-ans { color: var(--red); font-weight: 600; }
     .ri-user .ok-ans   { color: var(--green); font-weight: 600; }
-    .ri-icon   { font-size: 20px; }
+    .ri-icon   { font-size: 22px; }
 
-    .star-btn { width: 100%; padding: 14px; background: #f59e0b; color: #fff; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 10px; }
-    .retry-btn { width: 100%; padding: 14px; background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; }
+    .star-btn { width: 100%; padding: 14px; background: #f59e0b; color: #fff; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 10px; }
+    .retry-btn { width: 100%; padding: 14px; background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); font-size: 16px; font-weight: 600; cursor: pointer; }
 
     /* ERROR */
-    .error-box { background: var(--red-bg); border: 2px solid var(--red); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; font-size: 14px; color: var(--red); line-height: 1.6; display: none; }
+    .error-box { background: var(--red-bg); border: 2px solid var(--red); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; font-size: 15px; color: var(--red); line-height: 1.6; display: none; }
 
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 15px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
     .toast.show { opacity: 1; }
   </style>
 </head>
@@ -117,7 +119,7 @@
 
   <!-- 정답 카드 모드 -->
   <div id="manual-mode">
-    <div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+    <div style="font-size: 14px;color:var(--muted);margin-bottom:12px;line-height:1.6">
       시험지 보면서 ✅ / ❌ 를 직접 탭해서 채점하세요.
     </div>
     <div class="ans-card" id="ans-card"></div>
@@ -424,7 +426,7 @@ function showResults(extracted) {
     item.innerHTML = `
       <div class="ri-no">${no}</div>
       <div class="ri-body">
-        <div class="ri-word">${w.english} <span style="font-size:12px;font-weight:400;color:var(--muted)">${w.korean.split(',')[0]}</span></div>
+        <div class="ri-word">${w.english} <span style="font-size: 13px;font-weight:400;color:var(--muted)">${w.korean.split(',')[0]}</span></div>
         ${isOk
           ? `<div class="ri-user"><span class="ok-ans">✅ ${userAns || w.answer}</span></div>`
           : `<div class="ri-user">
@@ -432,7 +434,7 @@ function showResults(extracted) {
                정답: <span class="ok-ans">"${w.answer}"</span>
              </div>`
         }
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">${w.sentence.replace('___', `<strong>${w.answer}</strong>`)}</div>
+        <div style="font-size: 13px;color:var(--muted);margin-top:2px">${w.sentence.replace('___', `<strong>${w.answer}</strong>`)}</div>
       </div>
       <div class="ri-icon">${isOk ? '✅' : '❌'}</div>`;
     list.appendChild(item);
