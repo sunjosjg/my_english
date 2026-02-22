@@ -1,0 +1,187 @@
+{
+  "type": "SPEECH",
+  "unit": "12",
+  "title": "Speech - Unit 12. An Interview with David",
+  "words": [
+    {
+      "no": 1,
+      "english": "essay",
+      "pos": "n.",
+      "korean": "수필, 에세이",
+      "definition": "a short piece of writing about one topic",
+      "sentence": "I wrote an ___ about my favorite season.",
+      "answer": "essay"
+    },
+    {
+      "no": 2,
+      "english": "fair",
+      "pos": "n.",
+      "korean": "박람회",
+      "definition": "a large outdoor gathering for fun or learning",
+      "sentence": "We went to the science ___ at school.",
+      "answer": "fair"
+    },
+    {
+      "no": 3,
+      "english": "fashion",
+      "pos": "n.",
+      "korean": "패션",
+      "definition": "the style of clothes people wear",
+      "sentence": "She loves ___ and wears cool clothes.",
+      "answer": "fashion"
+    },
+    {
+      "no": 4,
+      "english": "grade",
+      "pos": "n.",
+      "korean": "성적",
+      "definition": "a score you get for schoolwork",
+      "sentence": "I got a good ___ on my test.",
+      "answer": "grade"
+    },
+    {
+      "no": 5,
+      "english": "gross",
+      "pos": "adj.",
+      "korean": "지독한, 역겨운",
+      "definition": "something that looks or smells bad",
+      "sentence": "The food looked ___, but it tasted okay.",
+      "answer": "gross"
+    },
+    {
+      "no": 6,
+      "english": "guest",
+      "pos": "n.",
+      "korean": "손님",
+      "definition": "a person who visits your home or event",
+      "sentence": "We had a special ___ visit our class.",
+      "answer": "guest"
+    },
+    {
+      "no": 7,
+      "english": "humor",
+      "pos": "n.",
+      "korean": "유머",
+      "definition": "the ability to make people laugh",
+      "sentence": "The movie was full of ___ and jokes.",
+      "answer": "humor"
+    },
+    {
+      "no": 8,
+      "english": "perform",
+      "pos": "v.",
+      "korean": "공연하다",
+      "definition": "to sing, dance, or act in front of people",
+      "sentence": "We will ___ a play for our parents.",
+      "answer": "perform"
+    },
+    {
+      "no": 9,
+      "english": "personality",
+      "pos": "n.",
+      "korean": "성격",
+      "definition": "how someone thinks, feels, and behaves",
+      "sentence": "Her ___ is kind and funny.",
+      "answer": "personality"
+    },
+    {
+      "no": 10,
+      "english": "play",
+      "pos": "n.",
+      "korean": "연극, 희곡",
+      "definition": "a story performed by actors",
+      "sentence": "We watched a ___ at the school theater.",
+      "answer": "play"
+    },
+    {
+      "no": 11,
+      "english": "rather",
+      "pos": "adv.",
+      "korean": "오히려, 차라리",
+      "definition": "instead or more exactly",
+      "sentence": "I would ___ stay home than go out today.",
+      "answer": "rather"
+    },
+    {
+      "no": 12,
+      "english": "semester",
+      "pos": "n.",
+      "korean": "학기",
+      "definition": "a part of the school year with classes",
+      "sentence": "The ___ ends in June.",
+      "answer": "semester"
+    },
+    {
+      "no": 13,
+      "english": "sense",
+      "pos": "n.",
+      "korean": "감각",
+      "definition": "one of the five ways we experience the world (touch, sight, hearing, smell, taste)",
+      "sentence": "He has a strong ___ of smell.",
+      "answer": "sense"
+    },
+    {
+      "no": 14,
+      "english": "smile",
+      "pos": "n.",
+      "korean": "미소",
+      "definition": "when your mouth turns up to show you are pleased",
+      "sentence": "Her ___ made me happy.",
+      "answer": "smile"
+    },
+    {
+      "no": 15,
+      "english": "spelling bee",
+      "pos": "phr.",
+      "korean": "철자법 대회",
+      "definition": "a competition about spelling",
+      "sentence": "I practiced hard for the ___.",
+      "answer": "spelling bee"
+    },
+    {
+      "no": 16,
+      "english": "strange",
+      "pos": "adj.",
+      "korean": "이상한",
+      "definition": "weird or hard to understand",
+      "sentence": "He saw a ___ light in the sky.",
+      "answer": "strange"
+    },
+    {
+      "no": 17,
+      "english": "take a test",
+      "pos": "phr.",
+      "korean": "시험을 보다",
+      "definition": "to do a quiz or exam",
+      "sentence": "I studied hard to ___.",
+      "answer": "take a test"
+    },
+    {
+      "no": 18,
+      "english": "talent show",
+      "pos": "phr.",
+      "korean": "탤런트쇼",
+      "definition": "a performance where people show special skills",
+      "sentence": "I sang a song in the ___.",
+      "answer": "talent show"
+    },
+    {
+      "no": 19,
+      "english": "taste",
+      "pos": "n.",
+      "korean": "미각",
+      "definition": "the sense you use to know how food feels in your mouth",
+      "sentence": "The cake had a sweet ___.",
+      "answer": "taste"
+    },
+    {
+      "no": 20,
+      "english": "worm",
+      "pos": "n.",
+      "korean": "벌레",
+      "definition": "a bug-like animal that wiggles and lives underground",
+      "sentence": "A little ___ was crawling in the dirt.",
+      "answer": "worm"
+    }
+  ]
+}

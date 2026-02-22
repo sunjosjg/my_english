@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>플래시카드 — 찬희 영어 단어장</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+    :root {
+      --primary: #5b4fcf; --primary-light: #7c71e0; --primary-bg: #eef2ff;
+      --green: #10b981; --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff;
+      --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+
+    /* LAYOUT */
+    html, body { height: 100%; }
+    #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+    .page { height: 100%; display: flex; flex-direction: column; overflow: hidden; padding: 16px; padding-bottom: 0; max-width: 860px; margin: 0 auto; width: 100%; }
+
+    /* HEADER */
+    .screen-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-shrink: 0; }
+    .back-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .back-btn:hover { background: var(--border); }
+    .progress-wrap { flex: 1; }
+    .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); border-radius: 4px; transition: width 0.3s; }
+    .progress-text { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+    /* FLASHCARD */
+    .study-fixed { flex-shrink: 0; }
+    .flashcard-wrap { perspective: 1200px; width: 100%; height: 240px; margin: 6px 0 8px; cursor: pointer; position: relative; }
+    /* 버튼 영역 — 카드 하단 전체 폭 차단 띠 */
+    .fc-nav-zone { position: absolute; bottom: 0; left: 0; right: 0; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; z-index: 10; }
+    .fc-nav-zone-left  { display: flex; gap: 8px; }
+    .fc-nav-zone-right { display: flex; gap: 8px; }
+    .fc-nav-btn { width: 56px; height: 48px; border-radius: 14px; border: none; background: rgba(255,255,255,0.28); color: #fff; font-size: 22px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; backdrop-filter: blur(6px); }
+    .fc-nav-btn:hover  { background: rgba(255,255,255,0.48); }
+    .fc-nav-btn:active { transform: scale(0.92); }
+    [data-tip] { position: relative; }
+    [data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: rgba(30,41,59,0.9); color: #fff; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 8px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 100; }
+    [data-tip]:hover::after { opacity: 1; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.55s cubic-bezier(.4,0,.2,1); transform-style: preserve-3d; }
+    .flashcard-wrap.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .fc-front { background: linear-gradient(135deg, #5b4fcf, #7c71e0); color: #fff; }
+    .fc-back  { background: linear-gradient(135deg, #10b981, #34d399); color: #fff; transform: rotateY(180deg); }
+    .fc-word { font-size: 34px; font-weight: 800; margin-bottom: 6px; }
+    .fc-pos  { font-size: 13px; opacity: 0.75; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 20px; }
+    .fc-korean { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+    .fc-definition { font-size: 14px; opacity: 0.9; line-height: 1.55; max-width: 480px; }
+    .fc-reveal { display: none; background: rgba(255,255,255,0.2); border: 2px dashed rgba(255,255,255,0.6); color: #fff; border-radius: 12px; padding: 12px 28px; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: background 0.2s; }
+    .fc-reveal:hover { background: rgba(255,255,255,0.38); }
+    .speak-btn { margin-top: 14px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5); color: #fff; border-radius: 50px; padding: 8px 20px; font-size: 18px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .speak-btn:hover { background: rgba(255,255,255,0.4); }
+    .speak-btn.speaking { background: rgba(255,255,255,0.5); animation: pulse 0.6s infinite alternate; }
+    @keyframes pulse { from { opacity: 1; } to { opacity: 0.6; } }
+
+    /* CTRL BAR */
+    .ctrl-bar { display: flex; gap: 8px; justify-content: center; margin: 8px 0 4px; flex-shrink: 0; }
+    .ctrl-btn { padding: 8px 16px; font-size: 13px; font-weight: 600; border: 2px solid var(--border); border-radius: 20px; background: var(--card); cursor: pointer; transition: all 0.15s; }
+    .ctrl-btn:hover { border-color: var(--primary-light); }
+    .ctrl-btn.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .ctrl-btn.shuffle { border-color: var(--yellow); color: var(--yellow); }
+    .ctrl-btn.shuffle:hover { background: var(--yellow); color: #fff; }
+    .ctrl-btn.done-btn { border-color: var(--green); color: var(--green); }
+    .ctrl-btn.done-btn:hover { background: var(--green); color: #fff; }
+    .ctrl-btn.done-btn.on { background: var(--green); color: #fff; border-color: var(--green); }
+
+    /* WORD LIST */
+    .study-word-list { flex: 1; min-height: 0; width: 100%; overflow-y: auto; margin-top: 10px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); }
+    .study-word-row { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; }
+    .study-word-row:last-child { border-bottom: none; }
+    .study-word-row:hover { background: var(--primary-bg); }
+    .study-word-row.current { background: var(--primary-bg); }
+    .study-word-row.result-correct { background: rgba(16,185,129,0.1) !important; }
+    .study-word-row.result-wrong   { background: rgba(239,68,68,0.07) !important; }
+    /* 정답 맞춘 행은 숨기기 모드여도 영어·한글 모두 표시 */
+    .study-word-row.result-correct .swr-en,
+    .study-word-row.result-correct .swr-kr { color: var(--text) !important; user-select: auto !important; }
+    .study-word-row.result-correct .swr-pos,
+    .study-word-row.result-correct .swr-speak { visibility: visible !important; }
+    .swr-result { font-size: 13px; min-width: 18px; text-align: center; }
+    .swr-no { font-size: 12px; color: var(--muted); min-width: 20px; }
+    .swr-star { font-size: 12px; color: #f59e0b; font-weight: 800; flex-shrink: 0; letter-spacing: -1px; }
+    .swr-en { font-weight: 700; font-size: 15px; flex: 1; }
+    .swr-pos { font-size: 11px; color: var(--muted); background: var(--border); padding: 1px 6px; border-radius: 10px; }
+    .swr-kr { font-size: 14px; color: var(--muted); }
+    .swr-speak { background: none; border: none; font-size: 16px; cursor: pointer; padding: 2px 4px; border-radius: 6px; opacity: 0.5; transition: opacity 0.15s; }
+    .swr-speak:hover { opacity: 1; background: var(--primary-bg); }
+
+    /* UNIT TITLE */
+    .unit-title { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 4px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .unit-title strong { color: var(--primary); }
+
+    /* MIC / VOICE */
+    .ctrl-btn.mic-btn { border-color: #3b82f6; color: #3b82f6; }
+    .ctrl-btn.mic-btn:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+    .ctrl-btn.mic-btn.listening { background: #ef4444; color: #fff; border-color: #ef4444; animation: micPulse 1s infinite; }
+    @keyframes micPulse { 0%,100% { opacity:1; } 50% { opacity:0.55; } }
+    .voice-feedback { display: none; padding: 10px 16px; border-radius: 12px; font-size: 15px; font-weight: 700; text-align: center; color: #fff; margin: 6px 0 2px; flex-shrink: 0; transition: background 0.2s; }
+
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; }
+
+    /* CELEBRATION */
+    #celebration { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background-size: 400% 400%; }
+    #celebration.show { display: flex; }
+    #celebration.tier-100 { background: linear-gradient(135deg, #ffd700, #ff4e50, #ffd700, #fc913a); animation: bgFast 0.7s ease infinite; }
+    #celebration.tier-90  { background: linear-gradient(135deg, #8b5cf6, #a78bfa, #6d28d9, #7c3aed); animation: bgShift 2s ease infinite; }
+    #celebration.tier-80  { background: linear-gradient(135deg, #3b82f6, #10b981, #2563eb, #059669); animation: bgShift 2.5s ease infinite; }
+    #celebration.tier-low { background: linear-gradient(135deg, #f97316, #fb923c, #ea580c, #f59e0b); animation: bgShift 3s ease infinite; }
+    @keyframes bgFast  { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .cele-emoji-wrap { margin-bottom: 4px; }
+    .cele-main-emoji { font-size: 90px; display: block; animation: emojiSpin 1s linear infinite; }
+    .cele-thumbs { font-size: 80px; display: flex; gap: 8px; }
+    .cele-thumbs span { display: inline-block; animation: thumbsBounce 0.35s ease-in-out infinite alternate; }
+    .cele-thumbs span:nth-child(2) { animation-delay: 0.18s; }
+    @keyframes emojiSpin    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes thumbsBounce { from{transform:scale(1) rotate(-18deg)} to{transform:scale(1.45) rotate(18deg)} }
+
+    .cele-msg { font-size: 40px; font-weight: 900; color: #fff; text-align: center; padding: 0 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.4); margin: 14px 0 8px; }
+    .tier-100 .cele-msg { font-size: 46px; animation: heartbeat 0.45s ease-in-out infinite alternate; }
+    .tier-90  .cele-msg { animation: pulse 0.55s ease-in-out infinite alternate; }
+    .tier-80  .cele-msg { animation: pulse 0.75s ease-in-out infinite alternate; }
+    .tier-low .cele-msg { animation: pulse 1.1s ease-in-out infinite alternate; }
+    @keyframes heartbeat { 0%{transform:scale(1)} 60%{transform:scale(1.18)} 100%{transform:scale(1.06)} }
+    @keyframes pulse     { from{transform:scale(1)} to{transform:scale(1.09)} }
+
+    .cele-sub { font-size: 19px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 24px; line-height: 1.5; }
+    .cele-tap { position: absolute; bottom: 28px; font-size: 15px; color: rgba(255,255,255,0.65); }
+    .fly-emoji { position: absolute; font-size: 36px; pointer-events: none; animation: flyUp linear forwards; }
+    @keyframes flyUp { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 100%{transform:translateY(-110vh) rotate(720deg) scale(0.5);opacity:0} }
+    .flash-overlay { position: fixed; inset: 0; background: #fff; pointer-events: none; z-index: 10000; animation: screenFlash 0.7s ease forwards; }
+    @keyframes screenFlash { 0%,100%{opacity:0} 15%,45%{opacity:0.9} 30%{opacity:0.4} }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="page">
+    <div class="study-fixed">
+      <div class="screen-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="study-pf"></div></div>
+        </div>
+        <div class="progress-text" id="study-count"></div>
+      </div>
+
+      <div class="unit-title" id="unit-title"></div>
+
+      <div class="flashcard-wrap" id="flashcard" onclick="flipCard()">
+        <div class="fc-nav-zone" onclick="event.stopPropagation()">
+          <div class="fc-nav-zone-left">
+            <button class="fc-nav-btn" id="fc-btn-autoplay" onclick="toggleAutoPlayBtn()" data-tip="이동 시 자동 읽기">🔊</button>
+          </div>
+          <div class="fc-nav-zone-right">
+            <button class="fc-nav-btn" id="fc-btn-prev" onclick="prevCard()" data-tip="이전 단어">←</button>
+            <button class="fc-nav-btn" id="fc-btn-next" onclick="nextCard()" data-tip="다음 단어">→</button>
+          </div>
+        </div>
+        <div class="flashcard-inner">
+          <div class="fc-front">
+            <button class="fc-reveal" id="fc-reveal-en" onclick="event.stopPropagation(); revealEnglish()">👁 영어 보기</button>
+            <div class="fc-word" id="fc-word"></div>
+            <div class="fc-pos"  id="fc-pos"></div>
+            <button class="speak-btn" id="speak-btn" onclick="event.stopPropagation(); speakWord()">🔊 듣기</button>
+          </div>
+          <div class="fc-back">
+            <button class="fc-reveal" id="fc-reveal-kr" onclick="event.stopPropagation(); revealKorean()">👁 한글 보기</button>
+            <div class="fc-korean"     id="fc-korean"></div>
+            <div class="fc-definition" id="fc-def"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-bar">
+        <button class="ctrl-btn" id="btn-hide-toggle" onclick="cycleHideMode()" data-tip="한글/영어 숨기기 전환">👁 전체 보기</button>
+        <button class="ctrl-btn shuffle" onclick="shuffleWords()" data-tip="단어 순서 랜덤 섞기">🔀 섞기</button>
+        <button class="ctrl-btn mic-btn" id="btn-mic" onclick="toggleMic()" data-tip="음성으로 정답 말하기">🎤 말하기</button>
+      </div>
+      <div class="voice-feedback" id="voice-feedback"></div>
+    </div>
+
+    <div class="study-word-list" id="study-word-list"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<div id="celebration" onclick="hideCelebration()">
+  <div class="cele-emoji-wrap" id="cele-emoji-wrap"></div>
+  <div class="cele-msg" id="cele-msg"></div>
+  <div class="cele-sub" id="cele-sub"></div>
+  <div class="cele-tap">👆 탭해서 닫기</div>
+</div>
+
+<script>
+// ── URL PARAMS ──
+const params  = new URLSearchParams(location.search);
+const courseId = params.get('c');
+const typeId   = params.get('t');
+const unitId   = params.get('u');
+
+let words    = [];
+let studyIdx = 0;
+let manifest = null;
+let starWords = new Set(); // 틀린 단어 (localStorage 영속)
+
+function starKey() { return `star_${courseId}_${typeId}_${unitId}`; }
+function loadStarWords() {
+  try { starWords = new Set(JSON.parse(localStorage.getItem(starKey()) || '[]')); }
+  catch { starWords = new Set(); }
+}
+function saveStarWords() {
+  localStorage.setItem(starKey(), JSON.stringify([...starWords]));
+}
+function addStarWord(english) {
+  if (starWords.has(english)) return;
+  starWords.add(english);
+  saveStarWords();
+}
+
+// ── TTS ──
+let enVoice = null;
+function loadEnglishVoice() {
+  const voices = speechSynthesis.getVoices();
+  enVoice = voices.find(v => v.lang === 'en-US' && v.localService) ||
+            voices.find(v => v.lang === 'en-US') ||
+            voices.find(v => v.lang === 'en-GB') ||
+            voices.find(v => v.lang.startsWith('en')) || null;
+}
+speechSynthesis.onvoiceschanged = loadEnglishVoice;
+loadEnglishVoice();
+
+function speakText(text, btn) {
+  if (!text) return;
+  speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US'; utt.rate = 0.7; utt.pitch = 1.0;
+  if (enVoice) utt.voice = enVoice;
+  if (btn) { btn.classList.add('speaking'); utt.onend = () => btn.classList.remove('speaking'); utt.onerror = () => btn.classList.remove('speaking'); }
+  speechSynthesis.speak(utt);
+}
+function speakWord() {
+  speakText(document.getElementById('fc-word').textContent, document.getElementById('speak-btn'));
+}
+
+// ── INIT ──
+(async () => {
+  if (!courseId || !typeId || !unitId) { location.href = 'index.html'; return; }
+  try {
+    const [mRes, dRes] = await Promise.all([
+      fetch('data/index.json'),
+      fetch(`data/${courseId}/${typeId}/${unitId}.json`)
+    ]);
+    manifest = await mRes.json();
+    const data = await dRes.json();
+    words = data.words;
+    loadStarWords();
+    startStudy();
+  } catch(e) {
+    showToast('⚠️ 파일 로딩 실패');
+  }
+})();
+
+// ── AUTO-PLAY ──
+let autoPlayOn = false;
+function toggleAutoPlayBtn() {
+  autoPlayOn = !autoPlayOn;
+  const btn = document.getElementById('fc-btn-autoplay');
+  if (btn) btn.style.background = autoPlayOn ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.25)';
+}
+function stopAutoPlay() {
+  autoPlayOn = false;
+  speechSynthesis.cancel();
+  const btn = document.getElementById('fc-btn-autoplay');
+  if (btn) btn.style.background = 'rgba(255,255,255,0.25)';
+}
+function autoReadCurrent() {
+  if (!autoPlayOn) return;
+  const text = words[studyIdx].english;
+  speechSynthesis.cancel();
+  requestAnimationFrame(() => {
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'en-US'; utt.rate = 0.7; utt.pitch = 1.0;
+    if (enVoice) utt.voice = enVoice;
+    speechSynthesis.speak(utt);
+  });
+}
+
+// ── HIDE/REVEAL/SHUFFLE ──
+let hideKorean = false, hideEnglish = false, enRevealed = false, krRevealed = false;
+let hideMode = 0;
+const hideModeConfig = [
+  { label: '👁 전체 보기',   hideKr: false, hideEn: false, on: false },
+  { label: '🙈 한글 숨기기', hideKr: true,  hideEn: false, on: true  },
+  { label: '🙈 영어 숨기기', hideKr: false, hideEn: true,  on: true  },
+];
+
+function applyHideState() {
+  const wordEl  = document.getElementById('fc-word');
+  const posEl   = document.getElementById('fc-pos');
+  const speakEl = document.getElementById('speak-btn');
+  const revEnEl = document.getElementById('fc-reveal-en');
+  const koreanEl= document.getElementById('fc-korean');
+  const defEl   = document.getElementById('fc-def');
+  const revKrEl = document.getElementById('fc-reveal-kr');
+
+  const showEn = !hideEnglish || enRevealed;
+  wordEl.style.display  = showEn ? '' : 'none';
+  // 한글 숨기기 모드: 앞면에서 단어만 표시 (품사·듣기 버튼 숨김)
+  posEl.style.display   = (showEn && !hideKorean) ? '' : 'none';
+  speakEl.style.display = (showEn && !hideKorean) ? '' : 'none';
+  revEnEl.style.display = showEn ? 'none' : 'block';
+
+  const showKr = !hideKorean || krRevealed;
+  koreanEl.style.display = showKr ? '' : 'none';
+  // 숨기기 모드에서는 뜻/예문도 숨김 (한글/영어만 단독 표시)
+  if (defEl) defEl.style.display = (hideKorean || hideEnglish) ? 'none' : '';
+  revKrEl.style.display  = showKr ? 'none' : 'block';
+
+  const listEl = document.getElementById('study-word-list');
+  if (listEl) {
+    const hidden = hideKorean || hideEnglish;
+    listEl.querySelectorAll('.swr-en').forEach(el => { el.style.color = hideEnglish ? 'transparent' : ''; el.style.userSelect = hideEnglish ? 'none' : ''; });
+    listEl.querySelectorAll('.swr-kr').forEach(el => { el.style.color = hideKorean ? 'transparent' : ''; el.style.userSelect = hideKorean ? 'none' : ''; });
+    listEl.querySelectorAll('.swr-pos, .swr-speak').forEach(el => { el.style.visibility = hidden ? 'hidden' : ''; });
+  }
+}
+function revealEnglish() { enRevealed = true; applyHideState(); }
+function revealKorean()  { krRevealed = true; applyHideState(); }
+function cycleHideMode() {
+  hideMode = (hideMode + 1) % 3;
+  const cfg = hideModeConfig[hideMode];
+  hideKorean = cfg.hideKr; hideEnglish = cfg.hideEn;
+  enRevealed = false; krRevealed = false;
+  const btn = document.getElementById('btn-hide-toggle');
+  btn.textContent = cfg.label;
+  btn.classList.toggle('on', cfg.on);
+  // 모드 전환 시 정답/오답 초기화 + 자동 섞기
+  voiceResults  = new Map();
+  wrongWords    = new Set();
+  voiceAttempts = new Map();
+  words = shuffle([...words]);
+  studyIdx = 0;
+  renderWordList();
+  renderStudyCard();
+  applyHideState();
+  // 숨기기 모드 → 말하기 자동 켜기 / 전체 보기 → 자동 끄기
+  if (cfg.hideKr || cfg.hideEn) {
+    if (!isListening) toggleMic();
+  } else {
+    stopListening();
+  }
+}
+function shuffleWords() {
+  stopListening();
+  words = shuffle([...words]);
+  studyIdx = 0;
+  enRevealed = false; krRevealed = false;
+  renderStudyCard();
+  renderWordList();
+  showToast('🔀 단어 순서를 섞었습니다!');
+}
+
+// ── UNIT TITLE ──
+function renderUnitTitle() {
+  if (!manifest) return;
+  const course = manifest.courses.find(c => c.id === courseId);
+  const type   = course?.types.find(t => t.id === typeId);
+  const unit   = type?.units.find(u => u.id === unitId);
+  const el = document.getElementById('unit-title');
+  if (!el) return;
+  const parts = [course?.label, type?.label, unit?.label].filter(Boolean);
+  el.innerHTML = parts.map((p, i) => i === parts.length - 1 ? `<strong>${p}</strong>` : p).join(' &middot; ');
+}
+
+// ── STUDY ──
+function startStudy() {
+  studyIdx = 0;
+  stopAutoPlay();
+  autoPlayOn = false;
+  voiceResults  = new Map();
+  wrongWords    = new Set();
+  voiceAttempts = new Map();
+  hideMode = 0; hideKorean = false; hideEnglish = false;
+  enRevealed = false; krRevealed = false;
+  const btn = document.getElementById('btn-hide-toggle');
+  btn.textContent = '👁 전체 보기'; btn.classList.remove('on');
+  renderUnitTitle();
+  renderWordList();
+  const list = document.getElementById('study-word-list');
+  if (list) list.scrollTop = 0;
+  renderStudyCard();
+}
+
+function renderStudyCard() {
+  const w = words[studyIdx];
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+
+  document.getElementById('fc-word').textContent   = w.english;
+  document.getElementById('fc-pos').textContent    = w.pos || '';
+  document.getElementById('fc-pos').style.display  = w.pos ? '' : 'none';
+  document.getElementById('fc-korean').textContent = w.korean;
+  document.getElementById('fc-def').textContent    = w.definition || w.sentence || '';
+
+  const pct = ((studyIdx + 1) / words.length) * 100;
+  document.getElementById('study-pf').style.width = pct + '%';
+  document.getElementById('study-count').textContent = `${studyIdx + 1} / ${words.length}`;
+
+  document.getElementById('fc-btn-prev').disabled = false;
+  const isLast = studyIdx === words.length - 1;
+  document.getElementById('fc-btn-next').style.background = isLast ? 'rgba(245,158,11,0.7)' : 'rgba(255,255,255,0.25)';
+
+  enRevealed = false; krRevealed = false;
+  applyHideState();
+
+  const list = document.getElementById('study-word-list');
+  if (list) {
+    const rows = list.querySelectorAll('.study-word-row');
+    rows.forEach((r, i) => r.classList.toggle('current', i === studyIdx));
+    const curRow = rows[studyIdx];
+    if (curRow) {
+      if (studyIdx === 0) {
+        list.scrollTop = 0;
+      } else {
+        const listRect = list.getBoundingClientRect();
+        const rowRect  = curRow.getBoundingClientRect();
+        const rowTopInList = rowRect.top - listRect.top + list.scrollTop;
+        const target = rowTopInList - list.clientHeight / 2 + rowRect.height / 2;
+        list.scrollTop = Math.max(0, Math.min(target, list.scrollHeight - list.clientHeight));
+      }
+    }
+  }
+}
+
+function renderWordList() {
+  const list = document.getElementById('study-word-list');
+  if (!list) return;
+  list.innerHTML = '';
+  words.forEach((w, i) => {
+    const isCurrent = (i === studyIdx);
+    const vr = voiceResults.get(w.english);
+    const resultClass = vr ? ` result-${vr}` : '';
+    const row = document.createElement('div');
+    row.className = 'study-word-row' + (isCurrent ? ' current' : '') + resultClass;
+    const enHtml   = `<span class="swr-en" style="${hideEnglish ? 'color:transparent;user-select:none' : ''}">${w.english}</span>`;
+    const krHtml   = `<span class="swr-kr" style="${hideKorean ? 'color:transparent;user-select:none' : ''}">${w.korean}</span>`;
+    const starHtml = starWords.has(w.english) ? '<span class="swr-star">★★★</span>' : '';
+    row.innerHTML = `
+      <span class="swr-result">${resultIcon(w.english)}</span>
+      <span class="swr-no">${i + 1}</span>
+      ${starHtml}
+      ${enHtml}
+      ${w.pos ? `<span class="swr-pos" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}">${w.pos}</span>` : ''}
+      ${krHtml}
+      <button class="swr-speak" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}" onclick="event.stopPropagation(); speakText('${w.english.replace(/'/g,"\\'")}')">🔊</button>`;
+    row.onclick = () => { studyIdx = i; renderStudyCard(); };
+    list.appendChild(row);
+  });
+}
+
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+function prevCard() { stopListening(); studyIdx = (studyIdx - 1 + words.length) % words.length; renderStudyCard(); autoReadCurrent(); }
+function nextCard() { stopListening(); studyIdx = (studyIdx + 1) % words.length; renderStudyCard(); autoReadCurrent(); }
+
+function goHome() { stopAutoPlay(); stopListening(); location.href = 'index.html'; }
+
+// ── VOICE RESULT TRACKING ──
+let voiceResults  = new Map(); // english → 'correct' | 'wrong'
+let wrongWords    = new Set(); // 한 번이라도 틀린 단어 (재학습용)
+let voiceAttempts = new Map(); // english → 시도 횟수
+
+function resultIcon(english) {
+  const result = voiceResults.get(english);
+  if (!result) return '';
+  const attempts = voiceAttempts.get(english) || 1;
+  if (result === 'correct') {
+    return attempts > 1
+      ? `✅<span style="color:#ef4444;font-size:11px;font-weight:700">(${attempts})</span>`
+      : '✅';
+  }
+  return '❌';
+}
+
+function updateListRowResult(idx) {
+  const list = document.getElementById('study-word-list');
+  if (!list) return;
+  const rows = list.querySelectorAll('.study-word-row');
+  const row = rows[idx];
+  if (!row) return;
+  const english = words[idx].english;
+  const result  = voiceResults.get(english);
+  if (!result) return;
+  row.classList.remove('result-correct', 'result-wrong');
+  row.classList.add(`result-${result}`);
+  const el = row.querySelector('.swr-result');
+  if (el) el.innerHTML = resultIcon(english);
+  // ★★★ 뱃지 갱신
+  let starEl = row.querySelector('.swr-star');
+  if (starWords.has(english)) {
+    if (!starEl) {
+      starEl = document.createElement('span');
+      starEl.className = 'swr-star';
+      starEl.textContent = '★★★';
+      const noEl = row.querySelector('.swr-no');
+      if (noEl) noEl.after(starEl);
+    }
+  }
+}
+
+// ── SPEECH RECOGNITION ──
+let recognition   = null;
+let isListening   = false;
+let silenceTimer  = null;
+const SILENCE_MS  = 10000;
+
+function resetSilenceTimer() {
+  clearSilenceTimer();
+  if (!isListening) return;
+  silenceTimer = setTimeout(() => {
+    if (!isListening) return;
+    // 10초 침묵 → 오답 처리 후 다음 단어
+    const w = words[studyIdx];
+    voiceAttempts.set(w.english, (voiceAttempts.get(w.english) || 0) + 1);
+    wrongWords.add(w.english);
+    addStarWord(w.english); // ★★★ 영속 기록
+    if (voiceResults.get(w.english) !== 'correct') {
+      voiceResults.set(w.english, 'wrong');
+      updateListRowResult(studyIdx);
+    }
+    showVoiceFeedback('⏱ 10초 초과 → ' + (hideEnglish ? w.english : w.korean), false);
+    setTimeout(() => {
+      clearVoiceFeedback();
+      studyIdx = (studyIdx + 1) % words.length;
+      renderStudyCard();
+      autoReadCurrent();
+      resetSilenceTimer();
+    }, 1200);
+  }, SILENCE_MS);
+}
+
+function clearSilenceTimer() {
+  if (silenceTimer) { clearTimeout(silenceTimer); silenceTimer = null; }
+}
+
+function getRecognitionLang() { return hideEnglish ? 'en-US' : 'ko-KR'; }
+function getCorrectAnswer()   { return hideEnglish ? words[studyIdx].english : words[studyIdx].korean; }
+
+function normalizeAnswer(text) {
+  return text.toLowerCase().trim().replace(/[^a-z0-9가-힣]/g, '');
+}
+function isMatch(said, correct) {
+  const s = normalizeAnswer(said);
+  // 콤마로 구분된 정답 중 하나라도 일치하면 정답
+  const parts = correct.split(',').map(p => normalizeAnswer(p.trim())).filter(Boolean);
+  return parts.some(c => s === c || c.includes(s) || s.includes(c));
+}
+
+function buildRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return null;
+  const r = new SR();
+  r.lang = getRecognitionLang();
+  r.continuous = true;   // 한 번 켜면 계속 감지
+  r.interimResults = false;
+
+  r.onresult = (e) => {
+    // continuous 모드: 마지막 확정 결과만 사용
+    const last = e.results[e.results.length - 1];
+    if (!last.isFinal) return;
+    resetSilenceTimer(); // 말했으므로 타이머 리셋
+    const said = last[0].transcript.trim();
+    const correct = getCorrectAnswer();
+    // 시도 횟수 증가
+    const curWord = words[studyIdx];
+    voiceAttempts.set(curWord.english, (voiceAttempts.get(curWord.english) || 0) + 1);
+
+    if (isMatch(said, correct)) {
+      const curIdx = studyIdx;
+      voiceResults.set(curWord.english, 'correct');
+      updateListRowResult(curIdx);
+      const allDone = words.every(w => voiceResults.get(w.english) === 'correct');
+      showVoiceFeedback('✅ ' + said, true);
+      setTimeout(() => {
+        clearVoiceFeedback();
+        if (allDone) {
+          showCelebration();
+        } else {
+          studyIdx = (studyIdx + 1) % words.length;
+          renderStudyCard();
+          autoReadCurrent();
+          resetSilenceTimer();
+        }
+      }, 1000);
+    } else {
+      // 오답 → 기록 남기고 계속 감지
+      wrongWords.add(curWord.english);
+      addStarWord(curWord.english); // ★★★ 영속 기록
+      if (voiceResults.get(curWord.english) !== 'correct') {
+        voiceResults.set(curWord.english, 'wrong');
+        updateListRowResult(studyIdx);
+      }
+      showVoiceFeedback('❌ ' + said, false);
+    }
+  };
+
+  r.onend = () => {
+    // 브라우저가 강제로 끊었을 때(타임아웃 등) 자동 재시작
+    if (isListening) {
+      setTimeout(() => {
+        if (isListening) { try { r.start(); } catch(_) {} }
+      }, 300);
+    }
+  };
+
+  r.onerror = (e) => {
+    if (e.error === 'no-speech' || e.error === 'aborted') return;
+    isListening = false;
+    updateMicBtn();
+    clearVoiceFeedback();
+  };
+
+  return r;
+}
+
+function toggleMic() {
+  if (isListening) {
+    stopListening();
+  } else {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { showToast('⚠️ 이 브라우저는 음성 인식을 지원하지 않습니다 (Chrome 권장)'); return; }
+    recognition = buildRecognition();
+    isListening = true;
+    updateMicBtn();
+    clearVoiceFeedback();
+    try { recognition.start(); resetSilenceTimer(); } catch(e) { isListening = false; updateMicBtn(); }
+  }
+}
+
+function stopListening() {
+  if (!isListening) return;
+  isListening = false;
+  clearSilenceTimer();
+  try { if (recognition) recognition.stop(); } catch(e) {}
+  updateMicBtn();
+  clearVoiceFeedback();
+}
+
+function updateMicBtn() {
+  const btn = document.getElementById('btn-mic');
+  if (!btn) return;
+  btn.textContent = isListening ? '🔴 듣는 중...' : '🎤 말하기';
+  btn.classList.toggle('listening', isListening);
+}
+
+function showVoiceFeedback(msg, isCorrect) {
+  const el = document.getElementById('voice-feedback');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.background = isCorrect ? '#10b981' : '#ef4444';
+  el.style.display = 'block';
+}
+function clearVoiceFeedback() {
+  const el = document.getElementById('voice-feedback');
+  if (el) el.style.display = 'none';
+}
+
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ── CELEBRATION ──
+const CELE_TIERS = {
+  100: {
+    cls: 'tier-100',
+    emoji: 'thumbs',
+    msg: '👍👍 쌍따봉!! 완전 뿅~ 💫',
+    sub: '한 번도 안 틀린 완벽한 100점!! 최강이야!! 🏆',
+    particles: ['👍','💯','🌟','✨','🎉','🏆','💫','⭐','🎊','🔥','😍','🎯'],
+    count: 65, interval: 75,
+  },
+  90: {
+    cls: 'tier-90',
+    emoji: '🏆',
+    msg: '🌟 대단해!! 거의 완벽해!',
+    sub: '90점대! 조금만 더 하면 100점이야! ⭐⭐⭐',
+    particles: ['🏆','⭐','✨','🌟','🎉','👍','😄','🎊'],
+    count: 38, interval: 110,
+  },
+  80: {
+    cls: 'tier-80',
+    emoji: '👏',
+    msg: '😊 잘했어! 좋은 점수야!',
+    sub: '80점대! 틀린 단어 복습하면 완벽해! 💪',
+    particles: ['👏','😊','💪','⭐','🎈','✨'],
+    count: 22, interval: 160,
+  },
+  low: {
+    cls: 'tier-low',
+    emoji: '💪',
+    msg: '💪 포기하지 마! 할 수 있어!!',
+    sub: '계속 연습하면 금방 늘어! 파이팅!! 🔥',
+    particles: ['💪','🔥','😤','⭐','✨','🌟'],
+    count: 16, interval: 200,
+  },
+};
+
+function showCelebration() {
+  stopListening();
+  // 틀린 단어 수로 티어 결정
+  const total     = words.length;
+  const wrongCnt  = wrongWords.size;
+  const isPerfect = wrongCnt === 0;
+  const pct       = Math.round((total - wrongCnt) / total * 100);
+  triggerCelebration(pct, isPerfect);
+}
+
+function getTier(pct, isPerfect) {
+  if (isPerfect && pct === 100) return 100;
+  if (pct >= 90) return 90;
+  if (pct >= 80) return 80;
+  return 'low';
+}
+
+function triggerCelebration(pct, isPerfect) {
+  const key  = getTier(pct, isPerfect);
+  const data = CELE_TIERS[key];
+  const cel  = document.getElementById('celebration');
+
+  cel.querySelectorAll('.fly-emoji').forEach(e => e.remove());
+  cel.className = 'show ' + data.cls;
+
+  const wrap = document.getElementById('cele-emoji-wrap');
+  if (data.emoji === 'thumbs') {
+    wrap.innerHTML = '<div class="cele-thumbs"><span>👍</span><span>👍</span></div>';
+  } else {
+    wrap.innerHTML = `<span class="cele-main-emoji">${data.emoji}</span>`;
+  }
+  document.getElementById('cele-msg').textContent = data.msg;
+  document.getElementById('cele-sub').textContent = data.sub;
+
+  if (key === 100) {
+    const fl = document.createElement('div');
+    fl.className = 'flash-overlay';
+    document.body.appendChild(fl);
+    setTimeout(() => fl.remove(), 800);
+  }
+
+  let cnt = 0;
+  const iv = setInterval(() => {
+    if (cnt++ >= data.count) { clearInterval(iv); return; }
+    const el = document.createElement('span');
+    el.className = 'fly-emoji';
+    el.textContent = data.particles[Math.floor(Math.random() * data.particles.length)];
+    el.style.left = (Math.random() * 95) + 'vw';
+    el.style.bottom = '-50px';
+    el.style.animationDuration = (1.2 + Math.random() * 1.8) + 's';
+    cel.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }, data.interval);
+}
+
+function hideCelebration() {
+  const cel = document.getElementById('celebration');
+  cel.classList.remove('show');
+  cel.querySelectorAll('.fly-emoji').forEach(e => e.remove());
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

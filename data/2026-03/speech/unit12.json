@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "12",
+  "title": "Speech - Unit 12. Music",
+  "words": [
+    {
+      "no": 1,
+      "english": "on average",
+      "korean": "평균적으로",
+      "sentence": "___, students study two hours a day.",
+      "answer": "On average"
+    },
+    {
+      "no": 2,
+      "english": "on stage",
+      "korean": "무대에서",
+      "sentence": "She was nervous when she performed ___.",
+      "answer": "on stage"
+    },
+    {
+      "no": 3,
+      "english": "stream",
+      "korean": "스트리밍하다",
+      "sentence": "I ___ music on my phone every day.",
+      "answer": "stream"
+    },
+    {
+      "no": 4,
+      "english": "especially",
+      "korean": "특히",
+      "sentence": "I love all music, ___ pop songs.",
+      "answer": "especially"
+    },
+    {
+      "no": 5,
+      "english": "dance to music",
+      "korean": "음악에 맞춰 춤추다",
+      "sentence": "She loves to ___ at parties.",
+      "answer": "dance to music"
+    },
+    {
+      "no": 6,
+      "english": "attend",
+      "korean": "참석하다",
+      "sentence": "I want to ___ a live concert.",
+      "answer": "attend"
+    },
+    {
+      "no": 7,
+      "english": "write lyrics",
+      "korean": "가사를 쓰다",
+      "sentence": "He started to ___ for his own songs.",
+      "answer": "write lyrics"
+    },
+    {
+      "no": 8,
+      "english": "play a song on my ukulele",
+      "korean": "우쿨렐레로 노래를 연주하다",
+      "sentence": "I want to ___ for the class.",
+      "answer": "play a song on my ukulele"
+    },
+    {
+      "no": 9,
+      "english": "held",
+      "korean": "hold(축제를 열다)의 과거형",
+      "sentence": "The concert was ___ at the park.",
+      "answer": "held"
+    },
+    {
+      "no": 10,
+      "english": "music competition",
+      "korean": "음악경연대회",
+      "sentence": "She won first place at the ___.",
+      "answer": "music competition"
+    },
+    {
+      "no": 11,
+      "english": "cover",
+      "korean": "(다른 가수의 노래를) 리메이크하다",
+      "sentence": "He made a ___ of a popular song.",
+      "answer": "cover"
+    },
+    {
+      "no": 12,
+      "english": "fantastic",
+      "korean": "엄청난, 굉장한",
+      "sentence": "Her performance was absolutely ___.",
+      "answer": "fantastic"
+    },
+    {
+      "no": 13,
+      "english": "music-related",
+      "korean": "음악과 연관된",
+      "sentence": "She joined a ___ club at school.",
+      "answer": "music-related"
+    },
+    {
+      "no": 14,
+      "english": "senior",
+      "korean": "나이 든 사람, 노인",
+      "sentence": "The choir performed for local ___s.",
+      "answer": "senior"
+    },
+    {
+      "no": 15,
+      "english": "unity",
+      "korean": "통합, 일치",
+      "sentence": "Music creates a feeling of ___.",
+      "answer": "unity"
+    },
+    {
+      "no": 16,
+      "english": "convince",
+      "korean": "납득시키다",
+      "sentence": "I tried to ___ my parents to let me join.",
+      "answer": "convince"
+    },
+    {
+      "no": 17,
+      "english": "nothing",
+      "korean": "아무것도 (아니다)",
+      "sentence": "There is ___ better than live music.",
+      "answer": "nothing"
+    },
+    {
+      "no": 18,
+      "english": "beat",
+      "korean": "이기다",
+      "sentence": "Our school team ___ the other school.",
+      "answer": "beat"
+    },
+    {
+      "no": 19,
+      "english": "get a chance",
+      "korean": "기회를 얻다",
+      "sentence": "I hope to ___ to perform on stage.",
+      "answer": "get a chance"
+    },
+    {
+      "no": 20,
+      "english": "regret",
+      "korean": "후회하다",
+      "sentence": "Don't ___ not trying your best.",
+      "answer": "regret"
+    }
+  ]
+}

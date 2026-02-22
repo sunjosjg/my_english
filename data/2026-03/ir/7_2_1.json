@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "7.2.1",
+  "title": "Integrated Reading - Word List 7.2.1",
+  "words": [
+    {
+      "no": 1,
+      "english": "after",
+      "pos": "prep.",
+      "korean": "~후에",
+      "sentence": "We will eat lunch ___ class.",
+      "answer": "after"
+    },
+    {
+      "no": 2,
+      "english": "before",
+      "pos": "prep.",
+      "korean": "~전에",
+      "sentence": "Wash your hands ___ dinner.",
+      "answer": "before"
+    },
+    {
+      "no": 3,
+      "english": "when",
+      "pos": "conj.",
+      "korean": "~할 때",
+      "sentence": "I smile ___ I see my dog.",
+      "answer": "when"
+    },
+    {
+      "no": 4,
+      "english": "while",
+      "pos": "conj.",
+      "korean": "~하는 동안",
+      "sentence": "He read a book ___ I drew.",
+      "answer": "while"
+    },
+    {
+      "no": 5,
+      "english": "respond",
+      "pos": "v.",
+      "korean": "반응하다",
+      "sentence": "Please ___ to the question.",
+      "answer": "respond"
+    },
+    {
+      "no": 6,
+      "english": "species",
+      "pos": "n.",
+      "korean": "생물의 종류",
+      "sentence": "Lions and tigers are different ___.",
+      "answer": "species"
+    },
+    {
+      "no": 7,
+      "english": "partner",
+      "pos": "n.",
+      "korean": "동반자",
+      "sentence": "Find a ___ for the project.",
+      "answer": "partner"
+    },
+    {
+      "no": 8,
+      "english": "enemy",
+      "pos": "n.",
+      "korean": "적",
+      "sentence": "The knight fought his ___ bravely.",
+      "answer": "enemy"
+    },
+    {
+      "no": 9,
+      "english": "threaten",
+      "pos": "v.",
+      "korean": "위협하다",
+      "sentence": "Dark clouds ___ a storm.",
+      "answer": "threaten"
+    },
+    {
+      "no": 10,
+      "english": "pair up",
+      "pos": "v.",
+      "korean": "짝을 짓다",
+      "sentence": "We will ___ for the game.",
+      "answer": "pair up"
+    },
+    {
+      "no": 11,
+      "english": "odd",
+      "pos": "adj.",
+      "korean": "이상한",
+      "sentence": "This puzzle piece looks ___.",
+      "answer": "odd"
+    },
+    {
+      "no": 12,
+      "english": "symbiotic",
+      "pos": "adj.",
+      "korean": "공생의",
+      "sentence": "Bees and flowers have a ___ bond.",
+      "answer": "symbiotic"
+    },
+    {
+      "no": 13,
+      "english": "relationship",
+      "pos": "n.",
+      "korean": "관계",
+      "sentence": "She has a good ___ with her dog.",
+      "answer": "relationship"
+    },
+    {
+      "no": 14,
+      "english": "station",
+      "pos": "n.",
+      "korean": "기지",
+      "sentence": "A space ___ orbits the Earth high above the clouds.",
+      "answer": "station"
+    },
+    {
+      "no": 15,
+      "english": "claw",
+      "pos": "n.",
+      "korean": "발톱",
+      "sentence": "The cat scratched with its ___.",
+      "answer": "claw"
+    }
+  ]
+}

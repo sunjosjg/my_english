@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "1",
+  "title": "Speech - Unit 1. House Rule",
+  "words": [
+    {
+      "no": 1,
+      "english": "follow",
+      "korean": "(규칙을) 따르다",
+      "sentence": "We must ___ the rules at school.",
+      "answer": "follow"
+    },
+    {
+      "no": 2,
+      "english": "several",
+      "korean": "몇몇의",
+      "sentence": "I have ___ books on my shelf.",
+      "answer": "several"
+    },
+    {
+      "no": 3,
+      "english": "curfew",
+      "korean": "귀가 시간",
+      "sentence": "My ___ is 9 PM on weekdays.",
+      "answer": "curfew"
+    },
+    {
+      "no": 4,
+      "english": "do one's best",
+      "korean": "최선을 다하다",
+      "sentence": "Always ___ in everything you do.",
+      "answer": "do one's best"
+    },
+    {
+      "no": 5,
+      "english": "even though",
+      "korean": "~에도 불구하고, 비록 ~일지라도",
+      "sentence": "I went to school ___ I was tired.",
+      "answer": "even though"
+    },
+    {
+      "no": 6,
+      "english": "not supposed to",
+      "korean": "~하면 안 된다",
+      "sentence": "You are ___ run in the hallway.",
+      "answer": "not supposed to"
+    },
+    {
+      "no": 7,
+      "english": "whenever",
+      "korean": "~할 때마다",
+      "sentence": "I feel happy ___ I see my dog.",
+      "answer": "whenever"
+    },
+    {
+      "no": 8,
+      "english": "break",
+      "korean": "(규칙을) 위반하다",
+      "sentence": "Don't ___ the rules at school.",
+      "answer": "break"
+    },
+    {
+      "no": 9,
+      "english": "punish",
+      "korean": "벌주다",
+      "sentence": "The teacher will ___ students who cheat.",
+      "answer": "punish"
+    },
+    {
+      "no": 10,
+      "english": "extra",
+      "korean": "추가의",
+      "sentence": "I got ___ points for my homework.",
+      "answer": "extra"
+    },
+    {
+      "no": 11,
+      "english": "do chores",
+      "korean": "집안일을 하다",
+      "sentence": "I ___ every Saturday morning.",
+      "answer": "do chores"
+    },
+    {
+      "no": 12,
+      "english": "fold the laundry",
+      "korean": "빨래를 개다",
+      "sentence": "Can you ___ after it dries?",
+      "answer": "fold the laundry"
+    },
+    {
+      "no": 13,
+      "english": "insult",
+      "korean": "모욕하다",
+      "sentence": "It is wrong to ___ your classmates.",
+      "answer": "insult"
+    },
+    {
+      "no": 14,
+      "english": "bother",
+      "korean": "괴롭히다, 성가시게 하다",
+      "sentence": "Please don't ___ me when I'm studying.",
+      "answer": "bother"
+    },
+    {
+      "no": 15,
+      "english": "apology",
+      "korean": "사과",
+      "sentence": "He made an ___ for being late.",
+      "answer": "apology"
+    },
+    {
+      "no": 16,
+      "english": "give up",
+      "korean": "포기하다",
+      "sentence": "Never ___ on your dreams.",
+      "answer": "give up"
+    },
+    {
+      "no": 17,
+      "english": "cancel",
+      "korean": "취소하다",
+      "sentence": "They had to ___ the game due to rain.",
+      "answer": "cancel"
+    },
+    {
+      "no": 18,
+      "english": "consequently",
+      "korean": "그 결과, 따라서",
+      "sentence": "She didn't study, and ___ she failed.",
+      "answer": "consequently"
+    },
+    {
+      "no": 19,
+      "english": "keep a promise",
+      "korean": "약속을 지키다",
+      "sentence": "Always ___ you make to others.",
+      "answer": "keep a promise"
+    },
+    {
+      "no": 20,
+      "english": "include",
+      "korean": "포함하다",
+      "sentence": "Please ___ your name on the paper.",
+      "answer": "include"
+    }
+  ]
+}

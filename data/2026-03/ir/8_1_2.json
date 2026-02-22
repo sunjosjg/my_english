@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "8.1.2",
+  "title": "Integrated Reading - Word List 8.1.2",
+  "words": [
+    {
+      "no": 1,
+      "english": "alike",
+      "pos": "adj.",
+      "korean": "비슷한",
+      "sentence": "The twins look ___.",
+      "answer": "alike"
+    },
+    {
+      "no": 2,
+      "english": "celebrate",
+      "pos": "v.",
+      "korean": "기념하다",
+      "sentence": "We ___ our birthdays with cake.",
+      "answer": "celebrate"
+    },
+    {
+      "no": 3,
+      "english": "difference",
+      "pos": "n.",
+      "korean": "다름",
+      "sentence": "There is a big ___ between the two.",
+      "answer": "difference"
+    },
+    {
+      "no": 4,
+      "english": "expect",
+      "pos": "v.",
+      "korean": "예상하다",
+      "sentence": "I ___ the test to be easy.",
+      "answer": "expect"
+    },
+    {
+      "no": 5,
+      "english": "variety",
+      "pos": "n.",
+      "korean": "여러 가지",
+      "sentence": "The market has a ___ of fruits.",
+      "answer": "variety"
+    },
+    {
+      "no": 6,
+      "english": "dumpling",
+      "pos": "n.",
+      "korean": "만두",
+      "sentence": "I ate a ___ for lunch.",
+      "answer": "dumpling"
+    },
+    {
+      "no": 7,
+      "english": "lunar",
+      "pos": "adj.",
+      "korean": "달의",
+      "sentence": "The full moon is part of the ___ cycle.",
+      "answer": "lunar"
+    },
+    {
+      "no": 8,
+      "english": "wrapped",
+      "pos": "adj.",
+      "korean": "싸여진",
+      "sentence": "The gift is ___ in red paper.",
+      "answer": "wrapped"
+    },
+    {
+      "no": 9,
+      "english": "prosperity",
+      "pos": "n.",
+      "korean": "번영",
+      "sentence": "We wish you happiness and ___.",
+      "answer": "prosperity"
+    },
+    {
+      "no": 10,
+      "english": "harbor",
+      "pos": "n.",
+      "korean": "항구",
+      "sentence": "The ship arrived at the ___.",
+      "answer": "harbor"
+    },
+    {
+      "no": 11,
+      "english": "stall",
+      "pos": "n.",
+      "korean": "가판대",
+      "sentence": "I bought fruit at a market ___.",
+      "answer": "stall"
+    },
+    {
+      "no": 12,
+      "english": "fierce",
+      "pos": "adj.",
+      "korean": "사나운",
+      "sentence": "The lion gave a ___ roar.",
+      "answer": "fierce"
+    },
+    {
+      "no": 13,
+      "english": "anxiously",
+      "pos": "adv.",
+      "korean": "걱정스럽게",
+      "sentence": "She waited ___ for the test.",
+      "answer": "anxiously"
+    },
+    {
+      "no": 14,
+      "english": "rhythm",
+      "pos": "n.",
+      "korean": "박자",
+      "sentence": "We clapped to the song's ___.",
+      "answer": "rhythm"
+    },
+    {
+      "no": 15,
+      "english": "order",
+      "pos": "v.",
+      "korean": "주문하다",
+      "sentence": "I want to ___ some food.",
+      "answer": "order"
+    }
+  ]
+}

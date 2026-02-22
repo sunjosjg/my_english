@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "5",
+  "title": "Speech - Unit 5. School Events",
+  "words": [
+    {
+      "no": 1,
+      "english": "happen",
+      "korean": "일어나다, 발생하다",
+      "sentence": "What will ___ at the school fair?",
+      "answer": "happen"
+    },
+    {
+      "no": 2,
+      "english": "look forward to",
+      "korean": "~을 기대하다",
+      "sentence": "I ___ the school festival every year.",
+      "answer": "look forward to"
+    },
+    {
+      "no": 3,
+      "english": "show off",
+      "korean": "~을 자랑하다",
+      "sentence": "She wanted to ___ her painting.",
+      "answer": "show off"
+    },
+    {
+      "no": 4,
+      "english": "perform",
+      "korean": "공연하다",
+      "sentence": "The students will ___ a dance.",
+      "answer": "perform"
+    },
+    {
+      "no": 5,
+      "english": "classmate",
+      "korean": "반 친구",
+      "sentence": "My ___ helped me with homework.",
+      "answer": "classmate"
+    },
+    {
+      "no": 6,
+      "english": "anticipated",
+      "korean": "기대되는",
+      "sentence": "The trip is the most ___ event.",
+      "answer": "anticipated"
+    },
+    {
+      "no": 7,
+      "english": "field day",
+      "korean": "운동회",
+      "sentence": "We run races on ___.",
+      "answer": "field day"
+    },
+    {
+      "no": 8,
+      "english": "build teamwork",
+      "korean": "팀워크를 쌓다",
+      "sentence": "Group games help us ___.",
+      "answer": "build teamwork"
+    },
+    {
+      "no": 9,
+      "english": "used item",
+      "korean": "중고품",
+      "sentence": "She sold a ___ at the flea market.",
+      "answer": "used item"
+    },
+    {
+      "no": 10,
+      "english": "reasonable",
+      "korean": "적정한, 너무 비싸지 않은",
+      "sentence": "The price was very ___.",
+      "answer": "reasonable"
+    },
+    {
+      "no": 11,
+      "english": "result",
+      "korean": "결과",
+      "sentence": "The ___ of the contest surprised us.",
+      "answer": "result"
+    },
+    {
+      "no": 12,
+      "english": "semester",
+      "korean": "학기",
+      "sentence": "We have two events each ___.",
+      "answer": "semester"
+    },
+    {
+      "no": 13,
+      "english": "competition",
+      "korean": "대회",
+      "sentence": "She won the science ___.",
+      "answer": "competition"
+    },
+    {
+      "no": 14,
+      "english": "stall",
+      "korean": "가판대, 좌판",
+      "sentence": "We set up a food ___ at the fair.",
+      "answer": "stall"
+    },
+    {
+      "no": 15,
+      "english": "spelling bee",
+      "korean": "철자 맞추기 대회",
+      "sentence": "He won the ___ last year.",
+      "answer": "spelling bee"
+    },
+    {
+      "no": 16,
+      "english": "portrait",
+      "korean": "초상화",
+      "sentence": "She drew a ___ of her teacher.",
+      "answer": "portrait"
+    },
+    {
+      "no": 17,
+      "english": "invent",
+      "korean": "발명하다",
+      "sentence": "Kids can ___ new things at the fair.",
+      "answer": "invent"
+    },
+    {
+      "no": 18,
+      "english": "recycled",
+      "korean": "재활용의, 재생의",
+      "sentence": "He made art from ___ materials.",
+      "answer": "recycled"
+    },
+    {
+      "no": 19,
+      "english": "showcase",
+      "korean": "보여주다",
+      "sentence": "The event will ___ student talents.",
+      "answer": "showcase"
+    },
+    {
+      "no": 20,
+      "english": "participate in",
+      "korean": "~에 참여하다",
+      "sentence": "Everyone should ___ school events.",
+      "answer": "participate in"
+    }
+  ]
+}

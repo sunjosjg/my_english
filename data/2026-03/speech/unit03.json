@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "3",
+  "title": "Speech - Unit 3. If I Were a Parent",
+  "words": [
+    {
+      "no": 1,
+      "english": "reveal",
+      "korean": "드러내다",
+      "sentence": "The magic trick will ___ a surprise.",
+      "answer": "reveal"
+    },
+    {
+      "no": 2,
+      "english": "common",
+      "korean": "흔한",
+      "sentence": "It is ___ to eat rice in Korea.",
+      "answer": "common"
+    },
+    {
+      "no": 3,
+      "english": "interestingly",
+      "korean": "흥미롭게도",
+      "sentence": "___, cats sleep up to 16 hours a day.",
+      "answer": "Interestingly"
+    },
+    {
+      "no": 4,
+      "english": "frequently",
+      "korean": "종종, 자주",
+      "sentence": "She ___ visits her grandmother.",
+      "answer": "frequently"
+    },
+    {
+      "no": 5,
+      "english": "traditionally",
+      "korean": "전통적으로",
+      "sentence": "___, people wear hanboks on holidays.",
+      "answer": "Traditionally"
+    },
+    {
+      "no": 6,
+      "english": "participate in",
+      "korean": "~에 참여하다",
+      "sentence": "Everyone should ___ the class activity.",
+      "answer": "participate in"
+    },
+    {
+      "no": 7,
+      "english": "diverse",
+      "korean": "다양한",
+      "sentence": "Our class has ___ students from many countries.",
+      "answer": "diverse"
+    },
+    {
+      "no": 8,
+      "english": "politely",
+      "korean": "예의 바르게",
+      "sentence": "Always speak ___ to your elders.",
+      "answer": "politely"
+    },
+    {
+      "no": 9,
+      "english": "respect",
+      "korean": "존경하다",
+      "sentence": "We should ___ our teachers.",
+      "answer": "respect"
+    },
+    {
+      "no": 10,
+      "english": "smart devices",
+      "korean": "스마트 기기",
+      "sentence": "___ help us learn new things.",
+      "answer": "Smart devices"
+    },
+    {
+      "no": 11,
+      "english": "communicate",
+      "korean": "의사소통하다",
+      "sentence": "We ___ with friends by texting.",
+      "answer": "communicate"
+    },
+    {
+      "no": 12,
+      "english": "contribute to",
+      "korean": "~에 기여하다",
+      "sentence": "Everyone can ___ a better world.",
+      "answer": "contribute to"
+    },
+    {
+      "no": 13,
+      "english": "believe",
+      "korean": "믿다, 생각하다",
+      "sentence": "I ___ that kindness is important.",
+      "answer": "believe"
+    },
+    {
+      "no": 14,
+      "english": "create",
+      "korean": "만들다",
+      "sentence": "She wants to ___ a painting.",
+      "answer": "create"
+    },
+    {
+      "no": 15,
+      "english": "healthier",
+      "korean": "건강한",
+      "sentence": "Eating vegetables makes you ___.",
+      "answer": "healthier"
+    },
+    {
+      "no": 16,
+      "english": "family environment",
+      "korean": "가정 환경",
+      "sentence": "A warm ___ helps children grow well.",
+      "answer": "family environment"
+    },
+    {
+      "no": 17,
+      "english": "stay up late",
+      "korean": "늦게까지 자지 않고 있다",
+      "sentence": "Don't ___ before school days.",
+      "answer": "stay up late"
+    },
+    {
+      "no": 18,
+      "english": "be kind to",
+      "korean": "~에게 친절히 대하다",
+      "sentence": "Always ___ everyone around you.",
+      "answer": "be kind to"
+    },
+    {
+      "no": 19,
+      "english": "take turns",
+      "korean": "~을 교대로 하다",
+      "sentence": "Let's ___ washing the dishes.",
+      "answer": "take turns"
+    },
+    {
+      "no": 20,
+      "english": "do the dishes",
+      "korean": "설거지하다",
+      "sentence": "I ___ after every meal.",
+      "answer": "do the dishes"
+    }
+  ]
+}

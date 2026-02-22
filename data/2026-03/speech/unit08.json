@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "8",
+  "title": "Speech - Unit 8. Content Creators",
+  "words": [
+    {
+      "no": 1,
+      "english": "content creator",
+      "korean": "콘텐츠 제작자",
+      "sentence": "She works as a ___ on YouTube.",
+      "answer": "content creator"
+    },
+    {
+      "no": 2,
+      "english": "endangered animals",
+      "korean": "멸종 위기에 처한 동물",
+      "sentence": "He makes videos about ___.",
+      "answer": "endangered animals"
+    },
+    {
+      "no": 3,
+      "english": "choose",
+      "korean": "선택하다, 고르다",
+      "sentence": "You can ___ any topic you like.",
+      "answer": "choose"
+    },
+    {
+      "no": 4,
+      "english": "subject",
+      "korean": "주제",
+      "sentence": "What is the ___ of your video?",
+      "answer": "subject"
+    },
+    {
+      "no": 5,
+      "english": "raise awareness about",
+      "korean": "~에 대한 인식을 높이다",
+      "sentence": "We should ___ climate change.",
+      "answer": "raise awareness about"
+    },
+    {
+      "no": 6,
+      "english": "mainly",
+      "korean": "주로",
+      "sentence": "She ___ posts cooking videos.",
+      "answer": "mainly"
+    },
+    {
+      "no": 7,
+      "english": "include",
+      "korean": "포함하다",
+      "sentence": "Please ___ your name in the form.",
+      "answer": "include"
+    },
+    {
+      "no": 8,
+      "english": "fact",
+      "korean": "사실",
+      "sentence": "That is an interesting ___.",
+      "answer": "fact"
+    },
+    {
+      "no": 9,
+      "english": "inspire",
+      "korean": "격려하다; 영감을 주다",
+      "sentence": "Her story can ___ many people.",
+      "answer": "inspire"
+    },
+    {
+      "no": 10,
+      "english": "species",
+      "korean": "종(생물 분류의 기본 단위)",
+      "sentence": "Many ___ are at risk of extinction.",
+      "answer": "species"
+    },
+    {
+      "no": 11,
+      "english": "such as",
+      "korean": "~와 같은",
+      "sentence": "I like fruits ___ apples and oranges.",
+      "answer": "such as"
+    },
+    {
+      "no": 12,
+      "english": "population number",
+      "korean": "개체수",
+      "sentence": "The ___ of tigers is decreasing.",
+      "answer": "population number"
+    },
+    {
+      "no": 13,
+      "english": "focus on",
+      "korean": "~에 초점을 맞추다",
+      "sentence": "Let's ___ the main idea.",
+      "answer": "focus on"
+    },
+    {
+      "no": 14,
+      "english": "neat",
+      "korean": "깔끔한",
+      "sentence": "His desk is always very ___.",
+      "answer": "neat"
+    },
+    {
+      "no": 15,
+      "english": "efficient",
+      "korean": "효율적인",
+      "sentence": "This is an ___ way to study.",
+      "answer": "efficient"
+    },
+    {
+      "no": 16,
+      "english": "introduce",
+      "korean": "소개하다",
+      "sentence": "Let me ___ my new friend.",
+      "answer": "introduce"
+    },
+    {
+      "no": 17,
+      "english": "make a difference",
+      "korean": "달라지게 만들다",
+      "sentence": "One small act can ___.",
+      "answer": "make a difference"
+    },
+    {
+      "no": 18,
+      "english": "feature",
+      "korean": "~를 특징으로 삼다",
+      "sentence": "The video will ___ rare animals.",
+      "answer": "feature"
+    },
+    {
+      "no": 19,
+      "english": "offer",
+      "korean": "제공하다",
+      "sentence": "The channel will ___ free lessons.",
+      "answer": "offer"
+    },
+    {
+      "no": 20,
+      "english": "make a video of",
+      "korean": "~을 영상으로 찍다",
+      "sentence": "She wants to ___ her daily life.",
+      "answer": "make a video of"
+    }
+  ]
+}

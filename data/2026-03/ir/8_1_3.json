@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "8.1.3",
+  "title": "Integrated Reading - Word List 8.1.3",
+  "words": [
+    {
+      "no": 1,
+      "english": "spell",
+      "pos": "v.",
+      "korean": "철자를 쓰다",
+      "sentence": "Can you ___ your name?",
+      "answer": "spell"
+    },
+    {
+      "no": 2,
+      "english": "cooperate",
+      "pos": "v.",
+      "korean": "협력하다",
+      "sentence": "Let's ___ to clean the room.",
+      "answer": "cooperate"
+    },
+    {
+      "no": 3,
+      "english": "belong",
+      "pos": "v.",
+      "korean": "속하다",
+      "sentence": "These books ___ on the top shelf.",
+      "answer": "belong"
+    },
+    {
+      "no": 4,
+      "english": "shade",
+      "pos": "n.",
+      "korean": "음영",
+      "sentence": "We sat in the ___ under the tree.",
+      "answer": "shade"
+    },
+    {
+      "no": 5,
+      "english": "greeting",
+      "pos": "n.",
+      "korean": "인사",
+      "sentence": "She gave me a warm ___.",
+      "answer": "greeting"
+    },
+    {
+      "no": 6,
+      "english": "shake",
+      "pos": "v.",
+      "korean": "악수하다",
+      "sentence": "Let's ___ hands to say hello.",
+      "answer": "shake"
+    },
+    {
+      "no": 7,
+      "english": "bow",
+      "pos": "n.",
+      "korean": "인사",
+      "sentence": "He gave a polite ___ to the teacher.",
+      "answer": "bow"
+    },
+    {
+      "no": 8,
+      "english": "gentle",
+      "pos": "adj.",
+      "korean": "부드러운",
+      "sentence": "The teacher is very ___ with kids.",
+      "answer": "gentle"
+    },
+    {
+      "no": 9,
+      "english": "respect",
+      "pos": "v.",
+      "korean": "존중하다",
+      "sentence": "We must ___ our teachers and parents.",
+      "answer": "respect"
+    },
+    {
+      "no": 10,
+      "english": "custom",
+      "pos": "n.",
+      "korean": "관습",
+      "sentence": "It is a ___ to take off shoes indoors.",
+      "answer": "custom"
+    },
+    {
+      "no": 11,
+      "english": "texture",
+      "pos": "n.",
+      "korean": "질감",
+      "sentence": "I like the soft ___ of this blanket.",
+      "answer": "texture"
+    },
+    {
+      "no": 12,
+      "english": "generation",
+      "pos": "n.",
+      "korean": "세대",
+      "sentence": "Each ___ has different ideas.",
+      "answer": "generation"
+    },
+    {
+      "no": 13,
+      "english": "proud",
+      "pos": "adj.",
+      "korean": "자랑스러워하는",
+      "sentence": "I feel ___ of my work.",
+      "answer": "proud"
+    },
+    {
+      "no": 14,
+      "english": "similarity",
+      "pos": "n.",
+      "korean": "닮음",
+      "sentence": "There is a ___ in their drawings.",
+      "answer": "similarity"
+    },
+    {
+      "no": 15,
+      "english": "share",
+      "pos": "v.",
+      "korean": "공유하다",
+      "sentence": "I ___ my toys with my friend.",
+      "answer": "share"
+    }
+  ]
+}

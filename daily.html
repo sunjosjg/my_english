@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>데일리 테스트 — 찬희 영어 단어장</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+    :root {
+      --primary: #5b4fcf; --primary-light: #7c71e0; --primary-bg: #eef2ff;
+      --green: #10b981; --green-bg: #ecfdf5; --red: #ef4444; --red-bg: #fef2f2;
+      --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
+      --muted: #64748b; --border: #e2e8f0; --radius: 14px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .page { padding: 16px; max-width: 760px; margin: 0 auto; padding-bottom: 48px; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── STEP HEADER ── */
+    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .step-back { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .step-back:hover { background: var(--border); }
+    .step-title { flex: 1; }
+    .step-label { font-size: 20px; font-weight: 800; color: var(--primary); }
+    .step-desc  { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .step-badge { background: var(--primary); color: #fff; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+
+    /* ── STEP 1 & 2: WORD ROWS ── */
+    .word-list { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; }
+    .word-row { display: grid; grid-template-columns: 28px 1fr 1fr; gap: 10px; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .word-row:last-child { border-bottom: none; }
+    .wr-no     { font-size: 12px; color: var(--muted); text-align: center; }
+    .wr-prompt { font-size: 16px; font-weight: 700; }
+    .wr-sub    { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .wr-input  { width: 100%; padding: 10px 12px; font-size: 17px; border: 2px solid var(--border); border-radius: 8px; outline: none; font-family: inherit; transition: border-color 0.2s; }
+    .wr-input:focus { border-color: var(--primary); }
+
+    /* ── STEP 3: SENTENCE CARDS ── */
+    .sentence-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 18px 20px; margin-bottom: 12px; }
+    .sc-no       { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .sc-sentence { font-size: 19px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+    .sc-blank    { color: var(--primary); border-bottom: 2px solid var(--primary); padding: 0 6px; font-weight: 700; }
+    .sc-hint     { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .sc-input    { width: 100%; padding: 13px 15px; font-size: 18px; border: 2px solid var(--border); border-radius: 8px; outline: none; font-family: inherit; transition: border-color 0.2s; }
+    .sc-input:focus { border-color: var(--primary); }
+
+    /* ── COMPLETE BUTTON ── */
+    .complete-btn { width: 100%; padding: 16px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .complete-btn:hover { background: var(--primary-light); }
+
+    /* ── FINAL: HEADER ── */
+    .final-header { text-align: center; background: linear-gradient(135deg, #5b4fcf, #7c71e0); color: #fff; border-radius: var(--radius); padding: 24px 20px; margin-bottom: 20px; }
+    .fh-title { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+    .fh-sub   { font-size: 15px; opacity: 0.9; line-height: 1.5; }
+
+    /* ── FINAL: RESULT LISTING ── */
+    .result-section { margin-bottom: 16px; }
+    .rs-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .rs-item  { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border-left: 3px solid var(--red); background: var(--red-bg); margin-bottom: 6px; border-radius: 0 10px 10px 0; }
+    .rs-word  { font-weight: 700; color: var(--red); min-width: 100px; font-size: 15px; }
+    .rs-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .rs-correct { color: var(--green); font-weight: 600; }
+    .rs-no-wrong { font-size: 14px; color: var(--green); font-weight: 600; padding: 8px 0; }
+
+    /* ── FINAL: WRITING SECTION ── */
+    .write-header { margin: 28px 0 16px; }
+    .wh-title { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .wh-sub   { font-size: 13px; color: var(--muted); }
+
+    .write-card { background: var(--card); border-radius: var(--radius); border: 2px solid var(--border); padding: 20px 20px 16px; margin-bottom: 16px; }
+    .wc-word   { font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+    .wc-ref    { font-size: 16px; color: var(--text); line-height: 1.6; background: var(--primary-bg); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-weight: 600; }
+    .wc-lines  { display: flex; flex-direction: column; gap: 8px; }
+    .wc-line   { display: flex; align-items: center; gap: 8px; }
+    .wc-num    { font-size: 14px; color: var(--muted); font-weight: 700; min-width: 22px; text-align: right; }
+    .wc-sep    { font-size: 18px; color: var(--border); flex-shrink: 0; }
+    .wc-sentence { font-size: 17px !important; }
+    .wc-input  {
+      flex: 1; padding: 14px 4px; font-size: 22px; font-weight: 600; letter-spacing: 1px;
+      border: none; border-bottom: 2.5px solid #cbd5e1; outline: none;
+      font-family: inherit; background: transparent; transition: border-color 0.2s;
+      min-height: 58px; border-radius: 0;
+    }
+    .wc-input:focus { border-bottom-color: var(--primary); }
+    .wc-input.ok   { border-bottom-color: var(--green); color: #065f46; }
+    .wc-input.fail { border-bottom-color: var(--red); color: var(--red); background: #fff0f0; border-radius: 6px; padding: 14px 10px; }
+
+    /* ── MOM CHECK ── */
+    .mom-section { margin-top: 28px; text-align: center; padding: 24px 20px; background: #fff8e1; border-radius: var(--radius); border: 2px dashed #f59e0b; }
+    .mom-msg  { font-size: 17px; font-weight: 700; color: #92400e; margin-bottom: 14px; line-height: 1.5; }
+    .mom-summary { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; text-align: left; }
+    .ms-row  { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-radius: 8px; font-size: 15px; font-weight: 600; }
+    .ms-ok   { background: #ecfdf5; color: #065f46; }
+    .ms-bad  { background: #fef2f2; color: #b91c1c; }
+    .ms-step { font-weight: 800; }
+    .mom-btn  { padding: 16px 36px; background: #f59e0b; color: #fff; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 800; cursor: pointer; transition: background 0.2s; }
+    .mom-btn:hover { background: #d97706; }
+    .mom-result { margin-top: 14px; font-size: 15px; font-weight: 600; display: none; line-height: 1.5; }
+    .mom-result.ok   { color: #065f46; }
+    .mom-result.fail { color: var(--red); }
+
+    .done-btn { display: none; width: 100%; padding: 16px; margin-top: 16px; background: var(--green); color: #fff; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; }
+
+    /* ── ALL CORRECT ── */
+    .all-correct { text-align: center; padding: 28px 20px; background: var(--green-bg); border-radius: var(--radius); border: 2px solid var(--green); margin-top: 12px; }
+    .ac-emoji { font-size: 56px; margin-bottom: 10px; }
+    .ac-title { font-size: 26px; font-weight: 900; color: var(--green); margin-bottom: 6px; }
+    .ac-sub   { font-size: 15px; color: #065f46; }
+
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ══ STEP 1: 한글 → 영어 ══ -->
+<div id="screen-step1" class="screen active">
+  <div class="page">
+    <div class="step-header">
+      <button class="step-back" onclick="goHome()">←</button>
+      <div class="step-title">
+        <div class="step-label">1단계 · 한글 → 영어</div>
+        <div class="step-desc">한글 뜻을 보고 영어 단어를 쓰세요</div>
+      </div>
+      <div class="step-badge">1 / 3</div>
+    </div>
+    <div class="word-list" id="step1-list"></div>
+    <button class="complete-btn" onclick="completeStep1()">✅ 완료 — 다음 단계</button>
+  </div>
+</div>
+
+<!-- ══ STEP 2: 영어 → 한글 ══ -->
+<div id="screen-step2" class="screen">
+  <div class="page">
+    <div class="step-header">
+      <div class="step-title">
+        <div class="step-label">2단계 · 영어 → 한글</div>
+        <div class="step-desc">영어 단어를 보고 한글 뜻을 쓰세요</div>
+      </div>
+      <div class="step-badge">2 / 3</div>
+    </div>
+    <div class="word-list" id="step2-list"></div>
+    <button class="complete-btn" onclick="completeStep2()">✅ 완료 — 다음 단계</button>
+  </div>
+</div>
+
+<!-- ══ STEP 3: 문장 빈칸 ══ -->
+<div id="screen-step3" class="screen">
+  <div class="page">
+    <div class="step-header">
+      <div class="step-title">
+        <div class="step-label">3단계 · 문장 빈칸 채우기</div>
+        <div class="step-desc">문장을 읽고 빈칸에 알맞은 단어를 쓰세요</div>
+      </div>
+      <div class="step-badge">3 / 3</div>
+    </div>
+    <div id="step3-list"></div>
+    <button class="complete-btn" onclick="completeStep3()">✅ 완료 — 결과 보기</button>
+  </div>
+</div>
+
+<!-- ══ FINAL SCREEN ══ -->
+<div id="screen-final" class="screen">
+  <div class="page">
+    <div class="final-header">
+      <div class="fh-title">📋 데일리 테스트 결과</div>
+      <div class="fh-sub" id="final-sub"></div>
+    </div>
+    <div id="final-results"></div>
+    <div id="final-write"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const params   = new URLSearchParams(location.search);
+const courseId = params.get('c');
+const typeId   = params.get('t');
+const unitId   = params.get('u');
+
+let words      = [];
+let step1Wrong = [];   // { word, user }
+let step2Wrong = [];
+let step3Wrong = [];
+let step2Order = [];
+let step3Order = [];
+
+// ── STAR (localStorage) ──
+function starKey() { return `star_${courseId}_${typeId}_${unitId}`; }
+function saveStarWords(englishArr) {
+  if (!englishArr.length) return;
+  try {
+    const existing = JSON.parse(localStorage.getItem(starKey()) || '[]');
+    const merged = [...new Set([...existing, ...englishArr])];
+    localStorage.setItem(starKey(), JSON.stringify(merged));
+  } catch {}
+}
+
+// ── LOAD ──
+(async () => {
+  if (!courseId || !typeId || !unitId) { location.href = 'index.html'; return; }
+  try {
+    const r    = await fetch(`data/${courseId}/${typeId}/${unitId}.json`);
+    const data = await r.json();
+    words = data.words;
+    renderStep1();
+    renderStep2();
+    renderStep3();
+  } catch { alert('⚠️ 파일 로딩 실패'); }
+})();
+
+// ── RENDER STEP 1 ──
+function renderStep1() {
+  const list = document.getElementById('step1-list');
+  words.forEach((w, i) => {
+    const row = document.createElement('div');
+    row.className = 'word-row';
+    row.innerHTML = `
+      <span class="wr-no">${i + 1}</span>
+      <div>
+        <div class="wr-prompt">${w.korean}</div>
+      </div>
+      <input class="wr-input" type="text" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">`;
+    list.appendChild(row);
+  });
+  addEnterNav('#step1-list .wr-input');
+}
+
+// ── RENDER STEP 2 ──
+function renderStep2() {
+  step2Order = shuffle([...words]);
+  const list = document.getElementById('step2-list');
+  step2Order.forEach((w, i) => {
+    const row = document.createElement('div');
+    row.className = 'word-row';
+    row.innerHTML = `
+      <span class="wr-no">${i + 1}</span>
+      <div>
+        <div class="wr-prompt">${w.english}</div>
+      </div>
+      <input class="wr-input" type="text" placeholder="" autocomplete="off" spellcheck="false">`;
+    list.appendChild(row);
+  });
+  addEnterNav('#step2-list .wr-input');
+}
+
+// ── RENDER STEP 3 ──
+function renderStep3() {
+  step3Order = shuffle([...words]);
+  const list = document.getElementById('step3-list');
+  step3Order.forEach((w, i) => {
+    const card = document.createElement('div');
+    card.className = 'sentence-card';
+    const sentHtml = w.sentence.replace('___', '<span class="sc-blank">___</span>');
+    card.innerHTML = `
+      <div class="sc-no">${i + 1}번</div>
+      <div class="sc-sentence">${sentHtml}</div>
+      <input class="sc-input" type="text" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">`;
+    list.appendChild(card);
+  });
+  addEnterNav('#step3-list .sc-input');
+}
+
+
+function addEnterNav(selector) {
+  const all = [...document.querySelectorAll(selector)];
+  all.forEach((inp, i) => {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && i < all.length - 1) { e.preventDefault(); all[i + 1].focus(); }
+    });
+  });
+}
+
+// ── GRADE ──
+const norm    = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+const normEn  = s => (s || '').trim().replace(/\s+/g, ' '); // 영어: 대소문자 구분, 연속 공백→1칸
+// 한글 정규화: ~ 제거, 띄어쓰기 무시, 콤마 구분 정답 허용
+const normKr  = s => (s || '').replace(/~/g, '').replace(/\s+/g, '').trim();
+function matchKorean(user, correct) {
+  const u = normKr(user);
+  return correct.split(',').map(k => normKr(k)).some(k => k === u);
+}
+
+function completeStep1() {
+  const inputs = [...document.querySelectorAll('#step1-list .wr-input')];
+  step1Wrong = [];
+  inputs.forEach((inp, i) => {
+    const w = words[i];
+    const user = inp.value.trim();
+    const ok = normEn(user) === normEn(w.english);
+    if (!ok) {
+      step1Wrong.push({ word: w, user });
+      saveStarWords([w.english]);
+    }
+  });
+  showScreen('screen-step2');
+  focusFirst('#step2-list .wr-input');
+}
+
+function completeStep2() {
+  const inputs = [...document.querySelectorAll('#step2-list .wr-input')];
+  step2Wrong = [];
+  inputs.forEach((inp, i) => {
+    const w = step2Order[i];
+    const user = inp.value.trim();
+    const ok = matchKorean(user, w.korean);
+    if (!ok) {
+      step2Wrong.push({ word: w, user });
+      saveStarWords([w.english]);
+    }
+  });
+  showScreen('screen-step3');
+  focusFirst('#step3-list .sc-input');
+}
+
+function completeStep3() {
+  const inputs = [...document.querySelectorAll('#step3-list .sc-input')];
+  step3Wrong = [];
+  inputs.forEach((inp, i) => {
+    const w = step3Order[i];
+    const user = inp.value.trim();
+    const ok = normEn(user) === normEn(w.answer);
+    if (!ok) {
+      step3Wrong.push({ word: w, user });
+      saveStarWords([w.english]);
+    }
+  });
+  renderFinal();
+  showScreen('screen-final');
+}
+
+// ── FINAL ──
+function renderFinal() {
+  const totalWrong = step1Wrong.length + step2Wrong.length + step3Wrong.length;
+
+  // 서브 타이틀
+  document.getElementById('final-sub').textContent = totalWrong === 0
+    ? '🎉 세 단계 모두 완벽하게 맞췄어요!'
+    : `총 ${totalWrong}개 틀렸어요 · 틀린 단어를 5번씩 써봐요 ✍️`;
+
+  // 단계별 오답 리스팅
+  const resultsEl = document.getElementById('final-results');
+  const sections = [
+    { label: '1단계 · 한글→영어', wrong: step1Wrong, ansKey: w => w.english },
+    { label: '2단계 · 영어→한글', wrong: step2Wrong, ansKey: w => w.korean },
+    { label: '3단계 · 문장 빈칸', wrong: step3Wrong, ansKey: w => w.answer },
+  ];
+  sections.forEach(sec => {
+    const wrap = document.createElement('div');
+    wrap.className = 'result-section';
+    wrap.innerHTML = `<div class="rs-label">${sec.label}</div>`;
+    if (!sec.wrong.length) {
+      wrap.innerHTML += `<div class="rs-no-wrong">✅ 모두 정답!</div>`;
+    } else {
+      sec.wrong.forEach(({ word, user }) => {
+        wrap.innerHTML += `
+          <div class="rs-item">
+            <div class="rs-word">${word.english}</div>
+            <div class="rs-detail">
+              내 답: <span style="color:var(--red)">"${user || '(미입력)'}"</span><br>
+              정답: <span class="rs-correct">"${sec.ansKey(word)}"</span>
+            </div>
+          </div>`;
+      });
+    }
+    resultsEl.appendChild(wrap);
+  });
+
+  // 쓰기 섹션
+  const writeEl = document.getElementById('final-write');
+
+  if (totalWrong === 0) {
+    writeEl.innerHTML = `
+      <div class="all-correct">
+        <div class="ac-emoji">👍👍</div>
+        <div class="ac-title">완벽해요! 쌍따봉!</div>
+        <div class="ac-sub">세 단계 모두 한 번에 맞췄어요! 정말 대단해요!</div>
+      </div>
+      <button class="done-btn" style="display:block;margin-top:16px;" onclick="goHome()">🏠 처음으로</button>`;
+    return;
+  }
+
+  // 1·2단계 고유 틀린 단어
+  const seenWord = new Set();
+  const uniqueWordWrong = [];
+  [...step1Wrong, ...step2Wrong].forEach(({ word }) => {
+    if (!seenWord.has(word.english)) { seenWord.add(word.english); uniqueWordWrong.push(word); }
+  });
+
+  // 3단계 고유 틀린 단어 (문장)
+  const seenSent = new Set();
+  const uniqueSentWrong = [];
+  step3Wrong.forEach(({ word }) => {
+    if (!seenSent.has(word.english)) { seenSent.add(word.english); uniqueSentWrong.push(word); }
+  });
+
+  writeEl.innerHTML = '';
+
+  // ── 단어 쓰기 (1·2단계) ──
+  if (uniqueWordWrong.length > 0) {
+    writeEl.insertAdjacentHTML('beforeend', `
+      <div class="write-header">
+        <div class="wh-title">✍️ 틀린 단어 5번씩 써봐요!</div>
+        <div class="wh-sub">1·2단계에서 틀린 단어를 영어+한글로 써보세요.</div>
+      </div>`);
+
+    uniqueWordWrong.forEach(w => {
+      const card = document.createElement('div');
+      card.className = 'write-card';
+      card.dataset.type   = 'word';
+      card.dataset.word   = w.english;
+      card.dataset.korean = w.korean;
+
+      let lines = '';
+      for (let n = 1; n <= 5; n++) {
+        lines += `
+          <div class="wc-line">
+            <span class="wc-num">${n}</span>
+            <input class="wc-input" type="text" data-lang="en" data-answer="${w.english}"
+              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <span class="wc-sep">|</span>
+            <input class="wc-input" type="text" data-lang="ko" data-answer="${w.korean}"
+              autocomplete="off" spellcheck="false">
+          </div>`;
+      }
+      card.innerHTML = `
+        <div class="wc-word">${w.english} <span style="font-size:16px;font-weight:400;color:var(--muted)">${w.korean}</span></div>
+        <div class="wc-lines">${lines}</div>`;
+
+      bindCardInputs(card);
+      writeEl.appendChild(card);
+    });
+  }
+
+  // ── 문장 쓰기 (3단계) ──
+  if (uniqueSentWrong.length > 0) {
+    writeEl.insertAdjacentHTML('beforeend', `
+      <div class="write-header" style="margin-top:${uniqueWordWrong.length > 0 ? '28px' : '0'}">
+        <div class="wh-title">✍️ 틀린 문장 5번씩 써봐요!</div>
+        <div class="wh-sub">3단계에서 틀린 문장을 보고 써보세요.</div>
+      </div>`);
+
+    uniqueSentWrong.forEach(w => {
+      const card = document.createElement('div');
+      card.className = 'write-card';
+      card.dataset.type     = 'sentence';
+      const fullSentence = w.sentence.replace('___', w.answer);
+      card.dataset.sentence = fullSentence;
+
+      let lines = '';
+      for (let n = 1; n <= 5; n++) {
+        lines += `
+          <div class="wc-line">
+            <span class="wc-num">${n}</span>
+            <input class="wc-input wc-sentence" type="text" data-lang="sentence"
+              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          </div>`;
+      }
+      card.innerHTML = `
+        <div class="wc-word">${w.english} <span style="font-size:16px;font-weight:400;color:var(--muted)">${w.korean}</span></div>
+        <div class="wc-ref">${fullSentence}</div>
+        <div class="wc-lines">${lines}</div>`;
+
+      bindCardInputs(card);
+      writeEl.appendChild(card);
+    });
+  }
+
+  writeEl.insertAdjacentHTML('beforeend', `
+    <div class="mom-section">
+      <div class="mom-msg">✋ 다 썼으면<br>엄마에게 확인 받으세요!</div>
+      <div class="mom-summary">
+        <div class="ms-row ${step1Wrong.length === 0 ? 'ms-ok' : 'ms-bad'}">
+          <span class="ms-step">1단계</span>
+          <span class="ms-count">${step1Wrong.length === 0 ? '✅ 모두 정답' : `❌ ${step1Wrong.length}개 틀림`}</span>
+        </div>
+        <div class="ms-row ${step2Wrong.length === 0 ? 'ms-ok' : 'ms-bad'}">
+          <span class="ms-step">2단계</span>
+          <span class="ms-count">${step2Wrong.length === 0 ? '✅ 모두 정답' : `❌ ${step2Wrong.length}개 틀림`}</span>
+        </div>
+        <div class="ms-row ${step3Wrong.length === 0 ? 'ms-ok' : 'ms-bad'}">
+          <span class="ms-step">3단계</span>
+          <span class="ms-count">${step3Wrong.length === 0 ? '✅ 모두 정답' : `❌ ${step3Wrong.length}개 틀림`}</span>
+        </div>
+      </div>
+      <button class="mom-btn" onclick="momCheck()">👩 엄마 확인</button>
+      <div class="mom-result" id="mom-result"></div>
+    </div>
+    <button class="done-btn" id="done-btn" onclick="goHome()">🏠 처음으로</button>`);
+}
+
+// ── BIND CARD INPUTS (Enter 이동 + 복붙 차단) ──
+function bindCardInputs(card) {
+  const inputs = [...card.querySelectorAll('.wc-input')];
+  inputs.forEach((inp, i) => {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && i < inputs.length - 1) { e.preventDefault(); inputs[i + 1].focus(); }
+    });
+    ['paste', 'copy', 'cut'].forEach(ev =>
+      inp.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); })
+    );
+  });
+}
+
+// ── MOM CHECK ──
+function momCheck() {
+  const cards = document.querySelectorAll('.write-card');
+  let allOk = true;
+  const failWords = [];
+
+  cards.forEach(card => {
+    const type = card.dataset.type;
+    const inputs = [...card.querySelectorAll('.wc-input')];
+    let cardOk = true;
+
+    if (type === 'sentence') {
+      const fullSentence = card.dataset.sentence;
+      inputs.forEach(inp => {
+        const ok = normEn(inp.value) === normEn(fullSentence);
+        inp.classList.remove('ok', 'fail');
+        inp.classList.add(ok ? 'ok' : 'fail');
+        if (!ok) cardOk = false;
+      });
+      if (!cardOk) failWords.push(card.querySelector('.wc-word').childNodes[0].textContent.trim());
+    } else {
+      const enWord = card.dataset.word;
+      const krWord = card.dataset.korean;
+      inputs.forEach(inp => {
+        const lang = inp.dataset.lang;
+        const ok = lang === 'ko'
+          ? matchKorean(inp.value, krWord)
+          : normEn(inp.value) === normEn(enWord);
+        inp.classList.remove('ok', 'fail');
+        inp.classList.add(ok ? 'ok' : 'fail');
+        if (!ok) cardOk = false;
+      });
+      if (!cardOk) failWords.push(enWord);
+    }
+    if (!cardOk) allOk = false;
+  });
+
+  const resultEl = document.getElementById('mom-result');
+  resultEl.style.display = 'block';
+
+  if (allOk) {
+    resultEl.className = 'mom-result ok';
+    resultEl.textContent = '🎉 모두 잘 썼어요! 정말 잘했어요!!';
+    document.getElementById('done-btn').style.display = 'block';
+    document.querySelector('.mom-btn').disabled = true;
+    document.querySelector('.mom-btn').style.opacity = '0.5';
+  } else {
+    resultEl.className = 'mom-result fail';
+    resultEl.innerHTML = `❌ 아직 틀린 게 있어요!<br><strong>${failWords.join(', ')}</strong><br>빨간 칸을 다시 써봐요!`;
+    // 첫 번째 틀린 칸으로 스크롤
+    const firstFail = document.querySelector('.wc-input.fail');
+    if (firstFail) firstFail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// ── UTILS ──
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function focusFirst(selector) {
+  setTimeout(() => {
+    const el = document.querySelector(selector);
+    if (el) el.focus();
+  }, 150);
+}
+
+function goHome() { location.href = 'index.html'; }
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+</script>
+</body>
+</html>

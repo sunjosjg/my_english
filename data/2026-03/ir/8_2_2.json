@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "8.2.2",
+  "title": "Integrated Reading - Word List 8.2.2",
+  "words": [
+    {
+      "no": 1,
+      "english": "freedom",
+      "pos": "n.",
+      "korean": "자유",
+      "sentence": "People fight for ___.",
+      "answer": "freedom"
+    },
+    {
+      "no": 2,
+      "english": "remember",
+      "pos": "v.",
+      "korean": "기억하다",
+      "sentence": "Please ___ to do your homework.",
+      "answer": "remember"
+    },
+    {
+      "no": 3,
+      "english": "seek",
+      "pos": "v.",
+      "korean": "찾다",
+      "sentence": "We ___ help when we are lost.",
+      "answer": "seek"
+    },
+    {
+      "no": 4,
+      "english": "symbol",
+      "pos": "n.",
+      "korean": "상징",
+      "sentence": "A red heart is a ___ of love.",
+      "answer": "symbol"
+    },
+    {
+      "no": 5,
+      "english": "united",
+      "pos": "adj.",
+      "korean": "단결된",
+      "sentence": "We stand ___ as a team.",
+      "answer": "united"
+    },
+    {
+      "no": 6,
+      "english": "combine",
+      "pos": "v.",
+      "korean": "결합하다",
+      "sentence": "We ___ flour and eggs to bake.",
+      "answer": "combine"
+    },
+    {
+      "no": 7,
+      "english": "shore",
+      "pos": "n.",
+      "korean": "해안",
+      "sentence": "We walked along the ___.",
+      "answer": "shore"
+    },
+    {
+      "no": 8,
+      "english": "soar",
+      "pos": "v.",
+      "korean": "날아오르다",
+      "sentence": "Birds ___ in the sky.",
+      "answer": "soar"
+    },
+    {
+      "no": 9,
+      "english": "powerful",
+      "pos": "adj.",
+      "korean": "강력한",
+      "sentence": "The storm was very ___.",
+      "answer": "powerful"
+    },
+    {
+      "no": 10,
+      "english": "path",
+      "pos": "n.",
+      "korean": "길",
+      "sentence": "The ___ leads to the park.",
+      "answer": "path"
+    },
+    {
+      "no": 11,
+      "english": "peak",
+      "pos": "n.",
+      "korean": "꼭대기",
+      "sentence": "We reached the mountain ___.",
+      "answer": "peak"
+    },
+    {
+      "no": 12,
+      "english": "pause",
+      "pos": "v.",
+      "korean": "잠시 멈추다",
+      "sentence": "Let's ___ the video here.",
+      "answer": "pause"
+    },
+    {
+      "no": 13,
+      "english": "tomb",
+      "pos": "n.",
+      "korean": "무덤",
+      "sentence": "The king was buried in a ___.",
+      "answer": "tomb"
+    },
+    {
+      "no": 14,
+      "english": "extend",
+      "pos": "v.",
+      "korean": "확장하다",
+      "sentence": "I ___ my arm to reach it.",
+      "answer": "extend"
+    },
+    {
+      "no": 15,
+      "english": "admire",
+      "pos": "v.",
+      "korean": "존경하다",
+      "sentence": "I ___ her hard work.",
+      "answer": "admire"
+    }
+  ]
+}

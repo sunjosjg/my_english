@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "7.2.2",
+  "title": "Integrated Reading - Word List 7.2.2",
+  "words": [
+    {
+      "no": 1,
+      "english": "ability",
+      "pos": "n.",
+      "korean": "능력",
+      "sentence": "He has the ___ to draw well.",
+      "answer": "ability"
+    },
+    {
+      "no": 2,
+      "english": "danger",
+      "pos": "n.",
+      "korean": "위험",
+      "sentence": "The sign warned us of ___.",
+      "answer": "danger"
+    },
+    {
+      "no": 3,
+      "english": "difficult",
+      "pos": "adj.",
+      "korean": "어려운",
+      "sentence": "That math problem was ___.",
+      "answer": "difficult"
+    },
+    {
+      "no": 4,
+      "english": "unusual",
+      "pos": "adj.",
+      "korean": "특이한",
+      "sentence": "We saw an ___ bird today.",
+      "answer": "unusual"
+    },
+    {
+      "no": 5,
+      "english": "useful",
+      "pos": "adj.",
+      "korean": "유용한",
+      "sentence": "This tool is very ___.",
+      "answer": "useful"
+    },
+    {
+      "no": 6,
+      "english": "pest",
+      "pos": "n.",
+      "korean": "해충",
+      "sentence": "A rat is a common ___.",
+      "answer": "pest"
+    },
+    {
+      "no": 7,
+      "english": "trade",
+      "pos": "v.",
+      "korean": "거래",
+      "sentence": "I will ___ my toy for yours.",
+      "answer": "trade"
+    },
+    {
+      "no": 8,
+      "english": "buddy",
+      "pos": "n.",
+      "korean": "친구",
+      "sentence": "He is my study ___.",
+      "answer": "buddy"
+    },
+    {
+      "no": 9,
+      "english": "in return",
+      "pos": "adv.",
+      "korean": "보답으로",
+      "sentence": "He helped me, and I helped him ___.",
+      "answer": "in return"
+    },
+    {
+      "no": 10,
+      "english": "attach",
+      "pos": "v.",
+      "korean": "붙이다",
+      "sentence": "Please ___ your name tag.",
+      "answer": "attach"
+    },
+    {
+      "no": 11,
+      "english": "leftover",
+      "pos": "n.",
+      "korean": "남은 음식",
+      "sentence": "We ate the ___ pizza.",
+      "answer": "leftover"
+    },
+    {
+      "no": 12,
+      "english": "team up",
+      "pos": "v.",
+      "korean": "협력하다",
+      "sentence": "Let's ___ to clean the room.",
+      "answer": "team up"
+    },
+    {
+      "no": 13,
+      "english": "treat",
+      "pos": "n.",
+      "korean": "간식",
+      "sentence": "Ice cream is my favorite ___.",
+      "answer": "treat"
+    },
+    {
+      "no": 14,
+      "english": "dart",
+      "pos": "v.",
+      "korean": "휙 움직이다",
+      "sentence": "The rabbit will ___ into the bush.",
+      "answer": "dart"
+    },
+    {
+      "no": 15,
+      "english": "tentacle",
+      "pos": "n.",
+      "korean": "촉수",
+      "sentence": "The octopus moved its ___.",
+      "answer": "tentacle"
+    }
+  ]
+}

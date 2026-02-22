@@ -1,0 +1,60 @@
+{
+  "courses": [
+    {
+      "id": "2025-12",
+      "label": "2025년 12월",
+      "types": [
+        {
+          "id": "speech",
+          "label": "SPEECH",
+          "units": [
+            { "id": "unit11", "short": "Unit 11", "label": "I Can't Wait to Get Older" },
+            { "id": "unit12", "short": "Unit 12", "label": "An Interview with David" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-03",
+      "label": "2026년 3월",
+      "types": [
+        {
+          "id": "ir",
+          "label": "Integrated Reading",
+          "units": [
+            { "id": "7_1_1", "short": "7.1.1", "label": "Word List 7.1.1" },
+            { "id": "7_1_2", "short": "7.1.2", "label": "Word List 7.1.2" },
+            { "id": "7_1_3", "short": "7.1.3", "label": "Word List 7.1.3" },
+            { "id": "7_2_1", "short": "7.2.1", "label": "Word List 7.2.1" },
+            { "id": "7_2_2", "short": "7.2.2", "label": "Word List 7.2.2" },
+            { "id": "7_2_3", "short": "7.2.3", "label": "Word List 7.2.3" },
+            { "id": "8_1_1", "short": "8.1.1", "label": "Word List 8.1.1" },
+            { "id": "8_1_2", "short": "8.1.2", "label": "Word List 8.1.2" },
+            { "id": "8_1_3", "short": "8.1.3", "label": "Word List 8.1.3" },
+            { "id": "8_2_1", "short": "8.2.1", "label": "Word List 8.2.1" },
+            { "id": "8_2_2", "short": "8.2.2", "label": "Word List 8.2.2" },
+            { "id": "8_2_3", "short": "8.2.3", "label": "Word List 8.2.3" }
+          ]
+        },
+        {
+          "id": "speech",
+          "label": "SPEECH",
+          "units": [
+            { "id": "unit01", "short": "Unit 1",  "label": "House Rule" },
+            { "id": "unit02", "short": "Unit 2",  "label": "Screen Time Rules" },
+            { "id": "unit03", "short": "Unit 3",  "label": "If I Were a Parent" },
+            { "id": "unit04", "short": "Unit 4",  "label": "After School Clubs" },
+            { "id": "unit05", "short": "Unit 5",  "label": "School Events" },
+            { "id": "unit06", "short": "Unit 6",  "label": "School Festivals" },
+            { "id": "unit07", "short": "Unit 7",  "label": "Famous People" },
+            { "id": "unit08", "short": "Unit 8",  "label": "Content Creators" },
+            { "id": "unit09", "short": "Unit 9",  "label": "Being Famous" },
+            { "id": "unit10", "short": "Unit 10", "label": "Movies" },
+            { "id": "unit11", "short": "Unit 11", "label": "Sports" },
+            { "id": "unit12", "short": "Unit 12", "label": "Music" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>사진 채점 — 찬희 영어 단어장</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+    :root {
+      --primary: #5b4fcf; --primary-light: #7c71e0; --primary-bg: #eef2ff;
+      --green: #10b981; --green-bg: #ecfdf5; --red: #ef4444; --red-bg: #fef2f2;
+      --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
+      --muted: #64748b; --border: #e2e8f0; --radius: 14px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .page { padding: 16px; max-width: 760px; margin: 0 auto; padding-bottom: 48px; }
+
+    /* HEADER */
+    .header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .back-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .header-title { font-size: 20px; font-weight: 800; color: var(--primary); }
+    .unit-badge { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* MODE TABS */
+    .mode-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: var(--radius); overflow: hidden; border: 2px solid var(--border); }
+    .mode-tab { flex: 1; padding: 14px 8px; text-align: center; font-size: 14px; font-weight: 700; cursor: pointer; background: var(--card); color: var(--muted); border: none; transition: all 0.15s; }
+    .mode-tab.on { background: var(--primary); color: #fff; }
+
+    /* ANSWER CARD */
+    .ans-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; }
+    .ans-item { display: grid; grid-template-columns: 28px 1fr 80px; gap: 10px; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+    .ans-item:last-child { border-bottom: none; }
+    .ans-item.marked-ok   { background: var(--green-bg); }
+    .ans-item.marked-fail { background: var(--red-bg); }
+    .ai-no   { font-size: 13px; color: var(--muted); font-weight: 700; }
+    .ai-body { }
+    .ai-answer { font-size: 17px; font-weight: 800; color: var(--primary); }
+    .ai-sent   { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+    .ai-btns { display: flex; gap: 6px; justify-content: flex-end; }
+    .ai-btn { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--border); background: var(--card); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .ai-btn.ok   { border-color: var(--green); background: var(--green-bg); }
+    .ai-btn.fail { border-color: var(--red);   background: var(--red-bg); }
+    .ans-summary { background: var(--card); border-radius: var(--radius); border: 2px solid var(--primary); padding: 16px; text-align: center; margin-bottom: 16px; font-size: 18px; font-weight: 800; color: var(--primary); display: none; }
+
+    /* API KEY SECTION */
+    .api-section { background: #fff8e1; border: 2px dashed #f59e0b; border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+    .api-title { font-size: 15px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+    .api-desc { font-size: 13px; color: #78350f; margin-bottom: 12px; line-height: 1.6; }
+    .api-row { display: flex; gap: 8px; }
+    .api-input { flex: 1; padding: 10px 14px; border: 2px solid #f59e0b; border-radius: 10px; font-size: 14px; font-family: monospace; outline: none; }
+    .api-input:focus { border-color: #d97706; }
+    .api-save-btn { padding: 10px 18px; background: #f59e0b; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .api-ok { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 8px; display: none; }
+
+    /* PHOTO SECTION */
+    .photo-section { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+    .photo-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .photo-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+    .photo-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .photo-btn { flex: 1; min-width: 140px; padding: 16px 10px; border: 2px solid var(--primary); border-radius: var(--radius); background: var(--primary-bg); color: var(--primary); font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; }
+    .photo-btn:active { background: var(--primary); color: #fff; }
+    input[type="file"] { display: none; }
+    .preview-wrap { margin-top: 16px; display: none; }
+    .preview-img { width: 100%; max-height: 320px; object-fit: contain; border-radius: 10px; border: 2px solid var(--border); }
+    .grade-btn { width: 100%; margin-top: 14px; padding: 16px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: none; }
+    .grade-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+    /* LOADING */
+    .loading { text-align: center; padding: 40px 20px; display: none; }
+    .loading-spinner { font-size: 48px; animation: spin 1s linear infinite; display: block; margin-bottom: 12px; }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .loading-msg { font-size: 16px; color: var(--muted); font-weight: 600; }
+
+    /* RESULTS */
+    .results { display: none; }
+    .result-header { background: linear-gradient(135deg, #5b4fcf, #7c71e0); color: #fff; border-radius: var(--radius); padding: 20px; text-align: center; margin-bottom: 16px; }
+    .rh-score { font-size: 42px; font-weight: 900; }
+    .rh-detail { font-size: 15px; opacity: 0.9; margin-top: 4px; }
+    .result-list { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; }
+    .result-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: start; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .result-item:last-child { border-bottom: none; }
+    .result-item.correct { background: var(--green-bg); }
+    .result-item.wrong   { background: var(--red-bg); }
+    .ri-no     { font-size: 12px; color: var(--muted); padding-top: 2px; }
+    .ri-body   { font-size: 14px; line-height: 1.6; }
+    .ri-word   { font-weight: 700; font-size: 15px; }
+    .ri-user   { font-size: 13px; }
+    .ri-user .user-ans { color: var(--red); font-weight: 600; }
+    .ri-user .ok-ans   { color: var(--green); font-weight: 600; }
+    .ri-icon   { font-size: 20px; }
+
+    .star-btn { width: 100%; padding: 14px; background: #f59e0b; color: #fff; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 10px; }
+    .retry-btn { width: 100%; padding: 14px; background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; }
+
+    /* ERROR */
+    .error-box { background: var(--red-bg); border: 2px solid var(--red); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; font-size: 14px; color: var(--red); line-height: 1.6; display: none; }
+
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div>
+      <div class="header-title">📸 사진 채점</div>
+      <div class="unit-badge" id="unit-badge"></div>
+    </div>
+  </div>
+
+  <!-- 모드 탭 -->
+  <div class="mode-tabs">
+    <button class="mode-tab on" id="tab-manual" onclick="switchMode('manual')">📋 정답 카드 (즉시)</button>
+    <button class="mode-tab" id="tab-ai" onclick="switchMode('ai')">📸 AI 사진 채점</button>
+  </div>
+
+  <!-- 정답 카드 모드 -->
+  <div id="manual-mode">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+      시험지 보면서 ✅ / ❌ 를 직접 탭해서 채점하세요.
+    </div>
+    <div class="ans-card" id="ans-card"></div>
+    <div class="ans-summary" id="ans-summary"></div>
+    <button class="star-btn" id="manual-star-btn" onclick="saveManualWrongAsStars()" style="display:none">⭐ 틀린 단어 별표로 저장</button>
+  </div>
+
+  <!-- AI 채점 모드 -->
+  <div id="ai-mode" style="display:none">
+
+  <!-- API 키 설정 -->
+  <div class="api-section" id="api-section">
+    <div class="api-title">🔑 Groq API 키 설정 (최초 1회 · 완전 무료)</div>
+    <div class="api-desc">
+      무료 키 발급: <strong>console.groq.com</strong> → 회원가입 → API Keys → Create API Key<br>
+      하루 14,400번 무료 · 키는 이 기기에만 저장됩니다.
+    </div>
+    <div class="api-row">
+      <input class="api-input" id="api-key-input" type="password" placeholder="gsk_...">
+      <button class="api-save-btn" onclick="saveApiKey()">저장</button>
+    </div>
+    <div class="api-ok" id="api-ok">✅ API 키가 저장되었습니다</div>
+  </div>
+
+  <!-- 사진 촬영 -->
+  <div class="photo-section" id="photo-section">
+    <div class="photo-title">📄 시험지 사진 찍기</div>
+    <div class="photo-desc">
+      찬희가 답을 쓴 <strong>1페이지(문장 빈칸)</strong> 시험지를 찍어주세요.<br>
+      밝은 곳에서 반듯하게 찍을수록 정확합니다.
+    </div>
+    <div class="photo-btns">
+      <button class="photo-btn" onclick="document.getElementById('camera-input').click()">📷 카메라로 찍기</button>
+      <button class="photo-btn" onclick="document.getElementById('file-input').click()">🖼 사진 선택</button>
+    </div>
+    <input type="file" id="camera-input" accept="image/*" capture="environment" onchange="onPhotoSelected(this)">
+    <input type="file" id="file-input"   accept="image/*" onchange="onPhotoSelected(this)">
+    <div class="preview-wrap" id="preview-wrap">
+      <img class="preview-img" id="preview-img" src="" alt="미리보기">
+      <button class="grade-btn" id="grade-btn" onclick="startGrading()">🤖 AI 채점 시작</button>
+    </div>
+  </div>
+
+  <!-- 오류 -->
+  <div class="error-box" id="error-box"></div>
+
+  <!-- 로딩 -->
+  <div class="loading" id="loading">
+    <span class="loading-spinner">🤖</span>
+    <div class="loading-msg">AI가 시험지를 분석하고 있어요...<br>잠시만 기다려 주세요</div>
+  </div>
+
+  <!-- 결과 -->
+  <div class="results" id="results">
+    <div class="result-header">
+      <div class="rh-score" id="rh-score"></div>
+      <div class="rh-detail" id="rh-detail"></div>
+    </div>
+    <div class="result-list" id="result-list"></div>
+    <button class="star-btn" id="star-btn" onclick="saveWrongAsStars()" style="display:none">⭐ 틀린 단어 별표로 저장</button>
+    <button class="retry-btn" onclick="resetToPhoto()">🔄 다시 찍기</button>
+  </div>
+
+  </div><!-- /ai-mode -->
+</div><!-- /page -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+const params   = new URLSearchParams(location.search);
+const courseId = params.get('c');
+const typeId   = params.get('t');
+const unitId   = params.get('u');
+
+let words        = [];
+let imageBase64  = '';
+let gradeResult  = [];
+let manualResult = []; // null | true | false per word
+
+// ── INIT ──
+(async () => {
+  if (!courseId || !typeId || !unitId) { location.href = 'index.html'; return; }
+  try {
+    const r    = await fetch(`data/${courseId}/${typeId}/${unitId}.json`);
+    const data = await r.json();
+    words = data.words;
+    document.getElementById('unit-badge').textContent =
+      `${courseId} · ${typeId} · ${unitId} — ${words.length}개 단어`;
+    renderAnswerCard();
+  } catch { showError('단어 데이터를 불러오지 못했습니다.'); }
+
+  // API 키 로드
+  const saved = localStorage.getItem('groq_api_key');
+  if (saved) {
+    document.getElementById('api-key-input').value = saved;
+    document.getElementById('api-ok').style.display = 'block';
+    document.getElementById('api-section').style.borderColor = '#10b981';
+  }
+})();
+
+// ── MODE SWITCH ──
+function switchMode(mode) {
+  document.getElementById('manual-mode').style.display = mode === 'manual' ? 'block' : 'none';
+  document.getElementById('ai-mode').style.display     = mode === 'ai'     ? 'block' : 'none';
+  document.getElementById('tab-manual').classList.toggle('on', mode === 'manual');
+  document.getElementById('tab-ai').classList.toggle('on', mode === 'ai');
+}
+
+// ── 정답 카드 (수동 채점) ──
+function renderAnswerCard() {
+  manualResult = new Array(words.length).fill(null);
+  const card = document.getElementById('ans-card');
+  card.innerHTML = '';
+  words.forEach((w, i) => {
+    const item = document.createElement('div');
+    item.className = 'ans-item';
+    item.id = `ans-item-${i}`;
+    const sentPreview = w.sentence.replace('___', `<strong style="color:var(--primary)">${w.answer}</strong>`);
+    item.innerHTML = `
+      <div class="ai-no">${i + 1}</div>
+      <div class="ai-body">
+        <div class="ai-answer">${w.answer}</div>
+        <div class="ai-sent">${sentPreview}</div>
+      </div>
+      <div class="ai-btns">
+        <button class="ai-btn" id="btn-ok-${i}"   onclick="markManual(${i}, true)">✅</button>
+        <button class="ai-btn" id="btn-fail-${i}" onclick="markManual(${i}, false)">❌</button>
+      </div>`;
+    card.appendChild(item);
+  });
+}
+
+function markManual(i, isOk) {
+  manualResult[i] = isOk;
+  const item = document.getElementById(`ans-item-${i}`);
+  item.classList.toggle('marked-ok',   isOk);
+  item.classList.toggle('marked-fail', !isOk);
+  document.getElementById(`btn-ok-${i}`).classList.toggle('ok',     isOk);
+  document.getElementById(`btn-fail-${i}`).classList.toggle('fail', !isOk);
+
+  // 전부 체크했으면 요약 표시
+  if (manualResult.every(v => v !== null)) {
+    const correct = manualResult.filter(v => v).length;
+    const total   = words.length;
+    const pct     = Math.round(correct / total * 100);
+    const summary = document.getElementById('ans-summary');
+    summary.textContent = `${pct}점 — ${total}문제 중 ${correct}개 정답 🎉`;
+    summary.style.display = 'block';
+    const wrongCount = total - correct;
+    document.getElementById('manual-star-btn').style.display = wrongCount > 0 ? 'block' : 'none';
+  }
+}
+
+function saveManualWrongAsStars() {
+  const wrongEnglish = words.filter((_, i) => manualResult[i] === false).map(w => w.english);
+  if (!wrongEnglish.length) return;
+  const key = `star_${courseId}_${typeId}_${unitId}`;
+  try {
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    const merged   = [...new Set([...existing, ...wrongEnglish])];
+    localStorage.setItem(key, JSON.stringify(merged));
+    showToast(`⭐ ${wrongEnglish.length}개 단어 별표 저장 완료!`);
+    document.getElementById('manual-star-btn').disabled = true;
+    document.getElementById('manual-star-btn').textContent = '⭐ 저장 완료!';
+  } catch { showToast('저장 실패'); }
+}
+
+// ── API KEY ──
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key) { showToast('API 키를 입력하세요'); return; }
+  localStorage.setItem('groq_api_key', key);
+  document.getElementById('api-ok').style.display = 'block';
+  document.getElementById('api-section').style.borderColor = '#10b981';
+  showToast('✅ 저장되었습니다');
+}
+
+// ── PHOTO ──
+function onPhotoSelected(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  document.getElementById('preview-img').src = url;
+  document.getElementById('preview-wrap').style.display = 'block';
+  document.getElementById('grade-btn').style.display = 'block';
+  // 이미지 리사이즈 후 base64 저장
+  resizeImage(file).then(b64 => { imageBase64 = b64; });
+  // 결과 초기화
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('error-box').style.display = 'none';
+}
+
+function resizeImage(file, maxWidth = 1600) {
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxWidth / img.width);
+      const canvas = document.createElement('canvas');
+      canvas.width  = img.width  * scale;
+      canvas.height = img.height * scale;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', 0.85).split(',')[1]);
+    };
+    img.src = url;
+  });
+}
+
+// ── GRADING ──
+async function startGrading() {
+  const apiKey = localStorage.getItem('groq_api_key');
+  if (!apiKey) { showToast('먼저 API 키를 저장하세요'); return; }
+  if (!imageBase64) { showToast('사진을 먼저 선택하세요'); return; }
+
+  document.getElementById('photo-section').style.display = 'none';
+  document.getElementById('error-box').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+
+  const answerList = words.map((w, i) => `${i + 1}번 정답: "${w.answer}"`).join('\n');
+
+  const prompt = `이 이미지는 영어 시험지입니다. 학생이 빈칸에 손글씨로 답을 썼습니다.
+
+각 번호의 빈칸에 학생이 쓴 손글씨를 읽어주세요.
+
+참고용 정답 목록 (채점에 사용하지 말고 손글씨 인식에만 참고하세요):
+${answerList}
+
+학생이 실제로 쓴 내용을 그대로 읽어서 아래 JSON 형식으로만 응답하세요:
+{"1":"학생이쓴답","2":"학생이쓴답",...}
+
+빈칸이 비어있으면 빈 문자열("")로 표시하세요.
+JSON 외 다른 텍스트는 절대 포함하지 마세요.`;
+
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        max_tokens: 1024,
+        temperature: 0.1,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image_url',
+              image_url: { url: `data:image/jpeg;base64,${imageBase64}` }
+            },
+            { type: 'text', text: prompt }
+          ]
+        }]
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      const msg = data?.error?.message || '';
+      if (res.status === 401) throw new Error('API 키가 유효하지 않습니다.\n• gsk_로 시작하는 키인지 확인하세요\n• console.groq.com 에서 새 키를 발급받아 다시 입력하세요');
+      if (res.status === 429) throw new Error('요청이 너무 많습니다. 잠시 후 다시 시도하세요.\n(하루 14,400번 무료 한도)');
+      throw new Error(`API 오류: ${msg || res.status}`);
+    }
+
+    const rawText = data.choices?.[0]?.message?.content || '';
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('AI 응답 형식 오류. 다시 시도해 주세요.');
+
+    const extracted = JSON.parse(jsonMatch[0]);
+    showResults(extracted);
+
+  } catch (e) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('photo-section').style.display = 'block';
+    showError(`채점 오류: ${e.message}`);
+  }
+}
+
+// ── RESULTS ──
+function normEn(s) { return (s || '').trim().replace(/\s+/g, ' '); }
+
+function showResults(extracted) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+
+  gradeResult = [];
+  let correct = 0;
+  const list = document.getElementById('result-list');
+  list.innerHTML = '';
+
+  words.forEach((w, i) => {
+    const no      = String(i + 1);
+    const userAns = extracted[no] || '';
+    const isOk    = normEn(userAns).toLowerCase() === normEn(w.answer).toLowerCase();
+    if (isOk) correct++;
+    gradeResult.push({ word: w, userAns, correct: isOk });
+
+    const item = document.createElement('div');
+    item.className = `result-item ${isOk ? 'correct' : 'wrong'}`;
+    item.innerHTML = `
+      <div class="ri-no">${no}</div>
+      <div class="ri-body">
+        <div class="ri-word">${w.english} <span style="font-size:12px;font-weight:400;color:var(--muted)">${w.korean.split(',')[0]}</span></div>
+        ${isOk
+          ? `<div class="ri-user"><span class="ok-ans">✅ ${userAns || w.answer}</span></div>`
+          : `<div class="ri-user">
+               내 답: <span class="user-ans">"${userAns || '(빈칸)'}"</span><br>
+               정답: <span class="ok-ans">"${w.answer}"</span>
+             </div>`
+        }
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">${w.sentence.replace('___', `<strong>${w.answer}</strong>`)}</div>
+      </div>
+      <div class="ri-icon">${isOk ? '✅' : '❌'}</div>`;
+    list.appendChild(item);
+  });
+
+  const total = words.length;
+  const pct   = Math.round(correct / total * 100);
+  document.getElementById('rh-score').textContent = `${pct}점`;
+  document.getElementById('rh-detail').textContent = `${total}문제 중 ${correct}개 정답 · ${total - correct}개 오답`;
+
+  const wrongCount = total - correct;
+  const starBtn = document.getElementById('star-btn');
+  starBtn.style.display = wrongCount > 0 ? 'block' : 'none';
+}
+
+function saveWrongAsStars() {
+  const wrongEnglish = gradeResult.filter(r => !r.correct).map(r => r.word.english);
+  if (!wrongEnglish.length) return;
+  const key = `star_${courseId}_${typeId}_${unitId}`;
+  try {
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    const merged   = [...new Set([...existing, ...wrongEnglish])];
+    localStorage.setItem(key, JSON.stringify(merged));
+    showToast(`⭐ ${wrongEnglish.length}개 단어 별표 저장 완료!`);
+    document.getElementById('star-btn').disabled = true;
+    document.getElementById('star-btn').textContent = '⭐ 저장 완료!';
+  } catch { showToast('저장 실패'); }
+}
+
+function resetToPhoto() {
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('photo-section').style.display = 'block';
+  document.getElementById('preview-wrap').style.display = 'none';
+  document.getElementById('grade-btn').style.display = 'none';
+  imageBase64 = '';
+}
+
+function showError(msg) {
+  const el = document.getElementById('error-box');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function goBack() {
+  const p = new URLSearchParams({ c: courseId, t: typeId, u: unitId });
+  location.href = 'index.html?' + p;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

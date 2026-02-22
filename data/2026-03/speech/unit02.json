@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "2",
+  "title": "Speech - Unit 2. Screen Time Rules",
+  "words": [
+    {
+      "no": 1,
+      "english": "post pictures online",
+      "korean": "사진을 온라인에 게시하다",
+      "sentence": "She likes to ___ every day.",
+      "answer": "post pictures online"
+    },
+    {
+      "no": 2,
+      "english": "get in trouble",
+      "korean": "곤란에 처하다",
+      "sentence": "He will ___ if he breaks the rule.",
+      "answer": "get in trouble"
+    },
+    {
+      "no": 3,
+      "english": "nearly",
+      "korean": "거의",
+      "sentence": "I have ___ finished my homework.",
+      "answer": "nearly"
+    },
+    {
+      "no": 4,
+      "english": "decide",
+      "korean": "결정하다",
+      "sentence": "Let's ___ what to eat for dinner.",
+      "answer": "decide"
+    },
+    {
+      "no": 5,
+      "english": "at all",
+      "korean": "조금도",
+      "sentence": "I don't like vegetables ___ .",
+      "answer": "at all"
+    },
+    {
+      "no": 6,
+      "english": "extra",
+      "korean": "추가의",
+      "sentence": "Can I have some ___ time to play?",
+      "answer": "extra"
+    },
+    {
+      "no": 7,
+      "english": "scroll through",
+      "korean": "스크롤하여 살펴보다",
+      "sentence": "I like to ___ photos on my phone.",
+      "answer": "scroll through"
+    },
+    {
+      "no": 8,
+      "english": "take selfies",
+      "korean": "셀카를 찍다",
+      "sentence": "My sister loves to ___ with friends.",
+      "answer": "take selfies"
+    },
+    {
+      "no": 9,
+      "english": "almost",
+      "korean": "거의",
+      "sentence": "It is ___ time for dinner.",
+      "answer": "almost"
+    },
+    {
+      "no": 10,
+      "english": "neglect",
+      "korean": "소홀히 하다, 방치하다",
+      "sentence": "Don't ___ your homework for games.",
+      "answer": "neglect"
+    },
+    {
+      "no": 11,
+      "english": "responsibility",
+      "korean": "책임[책무]",
+      "sentence": "It is your ___ to clean your room.",
+      "answer": "responsibility"
+    },
+    {
+      "no": 12,
+      "english": "addicted to",
+      "korean": "~에 중독된",
+      "sentence": "He is ___ playing video games.",
+      "answer": "addicted to"
+    },
+    {
+      "no": 13,
+      "english": "argument",
+      "korean": "논쟁[말다툼]",
+      "sentence": "They had an ___ about screen time.",
+      "answer": "argument"
+    },
+    {
+      "no": 14,
+      "english": "set a limit",
+      "korean": "한계를 두다",
+      "sentence": "Parents should ___ on phone use.",
+      "answer": "set a limit"
+    },
+    {
+      "no": 15,
+      "english": "permission",
+      "korean": "허락, 허가",
+      "sentence": "You need ___ to use my tablet.",
+      "answer": "permission"
+    },
+    {
+      "no": 16,
+      "english": "emergencies",
+      "korean": "응급상황",
+      "sentence": "Call me only in ___.",
+      "answer": "emergencies"
+    },
+    {
+      "no": 17,
+      "english": "ensure",
+      "korean": "반드시 ~하게 하다",
+      "sentence": "Please ___ you finish your work first.",
+      "answer": "ensure"
+    },
+    {
+      "no": 18,
+      "english": "put away",
+      "korean": "치우다",
+      "sentence": "___ your phone during dinner.",
+      "answer": "Put away"
+    },
+    {
+      "no": 19,
+      "english": "stick to",
+      "korean": "굳게 지키다, 고수하다",
+      "sentence": "You should ___ the rules we agreed on.",
+      "answer": "stick to"
+    },
+    {
+      "no": 20,
+      "english": "make sure",
+      "korean": "확실하게 하다",
+      "sentence": "___ you turn off the lights.",
+      "answer": "Make sure"
+    }
+  ]
+}

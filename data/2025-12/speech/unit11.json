@@ -1,0 +1,187 @@
+{
+  "type": "SPEECH",
+  "unit": "11",
+  "title": "Speech - Unit 11. I Can't Wait to Get Older",
+  "words": [
+    {
+      "no": 1,
+      "english": "adopt",
+      "pos": "v.",
+      "korean": "입양하다",
+      "definition": "to take a child or pet into your home as family",
+      "sentence": "We ___ a dog from the shelter.",
+      "answer": "adopted"
+    },
+    {
+      "no": 2,
+      "english": "apartment",
+      "pos": "n.",
+      "korean": "아파트",
+      "definition": "a place to live in a big building",
+      "sentence": "We moved into a new ___ last month.",
+      "answer": "apartment"
+    },
+    {
+      "no": 3,
+      "english": "beard",
+      "pos": "n.",
+      "korean": "턱수염",
+      "definition": "hair that grows on a man's chin and face",
+      "sentence": "He shaved off his ___ today.",
+      "answer": "beard"
+    },
+    {
+      "no": 4,
+      "english": "dye",
+      "pos": "v.",
+      "korean": "염색하다",
+      "definition": "to change the color of something, like hair or clothes",
+      "sentence": "I want to ___ my shirt a new color.",
+      "answer": "dye"
+    },
+    {
+      "no": 5,
+      "english": "enough",
+      "pos": "adv.",
+      "korean": "충분히",
+      "definition": "as much as needed",
+      "sentence": "I didn't have ___ time to finish.",
+      "answer": "enough"
+    },
+    {
+      "no": 6,
+      "english": "festival",
+      "pos": "n.",
+      "korean": "축제",
+      "definition": "a special event with fun, food, or shows",
+      "sentence": "We went to a music ___ last weekend.",
+      "answer": "festival"
+    },
+    {
+      "no": 7,
+      "english": "free",
+      "pos": "adj.",
+      "korean": "자유로운",
+      "definition": "able to do what you want",
+      "sentence": "I feel ___ when I ride my bike.",
+      "answer": "free"
+    },
+    {
+      "no": 8,
+      "english": "get older",
+      "pos": "phr.",
+      "korean": "나이가 들다",
+      "definition": "to become older over time",
+      "sentence": "As we ___, we learn more.",
+      "answer": "get older"
+    },
+    {
+      "no": 9,
+      "english": "graduate",
+      "pos": "v.",
+      "korean": "졸업하다",
+      "definition": "to finish school or a program",
+      "sentence": "He ___ from elementary school in June.",
+      "answer": "graduated"
+    },
+    {
+      "no": 10,
+      "english": "grow",
+      "pos": "v.",
+      "korean": "기르다",
+      "definition": "to become more in size or number",
+      "sentence": "My hair ___ fast in the summer.",
+      "answer": "grows"
+    },
+    {
+      "no": 11,
+      "english": "imagine",
+      "pos": "v.",
+      "korean": "상상하다",
+      "definition": "to create ideas or stories in your thoughts",
+      "sentence": "I ___ a world made of candy.",
+      "answer": "imagined"
+    },
+    {
+      "no": 12,
+      "english": "move into",
+      "pos": "phr.",
+      "korean": "~로 이사하다",
+      "definition": "to go and start living in a new place",
+      "sentence": "We will ___ our new house next week.",
+      "answer": "move into"
+    },
+    {
+      "no": 13,
+      "english": "pet",
+      "pos": "n.",
+      "korean": "애완동물",
+      "definition": "an animal that lives with people",
+      "sentence": "I have a ___ dog named Max.",
+      "answer": "pet"
+    },
+    {
+      "no": 14,
+      "english": "playlist",
+      "pos": "n.",
+      "korean": "재생 목록",
+      "definition": "a list of songs to play",
+      "sentence": "I made a ___ for our road trip.",
+      "answer": "playlist"
+    },
+    {
+      "no": 15,
+      "english": "put on",
+      "pos": "phr.",
+      "korean": "착용하다",
+      "definition": "to wear clothes or accessories",
+      "sentence": "Please ___ your jacket.",
+      "answer": "put on"
+    },
+    {
+      "no": 16,
+      "english": "road trip",
+      "pos": "phr.",
+      "korean": "장거리 자동차 여행",
+      "definition": "a vacation where you travel by car",
+      "sentence": "We took a ___ to the mountains.",
+      "answer": "road trip"
+    },
+    {
+      "no": 17,
+      "english": "seat belt",
+      "pos": "phr.",
+      "korean": "안전벨트",
+      "definition": "a belt in a car seat to stop you from falling",
+      "sentence": "Don't forget to wear your ___.",
+      "answer": "seat belt"
+    },
+    {
+      "no": 18,
+      "english": "shelter",
+      "pos": "n.",
+      "korean": "보호소",
+      "definition": "a building where people or pets stay when in need",
+      "sentence": "The animal ___ takes care of lost pets.",
+      "answer": "shelter"
+    },
+    {
+      "no": 19,
+      "english": "skydiving",
+      "pos": "n.",
+      "korean": "스카이다이빙",
+      "definition": "jumping from a plane with a parachute",
+      "sentence": "___ looks scary but exciting.",
+      "answer": "Skydiving"
+    },
+    {
+      "no": 20,
+      "english": "university",
+      "pos": "n.",
+      "korean": "대학교",
+      "definition": "a school you go to after high school",
+      "sentence": "My cousin studies math at a ___.",
+      "answer": "university"
+    }
+  ]
+}

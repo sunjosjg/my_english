@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "7.2.3",
+  "title": "Integrated Reading - Word List 7.2.3",
+  "words": [
+    {
+      "no": 1,
+      "english": "context",
+      "pos": "n.",
+      "korean": "문맥",
+      "sentence": "The word has many meanings, so read the full ___ first.",
+      "answer": "context"
+    },
+    {
+      "no": 2,
+      "english": "clue",
+      "pos": "n.",
+      "korean": "단서",
+      "sentence": "The ___ led us to the answer.",
+      "answer": "clue"
+    },
+    {
+      "no": 3,
+      "english": "pick off",
+      "pos": "v.",
+      "korean": "떼어내다",
+      "sentence": "She will ___ the leaves.",
+      "answer": "pick off"
+    },
+    {
+      "no": 4,
+      "english": "pattern",
+      "pos": "n.",
+      "korean": "무늬",
+      "sentence": "This shirt has a star ___.",
+      "answer": "pattern"
+    },
+    {
+      "no": 5,
+      "english": "partnership",
+      "pos": "n.",
+      "korean": "동업",
+      "sentence": "Their ___ helped the team win.",
+      "answer": "partnership"
+    },
+    {
+      "no": 6,
+      "english": "unique",
+      "pos": "adj.",
+      "korean": "독특한",
+      "sentence": "Each snowflake is ___.",
+      "answer": "unique"
+    },
+    {
+      "no": 7,
+      "english": "on its own",
+      "pos": "adv.",
+      "korean": "스스로",
+      "sentence": "The toy moved ___.",
+      "answer": "on its own"
+    },
+    {
+      "no": 8,
+      "english": "thrive",
+      "pos": "v.",
+      "korean": "번창하다",
+      "sentence": "Plants ___ in sunlight.",
+      "answer": "thrive"
+    },
+    {
+      "no": 9,
+      "english": "nectar",
+      "pos": "n.",
+      "korean": "꿀",
+      "sentence": "Bees drink ___ from flowers.",
+      "answer": "nectar"
+    },
+    {
+      "no": 10,
+      "english": "pollen",
+      "pos": "n.",
+      "korean": "꽃가루",
+      "sentence": "The wind carries ___.",
+      "answer": "pollen"
+    },
+    {
+      "no": 11,
+      "english": "vitamin",
+      "pos": "n.",
+      "korean": "비타민",
+      "sentence": "Eat fruit for ___ C.",
+      "answer": "vitamin"
+    },
+    {
+      "no": 12,
+      "english": "mineral",
+      "pos": "n.",
+      "korean": "무기질",
+      "sentence": "Water has healthy ___s.",
+      "answer": "mineral"
+    },
+    {
+      "no": 13,
+      "english": "protein",
+      "pos": "n.",
+      "korean": "단백질",
+      "sentence": "Eggs are full of ___.",
+      "answer": "protein"
+    },
+    {
+      "no": 14,
+      "english": "spread",
+      "pos": "v.",
+      "korean": "퍼지다",
+      "sentence": "We ___ jam on toast.",
+      "answer": "spread"
+    },
+    {
+      "no": 15,
+      "english": "fewer",
+      "pos": "adj.",
+      "korean": "더 적은",
+      "sentence": "Today there are ___ clouds.",
+      "answer": "fewer"
+    }
+  ]
+}

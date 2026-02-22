@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "10",
+  "title": "Speech - Unit 10. Movies",
+  "words": [
+    {
+      "no": 1,
+      "english": "in advance",
+      "korean": "미리",
+      "sentence": "Book your tickets ___ to get a good seat.",
+      "answer": "in advance"
+    },
+    {
+      "no": 2,
+      "english": "at all costs",
+      "korean": "무슨 수를 써서라도",
+      "sentence": "We must win this game ___.",
+      "answer": "at all costs"
+    },
+    {
+      "no": 3,
+      "english": "personally",
+      "korean": "개인적으로",
+      "sentence": "___, I prefer action movies.",
+      "answer": "Personally"
+    },
+    {
+      "no": 4,
+      "english": "right",
+      "korean": "알맞은",
+      "sentence": "Choose the ___ word for the sentence.",
+      "answer": "right"
+    },
+    {
+      "no": 5,
+      "english": "beforehand",
+      "korean": "사전에",
+      "sentence": "Read the rules ___ to prepare.",
+      "answer": "beforehand"
+    },
+    {
+      "no": 6,
+      "english": "guess",
+      "korean": "추측하다, 알아맞히다",
+      "sentence": "Can you ___ the ending of the movie?",
+      "answer": "guess"
+    },
+    {
+      "no": 7,
+      "english": "since then",
+      "korean": "그때부터",
+      "sentence": "I saw the film and ___ I love it.",
+      "answer": "since then"
+    },
+    {
+      "no": 8,
+      "english": "There is no point in",
+      "korean": "~하는데 의미가 없다, 소용이 없다",
+      "sentence": "___ arguing about it now.",
+      "answer": "There is no point in"
+    },
+    {
+      "no": 9,
+      "english": "pay close attention to",
+      "korean": "~에 세심한 주의를 하다",
+      "sentence": "You should ___ every scene.",
+      "answer": "pay close attention to"
+    },
+    {
+      "no": 10,
+      "english": "every little detail",
+      "korean": "모든 작은 세부사항",
+      "sentence": "He notices ___ in the movie.",
+      "answer": "every little detail"
+    },
+    {
+      "no": 11,
+      "english": "ruin",
+      "korean": "망치다",
+      "sentence": "Don't ___ the surprise ending!",
+      "answer": "ruin"
+    },
+    {
+      "no": 12,
+      "english": "enhance",
+      "korean": "높이다, 향상시키다",
+      "sentence": "Good music can ___ a movie scene.",
+      "answer": "enhance"
+    },
+    {
+      "no": 13,
+      "english": "give away",
+      "korean": "누설하다, 폭로하다",
+      "sentence": "Don't ___ the plot to your friends.",
+      "answer": "give away"
+    },
+    {
+      "no": 14,
+      "english": "plot",
+      "korean": "줄거리",
+      "sentence": "The ___ of the film was exciting.",
+      "answer": "plot"
+    },
+    {
+      "no": 15,
+      "english": "curious",
+      "korean": "궁금한, 호기심이 많은",
+      "sentence": "I am ___ about what happens next.",
+      "answer": "curious"
+    },
+    {
+      "no": 16,
+      "english": "blame",
+      "korean": "~을 탓하다",
+      "sentence": "Don't ___ others for your mistakes.",
+      "answer": "blame"
+    },
+    {
+      "no": 17,
+      "english": "cheesy",
+      "korean": "느끼한",
+      "sentence": "That ending felt a bit ___.",
+      "answer": "cheesy"
+    },
+    {
+      "no": 18,
+      "english": "heart-warming",
+      "korean": "마음이 따뜻해지는",
+      "sentence": "It was a ___ story about friendship.",
+      "answer": "heart-warming"
+    },
+    {
+      "no": 19,
+      "english": "uplifting",
+      "korean": "희망을 주는",
+      "sentence": "The movie had an ___ message.",
+      "answer": "uplifting"
+    },
+    {
+      "no": 20,
+      "english": "thought-provoking",
+      "korean": "진지하게 생각을 하게 하는",
+      "sentence": "The documentary was very ___.",
+      "answer": "thought-provoking"
+    }
+  ]
+}

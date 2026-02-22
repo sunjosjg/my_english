@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "4",
+  "title": "Speech - Unit 4. After School Clubs",
+  "words": [
+    {
+      "no": 1,
+      "english": "origami",
+      "korean": "종이접기",
+      "sentence": "She made a bird with ___.",
+      "answer": "origami"
+    },
+    {
+      "no": 2,
+      "english": "debate",
+      "korean": "토론",
+      "sentence": "We had a ___ about school rules.",
+      "answer": "debate"
+    },
+    {
+      "no": 3,
+      "english": "join",
+      "korean": "참가하다",
+      "sentence": "I want to ___ the art club.",
+      "answer": "join"
+    },
+    {
+      "no": 4,
+      "english": "play Go",
+      "korean": "바둑을 두다",
+      "sentence": "My grandfather taught me to ___.",
+      "answer": "play Go"
+    },
+    {
+      "no": 5,
+      "english": "grade",
+      "korean": "학년",
+      "sentence": "She is in the fifth ___.",
+      "answer": "grade"
+    },
+    {
+      "no": 6,
+      "english": "strategy",
+      "korean": "전략",
+      "sentence": "We need a good ___ to win.",
+      "answer": "strategy"
+    },
+    {
+      "no": 7,
+      "english": "play against",
+      "korean": "~와 겨루다[시합하다]",
+      "sentence": "We will ___ another school next week.",
+      "answer": "play against"
+    },
+    {
+      "no": 8,
+      "english": "get better at",
+      "korean": "~을 더 잘하다",
+      "sentence": "Practice every day to ___ math.",
+      "answer": "get better at"
+    },
+    {
+      "no": 9,
+      "english": "have a passion for",
+      "korean": "~에 열정이 있다",
+      "sentence": "She seems to ___ music.",
+      "answer": "have a passion for"
+    },
+    {
+      "no": 10,
+      "english": "be interested in",
+      "korean": "~에 관심이 있는",
+      "sentence": "He seems to ___ science.",
+      "answer": "be interested in"
+    },
+    {
+      "no": 11,
+      "english": "practice",
+      "korean": "연습하다",
+      "sentence": "I ___ the piano every evening.",
+      "answer": "practice"
+    },
+    {
+      "no": 12,
+      "english": "throw",
+      "korean": "던지다",
+      "sentence": "Can you ___ the ball to me?",
+      "answer": "throw"
+    },
+    {
+      "no": 13,
+      "english": "compete",
+      "korean": "경쟁하다",
+      "sentence": "Many students ___ in the race.",
+      "answer": "compete"
+    },
+    {
+      "no": 14,
+      "english": "host a tournament",
+      "korean": "대회를 주최하다",
+      "sentence": "Our school will ___ this year.",
+      "answer": "host a tournament"
+    },
+    {
+      "no": 15,
+      "english": "engage in",
+      "korean": "~에 참여하다",
+      "sentence": "Students should ___ club activities.",
+      "answer": "engage in"
+    },
+    {
+      "no": 16,
+      "english": "publish",
+      "korean": "출판하다, 발행하다",
+      "sentence": "They plan to ___ a school newspaper.",
+      "answer": "publish"
+    },
+    {
+      "no": 17,
+      "english": "monthly",
+      "korean": "한 달에 한 번의, 매월의",
+      "sentence": "We have ___ meetings every first Friday.",
+      "answer": "monthly"
+    },
+    {
+      "no": 18,
+      "english": "collaboratively",
+      "korean": "협력해서",
+      "sentence": "We worked ___ to finish the project.",
+      "answer": "collaboratively"
+    },
+    {
+      "no": 19,
+      "english": "individually",
+      "korean": "개인적으로",
+      "sentence": "Each student worked ___ on the test.",
+      "answer": "individually"
+    },
+    {
+      "no": 20,
+      "english": "base on",
+      "korean": "~에 근거하여",
+      "sentence": "The story is ___ real events.",
+      "answer": "base on"
+    }
+  ]
+}

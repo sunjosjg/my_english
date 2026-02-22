@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>문장 완성 — 찬희 영어 단어장</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+    :root {
+      --primary: #5b4fcf; --primary-light: #7c71e0; --primary-bg: #eef2ff;
+      --green: #10b981; --yellow: #f59e0b; --red: #ef4444;
+      --bg: #f1f5f9; --card: #ffffff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    html, body { height: 100%; }
+    #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+    .page { height: 100%; display: flex; flex-direction: column; overflow: hidden; padding: 16px; padding-bottom: 0; max-width: 860px; margin: 0 auto; width: 100%; }
+
+    /* HEADER */
+    .screen-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-shrink: 0; }
+    .back-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); padding: 4px 8px; border-radius: 8px; }
+    .back-btn:hover { background: var(--border); }
+    .header-title { flex: 1; font-size: 16px; font-weight: 700; }
+    .progress-text { font-size: 13px; color: var(--muted); white-space: nowrap; font-weight: 600; }
+
+    /* UNIT TITLE */
+    .unit-title { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 8px; flex-shrink: 0; }
+    .unit-title strong { color: var(--primary); }
+
+    /* WORD BANK */
+    .word-bank-wrap { flex-shrink: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px 12px; margin-bottom: 12px; }
+    .word-bank-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; min-height: 34px; }
+    .word-tile {
+      display: inline-flex; align-items: center; padding: 6px 14px;
+      background: var(--primary); color: #fff; border-radius: 20px;
+      font-size: 14px; font-weight: 700; cursor: grab;
+      box-shadow: 0 2px 8px rgba(91,79,207,0.25);
+      transition: transform 0.12s, opacity 0.2s, box-shadow 0.12s;
+      user-select: none; -webkit-user-select: none; touch-action: none;
+    }
+    .word-tile:hover  { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(91,79,207,0.35); }
+    .word-tile:active { cursor: grabbing; transform: scale(0.95); }
+    .word-tile.used   { opacity: 0.2; pointer-events: none; }
+    .word-tile.dragging { opacity: 0.35; }
+
+    /* DRAG GHOST */
+    #drag-ghost {
+      position: fixed; pointer-events: none; z-index: 9998;
+      background: var(--primary); color: #fff; border-radius: 20px;
+      padding: 6px 16px; font-size: 14px; font-weight: 700;
+      box-shadow: 0 6px 20px rgba(91,79,207,0.45);
+      opacity: 0.92; transform: scale(1.08);
+      display: none; white-space: nowrap;
+    }
+
+    /* SENTENCES */
+    .sentences-wrap { flex: 1; overflow-y: auto; padding-bottom: 16px; }
+    .sentence-row {
+      background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 14px 16px; margin-bottom: 10px; font-size: 16px; line-height: 2;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sentence-row.done { border-color: var(--green); background: rgba(16,185,129,0.05); }
+    .sentence-row.over  { border-color: var(--primary); background: var(--primary-bg); }
+    .sentence-row.wrong { border-color: var(--red) !important; background: rgba(239,68,68,0.08) !important; transition: none; }
+    @keyframes rowShake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-8px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-5px); }
+      80%      { transform: translateX(5px); }
+    }
+    .sentence-row.wrong { animation: rowShake 0.4s ease; }
+    .s-no { font-size: 12px; font-weight: 700; color: var(--muted); margin-right: 6px; }
+    .s-kr  { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; padding-left: 22px; line-height: 1.5; }
+
+    /* BLANK */
+    .s-blank {
+      display: inline-block; min-width: 72px; height: 30px;
+      border-bottom: 2.5px dashed var(--primary-light);
+      margin: 0 3px; vertical-align: middle;
+      border-radius: 6px 6px 0 0;
+      text-align: center; line-height: 30px;
+      font-weight: 700; font-size: 15px;
+      transition: background 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .s-blank.over    { background: rgba(91,79,207,0.1); border-bottom-color: var(--primary); }
+    .s-blank.filled  { border-bottom: 2.5px solid var(--green); background: rgba(16,185,129,0.12); color: var(--green); padding: 0 10px; min-width: auto; border-radius: 6px; cursor: default; }
+    .s-blank.wrong-anim { animation: shake 0.4s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-9px); }
+      40%      { transform: translateX(9px); }
+      60%      { transform: translateX(-6px); }
+      80%      { transform: translateX(6px); }
+    }
+
+    /* EMPTY STATE */
+    .empty-msg { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 15px; line-height: 1.8; }
+
+    /* CELEBRATION (same as study.html) */
+    #celebration { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6, #3b82f6); background-size: 400% 400%; animation: bgShift 2s ease infinite; }
+    #celebration.show { display: flex; }
+    @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .cele-main-emoji { font-size: 90px; animation: spin 1s linear infinite; display: block; }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .cele-msg { font-size: 46px; font-weight: 900; color: #fff; text-align: center; padding: 0 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.4); animation: cpulse 0.45s ease-in-out infinite alternate; margin: 16px 0 8px; }
+    .cele-sub { font-size: 22px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 20px; animation: cpulse 0.45s 0.2s ease-in-out infinite alternate; }
+    .cele-tap { position: absolute; bottom: 30px; font-size: 15px; color: rgba(255,255,255,0.7); }
+    @keyframes cpulse { from{transform:scale(1)} to{transform:scale(1.1)} }
+    .fly-emoji { position: absolute; font-size: 36px; pointer-events: none; animation: flyUp linear forwards; }
+    @keyframes flyUp { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(-110vh) rotate(720deg);opacity:0} }
+
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="page">
+    <div class="screen-header">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="header-title">✏️ 문장 완성</div>
+      <div class="progress-text" id="progress-text">0 / 0</div>
+    </div>
+    <div class="unit-title" id="unit-title"></div>
+
+    <div class="word-bank-wrap">
+      <div class="word-bank-label">📦 단어 목록 — 드래그해서 빈칸에 넣으세요</div>
+      <div class="word-bank" id="word-bank"></div>
+    </div>
+
+    <div class="sentences-wrap" id="sentences-wrap"></div>
+  </div>
+</div>
+
+<div id="drag-ghost"></div>
+
+<div id="celebration" onclick="hideCelebration()">
+  <span class="cele-main-emoji" id="cele-emoji"></span>
+  <div class="cele-msg" id="cele-msg"></div>
+  <div class="cele-sub" id="cele-sub"></div>
+  <div class="cele-tap">👆 탭해서 닫기</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const params   = new URLSearchParams(location.search);
+const courseId = params.get('c');
+const typeId   = params.get('t');
+const unitId   = params.get('u');
+
+let manifest    = null;
+let sentences   = []; // { word, display, sentence, korean, filled }
+let wrongCounts = []; // 문장별 오답 횟수
+
+// ── INIT ──
+(async () => {
+  if (!courseId || !typeId || !unitId) { location.href = 'index.html'; return; }
+  try {
+    const [mRes, dRes] = await Promise.all([
+      fetch('data/index.json'),
+      fetch(`data/${courseId}/${typeId}/${unitId}.json`)
+    ]);
+    manifest = await mRes.json();
+    const data = await dRes.json();
+    renderUnitTitle();
+    buildSentences(data.words);
+    renderAll();
+  } catch(e) {
+    showToast('⚠️ 파일 로딩 실패');
+  }
+})();
+
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function buildSentences(words) {
+  sentences = [];
+  words.forEach(w => {
+    if (!w.sentence) return;
+    const display = w.answer || w.english;   // 단어 목록·빈칸 표시는 answer 기준
+    const answerLower = display.toLowerCase();
+    sentences.push({
+      word:    answerLower,   // 타일 key도 answer 기준
+      display: display,       // 타일·빈칸에 보이는 텍스트
+      answer:  answerLower,
+      sentence: w.sentence,
+      korean:  w.korean || '',
+      filled:  false
+    });
+  });
+  // 순서 섞기
+  for (let i = sentences.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+  }
+  wrongCounts = new Array(sentences.length).fill(0);
+}
+
+function renderAll() {
+  renderWordBank();
+  renderSentences();
+  updateProgress();
+}
+
+// ── WORD BANK ──
+function renderWordBank() {
+  const bank = document.getElementById('word-bank');
+  bank.innerHTML = '';
+  // 문장 순서와 별개로 단어 목록 독립 셔플
+  const seen = new Set();
+  const uniqueWords = [];
+  sentences.forEach(s => { if (!seen.has(s.word)) { seen.add(s.word); uniqueWords.push(s); } });
+  for (let i = uniqueWords.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [uniqueWords[i], uniqueWords[j]] = [uniqueWords[j], uniqueWords[i]];
+  }
+  uniqueWords.forEach(s => {
+    const isUsed = sentences.filter(x => x.word === s.word).every(x => x.filled);
+    const tile = document.createElement('div');
+    tile.className = 'word-tile' + (isUsed ? ' used' : '');
+    tile.textContent = s.display;
+    tile.dataset.word = s.word;
+    tile.draggable = true;
+    tile.addEventListener('dragstart', onDragStart);
+    tile.addEventListener('dragend',   onDragEnd);
+    tile.addEventListener('touchstart', onTouchStart, { passive: false });
+    bank.appendChild(tile);
+  });
+}
+
+function refreshTileState(word) {
+  // 같은 단어(answer)를 사용하는 모든 문장이 채워졌으면 타일 비활성화
+  const isUsed = sentences.filter(s => s.answer === word || s.word === word).every(s => s.filled);
+  const tile = document.querySelector(`.word-tile[data-word="${CSS.escape(word)}"]`);
+  if (tile) { tile.classList.toggle('used', isUsed); tile.classList.remove('dragging'); }
+}
+
+// ── SENTENCES ──
+function renderSentences() {
+  const wrap = document.getElementById('sentences-wrap');
+  wrap.innerHTML = '';
+
+  if (sentences.length === 0) {
+    wrap.innerHTML = `<div class="empty-msg">⚠️ 이 단원에는 예문 데이터가 없습니다.<br>단어 데이터에 sentence 필드가 필요합니다.</div>`;
+    return;
+  }
+
+  sentences.forEach((s, idx) => {
+    const row = document.createElement('div');
+    row.className = 'sentence-row' + (s.filled ? ' done' : '');
+    row.dataset.idx = idx;
+
+    const filled   = s.filled;
+    const blankSpan = `<span class="s-blank ${filled ? 'filled' : ''}" data-idx="${idx}" data-answer="${s.answer}">${filled ? s.display : ''}</span>`;
+    const sentHtml  = s.sentence.replace('___', blankSpan);
+
+    row.innerHTML = `<span class="s-no">${idx + 1}.</span> ${sentHtml}`;
+
+    if (!s.filled) {
+      row.addEventListener('dragover',  onRowDragOver);
+      row.addEventListener('dragleave', onRowDragLeave);
+      row.addEventListener('drop',      onRowDrop);
+    }
+
+    wrap.appendChild(row);
+  });
+}
+
+function updateProgress() {
+  const done = sentences.filter(s => s.filled).length;
+  document.getElementById('progress-text').textContent = `${done} / ${sentences.length}`;
+  if (sentences.length > 0 && done === sentences.length) {
+    const isPerfect = wrongCounts.every(c => c === 0);
+    setTimeout(() => showCelebration(isPerfect), 500);
+  }
+}
+
+// ── DESKTOP DRAG & DROP ──
+let draggedWord = null;
+
+function onDragStart(e) {
+  draggedWord = e.currentTarget.dataset.word;
+  e.dataTransfer.setData('text/plain', draggedWord);
+  e.dataTransfer.effectAllowed = 'move';
+  e.currentTarget.classList.add('dragging');
+}
+function onDragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+}
+function onRowDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('over');
+}
+function onRowDragLeave(e) {
+  if (!e.currentTarget.contains(e.relatedTarget)) {
+    e.currentTarget.classList.remove('over');
+  }
+}
+function onRowDrop(e) {
+  e.preventDefault();
+  const row = e.currentTarget;
+  row.classList.remove('over');
+  const blank = row.querySelector('.s-blank:not(.filled)');
+  if (!blank) return;
+  const word = e.dataTransfer.getData('text/plain') || draggedWord;
+  checkAnswer(blank, word);
+  draggedWord = null;
+}
+
+// ── TOUCH DRAG (iPad / 모바일) ──
+let touchWord  = null;
+let touchGhost = null;
+
+function onTouchStart(e) {
+  const tile = e.currentTarget;
+  if (tile.classList.contains('used')) return;
+  e.preventDefault();
+  touchWord  = tile.dataset.word;
+  const ghost = document.getElementById('drag-ghost');
+  ghost.textContent = tile.textContent;
+  ghost.style.display = 'block';
+  const t = e.touches[0];
+  moveGhost(ghost, t.clientX, t.clientY);
+  tile.classList.add('dragging');
+  document.addEventListener('touchmove', onTouchMove, { passive: false });
+  document.addEventListener('touchend',  onTouchEnd);
+}
+
+function onTouchMove(e) {
+  e.preventDefault();
+  const t = e.touches[0];
+  moveGhost(document.getElementById('drag-ghost'), t.clientX, t.clientY);
+  // 드래그 오버 하이라이트 — 문장 전체 영역 기준
+  document.querySelectorAll('.sentence-row.over').forEach(el => el.classList.remove('over'));
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  const row = el?.closest('.sentence-row:not(.done)');
+  if (row) row.classList.add('over');
+}
+
+function onTouchEnd(e) {
+  document.getElementById('drag-ghost').style.display = 'none';
+  document.querySelectorAll('.sentence-row.over').forEach(el => el.classList.remove('over'));
+  document.removeEventListener('touchmove', onTouchMove);
+  document.removeEventListener('touchend',  onTouchEnd);
+
+  const t = e.changedTouches[0];
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  const row = el?.closest('.sentence-row:not(.done)');
+  if (row) {
+    const blank = row.querySelector('.s-blank:not(.filled)');
+    if (blank) checkAnswer(blank, touchWord);
+  }
+  // dragging 클래스 제거
+  const tile = document.querySelector(`.word-tile[data-word="${CSS.escape(touchWord)}"]`);
+  if (tile) tile.classList.remove('dragging');
+  touchWord = null;
+}
+
+function moveGhost(ghost, x, y) {
+  ghost.style.left = (x - ghost.offsetWidth  / 2) + 'px';
+  ghost.style.top  = (y - ghost.offsetHeight / 2 - 24) + 'px';
+}
+
+// ── ANSWER CHECK ──
+function checkAnswer(blank, word) {
+  if (!word || blank.classList.contains('filled')) return;
+  const answer = blank.dataset.answer;
+  if (word.toLowerCase() === answer) {
+    // ✅ 정답
+    const idx = parseInt(blank.dataset.idx);
+    sentences[idx].filled = true;
+    blank.textContent = sentences[idx].display;
+    blank.classList.add('filled');
+    blank.classList.remove('over');
+    const row = blank.closest('.sentence-row');
+    row.removeEventListener('dragover',  onRowDragOver);
+    row.removeEventListener('dragleave', onRowDragLeave);
+    row.removeEventListener('drop',      onRowDrop);
+    row.classList.add('done');
+    refreshTileState(word.toLowerCase());
+    updateProgress();
+  } else {
+    // ❌ 오답 — row 전체 + blank 흔들기 + 틀린 횟수 기록
+    const idx = parseInt(blank.dataset.idx);
+    wrongCounts[idx] = (wrongCounts[idx] || 0) + 1;
+    updateWrongDisplay(idx);
+    blank.classList.remove('over');
+    // blank 흔들기
+    blank.classList.add('wrong-anim');
+    blank.addEventListener('animationend', () => blank.classList.remove('wrong-anim'), { once: true });
+    // row 전체 빨간 플래시 (iPad에서 잘 보이도록)
+    const row = blank.closest('.sentence-row');
+    row.classList.add('wrong');
+    row.addEventListener('animationend', () => row.classList.remove('wrong'), { once: true });
+  }
+}
+
+function updateWrongDisplay(idx) {
+  const row = document.querySelector(`.sentence-row[data-idx="${idx}"]`);
+  if (!row) return;
+  const no = row.querySelector('.s-no');
+  if (!no) return;
+  const cnt = wrongCounts[idx];
+  no.innerHTML = `${idx + 1}.<span style="color:#ef4444;font-weight:800;margin-left:5px">(${cnt})</span>`;
+}
+
+// ── UNIT TITLE ──
+function renderUnitTitle() {
+  if (!manifest) return;
+  const course = manifest.courses.find(c => c.id === courseId);
+  const type   = course?.types.find(t => t.id === typeId);
+  const unit   = type?.units.find(u => u.id === unitId);
+  const el = document.getElementById('unit-title');
+  if (!el) return;
+  const parts = [course?.label, type?.label, unit?.label].filter(Boolean);
+  el.innerHTML = parts.map((p, i) => i === parts.length - 1 ? `<strong>${p}</strong>` : p).join(' &middot; ');
+}
+
+function goHome() { location.href = 'index.html'; }
+
+// ── CELEBRATION ──
+const CELE_PERFECT = [
+  { emoji: '🥳', msg: '👍 퍼펙트!! 👍',     sub: '한번도 안 틀리고 다 맞췄어!! 🔥🔥🔥' },
+  { emoji: '🏆', msg: '찬희 진짜 천재!!',    sub: '완벽해!! 노미스 클리어!! 💯💯💯' },
+  { emoji: '😍', msg: '완전 대박 퍼펙트!!',  sub: '한 문제도 안 틀렸어!! 최강!! 👍👍👍' },
+  { emoji: '🌟', msg: '노미스 클리어!!',     sub: '틀린 게 하나도 없어!! 엄지척!! 👊👊👊' },
+  { emoji: '💯', msg: '100점 만점 퍼펙트!!', sub: '진짜 짱이야!! 최고 최고!! ⭐⭐⭐' },
+];
+const CELE_DONE = [
+  { emoji: '😄', msg: '모두 완성!',   sub: '틀린 문제를 다시 확인해봐요 💪' },
+  { emoji: '✅', msg: '전부 채웠어!', sub: '다음엔 퍼펙트 도전! 👍' },
+];
+const FLY_EMOJIS = ['🎉','🎊','⭐','🌟','👍','🏆','😄','🥳','✨','💯','🎯','🔥','😍','🎈','🎁'];
+
+function showCelebration(isPerfect) {
+  const pool = isPerfect ? CELE_PERFECT : CELE_DONE;
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  document.getElementById('cele-emoji').textContent = pick.emoji;
+  document.getElementById('cele-msg').textContent   = pick.msg;
+  document.getElementById('cele-sub').textContent   = pick.sub;
+  const cel = document.getElementById('celebration');
+  cel.classList.add('show');
+  // 퍼펙트: 이모지 60개 빠르게 / 일반: 20개
+  const total    = isPerfect ? 60 : 20;
+  const interval = isPerfect ? 80 : 200;
+  let count = 0;
+  const iv = setInterval(() => {
+    if (count++ > total) { clearInterval(iv); return; }
+    const el = document.createElement('span');
+    el.className = 'fly-emoji';
+    el.textContent = FLY_EMOJIS[Math.floor(Math.random() * FLY_EMOJIS.length)];
+    el.style.left = (Math.random() * 95) + 'vw';
+    el.style.bottom = '-50px';
+    el.style.animationDuration = (1.0 + Math.random() * 1.5) + 's';
+    cel.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }, interval);
+}
+function hideCelebration() { document.getElementById('celebration').classList.remove('show'); }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

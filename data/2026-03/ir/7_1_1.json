@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "7.1.1",
+  "title": "Integrated Reading - Word List 7.1.1",
+  "words": [
+    {
+      "no": 1,
+      "english": "like",
+      "pos": "v.",
+      "korean": "좋아하다",
+      "sentence": "I ___ to read books with my sister.",
+      "answer": "like"
+    },
+    {
+      "no": 2,
+      "english": "no",
+      "pos": "adv.",
+      "korean": "아니요",
+      "sentence": "___, I do not want more food.",
+      "answer": "No"
+    },
+    {
+      "no": 3,
+      "english": "yes",
+      "pos": "adv.",
+      "korean": "네",
+      "sentence": "___, I finished all my homework today.",
+      "answer": "Yes"
+    },
+    {
+      "no": 4,
+      "english": "you",
+      "pos": "pron.",
+      "korean": "당신",
+      "sentence": "___ are my best friend at school.",
+      "answer": "You"
+    },
+    {
+      "no": 5,
+      "english": "role",
+      "pos": "n.",
+      "korean": "역할",
+      "sentence": "Each student has a ___ in the play.",
+      "answer": "role"
+    },
+    {
+      "no": 6,
+      "english": "chain",
+      "pos": "n.",
+      "korean": "사슬",
+      "sentence": "The dog was tied with a long ___.",
+      "answer": "chain"
+    },
+    {
+      "no": 7,
+      "english": "relate",
+      "pos": "v.",
+      "korean": "관련시키다",
+      "sentence": "Can you ___ this picture to what we learned in class?",
+      "answer": "relate"
+    },
+    {
+      "no": 8,
+      "english": "wildlife",
+      "pos": "n.",
+      "korean": "야생 동물",
+      "sentence": "We saw ___ at the national park.",
+      "answer": "wildlife"
+    },
+    {
+      "no": 9,
+      "english": "vegetation",
+      "pos": "n.",
+      "korean": "초목",
+      "sentence": "The forest is full of green ___.",
+      "answer": "vegetation"
+    },
+    {
+      "no": 10,
+      "english": "helpful",
+      "pos": "adj.",
+      "korean": "도움이 되는",
+      "sentence": "She is always ___ to her classmates.",
+      "answer": "helpful"
+    },
+    {
+      "no": 11,
+      "english": "trap",
+      "pos": "v.",
+      "korean": "잡다",
+      "sentence": "They tried to ___ the mouse in a box.",
+      "answer": "trap"
+    },
+    {
+      "no": 12,
+      "english": "sticky",
+      "pos": "adj.",
+      "korean": "끈적거리는",
+      "sentence": "My hands are ___ from the candy.",
+      "answer": "sticky"
+    },
+    {
+      "no": 13,
+      "english": "survive",
+      "pos": "v.",
+      "korean": "살아남다",
+      "sentence": "Animals need water to ___ in the wild.",
+      "answer": "survive"
+    },
+    {
+      "no": 14,
+      "english": "seed",
+      "pos": "n.",
+      "korean": "씨앗",
+      "sentence": "We planted a ___ in the garden.",
+      "answer": "seed"
+    },
+    {
+      "no": 15,
+      "english": "member",
+      "pos": "n.",
+      "korean": "구성 요소",
+      "sentence": "He is a ___ of the soccer team.",
+      "answer": "member"
+    }
+  ]
+}

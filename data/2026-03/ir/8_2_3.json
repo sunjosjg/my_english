@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "8.2.3",
+  "title": "Integrated Reading - Word List 8.2.3",
+  "words": [
+    {
+      "no": 1,
+      "english": "prefix",
+      "pos": "n.",
+      "korean": "접두사",
+      "sentence": "'Un' is a common ___.",
+      "answer": "prefix"
+    },
+    {
+      "no": 2,
+      "english": "immigrant",
+      "pos": "n.",
+      "korean": "이주민",
+      "sentence": "The ___ moved to a new country.",
+      "answer": "immigrant"
+    },
+    {
+      "no": 3,
+      "english": "input",
+      "pos": "n.",
+      "korean": "입력",
+      "sentence": "Type your ___ on the screen.",
+      "answer": "input"
+    },
+    {
+      "no": 4,
+      "english": "highway",
+      "pos": "n.",
+      "korean": "고속도로",
+      "sentence": "Cars drive fast on the ___.",
+      "answer": "highway"
+    },
+    {
+      "no": 5,
+      "english": "endless",
+      "pos": "adj.",
+      "korean": "끝없는",
+      "sentence": "The desert seemed ___.",
+      "answer": "endless"
+    },
+    {
+      "no": 6,
+      "english": "golden",
+      "pos": "adj.",
+      "korean": "금빛의",
+      "sentence": "She wore a ___ necklace.",
+      "answer": "golden"
+    },
+    {
+      "no": 7,
+      "english": "roam",
+      "pos": "v.",
+      "korean": "돌아다니다",
+      "sentence": "Wolves ___ the forest.",
+      "answer": "roam"
+    },
+    {
+      "no": 8,
+      "english": "ramble",
+      "pos": "v.",
+      "korean": "거닐다",
+      "sentence": "We ___ through the woods.",
+      "answer": "ramble"
+    },
+    {
+      "no": 9,
+      "english": "footstep",
+      "pos": "n.",
+      "korean": "발자국",
+      "sentence": "I heard a ___ behind me.",
+      "answer": "footstep"
+    },
+    {
+      "no": 10,
+      "english": "sparkling",
+      "pos": "adj.",
+      "korean": "반짝이는",
+      "sentence": "The stars were ___ at night.",
+      "answer": "sparkling"
+    },
+    {
+      "no": 11,
+      "english": "sounding",
+      "pos": "adj.",
+      "korean": "울려 퍼지는",
+      "sentence": "It was a deep-___ drum.",
+      "answer": "sounding"
+    },
+    {
+      "no": 12,
+      "english": "stroll",
+      "pos": "v.",
+      "korean": "산책하다",
+      "sentence": "We take a ___ after dinner.",
+      "answer": "stroll"
+    },
+    {
+      "no": 13,
+      "english": "lift",
+      "pos": "v.",
+      "korean": "들어올리다",
+      "sentence": "Can you ___ the box?",
+      "answer": "lift"
+    },
+    {
+      "no": 14,
+      "english": "provide",
+      "pos": "v.",
+      "korean": "제공하다",
+      "sentence": "Parents ___ food and love.",
+      "answer": "provide"
+    },
+    {
+      "no": 15,
+      "english": "photography",
+      "pos": "n.",
+      "korean": "사진 촬영",
+      "sentence": "___ is fun to learn.",
+      "answer": "Photography"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "11",
+  "title": "Speech - Unit 11. Sports",
+  "words": [
+    {
+      "no": 1,
+      "english": "all kinds of",
+      "korean": "모든 종류의",
+      "sentence": "She enjoys ___ sports.",
+      "answer": "all kinds of"
+    },
+    {
+      "no": 2,
+      "english": "fast-paced",
+      "korean": "빠른 속도로 진행되는",
+      "sentence": "Basketball is a very ___ game.",
+      "answer": "fast-paced"
+    },
+    {
+      "no": 3,
+      "english": "boost",
+      "korean": "북돋우다",
+      "sentence": "Winning can ___ your confidence.",
+      "answer": "boost"
+    },
+    {
+      "no": 4,
+      "english": "mood",
+      "korean": "기분",
+      "sentence": "Exercise always improves my ___.",
+      "answer": "mood"
+    },
+    {
+      "no": 5,
+      "english": "score",
+      "korean": "득점하다",
+      "sentence": "He managed to ___ in the last minute.",
+      "answer": "score"
+    },
+    {
+      "no": 6,
+      "english": "though",
+      "korean": "그렇지만, 하지만",
+      "sentence": "It was hard. I enjoyed it, ___.",
+      "answer": "though"
+    },
+    {
+      "no": 7,
+      "english": "miss a shot",
+      "korean": "슛을 실패하다",
+      "sentence": "He was upset after he ___.",
+      "answer": "miss a shot"
+    },
+    {
+      "no": 8,
+      "english": "terrible",
+      "korean": "끔찍한",
+      "sentence": "I played ___ in the first half.",
+      "answer": "terrible"
+    },
+    {
+      "no": 9,
+      "english": "foul",
+      "korean": "규칙을 위반하다",
+      "sentence": "The player got a ___ during the game.",
+      "answer": "foul"
+    },
+    {
+      "no": 10,
+      "english": "even",
+      "korean": "~이기는 하지만",
+      "sentence": "___ if we lose, we learn from it.",
+      "answer": "Even"
+    },
+    {
+      "no": 11,
+      "english": "ups and downs",
+      "korean": "좋은 점과 나쁜 점",
+      "sentence": "Every sport has its ___.",
+      "answer": "ups and downs"
+    },
+    {
+      "no": 12,
+      "english": "still",
+      "korean": "그런데도, 그럼에도 불구하고",
+      "sentence": "She lost, but she ___ smiled.",
+      "answer": "still"
+    },
+    {
+      "no": 13,
+      "english": "dynamic",
+      "korean": "역동적인",
+      "sentence": "The team showed a ___ performance.",
+      "answer": "dynamic"
+    },
+    {
+      "no": 14,
+      "english": "competitive",
+      "korean": "경쟁적인",
+      "sentence": "He has a very ___ spirit.",
+      "answer": "competitive"
+    },
+    {
+      "no": 15,
+      "english": "smash",
+      "korean": "(공을) 힘껏 치다[때리다]",
+      "sentence": "She ___ the ball over the net.",
+      "answer": "smash"
+    },
+    {
+      "no": 16,
+      "english": "give it one's all",
+      "korean": "혼신의 힘을 다하다",
+      "sentence": "Always ___ in every match.",
+      "answer": "give it one's all"
+    },
+    {
+      "no": 17,
+      "english": "exhausted",
+      "korean": "기진맥진한",
+      "sentence": "The players were ___ after the game.",
+      "answer": "exhausted"
+    },
+    {
+      "no": 18,
+      "english": "commit",
+      "korean": "저지르다, 범하다",
+      "sentence": "He did not ___ a foul on purpose.",
+      "answer": "commit"
+    },
+    {
+      "no": 19,
+      "english": "hit a home run",
+      "korean": "홈런을 치다",
+      "sentence": "He managed to ___ in the final inning.",
+      "answer": "hit a home run"
+    },
+    {
+      "no": 20,
+      "english": "successfully",
+      "korean": "성공적으로",
+      "sentence": "She ___ completed the race.",
+      "answer": "successfully"
+    }
+  ]
+}

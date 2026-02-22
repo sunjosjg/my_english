@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "8.1.1",
+  "title": "Integrated Reading - Word List 8.1.1",
+  "words": [
+    {
+      "no": 1,
+      "english": "may",
+      "pos": "v.",
+      "korean": "~해도 된다",
+      "sentence": "You ___ use a pencil.",
+      "answer": "may"
+    },
+    {
+      "no": 2,
+      "english": "please",
+      "pos": "adv.",
+      "korean": "제발",
+      "sentence": "___ close the door softly.",
+      "answer": "Please"
+    },
+    {
+      "no": 3,
+      "english": "we",
+      "pos": "pron.",
+      "korean": "우리",
+      "sentence": "___ are playing a new game.",
+      "answer": "We"
+    },
+    {
+      "no": 4,
+      "english": "will",
+      "pos": "v.",
+      "korean": "~할 것이다",
+      "sentence": "I ___ bring my book.",
+      "answer": "will"
+    },
+    {
+      "no": 5,
+      "english": "independence",
+      "pos": "n.",
+      "korean": "독립",
+      "sentence": "The country celebrates its ___ every year.",
+      "answer": "independence"
+    },
+    {
+      "no": 6,
+      "english": "tradition",
+      "pos": "n.",
+      "korean": "전통",
+      "sentence": "It is a family ___ to eat rice cakes.",
+      "answer": "tradition"
+    },
+    {
+      "no": 7,
+      "english": "belief",
+      "pos": "n.",
+      "korean": "믿음",
+      "sentence": "She has a strong ___ in helping others.",
+      "answer": "belief"
+    },
+    {
+      "no": 8,
+      "english": "history",
+      "pos": "n.",
+      "korean": "역사",
+      "sentence": "We learned about world ___ in school.",
+      "answer": "history"
+    },
+    {
+      "no": 9,
+      "english": "holiday",
+      "pos": "n.",
+      "korean": "휴일",
+      "sentence": "My favorite ___ is Lunar New Year.",
+      "answer": "holiday"
+    },
+    {
+      "no": 10,
+      "english": "people",
+      "pos": "n.",
+      "korean": "사람들",
+      "sentence": "Many ___ came to the festival.",
+      "answer": "people"
+    },
+    {
+      "no": 11,
+      "english": "language",
+      "pos": "n.",
+      "korean": "언어",
+      "sentence": "English is my second ___.",
+      "answer": "language"
+    },
+    {
+      "no": 12,
+      "english": "culture",
+      "pos": "n.",
+      "korean": "문화",
+      "sentence": "We study Korean ___ in class.",
+      "answer": "culture"
+    },
+    {
+      "no": 13,
+      "english": "sweet",
+      "pos": "adj.",
+      "korean": "다정한",
+      "sentence": "She gave me a ___ smile.",
+      "answer": "sweet"
+    },
+    {
+      "no": 14,
+      "english": "parade",
+      "pos": "n.",
+      "korean": "행진",
+      "sentence": "We watched a ___ in the street.",
+      "answer": "parade"
+    },
+    {
+      "no": 15,
+      "english": "firework",
+      "pos": "n.",
+      "korean": "불꽃놀이",
+      "sentence": "The ___ lit up the night sky.",
+      "answer": "firework"
+    }
+  ]
+}

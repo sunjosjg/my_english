@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>찬희 영어 단어장</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+    :root {
+      --primary: #5b4fcf; --primary-light: #7c71e0; --primary-bg: #eef2ff;
+      --green: #10b981; --green-bg: #ecfdf5; --red: #ef4444; --red-bg: #fef2f2;
+      --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
+      --muted: #64748b; --border: #e2e8f0; --radius: 14px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .page { padding: 16px; max-width: 860px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
+    .chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { padding: 8px 18px; border: 2px solid var(--border); border-radius: 30px; background: var(--card); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; user-select: none; }
+    .chip:hover { border-color: var(--primary-light); }
+    .chip.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .app-header { text-align: center; padding: 24px 0 8px; }
+    .app-title { font-size: 26px; font-weight: 800; color: var(--primary); }
+    .app-sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
+    .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .unit-card { padding: 14px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); cursor: pointer; transition: all 0.15s; position: relative; }
+    .unit-card:hover { border-color: var(--primary-light); transform: translateY(-1px); }
+    .unit-card.on { border-color: var(--primary); background: var(--primary-bg); }
+    .unit-card.done { border-color: var(--green); background: var(--green-bg); opacity: 0.75; }
+    .unit-card.done.on { border-color: var(--green); background: var(--green-bg); opacity: 1; }
+    .unit-card .uc-id { font-weight: 700; color: var(--primary); font-size: 15px; }
+    .unit-card.done .uc-id { color: var(--green); }
+    .unit-card .uc-label { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+    .unit-done-btn {
+      position: absolute; top: 7px; right: 8px;
+      background: none; border: none; font-size: 18px;
+      cursor: pointer; padding: 2px; line-height: 1;
+      opacity: 0.35; transition: opacity 0.15s, transform 0.15s;
+    }
+    .unit-done-btn:hover { opacity: 1; transform: scale(1.2); }
+    .unit-card.done .unit-done-btn { opacity: 1; }
+    .mode-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
+    .mode-card { padding: 16px 8px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); text-align: center; cursor: pointer; transition: all 0.15s; }
+    .mode-card:hover { border-color: var(--primary-light); }
+    .mode-card.on { border-color: var(--primary); background: var(--primary-bg); }
+    .mode-card .mc-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+    .mode-card .mc-label { font-size: 13px; font-weight: 700; }
+    .mode-card .mc-desc { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .start-btn { width: 100%; padding: 16px; margin-top: 20px; margin-bottom: 32px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .start-btn:hover { background: var(--primary-light); }
+    .start-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .check-btn { width: 100%; padding: 14px; margin-top: 8px; margin-bottom: 32px; background: var(--card); border: 2px solid #10b981; color: #10b981; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .check-btn:hover { background: #ecfdf5; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; }
+
+    /* PRINT */
+    #print-area { display: none; }
+    @media print {
+      body > * { display: none !important; }
+      #print-area { display: block !important; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; }
+      @page { margin: 0; size: A4; }
+
+      /* ── 1페이지: 문장 빈칸 ── */
+      #pt-page1 { padding: 12mm 15mm; page-break-after: always; }
+      .pt-title { font-size: 15pt; font-weight: bold; text-align: center; margin-bottom: 2mm; }
+      .pt-meta  { font-size: 10pt; color: #555; text-align: center; margin-bottom: 6mm; }
+      .pt-grid  { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; }
+      .pt-item  { display: flex; align-items: baseline; gap: 5px; padding: 4mm 0; border-bottom: 1px dotted #ccc; break-inside: avoid; }
+      .pt-no       { color: #999; min-width: 18px; font-size: 9pt; }
+      .pt-sentence { flex: 1; line-height: 1.5; }
+      .pt-blank    { display: inline-block; border-bottom: 1.2px solid #333; min-width: 40px; }
+      .pt-bank      { margin-top: 7mm; padding: 3mm 4mm; border: 1px solid #999; border-radius: 3px; }
+      .pt-bank-title { font-weight: bold; font-size: 10pt; margin-bottom: 2mm; }
+      .pt-bank-words { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 10pt; }
+
+      /* ── 2페이지: 단어 쓰기 (반으로 잘라서 사용) ── */
+      #pt-page2 { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; padding: 10mm 0 8mm; }
+      .pw-page-title { text-align: center; font-size: 13pt; font-weight: bold; margin-bottom: 6mm; }
+      .pw-cut-guide  { text-align: center; font-size: 8pt; color: #aaa; margin-bottom: 3mm; letter-spacing: 0.05em; }
+      .pw-body { display: flex; flex: 1; overflow: hidden; }
+      .pw-half { flex: 1; display: flex; flex-direction: column; overflow: hidden; padding: 0 8mm; }
+      .pw-divider { width: 1px; border-left: 2px dashed #aaa; position: relative; flex-shrink: 0; }
+      .pw-divider::before { content: '✂'; position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 13pt; color: #999; line-height: 1; }
+      .pw-section-header { font-size: 10pt; font-weight: bold; text-align: center; padding: 2mm 0; border-bottom: 2px solid #333; margin-bottom: 1mm; }
+      .pw-row { display: flex; align-items: center; border-bottom: 1px dotted #ddd; overflow: hidden; }
+      .pw-no   { font-size: 8pt; color: #bbb; min-width: 16px; flex-shrink: 0; }
+      .pw-word { font-size: 11pt; font-weight: 600; white-space: nowrap; padding-right: 4px; flex-shrink: 0; }
+      .pw-line { flex: 1; border-bottom: 1px solid #bbb; margin: 0 2px 2px; align-self: flex-end; min-width: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="app-header">
+    <div class="app-title">📚 찬희 영어 단어장</div>
+    <div class="app-sub">과정 → 유형 → 단원 → 모드 선택 후 시작</div>
+  </div>
+
+  <div class="section-label">과정 선택</div>
+  <div class="chip-group" id="course-chips"></div>
+
+  <div id="type-section" style="display:none">
+    <div class="section-label">유형 선택</div>
+    <div class="chip-group" id="type-chips"></div>
+  </div>
+
+  <div id="unit-section" style="display:none">
+    <div class="section-label">단원 선택</div>
+    <div class="unit-grid" id="unit-grid"></div>
+  </div>
+
+  <div class="section-label">학습 모드</div>
+  <div class="mode-grid">
+    <div class="mode-card on" data-mode="study">
+      <span class="mc-icon">🃏</span>
+      <span class="mc-label">플래시카드</span>
+      <span class="mc-desc">단어 암기</span>
+    </div>
+    <div class="mode-card" data-mode="sentence">
+      <span class="mc-icon">🧩</span>
+      <span class="mc-label">문장 완성</span>
+      <span class="mc-desc">드래그 빈칸 채우기</span>
+    </div>
+    <div class="mode-card" data-mode="daily" style="border-color: #f59e0b; background: #fffbeb;">
+      <span class="mc-icon">📝</span>
+      <span class="mc-label" style="color:#92400e;">Daily Test</span>
+      <span class="mc-desc">3단계 최종 테스트 · 엄마 확인</span>
+    </div>
+    <div class="mode-card" data-mode="print">
+      <span class="mc-icon">🖨️</span>
+      <span class="mc-label">인쇄</span>
+      <span class="mc-desc">A4 워크시트</span>
+    </div>
+  </div>
+
+  <button class="start-btn" id="start-btn" disabled>단원을 먼저 선택하세요</button>
+  <button class="check-btn" id="check-btn" style="display:none" onclick="goCheck()">📸 사진으로 채점하기</button>
+</div>
+
+<!-- Print area -->
+<div id="print-area">
+  <!-- 1페이지: 문장 빈칸 -->
+  <div id="pt-page1">
+    <div class="pt-title" id="pt-title"></div>
+    <div class="pt-meta"  id="pt-meta"></div>
+    <div class="pt-grid"  id="pt-grid"></div>
+    <div class="pt-bank">
+      <div class="pt-bank-title">✦ Word Bank</div>
+      <div class="pt-bank-words" id="pt-bank-words"></div>
+    </div>
+  </div>
+  <!-- 2페이지: 단어 쓰기 (반으로 잘라서 사용) -->
+  <div id="pt-page2">
+    <div class="pw-page-title" id="pw-page-title"></div>
+    <div class="pw-cut-guide">✂ 가운데 점선을 따라 자르세요 — 왼쪽: 한글 쓰기 / 오른쪽: 영어 쓰기</div>
+    <div class="pw-body">
+      <div class="pw-half">
+        <div class="pw-section-header">영어 → 한글 쓰기</div>
+        <div id="pw-en-list"></div>
+      </div>
+      <div class="pw-divider"></div>
+      <div class="pw-half">
+        <div class="pw-section-header">한글 → 영어 쓰기</div>
+        <div id="pw-kr-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let manifest = null;
+let selCourse = null;
+let selType   = null;
+let selUnit   = null;
+let selMode   = 'study';
+let words     = [];
+let doneSet   = new Set();
+
+(async () => {
+  try {
+    const mRes = await fetch('data/index.json');
+    manifest = await mRes.json();
+  } catch(e) {
+    showToast('⚠️ data/index.json 로딩 실패');
+    return;
+  }
+  // /api/done 은 Node 서버 전용 — 없어도 동작
+  try {
+    const dRes = await fetch('/api/done');
+    const doneData = await dRes.json();
+    doneSet = new Set(doneData.done);
+  } catch { /* python 서버 등 API 없는 환경에서는 무시 */ }
+  renderCourses();
+  if (manifest.courses.length > 0) selectCourse(manifest.courses[0].id);
+})();
+
+function renderCourses() {
+  const wrap = document.getElementById('course-chips');
+  wrap.innerHTML = '';
+  manifest.courses.forEach(c => {
+    const el = chip(c.label, () => selectCourse(c.id));
+    wrap.appendChild(el);
+  });
+}
+
+function selectCourse(id) {
+  selCourse = manifest.courses.find(c => c.id === id);
+  selType = null; selUnit = null;
+  setChipsActive('course-chips', id, manifest.courses, 'id');
+  const typeChips = document.getElementById('type-chips');
+  typeChips.innerHTML = '';
+  selCourse.types.forEach(t => {
+    const el = chip(t.label, () => selectType(t.id));
+    typeChips.appendChild(el);
+  });
+  document.getElementById('type-section').style.display = 'block';
+  document.getElementById('unit-section').style.display = 'none';
+  if (selCourse.types.length > 0) selectType(selCourse.types[0].id);
+  else updateStartBtn();
+}
+
+function selectType(id) {
+  selType = selCourse.types.find(t => t.id === id);
+  selUnit = null;
+  setChipsActive('type-chips', id, selCourse.types, 'id');
+  renderUnits();
+  document.getElementById('unit-section').style.display = 'block';
+  if (selType.units.length > 0) {
+    // 미완료 중 첫 번째 선택, 모두 완료면 마지막 선택
+    const defaultUnit =
+      selType.units.find(u => !isDone(selCourse.id, selType.id, u.id)) ||
+      selType.units[selType.units.length - 1];
+    selUnit = defaultUnit;
+    document.querySelectorAll('.unit-card').forEach(c => c.classList.remove('on'));
+    const defaultCard = document.querySelector(`.unit-card[data-uid="${defaultUnit.id}"]`);
+    if (defaultCard) defaultCard.classList.add('on');
+  }
+  updateStartBtn();
+}
+
+function isDone(cId, tId, uId) {
+  return doneSet.has(`${cId}_${tId}_${uId}`);
+}
+
+async function toggleUnitDone(cId, tId, uId, event) {
+  event.stopPropagation();
+  const key = `${cId}_${tId}_${uId}`;
+  const nowDone = !doneSet.has(key);
+  if (nowDone) doneSet.add(key); else doneSet.delete(key);
+  try {
+    await fetch('/api/done', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, done: nowDone })
+    });
+  } catch { /* 오프라인 무시 */ }
+  renderUnits();
+  // 선택 유지
+  const prevSelected = selUnit;
+  if (prevSelected) {
+    const card = document.querySelector(`.unit-card[data-uid="${prevSelected.id}"]`);
+    if (card) card.classList.add('on');
+  }
+  showToast(nowDone ? '✅ 완료 표시!' : '완료 취소');
+}
+
+function renderUnits() {
+  const grid = document.getElementById('unit-grid');
+  grid.innerHTML = '';
+  selType.units.forEach(u => {
+    const done = isDone(selCourse.id, selType.id, u.id);
+    const el = document.createElement('div');
+    el.className = 'unit-card' + (done ? ' done' : '');
+    el.dataset.uid = u.id;
+    el.innerHTML = `
+      <div class="uc-id">${u.short}</div>
+      <div class="uc-label">${u.label}</div>
+      <button class="unit-done-btn" title="${done ? '완료 취소' : '완료 표시'}">${done ? '✅' : '⬜'}</button>`;
+    el.onclick = () => {
+      document.querySelectorAll('.unit-card').forEach(c => c.classList.remove('on'));
+      el.classList.add('on');
+      selUnit = u;
+      updateStartBtn();
+    };
+    el.querySelector('.unit-done-btn').onclick = (e) =>
+      toggleUnitDone(selCourse.id, selType.id, u.id, e);
+    grid.appendChild(el);
+  });
+}
+
+document.querySelectorAll('.mode-card').forEach(mc => {
+  mc.onclick = () => {
+    document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
+    mc.classList.add('on');
+    selMode = mc.dataset.mode;
+    updateStartBtn();
+  };
+});
+
+function updateStartBtn() {
+  const btn      = document.getElementById('start-btn');
+  const checkBtn = document.getElementById('check-btn');
+  if (!selUnit) { btn.disabled = true; btn.textContent = '단원을 먼저 선택하세요'; checkBtn.style.display = 'none'; return; }
+  btn.disabled = false;
+  const labels = { study: '플래시카드', sentence: '문장 완성', print: '인쇄', daily: '데일리 테스트' };
+  btn.textContent = `▶  ${selUnit.short}. ${selUnit.label}  —  ${labels[selMode]}`;
+  checkBtn.style.display = selMode === 'print' ? 'block' : 'none';
+}
+
+function goCheck() {
+  if (!selUnit) return;
+  const params = new URLSearchParams({ c: selCourse.id, t: selType.id, u: selUnit.id });
+  window.location.href = `check.html?${params}`;
+}
+
+document.getElementById('start-btn').onclick = async () => {
+  try {
+    const path = `data/${selCourse.id}/${selType.id}/${selUnit.id}.json`;
+    const r = await fetch(path);
+    const data = await r.json();
+    words = data.words;
+    const params = new URLSearchParams({ c: selCourse.id, t: selType.id, u: selUnit.id });
+    if (selMode === 'study') {
+      window.location.href = `study.html?${params}`;
+    } else if (selMode === 'quiz') {
+      window.location.href = `quiz.html?${params}`;
+    } else if (selMode === 'sentence') {
+      window.location.href = `sentence.html?${params}`;
+    } else if (selMode === 'daily') {
+      window.location.href = `daily.html?${params}`;
+    } else {
+      startPrint();
+    }
+  } catch(e) {
+    showToast('⚠️ 파일 로딩 실패');
+  }
+};
+
+function startPrint() {
+  const unitLabel = `${selCourse.label}  ${selType.label}  ${selUnit.short}. ${selUnit.label}`;
+
+  // ── 1페이지: 문장 빈칸 ──
+  document.getElementById('pt-title').textContent = unitLabel;
+  document.getElementById('pt-meta').textContent =
+    `이름: ___________________    날짜: ___________________    점수: ________`;
+  const grid = document.getElementById('pt-grid');
+  grid.innerHTML = '';
+  words.forEach(w => {
+    const bw = (w.answer.length + 5) + 'ch';
+    const sentHtml = w.sentence.replace('___', `<span class="pt-blank" style="min-width:${bw}"></span>`);
+    const item = document.createElement('div');
+    item.className = 'pt-item';
+    item.innerHTML = `<span class="pt-no">${w.no}.</span><span class="pt-sentence">${sentHtml}</span>`;
+    grid.appendChild(item);
+  });
+  const shuffled = shuffle([...words]);
+  document.getElementById('pt-bank-words').innerHTML =
+    shuffled.map(w => `<span>${w.answer}</span>`).join(' &nbsp;·&nbsp; ');
+
+  // ── 2페이지: 단어 쓰기 ──
+  document.getElementById('pw-page-title').textContent = unitLabel + ' — 단어 쓰기';
+
+  // 단어 수에 맞춰 행 높이 계산 (헤더 약 22mm, 제목 약 18mm, 안내문 약 8mm 제외)
+  const usableMm = 297 - 10 - 8 - 22 - 18 - 8; // ≒ 231mm
+  const rowMm = Math.min(16, Math.max(6, Math.floor(usableMm / words.length)));
+  const rowStyle = `height:${rowMm}mm;`;
+
+  const enList = document.getElementById('pw-en-list');
+  const krList = document.getElementById('pw-kr-list');
+  enList.innerHTML = '';
+  krList.innerHTML = '';
+
+  const swapped = Math.random() < 0.5;
+  const leftWords  = shuffle([...words]);
+  const rightWords = shuffle([...words]);
+  const leftIsEn   = !swapped;
+
+  const leftHeader  = document.querySelector('#pt-page2 .pw-half:first-child .pw-section-header');
+  const rightHeader = document.querySelector('#pt-page2 .pw-half:last-child .pw-section-header');
+  leftHeader.textContent  = leftIsEn ? '영어 → 한글 쓰기' : '한글 → 영어 쓰기';
+  rightHeader.textContent = leftIsEn ? '한글 → 영어 쓰기' : '영어 → 한글 쓰기';
+
+  leftWords.forEach((w, i) => {
+    const row = document.createElement('div');
+    row.className = 'pw-row';
+    row.style.cssText = rowStyle;
+    const word = leftIsEn ? w.english : w.korean.split(',')[0].trim();
+    row.innerHTML = `<span class="pw-no">${i + 1}.</span><span class="pw-word">${word}</span><span class="pw-line"></span>`;
+    enList.appendChild(row);
+  });
+
+  rightWords.forEach((w, i) => {
+    const row = document.createElement('div');
+    row.className = 'pw-row';
+    row.style.cssText = rowStyle;
+    const word = leftIsEn ? w.korean.split(',')[0].trim() : w.english;
+    row.innerHTML = `<span class="pw-no">${i + 1}.</span><span class="pw-word">${word}</span><span class="pw-line"></span>`;
+    krList.appendChild(row);
+  });
+
+  window.print();
+}
+
+function chip(text, onClick) {
+  const el = document.createElement('button');
+  el.className = 'chip';
+  el.textContent = text;
+  el.onclick = onClick;
+  return el;
+}
+
+function setChipsActive(wrapperId, activeId, items, key) {
+  const chips = document.querySelectorAll(`#${wrapperId} .chip`);
+  chips.forEach((c, i) => c.classList.toggle('on', items[i][key] === activeId));
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "8.2.1",
+  "title": "Integrated Reading - Word List 8.2.1",
+  "words": [
+    {
+      "no": 1,
+      "english": "trip",
+      "pos": "n.",
+      "korean": "여행",
+      "sentence": "We went on a fun ___ to the mountains last weekend.",
+      "answer": "trip"
+    },
+    {
+      "no": 2,
+      "english": "there",
+      "pos": "adv.",
+      "korean": "그곳에",
+      "sentence": "Look over ___ by the tree.",
+      "answer": "there"
+    },
+    {
+      "no": 3,
+      "english": "these",
+      "pos": "pron.",
+      "korean": "이것들",
+      "sentence": "___ are my favorite books.",
+      "answer": "These"
+    },
+    {
+      "no": 4,
+      "english": "Vietnam",
+      "pos": "n.",
+      "korean": "베트남",
+      "sentence": "___ is a country in Asia.",
+      "answer": "Vietnam"
+    },
+    {
+      "no": 5,
+      "english": "Egypt",
+      "pos": "n.",
+      "korean": "이집트",
+      "sentence": "___ has many ancient pyramids.",
+      "answer": "Egypt"
+    },
+    {
+      "no": 6,
+      "english": "deep",
+      "pos": "adj.",
+      "korean": "깊은",
+      "sentence": "The lake is very ___.",
+      "answer": "deep"
+    },
+    {
+      "no": 7,
+      "english": "take photos",
+      "pos": "v.",
+      "korean": "사진을 찍다",
+      "sentence": "We ___ on our trips.",
+      "answer": "take photos"
+    },
+    {
+      "no": 8,
+      "english": "super",
+      "pos": "adj.",
+      "korean": "멋진",
+      "sentence": "This is a ___ fun game.",
+      "answer": "super"
+    },
+    {
+      "no": 9,
+      "english": "desert",
+      "pos": "n.",
+      "korean": "사막",
+      "sentence": "Camels live in the ___.",
+      "answer": "desert"
+    },
+    {
+      "no": 10,
+      "english": "wonderful",
+      "pos": "adj.",
+      "korean": "훌륭한",
+      "sentence": "We had a ___ time today.",
+      "answer": "wonderful"
+    },
+    {
+      "no": 11,
+      "english": "body of water",
+      "pos": "n.",
+      "korean": "물이 있는 지역",
+      "sentence": "A lake is a ___.",
+      "answer": "body of water"
+    },
+    {
+      "no": 12,
+      "english": "monument",
+      "pos": "n.",
+      "korean": "기념물",
+      "sentence": "We visited a famous ___.",
+      "answer": "monument"
+    },
+    {
+      "no": 13,
+      "english": "wilderness",
+      "pos": "n.",
+      "korean": "자연 그대로의 지역",
+      "sentence": "Animals live in the ___.",
+      "answer": "wilderness"
+    },
+    {
+      "no": 14,
+      "english": "landform",
+      "pos": "n.",
+      "korean": "지형",
+      "sentence": "A mountain is a kind of ___.",
+      "answer": "landform"
+    },
+    {
+      "no": 15,
+      "english": "legend",
+      "pos": "n.",
+      "korean": "범례",
+      "sentence": "The ___ shows what symbols mean.",
+      "answer": "legend"
+    }
+  ]
+}

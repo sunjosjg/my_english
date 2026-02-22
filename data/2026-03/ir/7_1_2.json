@@ -1,0 +1,127 @@
+{
+  "type": "IR",
+  "unit": "7.1.2",
+  "title": "Integrated Reading - Word List 7.1.2",
+  "words": [
+    {
+      "no": 1,
+      "english": "accept",
+      "pos": "v.",
+      "korean": "받아들이다",
+      "sentence": "Please ___ this gift from me.",
+      "answer": "accept"
+    },
+    {
+      "no": 2,
+      "english": "connect",
+      "pos": "v.",
+      "korean": "연결하다",
+      "sentence": "We ___ the blocks to build a house.",
+      "answer": "connect"
+    },
+    {
+      "no": 3,
+      "english": "important",
+      "pos": "adj.",
+      "korean": "중요한",
+      "sentence": "It is ___ to tell the truth.",
+      "answer": "important"
+    },
+    {
+      "no": 4,
+      "english": "necessary",
+      "pos": "adj.",
+      "korean": "필수적인",
+      "sentence": "Water is ___ for all living things.",
+      "answer": "necessary"
+    },
+    {
+      "no": 5,
+      "english": "others",
+      "pos": "pron.",
+      "korean": "다른 사람들",
+      "sentence": "Some kids are faster than ___.",
+      "answer": "others"
+    },
+    {
+      "no": 6,
+      "english": "awakened",
+      "pos": "adj.",
+      "korean": "깨어난",
+      "sentence": "The ___ baby started crying.",
+      "answer": "awakened"
+    },
+    {
+      "no": 7,
+      "english": "firefly",
+      "pos": "n.",
+      "korean": "반딧불이",
+      "sentence": "A ___ glows in the dark night.",
+      "answer": "firefly"
+    },
+    {
+      "no": 8,
+      "english": "flash",
+      "pos": "v.",
+      "korean": "반짝이다",
+      "sentence": "The light will ___ when you press the button.",
+      "answer": "flash"
+    },
+    {
+      "no": 9,
+      "english": "thoughtful",
+      "pos": "adj.",
+      "korean": "사려 깊은",
+      "sentence": "It was ___ of you to share.",
+      "answer": "thoughtful"
+    },
+    {
+      "no": 10,
+      "english": "put up with",
+      "pos": "v.",
+      "korean": "참다",
+      "sentence": "I can ___ the loud noise.",
+      "answer": "put up with"
+    },
+    {
+      "no": 11,
+      "english": "puddle",
+      "pos": "n.",
+      "korean": "물웅덩이",
+      "sentence": "I jumped over a big ___.",
+      "answer": "puddle"
+    },
+    {
+      "no": 12,
+      "english": "mosquito",
+      "pos": "n.",
+      "korean": "모기",
+      "sentence": "A ___ bit me on the arm.",
+      "answer": "mosquito"
+    },
+    {
+      "no": 13,
+      "english": "flit",
+      "pos": "v.",
+      "korean": "가볍게 날다",
+      "sentence": "The butterfly will ___ from flower to flower.",
+      "answer": "flit"
+    },
+    {
+      "no": 14,
+      "english": "grumpily",
+      "pos": "adv.",
+      "korean": "심술궂게",
+      "sentence": "He ___ complained when his sister changed the TV channel.",
+      "answer": "grumpily"
+    },
+    {
+      "no": 15,
+      "english": "blink",
+      "pos": "v.",
+      "korean": "깜빡이다",
+      "sentence": "Do not ___ during the picture.",
+      "answer": "blink"
+    }
+  ]
+}

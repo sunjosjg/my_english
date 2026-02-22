@@ -1,0 +1,147 @@
+{
+  "type": "SPEECH",
+  "unit": "7",
+  "title": "Speech - Unit 7. Famous People",
+  "words": [
+    {
+      "no": 1,
+      "english": "TV personality",
+      "korean": "방송인",
+      "sentence": "She became a famous ___ last year.",
+      "answer": "TV personality"
+    },
+    {
+      "no": 2,
+      "english": "improve",
+      "korean": "향상시키다, 개선하다",
+      "sentence": "Reading every day can ___ your English.",
+      "answer": "improve"
+    },
+    {
+      "no": 3,
+      "english": "celebrity",
+      "korean": "유명 인사",
+      "sentence": "The ___ signed autographs for fans.",
+      "answer": "celebrity"
+    },
+    {
+      "no": 4,
+      "english": "touch one's heart",
+      "korean": "가슴에 와닿다, 감동을 주다",
+      "sentence": "His speech really ___.",
+      "answer": "touch one's heart"
+    },
+    {
+      "no": 5,
+      "english": "incredible",
+      "korean": "믿을 수 없는; 매우 뛰어난",
+      "sentence": "She has an ___ singing voice.",
+      "answer": "incredible"
+    },
+    {
+      "no": 6,
+      "english": "performance",
+      "korean": "공연",
+      "sentence": "The dance ___ was amazing.",
+      "answer": "performance"
+    },
+    {
+      "no": 7,
+      "english": "ever since then",
+      "korean": "그 이후로",
+      "sentence": "___, she has worked hard every day.",
+      "answer": "Ever since then"
+    },
+    {
+      "no": 8,
+      "english": "admire",
+      "korean": "존경하다",
+      "sentence": "Many people ___ her courage.",
+      "answer": "admire"
+    },
+    {
+      "no": 9,
+      "english": "direct",
+      "korean": "감독하다, 연출하다",
+      "sentence": "She will ___ the school play.",
+      "answer": "direct"
+    },
+    {
+      "no": 10,
+      "english": "passionate about",
+      "korean": "~에 대해 열정적인",
+      "sentence": "He is ___ helping others.",
+      "answer": "passionate about"
+    },
+    {
+      "no": 11,
+      "english": "down-to-earth",
+      "korean": "현실적인",
+      "sentence": "Despite being famous, she is very ___.",
+      "answer": "down-to-earth"
+    },
+    {
+      "no": 12,
+      "english": "interview",
+      "korean": "인터뷰",
+      "sentence": "He gave an ___ to the school paper.",
+      "answer": "interview"
+    },
+    {
+      "no": 13,
+      "english": "in person",
+      "korean": "직접",
+      "sentence": "I finally met my hero ___.",
+      "answer": "in person"
+    },
+    {
+      "no": 14,
+      "english": "considerate",
+      "korean": "사려 깊은, 배려하는",
+      "sentence": "She is always ___ of others' feelings.",
+      "answer": "considerate"
+    },
+    {
+      "no": 15,
+      "english": "skillful",
+      "korean": "숙련된",
+      "sentence": "He is a ___ painter.",
+      "answer": "skillful"
+    },
+    {
+      "no": 16,
+      "english": "talented",
+      "korean": "타고난 재능이 있는",
+      "sentence": "She is a very ___ musician.",
+      "answer": "talented"
+    },
+    {
+      "no": 17,
+      "english": "outstanding",
+      "korean": "뛰어난",
+      "sentence": "His work is truly ___.",
+      "answer": "outstanding"
+    },
+    {
+      "no": 18,
+      "english": "impressive",
+      "korean": "인상적인",
+      "sentence": "The final scene was very ___.",
+      "answer": "impressive"
+    },
+    {
+      "no": 19,
+      "english": "relatable",
+      "korean": "공감대를 형성하는",
+      "sentence": "Her story is very ___ to students.",
+      "answer": "relatable"
+    },
+    {
+      "no": 20,
+      "english": "catchy",
+      "korean": "외우기 쉬운",
+      "sentence": "That song has a very ___ tune.",
+      "answer": "catchy"
+    }
+  ]
+}
