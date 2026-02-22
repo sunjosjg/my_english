@@ -13,19 +13,36 @@
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-    .hb-btn { position: fixed; top: 14px; left: 14px; z-index: 300; background: var(--card); border: 2px solid var(--border); border-radius: 12px; width: 46px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .hb-btn span { display: block; width: 20px; height: 2.5px; background: var(--text); border-radius: 2px; }
-    .hb-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 400; display: none; }
-    .hb-overlay.open { display: block; }
-    .hb-drawer { position: absolute; left: 0; top: 0; bottom: 0; width: 290px; background: var(--card); padding: 24px 20px 32px; transform: translateX(-100%); transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
-    .hb-overlay.open .hb-drawer { transform: translateX(0); }
-    .hb-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .hb-title { font-size: 18px; font-weight: 800; color: var(--primary); }
-    .hb-close { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--muted); }
-    .hb-unit { background: var(--primary-bg); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: var(--primary); font-weight: 600; line-height: 1.6; }
-    .hb-mode-btn { width: 100%; padding: 13px 16px; text-align: left; background: var(--bg); border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.15s; }
-    .hb-mode-btn:hover { border-color: var(--primary); background: var(--primary-bg); }
-    .hb-mode-btn.current { border-color: var(--primary); background: var(--primary-bg); color: var(--primary); }
+    /* ── 세레머니 ── */
+    #daily-cele { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; background-size: 400% 400%; overflow: hidden; }
+    #daily-cele.show { display: flex; }
+    #daily-cele.tier-100 { background: linear-gradient(135deg, #ffd700, #ff4e50, #ffd700, #fc913a); animation: dcBg 1.5s ease infinite; }
+    #daily-cele.tier-90  { background: linear-gradient(135deg, #8b5cf6, #a78bfa, #6d28d9, #7c3aed); animation: dcBg 2s ease infinite; }
+    #daily-cele.tier-80  { background: linear-gradient(135deg, #3b82f6, #10b981, #2563eb, #059669); animation: dcBg 2.5s ease infinite; }
+    #daily-cele.tier-low { background: linear-gradient(135deg, #f97316, #fb923c, #ea580c, #f59e0b); animation: dcBg 3s ease infinite; }
+    @keyframes dcBg { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .dc-100-wrap { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
+    .dc-main { font-size: 110px; z-index: 2; position: relative; animation: dcSpin 1.8s ease-in-out infinite; }
+    @keyframes dcSpin {
+      0%   { transform: rotate(0deg)   scale(1.0); }
+      12%  { transform: rotate(72deg)  scale(2.1); }
+      25%  { transform: rotate(144deg) scale(0.45); }
+      37%  { transform: rotate(216deg) scale(2.3); }
+      50%  { transform: rotate(360deg) scale(0.55); }
+      62%  { transform: rotate(432deg) scale(1.9); }
+      75%  { transform: rotate(504deg) scale(0.4); }
+      87%  { transform: rotate(576deg) scale(2.2); }
+      100% { transform: rotate(720deg) scale(1.0); }
+    }
+    .dc-main-emoji { font-size: 90px; display: block; animation: dcNormalSpin 1.2s linear infinite; }
+    @keyframes dcNormalSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .dc-crowd { position: absolute; inset: 0; }
+    .dc-crowd-thumb { position: absolute; font-size: 30px; animation: dcCheer 1.0s ease-in-out infinite alternate; }
+    @keyframes dcCheer { from{transform:scale(0.7) rotate(-20deg);opacity:0.75} to{transform:scale(1.5) rotate(20deg);opacity:1.0} }
+    .dc-bg-thumb { position: absolute; animation: dcBgFloat 1.4s ease-in-out infinite alternate; pointer-events: none; z-index: 0; }
+    @keyframes dcBgFloat { from{transform:scale(0.8) rotate(-8deg);opacity:0.25} to{transform:scale(1.2) rotate(8deg);opacity:0.5} }
+    .dc-msg { font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-top: 16px; z-index: 2; text-align: center; }
+    .dc-sub { font-size: 18px; color: rgba(255,255,255,0.9); margin-top: 8px; font-weight: 700; z-index: 2; text-align: center; }
     .page { padding: 16px; max-width: 760px; margin: 0 auto; padding-bottom: 48px; }
     .screen { display: none; }
     .screen.active { display: block; }
@@ -132,17 +149,8 @@
   </style>
 </head>
 <body>
-<button class="hb-btn" onclick="hbOpen()"><span></span><span></span><span></span></button>
-<div class="hb-overlay" id="hb-overlay" onclick="if(event.target===this)hbClose()">
-  <div class="hb-drawer">
-    <div class="hb-hd"><div class="hb-title">📚 학습 메뉴</div><button class="hb-close" onclick="hbClose()">✕</button></div>
-    <div class="hb-unit" id="hb-unit"></div>
-    <button class="hb-mode-btn" onclick="hbGo('home')">🏠 처음으로</button>
-    <button class="hb-mode-btn" onclick="hbGo('study')">🃏 플래시카드</button>
-    <button class="hb-mode-btn" onclick="hbGo('sentence')">🧩 문장 완성</button>
-    <button class="hb-mode-btn current" onclick="hbClose()">📝 Daily Test (현재)</button>
-  </div>
-</div>
+<!-- 세레머니 -->
+<div id="daily-cele"></div>
 
 <!-- ══ STEP 1: 한글 → 영어 ══ -->
 <div id="screen-step1" class="screen active">
@@ -262,8 +270,6 @@ function renderStep1() {
     list.appendChild(row);
   });
   addEnterNav('#step1-list .wr-input');
-  if (new URLSearchParams(location.search).get('fill') === '1')
-    document.querySelectorAll('#step1-list .wr-input').forEach((inp, i) => { inp.value = words[i].english; });
 }
 
 // ── RENDER STEP 2 ──
@@ -282,8 +288,6 @@ function renderStep2() {
     list.appendChild(row);
   });
   addEnterNav('#step2-list .wr-input');
-  if (new URLSearchParams(location.search).get('fill') === '1')
-    document.querySelectorAll('#step2-list .wr-input').forEach((inp, i) => { inp.value = step2Order[i].korean.split(',')[0]; });
 }
 
 // ── RENDER STEP 3 ──
@@ -313,8 +317,6 @@ function renderStep3() {
     list.appendChild(card);
   });
   addEnterNav('#step3-list .sc-input');
-  if (new URLSearchParams(location.search).get('fill') === '1')
-    document.querySelectorAll('#step3-list .sc-input').forEach((inp, i) => { inp.value = step3Order[i].answer; });
 }
 
 function updateWordBank() {
@@ -403,12 +405,13 @@ function completeStep3() {
     }
   });
   renderFinal();
-  showScreen('screen-final');
 }
 
 // ── FINAL ──
 function renderFinal() {
   const totalWrong = step1Wrong.length + step2Wrong.length + step3Wrong.length;
+  const totalPossible = words.length * 3;
+  const pct = Math.round(((totalPossible - totalWrong) / totalPossible) * 100);
 
   // 서브 타이틀
   document.getElementById('final-sub').textContent = totalWrong === 0
@@ -417,6 +420,7 @@ function renderFinal() {
 
   // 단계별 오답 리스팅
   const resultsEl = document.getElementById('final-results');
+  resultsEl.innerHTML = '';
   const sections = [
     { label: '1단계 · 한글→영어', wrong: step1Wrong, ansKey: w => w.english },
     { label: '2단계 · 영어→한글', wrong: step2Wrong, ansKey: w => w.korean },
@@ -445,6 +449,7 @@ function renderFinal() {
 
   // 쓰기 섹션
   const writeEl = document.getElementById('final-write');
+  writeEl.innerHTML = '';
 
   if (totalWrong === 0) {
     writeEl.innerHTML = `
@@ -452,100 +457,74 @@ function renderFinal() {
         <div class="ac-emoji">👍👍</div>
         <div class="ac-title">완벽해요! 쌍따봉!</div>
         <div class="ac-sub">세 단계 모두 한 번에 맞췄어요! 정말 대단해요!</div>
-      </div>
-      <button class="done-btn" style="display:block;margin-top:16px;" onclick="goHome()">🏠 처음으로</button>`;
-    return;
-  }
+      </div>`;
+  } else {
+    // 1·2단계 고유 틀린 단어
+    const seenWord = new Set();
+    const uniqueWordWrong = [];
+    [...step1Wrong, ...step2Wrong].forEach(({ word }) => {
+      if (!seenWord.has(word.english)) { seenWord.add(word.english); uniqueWordWrong.push(word); }
+    });
 
-  // 1·2단계 고유 틀린 단어
-  const seenWord = new Set();
-  const uniqueWordWrong = [];
-  [...step1Wrong, ...step2Wrong].forEach(({ word }) => {
-    if (!seenWord.has(word.english)) { seenWord.add(word.english); uniqueWordWrong.push(word); }
-  });
+    // 3단계 고유 틀린 단어 (문장)
+    const seenSent = new Set();
+    const uniqueSentWrong = [];
+    step3Wrong.forEach(({ word }) => {
+      if (!seenSent.has(word.english)) { seenSent.add(word.english); uniqueSentWrong.push(word); }
+    });
 
-  // 3단계 고유 틀린 단어 (문장)
-  const seenSent = new Set();
-  const uniqueSentWrong = [];
-  step3Wrong.forEach(({ word }) => {
-    if (!seenSent.has(word.english)) { seenSent.add(word.english); uniqueSentWrong.push(word); }
-  });
-
-  writeEl.innerHTML = '';
-
-  // ── 단어 쓰기 (1·2단계) ──
-  if (uniqueWordWrong.length > 0) {
-    writeEl.insertAdjacentHTML('beforeend', `
-      <div class="write-header">
-        <div class="wh-title">✍️ 틀린 단어 5번씩 써봐요!</div>
-        <div class="wh-sub">1·2단계에서 틀린 단어를 영어+한글로 써보세요.</div>
-      </div>`);
-
-    uniqueWordWrong.forEach(w => {
-      const card = document.createElement('div');
-      card.className = 'write-card';
-      card.dataset.type   = 'word';
-      card.dataset.word   = w.english;
-      card.dataset.korean = w.korean;
-
-      let lines = '';
-      for (let n = 1; n <= 5; n++) {
-        lines += `
-          <div class="wc-line">
-            <span class="wc-num">${n}</span>
-            <input class="wc-input" type="text" data-lang="en" data-answer="${w.english}"
-              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    if (uniqueWordWrong.length > 0) {
+      writeEl.insertAdjacentHTML('beforeend', `
+        <div class="write-header">
+          <div class="wh-title">✍️ 틀린 단어 5번씩 써봐요!</div>
+          <div class="wh-sub">1·2단계에서 틀린 단어를 영어+한글로 써보세요.</div>
+        </div>`);
+      uniqueWordWrong.forEach(w => {
+        const card = document.createElement('div');
+        card.className = 'write-card';
+        card.dataset.type = 'word'; card.dataset.word = w.english; card.dataset.korean = w.korean;
+        let lines = '';
+        for (let n = 1; n <= 5; n++) {
+          lines += `<div class="wc-line"><span class="wc-num">${n}</span>
+            <input class="wc-input" type="text" data-lang="en" data-answer="${w.english}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             <span class="wc-sep">|</span>
-            <input class="wc-input" type="text" data-lang="ko" data-answer="${w.korean}"
-              autocomplete="off" spellcheck="false">
+            <input class="wc-input" type="text" data-lang="ko" data-answer="${w.korean}" autocomplete="off" spellcheck="false">
           </div>`;
-      }
-      card.innerHTML = `
-        <div class="wc-word">${w.english} <span style="font-size:16px;font-weight:400;color:var(--muted)">${w.korean}</span></div>
-        <div class="wc-lines">${lines}</div>`;
+        }
+        card.innerHTML = `<div class="wc-word">${w.english} <span style="font-size:16px;font-weight:400;color:var(--muted)">${w.korean}</span></div><div class="wc-lines">${lines}</div>`;
+        bindCardInputs(card);
+        writeEl.appendChild(card);
+      });
+    }
 
-      bindCardInputs(card);
-      writeEl.appendChild(card);
-    });
+    if (uniqueSentWrong.length > 0) {
+      writeEl.insertAdjacentHTML('beforeend', `
+        <div class="write-header" style="margin-top:${uniqueWordWrong.length > 0 ? '28px' : '0'}">
+          <div class="wh-title">✍️ 틀린 문장 5번씩 써봐요!</div>
+          <div class="wh-sub">3단계에서 틀린 문장을 보고 써보세요.</div>
+        </div>`);
+      uniqueSentWrong.forEach(w => {
+        const card = document.createElement('div');
+        card.className = 'write-card'; card.dataset.type = 'sentence';
+        const fullSentence = w.sentence.replace('___', w.answer);
+        card.dataset.sentence = fullSentence;
+        let lines = '';
+        for (let n = 1; n <= 5; n++) {
+          lines += `<div class="wc-line"><span class="wc-num">${n}</span>
+            <input class="wc-input wc-sentence" type="text" data-lang="sentence" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          </div>`;
+        }
+        card.innerHTML = `<div class="wc-word">${w.english} <span style="font-size:16px;font-weight:400;color:var(--muted)">${w.korean}</span></div><div class="wc-ref">${fullSentence}</div><div class="wc-lines">${lines}</div>`;
+        bindCardInputs(card);
+        writeEl.appendChild(card);
+      });
+    }
   }
 
-  // ── 문장 쓰기 (3단계) ──
-  if (uniqueSentWrong.length > 0) {
-    writeEl.insertAdjacentHTML('beforeend', `
-      <div class="write-header" style="margin-top:${uniqueWordWrong.length > 0 ? '28px' : '0'}">
-        <div class="wh-title">✍️ 틀린 문장 5번씩 써봐요!</div>
-        <div class="wh-sub">3단계에서 틀린 문장을 보고 써보세요.</div>
-      </div>`);
-
-    uniqueSentWrong.forEach(w => {
-      const card = document.createElement('div');
-      card.className = 'write-card';
-      card.dataset.type     = 'sentence';
-      const fullSentence = w.sentence.replace('___', w.answer);
-      card.dataset.sentence = fullSentence;
-
-      let lines = '';
-      for (let n = 1; n <= 5; n++) {
-        lines += `
-          <div class="wc-line">
-            <span class="wc-num">${n}</span>
-            <input class="wc-input wc-sentence" type="text" data-lang="sentence"
-              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-          </div>`;
-      }
-      card.innerHTML = `
-        <div class="wc-word">${w.english} <span style="font-size:16px;font-weight:400;color:var(--muted)">${w.korean}</span></div>
-        <div class="wc-ref">${fullSentence}</div>
-        <div class="wc-lines">${lines}</div>`;
-
-      bindCardInputs(card);
-      writeEl.appendChild(card);
-    });
-  }
-
+  // 엄마 확인 섹션 (항상 표시)
   writeEl.insertAdjacentHTML('beforeend', `
     <div class="mom-section">
-      <div class="mom-msg">✋ 다 썼으면<br>엄마에게 확인 받으세요!</div>
+      <div class="mom-msg">✋ ${totalWrong === 0 ? '모두 맞췄어요!' : '다 썼으면'}<br>엄마에게 확인 받으세요!</div>
       <div class="mom-summary">
         <div class="ms-row ${step1Wrong.length === 0 ? 'ms-ok' : 'ms-bad'}">
           <span class="ms-step">1단계</span>
@@ -564,6 +543,10 @@ function renderFinal() {
       <div class="mom-result" id="mom-result"></div>
     </div>
     <button class="done-btn" id="done-btn" onclick="goHome()">🏠 처음으로</button>`);
+
+  // 세레머니 먼저, 그 다음 결과 화면
+  showScreen('screen-final');
+  showDailyCeremony(pct, totalWrong);
 }
 
 // ── BIND CARD INPUTS (Enter 이동 + 복붙 차단) ──
@@ -650,18 +633,64 @@ function focusFirst(selector) {
 
 function goHome() { location.href = 'index.html'; }
 
-function hbOpen() {
-  document.getElementById('hb-unit').textContent = `${courseId} · ${typeId} · ${unitId}`;
-  document.getElementById('hb-overlay').classList.add('open');
+// ── 세레머니 ──
+const DAILY_TIERS = {
+  100: { cls: 'tier-100', msg: '🎉 완벽!! 100점!! 🎉',         sub: '세 단계 모두 한 번에 다 맞췄어! 짱이야!!', type: 'thumbs100' },
+  90:  { cls: 'tier-90',  emoji: '⭐', msg: '🌟 대단해!! 거의 완벽해!',   sub: '조금만 더 하면 100점이야!! ⭐⭐⭐', type: 'emoji' },
+  80:  { cls: 'tier-80',  emoji: '👏', msg: '😊 잘했어! 좋은 점수야!',    sub: '틀린 단어 복습하면 완벽해! 💪',    type: 'emoji' },
+  low: { cls: 'tier-low', emoji: '💪', msg: '💪 포기하지 마! 할 수 있어!!', sub: '계속 연습하면 금방 늘어! 파이팅!! 🔥', type: 'emoji' },
+};
+
+function getTierKey(pct, totalWrong) {
+  if (totalWrong === 0) return 100;
+  if (pct >= 90) return 90;
+  if (pct >= 80) return 80;
+  return 'low';
 }
-function hbClose() { document.getElementById('hb-overlay').classList.remove('open'); }
-function hbGo(mode) {
-  hbClose();
-  const p = new URLSearchParams({ c: courseId, t: typeId, u: unitId });
-  if (mode === 'home') { location.href = 'index.html'; return; }
-  const map = { study: 'study.html', sentence: 'sentence.html' };
-  location.href = `${map[mode]}?${p}`;
+
+function showDailyCeremony(pct, totalWrong) {
+  const key  = getTierKey(pct, totalWrong);
+  const data = DAILY_TIERS[key];
+  const cel  = document.getElementById('daily-cele');
+
+  // 배경 따봉 (군데군데)
+  const bgPos = [
+    [5,10],[15,80],[85,15],[90,75],[50,5],[30,90],[70,88],
+    [8,45],[92,45],[20,25],[75,30],[45,85],[60,10],[35,60],[80,55]
+  ];
+  const bgHtml = bgPos.map((p, i) => {
+    const sz = 22 + Math.floor(i % 3) * 10;
+    return `<span class="dc-bg-thumb" style="left:${p[0]}%;top:${p[1]}%;font-size:${sz}px;animation-delay:${(i*0.11).toFixed(2)}s">👍</span>`;
+  }).join('');
+
+  // 중앙 이모지
+  const centerHtml = (data.type === 'thumbs100')
+    ? `<div class="dc-100-wrap"><div class="dc-crowd" id="dc-crowd"></div><div class="dc-main">👍</div></div>`
+    : `<span class="dc-main-emoji">${data.emoji}</span>`;
+
+  cel.innerHTML = bgHtml + centerHtml +
+    `<div class="dc-msg">${data.msg}</div><div class="dc-sub">${data.sub}</div>`;
+
+  // 100점: 원형 따봉 군중
+  if (data.type === 'thumbs100') {
+    const crowd = cel.querySelector('#dc-crowd');
+    for (let i = 0; i < 10; i++) {
+      const angle = (i / 10) * Math.PI * 2;
+      const r = 105, x = 140 + r * Math.cos(angle) - 15, y = 140 + r * Math.sin(angle) - 15;
+      const sp = document.createElement('span');
+      sp.className = 'dc-crowd-thumb';
+      sp.textContent = '👍';
+      sp.style.left = x + 'px';
+      sp.style.top  = y + 'px';
+      sp.style.animationDelay = (i * 0.07) + 's';
+      crowd.appendChild(sp);
+    }
+  }
+
+  cel.className = 'show ' + data.cls;
+  setTimeout(() => { cel.className = ''; }, 5000);
 }
+
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -671,5 +700,7 @@ function shuffle(arr) {
   return arr;
 }
 </script>
+<script src="nav.js"></script>
+<script>initNav('daily');</script>
 </body>
 </html>

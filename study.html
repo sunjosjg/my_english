@@ -12,19 +12,6 @@
       --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
-    .hb-btn { position: fixed; top: 14px; left: 14px; z-index: 300; background: var(--card); border: 2px solid var(--border); border-radius: 12px; width: 46px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .hb-btn span { display: block; width: 20px; height: 2.5px; background: var(--text); border-radius: 2px; }
-    .hb-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 400; display: none; }
-    .hb-overlay.open { display: block; }
-    .hb-drawer { position: absolute; left: 0; top: 0; bottom: 0; width: 290px; background: var(--card); padding: 24px 20px 32px; transform: translateX(-100%); transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
-    .hb-overlay.open .hb-drawer { transform: translateX(0); }
-    .hb-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .hb-title { font-size: 18px; font-weight: 800; color: var(--primary); }
-    .hb-close { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--muted); }
-    .hb-unit { background: var(--primary-bg); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: var(--primary); font-weight: 600; line-height: 1.6; }
-    .hb-mode-btn { width: 100%; padding: 13px 16px; text-align: left; background: var(--bg); border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.15s; }
-    .hb-mode-btn:hover { border-color: var(--primary); background: var(--primary-bg); }
-    .hb-mode-btn.current { border-color: var(--primary); background: var(--primary-bg); color: var(--primary); }
 
     /* LAYOUT */
     html, body { height: 100%; }
@@ -96,7 +83,8 @@
     .swr-result { font-size: 13px; min-width: 18px; text-align: center; }
     .swr-no { font-size: 12px; color: var(--muted); min-width: 20px; }
     .swr-star { font-size: 12px; color: #f59e0b; font-weight: 800; flex-shrink: 0; letter-spacing: -1px; }
-    .swr-en { font-weight: 700; font-size: 15px; flex: 1; }
+    .swr-en-wrap { flex: 1; display: flex; align-items: center; gap: 5px; min-width: 0; }
+    .swr-en { font-weight: 700; font-size: 15px; }
     .swr-pos { font-size: 11px; color: var(--muted); background: var(--border); padding: 1px 6px; border-radius: 10px; }
     .swr-kr { font-size: 14px; color: var(--muted); }
     .swr-speak { background: none; border: none; font-size: 16px; cursor: pointer; padding: 2px 4px; border-radius: 6px; opacity: 0.5; transition: opacity 0.15s; }
@@ -151,17 +139,6 @@
   </style>
 </head>
 <body>
-<button class="hb-btn" onclick="hbOpen()"><span></span><span></span><span></span></button>
-<div class="hb-overlay" id="hb-overlay" onclick="if(event.target===this)hbClose()">
-  <div class="hb-drawer">
-    <div class="hb-hd"><div class="hb-title">📚 학습 메뉴</div><button class="hb-close" onclick="hbClose()">✕</button></div>
-    <div class="hb-unit" id="hb-unit"></div>
-    <button class="hb-mode-btn" onclick="hbGo('home')">🏠 처음으로</button>
-    <button class="hb-mode-btn current" onclick="hbClose()">🃏 플래시카드 (현재)</button>
-    <button class="hb-mode-btn" onclick="hbGo('sentence')">🧩 문장 완성</button>
-    <button class="hb-mode-btn" onclick="hbGo('daily')">📝 Daily Test</button>
-  </div>
-</div>
 <div id="app">
   <div class="page">
     <div class="study-fixed">
@@ -351,6 +328,8 @@ function applyHideState() {
     listEl.querySelectorAll('.swr-en').forEach(el => { el.style.color = hideEnglish ? 'transparent' : ''; el.style.userSelect = hideEnglish ? 'none' : ''; });
     listEl.querySelectorAll('.swr-kr').forEach(el => { el.style.color = hideKorean ? 'transparent' : ''; el.style.userSelect = hideKorean ? 'none' : ''; });
     listEl.querySelectorAll('.swr-pos, .swr-speak').forEach(el => { el.style.visibility = hidden ? 'hidden' : ''; });
+    // 별표: 전체 보기 모드에서만 표시
+    listEl.querySelectorAll('.swr-star').forEach(el => { el.style.display = hidden ? 'none' : ''; });
   }
 }
 function revealEnglish() { enRevealed = true; applyHideState(); }
@@ -473,12 +452,11 @@ function renderWordList() {
     row.className = 'study-word-row' + (isCurrent ? ' current' : '') + resultClass;
     const enHtml   = `<span class="swr-en" style="${hideEnglish ? 'color:transparent;user-select:none' : ''}">${w.english}</span>`;
     const krHtml   = `<span class="swr-kr" style="${hideKorean ? 'color:transparent;user-select:none' : ''}">${w.korean}</span>`;
-    const starHtml = starWords.has(w.english) ? '<span class="swr-star">★★★</span>' : '';
+    const starHtml = (starWords.has(w.english) && hideMode === 0) ? '<span class="swr-star">★★★</span>' : '';
     row.innerHTML = `
       <span class="swr-result">${resultIcon(w.english)}</span>
       <span class="swr-no">${i + 1}</span>
-      ${starHtml}
-      ${enHtml}
+      <span class="swr-en-wrap">${enHtml}${starHtml}</span>
       ${w.pos ? `<span class="swr-pos" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}">${w.pos}</span>` : ''}
       ${krHtml}
       <button class="swr-speak" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}" onclick="event.stopPropagation(); speakText('${w.english.replace(/'/g,"\\'")}')">🔊</button>`;
@@ -493,18 +471,6 @@ function nextCard() { stopListening(); studyIdx = (studyIdx + 1) % words.length;
 
 function goHome() { stopAutoPlay(); stopListening(); location.href = 'index.html'; }
 
-function hbOpen() {
-  document.getElementById('hb-unit').textContent = `${courseId} · ${typeId} · ${unitId}`;
-  document.getElementById('hb-overlay').classList.add('open');
-}
-function hbClose() { document.getElementById('hb-overlay').classList.remove('open'); }
-function hbGo(mode) {
-  hbClose(); stopAutoPlay(); stopListening();
-  const p = new URLSearchParams({ c: courseId, t: typeId, u: unitId });
-  if (mode === 'home') { location.href = 'index.html'; return; }
-  const map = { sentence: 'sentence.html', daily: 'daily.html' };
-  location.href = `${map[mode]}?${p}`;
-}
 
 // ── VOICE RESULT TRACKING ──
 let voiceResults  = new Map(); // english → 'correct' | 'wrong'
@@ -536,16 +502,18 @@ function updateListRowResult(idx) {
   row.classList.add(`result-${result}`);
   const el = row.querySelector('.swr-result');
   if (el) el.innerHTML = resultIcon(english);
-  // ★★★ 뱃지 갱신
+  // ★★★ 뱃지 갱신 (전체 보기 모드에서만, 영어 단어 뒤에)
   let starEl = row.querySelector('.swr-star');
-  if (starWords.has(english)) {
+  if (starWords.has(english) && hideMode === 0) {
     if (!starEl) {
       starEl = document.createElement('span');
       starEl.className = 'swr-star';
       starEl.textContent = '★★★';
-      const noEl = row.querySelector('.swr-no');
-      if (noEl) noEl.after(starEl);
+      const enEl = row.querySelector('.swr-en');
+      if (enEl) enEl.after(starEl);
     }
+  } else if (starEl) {
+    starEl.remove();
   }
 }
 
@@ -818,5 +786,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
+<script src="nav.js"></script>
+<script>initNav('study', { onLeave: () => { stopAutoPlay(); stopListening(); } });</script>
 </body>
 </html>

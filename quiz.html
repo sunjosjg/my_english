@@ -216,13 +216,6 @@ function startQuiz() {
   quizWords = shuffle([...words]);
   showScreen('screen-quiz');
   renderQuizCard();
-  // ?fill=1 이면 정답 자동 채움 (테스트용)
-  if (params.get('fill') === '1') {
-    setTimeout(() => {
-      const inp = document.getElementById('quiz-input');
-      if (inp) inp.value = quizWords[0].answer;
-    }, 300);
-  }
 }
 
 function renderQuizCard() {
@@ -235,7 +228,6 @@ function renderQuizCard() {
   document.getElementById('qc-sentence').innerHTML = w.sentence.replace('___', '<span class="blank">___</span>');
   const inp = document.getElementById('quiz-input');
   inp.value = ''; inp.className = 'quiz-input'; inp.disabled = false; inp.focus();
-  if (params.get('fill') === '1') setTimeout(() => { inp.value = w.answer; }, 100);
   const fb = document.getElementById('feedback');
   fb.className = 'feedback'; fb.textContent = '';
   document.getElementById('submit-btn').textContent = '확인';
@@ -408,6 +400,9 @@ function triggerCelebration(pct, isPerfect) {
     cel.appendChild(el);
     el.addEventListener('animationend', () => el.remove());
   }, data.interval);
+
+  // 5초 후 자동 닫기
+  setTimeout(hideCelebration, 5000);
 }
 
 function hideCelebration() {

@@ -59,12 +59,107 @@
 
 ---
 
+## 세션 2 작업 내역 (2026-02-23)
+
+### 🍔 공통 햄버거 메뉴 — nav.js 신규 제작
+
+**배경:** 각 페이지마다 중복된 햄버거 메뉴 코드가 있었음 → 공통 컴포넌트로 통합
+
+**nav.js IIFE 구조:**
+- CSS, HTML(버튼 + 드로어)을 자동으로 `<head>` / `<body>`에 삽입
+- Public API: `initNav(page, opts)`, `setNavUnit(...)`, `navOpen()`, `navClose()`, `navGo(mode)`
+- 스크립트 로딩 순서: `<script src="nav.js">` 뒤에 별도 `<script>`로 `initNav()` 호출해야 함 (ReferenceError 방지)
+
+**메뉴 구성:**
+| 항목 | 표시 조건 |
+|------|----------|
+| 🏠 처음으로 | index.html 제외 전 페이지 |
+| 🃏 플래시카드 | 항상 |
+| 🧩 문장 완성 | 항상 |
+| 📝 Daily Test | 항상 |
+| 📷 정답 채점 | 항상 |
+| 🖨️ 인쇄 | index.html 에서만 |
+
+**적용 파일:** index.html, study.html, sentence.html, daily.html, check.html
+- 각 페이지의 hb-* CSS, 햄버거 HTML, hbOpen/hbClose/hbGo 함수 전부 제거
+
+---
+
+### 🎭 daily.html — 세레머니 고도화
+
+**점수 구간별 4단계 티어:**
+| 티어 | 조건 | 배경 | 중앙 이모지 |
+|------|------|------|------------|
+| 100점 | 완벽 | 금색+빨강 그라데이션 | 👍 스피닝 |
+| 90점대 | 90%+ | 보라 계열 | ⭐ |
+| 80점대 | 80%+ | 파랑+초록 | 👏 |
+| 그 이하 | ~79% | 주황 계열 | 💪 |
+
+**애니메이션 개선:**
+- 따봉 회전 속도 느리게: `dcSpin 0.9s → 1.8s`, `dcCheer 0.38s → 1.0s`
+- 배경에 따봉 15개 랜덤 배치 (`dc-bg-thumb`, `dcBgFloat` 애니메이션)
+
+**흐름 개선:**
+- 세레머니 5초 → 최종 화면(엄마 확인) 자동 전환
+- 100점이어도 엄마 확인 메세지 표시 (이전: 100점 시 생략)
+
+---
+
+### 🎉 quiz.html — 세레머니 5초 자동 닫기
+- `triggerCelebration()` 마지막에 `setTimeout(hideCelebration, 5000)` 추가
+
+---
+
+### 🏠 index.html UI 정리
+
+**제거:**
+- `.app-sub` 부제목 텍스트 ("과정 → 유형 → 단원 → 모드 선택 후 시작")
+- 모드 카드 `.mc-desc` 설명 문구 4개 → 이후 **다시 복원** (유저 피드백: "너무 허전하다")
+
+**복원된 설명 문구:**
+| 모드 | 설명 |
+|------|------|
+| 🃏 플래시카드 | 단어 암기 |
+| 🧩 문장 완성 | 드래그 빈칸 채우기 |
+| 📝 Daily Test | 3단계 최종 테스트 |
+| 🖨️ 인쇄 | A4 워크시트 |
+
+---
+
+### 🚫 fill=1 자동 채우기 기능 완전 제거
+
+모든 파일에서 `?fill=1` URL 파라미터 관련 코드 제거:
+
+| 파일 | 제거 내용 |
+|------|----------|
+| nav.js | daily/sentence 이동 URL의 `&fill=1` 제거 |
+| daily.html | step1/2/3 자동 채우기 3곳 제거 |
+| sentence.html | `sentences.forEach(s => s.filled = true)` 블록 제거 |
+| quiz.html | 퀴즈 시작·카드 렌더 시 자동 채우기 코드 2곳 제거 |
+
+---
+
+### ⭐ study.html — 별표(★★★) 표시 개선
+
+**변경 전:** 번호 뒤에 별 → 영어 단어 앞에 위치, 항상 표시
+**변경 후:**
+- 위치: 영어 단어 바로 뒤 (`free ★★★`) — `swr-en-wrap` 래퍼로 묶음
+- 표시 조건: **전체 보기 모드에서만** 표시 (한글/영어 숨기기 모드에서는 숨김)
+
+**CSS 변경:**
+```css
+/* 추가 */
+.swr-en-wrap { flex: 1; display: flex; align-items: center; gap: 5px; min-width: 0; }
+/* 수정: flex:1 제거 */
+.swr-en { font-weight: 700; font-size: 15px; }
+```
+
+---
+
 ## 🚧 남은 작업
 
 ### 즉시 처리 필요
-- [ ] **daily.html 테스트 자동 입력 제거**
-  - `fillTestData()` 함수 및 호출 코드 삭제
-  - 현재 테스트용으로 모든 입력란 자동 채움
+- [x] **fill=1 자동 채우기 완전 제거** (세션 2에서 완료)
 
 ### 배포
 - [ ] **서버 배포**
@@ -103,10 +198,12 @@
 ```
 my_english/
 ├── index.html          # 메인 (과정/단원/모드 선택)
-├── study.html          # 플래시카드 (음성 자동 재생)
+├── study.html          # 플래시카드 (음성 자동 재생, 별표 추적)
 ├── quiz.html           # 빈칸 퀴즈 (현재 메인에서 미노출)
 ├── sentence.html       # 문장 완성 (드래그 앤 드롭)
-├── daily.html          # 데일리 테스트 (3단계 + 5번 쓰기)
+├── daily.html          # 데일리 테스트 (3단계 + 5번 쓰기 + 세레머니)
+├── check.html          # 정답 채점 (수기 답안 사진 채점)
+├── nav.js              # 공통 햄버거 메뉴 컴포넌트 (세션 2 신규)
 ├── DEV_LOG.md          # 이 파일
 └── data/
     └── {courseId}/

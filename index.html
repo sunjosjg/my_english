@@ -58,21 +58,6 @@
     .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
     .toast.show { opacity: 1; }
 
-    /* ── 햄버거 메뉴 ── */
-    .hamburger-btn { position: fixed; top: 14px; left: 14px; z-index: 300; background: var(--card); border: 2px solid var(--border); border-radius: 12px; width: 46px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .hamburger-btn span { display: block; width: 20px; height: 2.5px; background: var(--text); border-radius: 2px; }
-    .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 400; display: none; }
-    .menu-overlay.open { display: block; }
-    .menu-drawer { position: absolute; left: 0; top: 0; bottom: 0; width: 290px; background: var(--card); padding: 24px 20px 32px; transform: translateX(-100%); transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
-    .menu-overlay.open .menu-drawer { transform: translateX(0); }
-    .menu-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .menu-title { font-size: 19px; font-weight: 800; color: var(--primary); }
-    .menu-close { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--muted); line-height: 1; padding: 4px; }
-    .menu-unit-info { background: var(--primary-bg); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 13px; color: var(--primary); font-weight: 600; line-height: 1.6; }
-    .menu-mode-btn { width: 100%; padding: 14px 16px; text-align: left; background: var(--bg); border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.15s; }
-    .menu-mode-btn:hover { border-color: var(--primary); background: var(--primary-bg); }
-    .menu-mode-btn.m-daily { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
-    .menu-no-unit { text-align: center; padding: 48px 16px; color: var(--muted); font-size: 16px; font-weight: 600; line-height: 1.8; }
 
     /* PRINT */
     #print-area { display: none; }
@@ -112,26 +97,10 @@
 </head>
 <body>
 
-<!-- 햄버거 버튼 (왼쪽 상단 고정) -->
-<button class="hamburger-btn" onclick="openMenu()">
-  <span></span><span></span><span></span>
-</button>
-
-<!-- 메뉴 드로어 -->
-<div class="menu-overlay" id="menu-overlay" onclick="closeMenuOnBg(event)">
-  <div class="menu-drawer">
-    <div class="menu-hd">
-      <div class="menu-title">📚 학습 메뉴</div>
-      <button class="menu-close" onclick="closeMenu()">✕</button>
-    </div>
-    <div id="menu-body"></div>
-  </div>
-</div>
 
 <div class="page">
   <div class="app-header">
     <div class="app-title">📚 찬희 영어 단어장</div>
-    <div class="app-sub">과정 → 유형 → 단원 → 모드 선택 후 시작</div>
   </div>
 
   <div class="section-label">과정 선택</div>
@@ -162,7 +131,7 @@
     <div class="mode-card" data-mode="daily">
       <span class="mc-icon">📝</span>
       <span class="mc-label">Daily Test</span>
-      <span class="mc-desc">3단계 최종 테스트 · 엄마 확인</span>
+      <span class="mc-desc">3단계 최종 테스트</span>
     </div>
     <div class="mode-card" data-mode="print">
       <span class="mc-icon">🖨️</span>
@@ -327,16 +296,16 @@ function renderUnits() {
 }
 
 document.querySelectorAll('.mode-card').forEach(mc => {
-  mc.onclick = async () => {
+  mc.onclick = () => {
     document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
     mc.classList.add('on');
     selMode = mc.dataset.mode;
     if (!selUnit) { showToast('단원을 먼저 선택하세요'); return; }
-    await menuGoMode(selMode);
+    navGo(selMode);
   };
 });
 
-function updateStartBtn() { /* 버튼 제거됨 — 모드 카드 직접 클릭으로 진입 */ }
+function updateStartBtn() { updateNavUnit(); }
 
 function goCheck() {
   if (!selUnit) return;
@@ -431,43 +400,22 @@ function shuffle(arr) {
   return arr;
 }
 
-// ── 햄버거 메뉴 ──
-function openMenu() {
-  const body = document.getElementById('menu-body');
-  if (!selUnit) {
-    body.innerHTML = `<div class="menu-no-unit">📖 단원을 먼저 선택하세요<br><span style="font-size:13px;font-weight:400">메인 화면에서 단원을 선택하면<br>여기서 바로 학습할 수 있어요!</span></div>`;
-  } else {
-    body.innerHTML = `
-      <div class="menu-unit-info">
-        📌 ${selCourse.label} · ${selType.label}<br>${selUnit.short}. ${selUnit.label}
-      </div>
-      <button class="menu-mode-btn" onclick="menuGoMode('study')">🃏 <span>플래시카드</span></button>
-      <button class="menu-mode-btn" onclick="menuGoMode('sentence')">🧩 <span>문장 완성</span></button>
-      <button class="menu-mode-btn" onclick="menuGoMode('daily')">📝 <span>Daily Test</span></button>
-      <button class="menu-mode-btn" onclick="menuGoMode('print')">🖨️ <span>인쇄</span></button>
-      <button class="menu-mode-btn" onclick="closeMenu(); goCheck()">📷 <span>정답 채점</span></button>`;
+function updateNavUnit() {
+  if (selCourse && selType && selUnit) {
+    setNavUnit(selCourse.id, selType.id, selUnit.id, selCourse.label, selType.label, selUnit.short, selUnit.label);
   }
-  document.getElementById('menu-overlay').classList.add('open');
 }
 
-function closeMenu() {
-  document.getElementById('menu-overlay').classList.remove('open');
+async function loadWords() {
+  if (!selUnit) return false;
+  try {
+    const r = await fetch(`data/${selCourse.id}/${selType.id}/${selUnit.id}.json`);
+    const data = await r.json();
+    words = data.words;
+    return true;
+  } catch { return false; }
 }
 
-function closeMenuOnBg(e) {
-  if (e.target === document.getElementById('menu-overlay')) closeMenu();
-}
-
-async function menuGoMode(mode) {
-  closeMenu();
-  selMode = mode;
-  if (!selUnit) return;
-  const params = new URLSearchParams({ c: selCourse.id, t: selType.id, u: selUnit.id });
-  if (mode === 'study')    { window.location.href = `study.html?${params}`; return; }
-  if (mode === 'sentence') { window.location.href = `sentence.html?${params}`; return; }
-  if (mode === 'daily')    { window.location.href = `daily.html?${params}`; return; }
-  if (mode === 'print')    { updateStartBtn(); startPrint(); return; }
-}
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -476,5 +424,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
+<script src="nav.js"></script>
+<script>initNav('index', { printFn: async () => { if (await loadWords()) startPrint(); } });</script>
 </body>
 </html>

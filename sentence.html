@@ -12,19 +12,6 @@
       --bg: #f1f5f9; --card: #ffffff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
-    .hb-btn { position: fixed; top: 14px; left: 14px; z-index: 300; background: var(--card); border: 2px solid var(--border); border-radius: 12px; width: 46px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .hb-btn span { display: block; width: 20px; height: 2.5px; background: var(--text); border-radius: 2px; }
-    .hb-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 400; display: none; }
-    .hb-overlay.open { display: block; }
-    .hb-drawer { position: absolute; left: 0; top: 0; bottom: 0; width: 290px; background: var(--card); padding: 24px 20px 32px; transform: translateX(-100%); transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
-    .hb-overlay.open .hb-drawer { transform: translateX(0); }
-    .hb-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .hb-title { font-size: 18px; font-weight: 800; color: var(--primary); }
-    .hb-close { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--muted); }
-    .hb-unit { background: var(--primary-bg); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: var(--primary); font-weight: 600; line-height: 1.6; }
-    .hb-mode-btn { width: 100%; padding: 13px 16px; text-align: left; background: var(--bg); border: 2px solid var(--border); border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.15s; }
-    .hb-mode-btn:hover { border-color: var(--primary); background: var(--primary-bg); }
-    .hb-mode-btn.current { border-color: var(--primary); background: var(--primary-bg); color: var(--primary); }
     html, body { height: 100%; }
     #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
     .page { height: 100%; display: flex; flex-direction: column; overflow: hidden; padding: 16px; padding-bottom: 0; max-width: 860px; margin: 0 auto; width: 100%; }
@@ -131,17 +118,6 @@
   </style>
 </head>
 <body>
-<button class="hb-btn" onclick="hbOpen()"><span></span><span></span><span></span></button>
-<div class="hb-overlay" id="hb-overlay" onclick="if(event.target===this)hbClose()">
-  <div class="hb-drawer">
-    <div class="hb-hd"><div class="hb-title">📚 학습 메뉴</div><button class="hb-close" onclick="hbClose()">✕</button></div>
-    <div class="hb-unit" id="hb-unit"></div>
-    <button class="hb-mode-btn" onclick="hbGo('home')">🏠 처음으로</button>
-    <button class="hb-mode-btn" onclick="hbGo('study')">🃏 플래시카드</button>
-    <button class="hb-mode-btn current" onclick="hbClose()">🧩 문장 완성 (현재)</button>
-    <button class="hb-mode-btn" onclick="hbGo('daily')">📝 Daily Test</button>
-  </div>
-</div>
 <div id="app">
   <div class="page">
     <div class="screen-header">
@@ -446,18 +422,6 @@ function renderUnitTitle() {
 
 function goHome() { location.href = 'index.html'; }
 
-function hbOpen() {
-  document.getElementById('hb-unit').textContent = `${courseId} · ${typeId} · ${unitId}`;
-  document.getElementById('hb-overlay').classList.add('open');
-}
-function hbClose() { document.getElementById('hb-overlay').classList.remove('open'); }
-function hbGo(mode) {
-  hbClose();
-  const p = new URLSearchParams({ c: courseId, t: typeId, u: unitId });
-  if (mode === 'home') { location.href = 'index.html'; return; }
-  const map = { study: 'study.html', daily: 'daily.html' };
-  location.href = `${map[mode]}?${p}`;
-}
 
 // ── CELEBRATION ──
 const CELE_PERFECT = [
@@ -505,5 +469,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
+<script src="nav.js"></script>
+<script>initNav('sentence');</script>
 </body>
 </html>
