@@ -156,6 +156,63 @@
 
 ---
 
+## 세션 3 작업 내역 (2026-02-23)
+
+### 🍔 3단계 워드뱅크 2열 레이아웃 (daily.html)
+- 오른쪽 answer 목록이 세로로 길어 스크롤 필요 → 2열 그리드로 변경
+- 너비: `130px` → `280px`
+- `#wordbank-list`: `display: grid; grid-template-columns: 1fr 1fr; gap: 6px;`
+
+---
+
+### 🔤 전체 글씨체 Jua(주아) 폰트 적용
+
+**적용 파일:** index.html, study.html, daily.html, sentence.html, check.html, quiz.html
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+```
+```css
+body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; }
+button, input, select, textarea { font-family: inherit; }
+```
+
+**포인트:** `<button>` 요소는 브라우저 기본값으로 시스템 폰트를 사용 → `font-family: inherit` 없으면 칩/버튼에 Jua 미적용. 모든 파일에 추가.
+
+---
+
+### 📏 전체 폰트 크기 증가
+
+Python 스크립트로 전체 일괄 처리 (140곳):
+- `10~17px` → `+1px`
+- `18~22px` → `+2px`
+- `23px+` (이모지/큰 제목) → 유지
+
+---
+
+### 📦 sentence.html 단어 뱅크 — 오른쪽 사이드바로 이동
+
+**변경 전:** 상단 가로 flex-wrap 배열
+**변경 후:** 오른쪽 2열 그리드 사이드바
+
+```css
+.content-wrap { flex: 1; display: flex; gap: 12px; min-height: 0; overflow: hidden; }
+.word-bank-wrap { flex-shrink: 0; width: 230px; ... align-self: flex-start; position: sticky; top: 0; }
+.word-bank { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+```
+
+HTML 구조:
+```
+.page
+  ├── screen-header
+  ├── unit-title
+  └── content-wrap (flex-row)
+        ├── sentences-wrap (flex: 1, 스크롤)
+        └── word-bank-wrap (230px, 오른쪽 고정)
+```
+
+---
+
 ## 🚧 남은 작업
 
 ### 즉시 처리 필요
