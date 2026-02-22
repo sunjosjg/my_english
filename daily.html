@@ -60,29 +60,46 @@
 
     /* ── STEP 1 & 2: WORD ROWS ── */
     .word-list { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; }
-    .word-row { display: grid; grid-template-columns: 28px 1fr 1fr; gap: 10px; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .word-row { display: grid; grid-template-columns: 28px 1fr 1fr; gap: 10px; align-items: center; padding: 4px 14px; border-bottom: 1px solid var(--border); }
     .word-row:last-child { border-bottom: none; }
     .wr-no     { font-size: 13px; color: var(--muted); text-align: center; }
     .wr-prompt { font-size: 17px; font-weight: 700; }
     .wr-sub    { font-size: 13px; color: var(--muted); margin-top: 2px; }
-    .wr-input  { width: 100%; padding: 10px 12px; font-size: 18px; border: 2px solid var(--border); border-radius: 8px; outline: none; font-family: inherit; transition: border-color 0.2s; }
+    .wr-input  { width: 100%; padding: 6px 10px; font-size: 17px; border: 2px solid var(--border); border-radius: 8px; outline: none; font-family: inherit; transition: border-color 0.2s; }
     .wr-input:focus { border-color: var(--primary); }
 
     /* ── STEP 3: SENTENCE CARDS ── */
-    .step3-layout { display: grid; grid-template-columns: 1fr 280px; gap: 14px; align-items: start; }
+    .step3-layout { display: grid; grid-template-columns: 1fr 200px; gap: 14px; align-items: start; }
     .step3-wordbank { position: sticky; top: 16px; background: var(--card); border-radius: var(--radius); border: 2px solid var(--primary); padding: 12px 10px; }
     .wb-title { font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 10px; text-align: center; letter-spacing: 0.05em; }
     #wordbank-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .wb-item { padding: 8px 6px; font-size: 14px; font-weight: 700; border-radius: 8px; background: var(--primary-bg); color: var(--primary); text-align: center; transition: all 0.2s; }
-    .wb-item.used { background: var(--border); color: var(--muted); text-decoration: line-through; opacity: 0.5; }
+    .wb-item { padding: 8px 6px; font-size: 14px; font-weight: 700; border-radius: 8px; background: var(--primary-bg); color: var(--primary); text-align: center; transition: all 0.15s; cursor: pointer; border: 2px solid var(--primary-light); user-select: none; -webkit-user-select: none; }
+    .wb-item:active { transform: scale(0.93); background: var(--primary); color: #fff; }
+    .wb-item.used { background: var(--border); color: var(--muted); text-decoration: line-through; opacity: 0.45; cursor: default; border-color: var(--border); pointer-events: none; }
 
-    .sentence-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 18px 20px; margin-bottom: 12px; }
-    .sc-no       { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-    .sc-sentence { font-size: 21px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+    .sentence-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 6px 16px; margin-bottom: 5px; }
+    .sc-top-row  { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+    .sc-no       { font-size: 13px; color: var(--muted); flex-shrink: 0; }
+    .sc-sentence { font-size: 19px; line-height: 1.65; color: var(--text); }
     .sc-blank    { color: var(--primary); border-bottom: 2px solid var(--primary); padding: 0 6px; font-weight: 700; }
     .sc-hint     { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
-    .sc-input    { width: 100%; padding: 13px 15px; font-size: 20px; border: 2px solid var(--border); border-radius: 8px; outline: none; font-family: inherit; transition: border-color 0.2s; }
+    .sc-input    { width: 100%; padding: 7px 12px; font-size: 18px; border: 2px solid var(--border); border-radius: 8px; outline: none; font-family: inherit; transition: border-color 0.2s; }
     .sc-input:focus { border-color: var(--primary); }
+
+    /* ── STEP3 RESPONSIVE ── */
+    /* 폰: 단어 목록 상단 sticky 고정, 문장만 스크롤 */
+    @media (max-width: 599px) {
+      .step3-layout { display: flex; flex-direction: column; }
+      .step3-wordbank { order: -1; position: sticky; top: 0; z-index: 50;
+        width: 100%; border-radius: 0 0 var(--radius) var(--radius);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
+      #wordbank-list { display: flex; flex-wrap: wrap; gap: 6px; grid-template-columns: unset; }
+      .wb-item { flex: 0 0 auto; }
+    }
+    /* 세로 긴 태블릿: 1열 */
+    @media (min-width: 600px) and (min-height: 800px) {
+      #wordbank-list { grid-template-columns: 1fr; }
+    }
 
     /* ── COMPLETE BUTTON ── */
     .complete-btn { width: 100%; padding: 16px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 18px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
@@ -233,6 +250,7 @@ let step2Wrong = [];
 let step3Wrong = [];
 let step2Order = [];
 let step3Order = [];
+let lastFocusedInput = null;
 
 // ── STAR (localStorage) ──
 function starKey() { return `star_${courseId}_${typeId}_${unitId}`; }
@@ -301,10 +319,13 @@ function renderStep3() {
   // 정답 목록 (섞어서 오른쪽에 표시)
   const bankEl = document.getElementById('wordbank-list');
   shuffle([...step3Order]).forEach(w => {
-    const item = document.createElement('div');
+    const item = document.createElement('button');
     item.className = 'wb-item';
     item.dataset.answer = w.answer;
     item.textContent = w.answer;
+    item.addEventListener('mousedown', e => e.preventDefault()); // 포커스 유지
+    item.addEventListener('touchstart', e => e.preventDefault(), { passive: false }); // iOS
+    item.addEventListener('click', () => fillFromBank(item));
     bankEl.appendChild(item);
   });
 
@@ -313,13 +334,36 @@ function renderStep3() {
     card.className = 'sentence-card';
     const sentHtml = w.sentence.replace('___', '<span class="sc-blank">___</span>');
     card.innerHTML = `
-      <div class="sc-no">${i + 1}번</div>
-      <div class="sc-sentence">${sentHtml}</div>
+      <div class="sc-top-row">
+        <span class="sc-no">${i + 1}.</span>
+        <div class="sc-sentence">${sentHtml}</div>
+      </div>
       <input class="sc-input" type="text" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">`;
-    card.querySelector('.sc-input').addEventListener('input', updateWordBank);
+    const inp = card.querySelector('.sc-input');
+    inp.addEventListener('focus', () => { lastFocusedInput = inp; });
+    inp.addEventListener('input', updateWordBank);
     list.appendChild(card);
   });
   addEnterNav('#step3-list .sc-input');
+}
+
+function fillFromBank(item) {
+  const inputs = [...document.querySelectorAll('#step3-list .sc-input')];
+  let target = null;
+  if (lastFocusedInput && inputs.includes(lastFocusedInput)) {
+    target = lastFocusedInput;
+  } else {
+    target = inputs.find(inp => !inp.value.trim()) || null;
+  }
+  if (!target) return;
+  target.value = item.dataset.answer;
+  updateWordBank();
+  // 다음 빈 칸으로 포커스 + 스크롤
+  const nextEmpty = inputs.find(inp => !inp.value.trim());
+  const moveTo = nextEmpty || target;
+  moveTo.focus();
+  lastFocusedInput = moveTo;
+  moveTo.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function updateWordBank() {

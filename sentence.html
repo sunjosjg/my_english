@@ -29,6 +29,18 @@
     .unit-title { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 8px; flex-shrink: 0; }
     .unit-title strong { color: var(--primary); }
 
+    /* 스크롤 시 헤더 숨김 */
+    .screen-header, .unit-title {
+      transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+      overflow: hidden;
+    }
+    .header-hidden .screen-header,
+    .header-hidden .unit-title {
+      max-height: 0 !important;
+      opacity: 0;
+      margin-bottom: 0 !important;
+    }
+
     /* CONTENT LAYOUT */
     .content-wrap { flex: 1; display: flex; gap: 12px; min-height: 0; overflow: hidden; }
 
@@ -50,6 +62,22 @@
     .word-tile.used   { opacity: 0.2; pointer-events: none; }
     .word-tile.dragging { opacity: 0.35; }
 
+    /* RESPONSIVE WORD BANK */
+    /* 폰: 단어 목록 상단 고정, 문장만 스크롤 */
+    @media (max-width: 599px) {
+      .content-wrap { flex-direction: column; }
+      .word-bank-wrap { order: -1; width: 100%; flex-shrink: 0; position: static;
+        border-radius: var(--radius) var(--radius) 0 0; border-bottom: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      .word-bank { display: flex; flex-wrap: wrap; gap: 6px; grid-template-columns: unset; }
+      .word-tile { flex: 0 0 auto; }
+      .sentences-wrap { flex: 1; overflow-y: auto; }
+    }
+    /* 세로 긴 태블릿: 1열 */
+    @media (min-width: 600px) and (min-height: 800px) {
+      .word-bank { grid-template-columns: 1fr; }
+    }
+
     /* DRAG GHOST */
     #drag-ghost {
       position: fixed; pointer-events: none; z-index: 9998;
@@ -64,7 +92,7 @@
     .sentences-wrap { flex: 1; overflow-y: auto; padding-bottom: 16px; }
     .sentence-row {
       background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
-      padding: 14px 16px; margin-bottom: 10px; font-size: 17px; line-height: 2;
+      padding: 8px 14px; margin-bottom: 6px; font-size: 17px; line-height: 1.8;
       transition: border-color 0.2s, background 0.2s;
     }
     .sentence-row.done { border-color: var(--green); background: rgba(16,185,129,0.05); }
@@ -210,6 +238,12 @@ function renderAll() {
   renderWordBank();
   renderSentences();
   updateProgress();
+  // 스크롤 시 헤더 숨김
+  const wrap = document.getElementById('sentences-wrap');
+  const page = document.querySelector('.page');
+  wrap.addEventListener('scroll', () => {
+    page.classList.toggle('header-hidden', wrap.scrollTop > 30);
+  }, { passive: true });
 }
 
 // ── WORD BANK ──
@@ -390,6 +424,9 @@ function checkAnswer(blank, word) {
     row.classList.add('done');
     refreshTileState(word.toLowerCase());
     updateProgress();
+    // 다음 빈 문장으로 스크롤
+    const nextRow = document.querySelector('.sentence-row:not(.done)');
+    if (nextRow) nextRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
     // ❌ 오답 — row 전체 + blank 흔들기 + 틀린 횟수 기록
     const idx = parseInt(blank.dataset.idx);

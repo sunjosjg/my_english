@@ -31,12 +31,12 @@
 
     /* FLASHCARD */
     .study-fixed { flex-shrink: 0; }
-    .flashcard-wrap { perspective: 1200px; width: 100%; height: 240px; margin: 6px 0 8px; cursor: pointer; position: relative; }
+    .flashcard-wrap { perspective: 1200px; width: 100%; height: 90px; margin: 4px 0 4px; cursor: pointer; position: relative; }
     /* 버튼 영역 — 카드 하단 전체 폭 차단 띠 */
-    .fc-nav-zone { position: absolute; bottom: 0; left: 0; right: 0; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; z-index: 10; }
-    .fc-nav-zone-left  { display: flex; gap: 8px; }
-    .fc-nav-zone-right { display: flex; gap: 8px; }
-    .fc-nav-btn { width: 56px; height: 48px; border-radius: 14px; border: none; background: rgba(255,255,255,0.28); color: #fff; font-size: 24px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; backdrop-filter: blur(6px); }
+    .fc-nav-zone { position: absolute; bottom: 6px; left: 0; right: 0; height: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; z-index: 10; }
+    .fc-nav-zone-left  { display: flex; gap: 6px; }
+    .fc-nav-zone-right { display: flex; gap: 6px; }
+    .fc-nav-btn { width: 40px; height: 34px; border-radius: 10px; border: none; background: rgba(255,255,255,0.28); color: #fff; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; backdrop-filter: blur(6px); }
     .fc-nav-btn:hover  { background: rgba(255,255,255,0.48); }
     .fc-nav-btn:active { transform: scale(0.92); }
     [data-tip] { position: relative; }
@@ -44,23 +44,24 @@
     [data-tip]:hover::after { opacity: 1; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.55s cubic-bezier(.4,0,.2,1); transform-style: preserve-3d; }
     .flashcard-wrap.flipped .flashcard-inner { transform: rotateY(180deg); }
-    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     .fc-front { background: linear-gradient(135deg, #5b4fcf, #7c71e0); color: #fff; }
     .fc-back  { background: linear-gradient(135deg, #10b981, #34d399); color: #fff; transform: rotateY(180deg); }
-    .fc-word { font-size: 34px; font-weight: 800; margin-bottom: 6px; }
-    .fc-pos  { font-size: 14px; opacity: 0.75; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 20px; }
-    .fc-korean { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
-    .fc-definition { font-size: 15px; opacity: 0.9; line-height: 1.55; max-width: 480px; }
-    .fc-reveal { display: none; background: rgba(255,255,255,0.2); border: 2px dashed rgba(255,255,255,0.6); color: #fff; border-radius: 12px; padding: 12px 28px; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: background 0.2s; }
+    .fc-word { font-size: 26px; font-weight: 800; }
+    .fc-pos  { font-size: 12px; opacity: 0.75; background: rgba(255,255,255,0.2); padding: 1px 8px; border-radius: 20px; }
+    .fc-korean { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .fc-definition { font-size: 13px; opacity: 0.9; line-height: 1.4; max-width: 480px; }
+    .fc-reveal { display: none; background: rgba(255,255,255,0.2); border: 2px dashed rgba(255,255,255,0.6); color: #fff; border-radius: 10px; padding: 6px 20px; font-size: 14px; font-weight: 700; cursor: pointer; margin-bottom: 4px; transition: background 0.2s; }
     .fc-reveal:hover { background: rgba(255,255,255,0.38); }
-    .speak-btn { margin-top: 14px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5); color: #fff; border-radius: 50px; padding: 8px 20px; font-size: 20px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .fc-word-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .speak-btn { background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5); color: #fff; border-radius: 50px; padding: 4px 12px; font-size: 16px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; }
     .speak-btn:hover { background: rgba(255,255,255,0.4); }
     .speak-btn.speaking { background: rgba(255,255,255,0.5); animation: pulse 0.6s infinite alternate; }
     @keyframes pulse { from { opacity: 1; } to { opacity: 0.6; } }
 
     /* CTRL BAR */
-    .ctrl-bar { display: flex; gap: 8px; justify-content: center; margin: 8px 0 4px; flex-shrink: 0; }
-    .ctrl-btn { padding: 8px 16px; font-size: 14px; font-weight: 600; border: 2px solid var(--border); border-radius: 20px; background: var(--card); cursor: pointer; transition: all 0.15s; }
+    .ctrl-bar { display: flex; gap: 6px; justify-content: center; margin: 4px 0 2px; flex-shrink: 0; }
+    .ctrl-btn { padding: 5px 14px; font-size: 13px; font-weight: 600; border: 2px solid var(--border); border-radius: 20px; background: var(--card); cursor: pointer; transition: all 0.15s; }
     .ctrl-btn:hover { border-color: var(--primary-light); }
     .ctrl-btn.on { background: var(--primary); color: #fff; border-color: var(--primary); }
     .ctrl-btn.shuffle { border-color: var(--yellow); color: var(--yellow); }
@@ -155,21 +156,23 @@
       <div class="unit-title" id="unit-title"></div>
 
       <div class="flashcard-wrap" id="flashcard" onclick="flipCard()">
-        <div class="fc-nav-zone" onclick="event.stopPropagation()">
+        <div class="fc-nav-zone">
           <div class="fc-nav-zone-left">
-            <button class="fc-nav-btn" id="fc-btn-autoplay" onclick="toggleAutoPlayBtn()" data-tip="이동 시 자동 읽기">🔊</button>
+            <button class="fc-nav-btn" id="fc-btn-autoplay" onclick="event.stopPropagation(); toggleAutoPlayBtn()" data-tip="이동 시 자동 읽기">🔊</button>
           </div>
           <div class="fc-nav-zone-right">
-            <button class="fc-nav-btn" id="fc-btn-prev" onclick="prevCard()" data-tip="이전 단어">←</button>
-            <button class="fc-nav-btn" id="fc-btn-next" onclick="nextCard()" data-tip="다음 단어">→</button>
+            <button class="fc-nav-btn" id="fc-btn-prev" onclick="event.stopPropagation(); prevCard()" data-tip="이전 단어">←</button>
+            <button class="fc-nav-btn" id="fc-btn-next" onclick="event.stopPropagation(); nextCard()" data-tip="다음 단어">→</button>
           </div>
         </div>
         <div class="flashcard-inner">
           <div class="fc-front">
             <button class="fc-reveal" id="fc-reveal-en" onclick="event.stopPropagation(); revealEnglish()">👁 영어 보기</button>
-            <div class="fc-word" id="fc-word"></div>
-            <div class="fc-pos"  id="fc-pos"></div>
-            <button class="speak-btn" id="speak-btn" onclick="event.stopPropagation(); speakWord()">🔊 듣기</button>
+            <div class="fc-word-row">
+              <div class="fc-word" id="fc-word"></div>
+              <div class="fc-pos" id="fc-pos"></div>
+              <button class="speak-btn" id="speak-btn" onclick="event.stopPropagation(); speakWord()">🔊</button>
+            </div>
           </div>
           <div class="fc-back">
             <button class="fc-reveal" id="fc-reveal-kr" onclick="event.stopPropagation(); revealKorean()">👁 한글 보기</button>
@@ -311,18 +314,36 @@ function applyHideState() {
   const defEl   = document.getElementById('fc-def');
   const revKrEl = document.getElementById('fc-reveal-kr');
 
-  const showEn = !hideEnglish || enRevealed;
-  wordEl.style.display  = showEn ? '' : 'none';
-  // 한글 숨기기 모드: 앞면에서 단어만 표시 (품사·듣기 버튼 숨김)
-  posEl.style.display   = (showEn && !hideKorean) ? '' : 'none';
-  speakEl.style.display = (showEn && !hideKorean) ? '' : 'none';
-  revEnEl.style.display = showEn ? 'none' : 'block';
-
-  const showKr = !hideKorean || krRevealed;
-  koreanEl.style.display = showKr ? '' : 'none';
-  // 숨기기 모드에서는 뜻/예문도 숨김 (한글/영어만 단독 표시)
-  if (defEl) defEl.style.display = (hideKorean || hideEnglish) ? 'none' : '';
-  revKrEl.style.display  = showKr ? 'none' : 'block';
+  if (hideMode === 0) {
+    // 전체 보기: 기본 flip card 동작
+    const showEn = !hideEnglish || enRevealed;
+    wordEl.style.display   = showEn ? '' : 'none';
+    posEl.style.display    = showEn ? (posEl.textContent ? '' : 'none') : 'none';
+    speakEl.style.display  = showEn ? '' : 'none';
+    revEnEl.style.display  = showEn ? 'none' : 'block';
+    const showKr = !hideKorean || krRevealed;
+    koreanEl.style.display = showKr ? '' : 'none';
+    if (defEl) defEl.style.display = '';
+    revKrEl.style.display  = showKr ? 'none' : 'block';
+  } else if (hideMode === 1) {
+    // 한글 숨기기: 카드 앞면(영어) 바로 표시, reveal 버튼 숨김
+    wordEl.style.display   = ''; // 영어 바로 표시
+    posEl.style.display    = posEl.textContent ? '' : 'none';
+    speakEl.style.display  = '';
+    revEnEl.style.display  = 'none';
+    koreanEl.style.display = 'none';
+    if (defEl) defEl.style.display = 'none';
+    revKrEl.style.display  = 'none';
+  } else {
+    // 영어 숨기기: 카드 뒷면(한글) 바로 표시, reveal 버튼 숨김
+    wordEl.style.display   = '';
+    posEl.style.display    = 'none';
+    speakEl.style.display  = 'none';
+    revEnEl.style.display  = 'none';
+    koreanEl.style.display = ''; // 한글 바로 표시
+    if (defEl) defEl.style.display = 'none';
+    revKrEl.style.display  = 'none';
+  }
 
   const listEl = document.getElementById('study-word-list');
   if (listEl) {
@@ -405,6 +426,8 @@ function renderStudyCard() {
   const w = words[studyIdx];
   const fc = document.getElementById('flashcard');
   fc.classList.remove('flipped');
+  // 영어 숨기기 → 뒷면(한글) 바로 표시
+  if (hideMode === 2) fc.classList.add('flipped');
 
   document.getElementById('fc-word').textContent   = w.english;
   document.getElementById('fc-pos').textContent    = w.pos || '';
@@ -467,7 +490,10 @@ function renderWordList() {
   });
 }
 
-function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+function flipCard() {
+  if (hideMode !== 0) return; // 전체보기에서만 뒤집기
+  document.getElementById('flashcard').classList.toggle('flipped');
+}
 function prevCard() { stopListening(); studyIdx = (studyIdx - 1 + words.length) % words.length; renderStudyCard(); autoReadCurrent(); }
 function nextCard() { stopListening(); studyIdx = (studyIdx + 1) % words.length; renderStudyCard(); autoReadCurrent(); }
 

@@ -46,10 +46,11 @@
     .unit-done-btn:hover { opacity: 1; transform: scale(1.2); }
     .unit-card.done .unit-done-btn { opacity: 1; }
     .mode-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
-    .mode-card { padding: 16px 8px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); text-align: center; cursor: pointer; transition: all 0.15s; }
+    .mode-card { padding: 10px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); text-align: center; cursor: pointer; transition: all 0.15s; }
     .mode-card:hover { border-color: var(--primary-light); }
     .mode-card.on { border-color: var(--primary); background: var(--primary-bg); }
-    .mode-card .mc-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+    .mode-card .mc-top { display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .mode-card .mc-icon { font-size: 22px; flex-shrink: 0; }
     .mode-card .mc-label { font-size: 14px; font-weight: 700; }
     .mode-card .mc-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
     .start-btn { width: 100%; padding: 16px; margin-top: 20px; margin-bottom: 32px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 18px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
@@ -121,23 +122,19 @@
   <div class="section-label">학습 모드</div>
   <div class="mode-grid">
     <div class="mode-card on" data-mode="study">
-      <span class="mc-icon">🃏</span>
-      <span class="mc-label">플래시카드</span>
+      <div class="mc-top"><span class="mc-icon">🃏</span><span class="mc-label">플래시카드</span></div>
       <span class="mc-desc">단어 암기</span>
     </div>
     <div class="mode-card" data-mode="sentence">
-      <span class="mc-icon">🧩</span>
-      <span class="mc-label">문장 완성</span>
+      <div class="mc-top"><span class="mc-icon">🧩</span><span class="mc-label">문장 완성</span></div>
       <span class="mc-desc">드래그 빈칸 채우기</span>
     </div>
     <div class="mode-card" data-mode="daily">
-      <span class="mc-icon">📝</span>
-      <span class="mc-label">Daily Test</span>
+      <div class="mc-top"><span class="mc-icon">📝</span><span class="mc-label">Daily Test</span></div>
       <span class="mc-desc">3단계 최종 테스트</span>
     </div>
     <div class="mode-card" data-mode="print">
-      <span class="mc-icon">🖨️</span>
-      <span class="mc-label">인쇄</span>
+      <div class="mc-top"><span class="mc-icon">🖨️</span><span class="mc-label">인쇄</span></div>
       <span class="mc-desc">A4 워크시트</span>
     </div>
   </div>
