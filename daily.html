@@ -66,11 +66,11 @@
     .wr-input:focus { border-color: var(--primary); }
 
     /* ── STEP 3: SENTENCE CARDS ── */
-    .step3-layout { display: grid; grid-template-columns: 1fr 200px; gap: 14px; align-items: start; }
+    .step3-layout { display: grid; grid-template-columns: 1fr 260px; gap: 14px; align-items: start; }
     .step3-wordbank { position: sticky; top: 16px; background: var(--card); border-radius: var(--radius); border: 2px solid var(--primary); padding: 12px 10px; }
     .wb-title { font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 10px; text-align: center; letter-spacing: 0.05em; }
-    #wordbank-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .wb-item { padding: 8px 6px; font-size: 14px; font-weight: 700; border-radius: 8px; background: var(--primary-bg); color: var(--primary); text-align: center; transition: all 0.15s; cursor: pointer; border: 2px solid var(--primary-light); user-select: none; -webkit-user-select: none; }
+    #wordbank-list { display: grid; grid-template-columns: 1fr; gap: 6px; }
+    .wb-item { padding: 7px 10px; font-size: 14px; font-weight: 700; border-radius: 8px; background: var(--primary-bg); color: var(--primary); text-align: left; transition: all 0.15s; cursor: pointer; border: 2px solid var(--primary-light); user-select: none; -webkit-user-select: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .wb-item:active { transform: scale(0.93); background: var(--primary); color: #fff; }
     .wb-item.used { background: var(--border); color: var(--muted); text-decoration: line-through; opacity: 0.45; cursor: default; border-color: var(--border); pointer-events: none; }
 

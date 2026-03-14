@@ -373,6 +373,23 @@ HTML 구조:
 
 ---
 
+## 세션 6 작업 내역 (2026-03-14)
+
+### 📦 sentence.html — 단어 목록 스크롤 지원
+
+- `.word-bank-wrap`: `align-self: flex-start; position: sticky` → `max-height: 100%; overflow-y: auto`
+- 화면 높이가 작을 때 단어 목록 영역 자체가 스크롤됨
+
+---
+
+### 📦 daily.html — 3단계 단어 목록 레이아웃 개선
+
+- 2열 그리드 → **1열** 로 변경 (단어가 길어도 한 줄 표시)
+- 단어 목록 컬럼 너비: `200px` → `260px`
+- `.wb-item`: `white-space: nowrap; overflow: hidden; text-overflow: ellipsis` 추가 — 긴 단어 잘림 방지
+
+---
+
 ## 🚧 남은 작업
 
 ### 즉시 처리 필요
