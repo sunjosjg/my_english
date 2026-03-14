@@ -106,8 +106,10 @@
     <div class="app-title">📚 찬희 영어 단어장</div>
   </div>
 
-  <div class="section-label">과정 선택</div>
-  <div class="chip-group" id="course-chips"></div>
+  <div id="course-section">
+    <div class="section-label">과정 선택</div>
+    <div class="chip-group" id="course-chips"></div>
+  </div>
 
   <div id="type-section" style="display:none">
     <div class="section-label">유형 선택</div>
@@ -190,14 +192,20 @@ let doneSet   = new Set();
     showToast('⚠️ data/index.json 로딩 실패');
     return;
   }
-  // /api/done 은 Node 서버 전용 — 없어도 동작
+  // localStorage에서 먼저 로드
+  try { doneSet = new Set(JSON.parse(localStorage.getItem('myeng_done') || '[]')); } catch {}
+  // 서버 API와 머지 (Node 서버 전용 — 없어도 동작)
   try {
     const dRes = await fetch('/api/done');
     const doneData = await dRes.json();
-    doneSet = new Set(doneData.done);
-  } catch { /* python 서버 등 API 없는 환경에서는 무시 */ }
+    doneData.done.forEach(k => doneSet.add(k));
+    saveDoneLocal();
+  } catch { /* 오프라인 무시 */ }
   renderCourses();
-  if (manifest.courses.length > 0) selectCourse(manifest.courses[0].id);
+  if (manifest.courses.length > 0) {
+    const saved = JSON.parse(localStorage.getItem('myeng_sel') || 'null');
+    selectCourse(manifest.courses[0].id, saved);
+  }
 })();
 
 function renderCourses() {
@@ -207,39 +215,47 @@ function renderCourses() {
     const el = chip(c.label, () => selectCourse(c.id));
     wrap.appendChild(el);
   });
+  document.getElementById('course-section').style.display =
+    manifest.courses.length <= 1 ? 'none' : '';
 }
 
-function selectCourse(id) {
+function saveSelection() {
+  if (selCourse && selType && selUnit)
+    localStorage.setItem('myeng_sel', JSON.stringify({ c: selCourse.id, t: selType.id, u: selUnit.id }));
+}
+
+function selectCourse(id, saved) {
   selCourse = manifest.courses.find(c => c.id === id);
   selType = null; selUnit = null;
   setChipsActive('course-chips', id, manifest.courses, 'id');
   const typeChips = document.getElementById('type-chips');
   typeChips.innerHTML = '';
   selCourse.types.forEach(t => {
-    const el = chip(t.label, () => selectType(t.id));
+    const el = chip(t.label, () => { selectType(t.id); saveSelection(); });
     typeChips.appendChild(el);
   });
   document.getElementById('type-section').style.display = 'block';
   document.getElementById('unit-section').style.display = 'none';
-  if (selCourse.types.length > 0) selectType(selCourse.types[0].id);
-  else updateStartBtn();
+  if (selCourse.types.length > 0) {
+    const typeId = saved?.t || selCourse.types[0].id;
+    selectType(typeId, saved?.u);
+  } else updateStartBtn();
 }
 
-function selectType(id) {
+function selectType(id, savedUnitId) {
   selType = selCourse.types.find(t => t.id === id);
   selUnit = null;
   setChipsActive('type-chips', id, selCourse.types, 'id');
   renderUnits();
   document.getElementById('unit-section').style.display = 'block';
   if (selType.units.length > 0) {
-    // 미완료 중 첫 번째 선택, 모두 완료면 마지막 선택
-    const defaultUnit =
-      selType.units.find(u => !isDone(selCourse.id, selType.id, u.id)) ||
-      selType.units[selType.units.length - 1];
-    selUnit = defaultUnit;
+    const targetUnit = (savedUnitId && selType.units.find(u => u.id === savedUnitId))
+      || selType.units.find(u => !isDone(selCourse.id, selType.id, u.id))
+      || selType.units[selType.units.length - 1];
+    selUnit = targetUnit;
     document.querySelectorAll('.unit-card').forEach(c => c.classList.remove('on'));
-    const defaultCard = document.querySelector(`.unit-card[data-uid="${defaultUnit.id}"]`);
-    if (defaultCard) defaultCard.classList.add('on');
+    const targetCard = document.querySelector(`.unit-card[data-uid="${targetUnit.id}"]`);
+    if (targetCard) targetCard.classList.add('on');
   }
   updateStartBtn();
 }
@@ -248,11 +264,16 @@ function isDone(cId, tId, uId) {
   return doneSet.has(`${cId}_${tId}_${uId}`);
 }
 
+function saveDoneLocal() {
+  localStorage.setItem('myeng_done', JSON.stringify([...doneSet]));
+}
+
 async function toggleUnitDone(cId, tId, uId, event) {
   event.stopPropagation();
   const key = `${cId}_${tId}_${uId}`;
   const nowDone = !doneSet.has(key);
   if (nowDone) doneSet.add(key); else doneSet.delete(key);
+  saveDoneLocal();
   try {
     await fetch('/api/done', {
       method: 'POST',
@@ -286,6 +307,7 @@ function renderUnits() {
       document.querySelectorAll('.unit-card').forEach(c => c.classList.remove('on'));
       el.classList.add('on');
       selUnit = u;
+      saveSelection();
       updateStartBtn();
     };
     el.querySelector('.unit-done-btn').onclick = (e) =>

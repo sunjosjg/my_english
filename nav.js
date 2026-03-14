@@ -13,6 +13,24 @@
       gap: 5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 0;
     }
     #nav-btn span { display: block; width: 20px; height: 2.5px; background: var(--text, #1e293b); border-radius: 2px; }
+    #nav-home-btn {
+      position: fixed; top: 14px; left: 70px; z-index: 300;
+      background: var(--card, #fff); border: 2px solid var(--border, #e2e8f0);
+      border-radius: 12px; width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); font-size: 20px;
+    }
+    #nav-home-btn:hover { border-color: var(--primary, #5b4fcf); background: var(--primary-bg, #eef2ff); }
+    #nav-unit-bar {
+      position: fixed; top: 14px; left: 126px; right: 14px; height: 46px; z-index: 299;
+      background: var(--card, #fff); border: 2px solid var(--border, #e2e8f0);
+      border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 14px; gap: 6px; overflow: hidden;
+    }
+    #nav-unit-bar .nub-type { font-size: 13px; color: var(--muted, #64748b); font-weight: 600; white-space: nowrap; }
+    #nav-unit-bar .nub-sep  { font-size: 12px; color: var(--border, #e2e8f0); }
+    #nav-unit-bar .nub-unit { font-size: 14px; color: var(--primary, #5b4fcf); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     #nav-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 400; display: none;
     }
@@ -53,6 +71,18 @@
   btn.onclick = navOpen;
   document.body.appendChild(btn);
 
+  const unitBar = document.createElement('div');
+  unitBar.id = 'nav-unit-bar';
+  unitBar.innerHTML = '<span class="nub-unit" style="color:var(--muted,#64748b)">단원을 선택하세요</span>';
+  document.body.appendChild(unitBar);
+
+  const homeBtn = document.createElement('button');
+  homeBtn.id = 'nav-home-btn';
+  homeBtn.setAttribute('aria-label', '처음으로');
+  homeBtn.textContent = '🏠';
+  homeBtn.onclick = () => { location.href = 'index.html'; };
+  document.body.appendChild(homeBtn);
+
   const overlay = document.createElement('div');
   overlay.id = 'nav-overlay';
   overlay.innerHTML = `
@@ -77,11 +107,41 @@
     _page = page;
     _onLeave = (opts && opts.onLeave) || null;
     _printFn = (opts && opts.printFn) || null;
+    if (page === 'index') {
+      homeBtn.style.display = 'none';
+      unitBar.style.left = '70px';
+    } else {
+      initUnitBarFromUrl();
+    }
   };
 
   window.setNavUnit = function (courseId, typeId, unitId, courseLabel, typeLabel, unitShort, unitLabel) {
     _navUnit = { courseId, typeId, unitId, courseLabel, typeLabel, unitShort, unitLabel };
+    renderUnitBar(typeLabel, unitShort, unitLabel);
   };
+
+  function renderUnitBar(typeLabel, unitShort, unitLabel) {
+    if (!typeLabel && !unitLabel) { return; }
+    unitBar.innerHTML =
+      `<span class="nub-type">${typeLabel || ''}</span>` +
+      `<span class="nub-sep">·</span>` +
+      `<span class="nub-unit">${unitShort ? unitShort + '. ' : ''}${unitLabel || ''}</span>`;
+  }
+
+  // 비index 페이지: URL params로 manifest 로드 후 바 업데이트
+  async function initUnitBarFromUrl() {
+    const p = new URLSearchParams(location.search);
+    const cId = p.get('c'), tId = p.get('t'), uId = p.get('u');
+    if (!cId || !tId || !uId) return;
+    try {
+      const res = await fetch('data/index.json');
+      const manifest = await res.json();
+      const course = manifest.courses.find(c => c.id === cId);
+      const type   = course?.types.find(t => t.id === tId);
+      const unit   = type?.units.find(u => u.id === uId);
+      if (type && unit) renderUnitBar(type.label, unit.short, unit.label);
+    } catch {}
+  }
 
   function navOpen() {
     document.getElementById('nav-body').innerHTML = buildMenu();

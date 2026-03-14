@@ -25,17 +25,12 @@
     .header-title { flex: 1; font-size: 17px; font-weight: 700; }
     .progress-text { font-size: 14px; color: var(--muted); white-space: nowrap; font-weight: 600; }
 
-    /* UNIT TITLE */
-    .unit-title { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 8px; flex-shrink: 0; }
-    .unit-title strong { color: var(--primary); }
-
     /* 스크롤 시 헤더 숨김 */
-    .screen-header, .unit-title {
+    .screen-header {
       transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
       overflow: hidden;
     }
-    .header-hidden .screen-header,
-    .header-hidden .unit-title {
+    .header-hidden .screen-header {
       max-height: 0 !important;
       opacity: 0;
       margin-bottom: 0 !important;
@@ -159,8 +154,6 @@
       <div class="header-title">✏️ 문장 완성</div>
       <div class="progress-text" id="progress-text">0 / 0</div>
     </div>
-    <div class="unit-title" id="unit-title"></div>
-
     <div class="content-wrap">
       <div class="sentences-wrap" id="sentences-wrap"></div>
       <div class="word-bank-wrap">
@@ -453,16 +446,7 @@ function updateWrongDisplay(idx) {
 }
 
 // ── UNIT TITLE ──
-function renderUnitTitle() {
-  if (!manifest) return;
-  const course = manifest.courses.find(c => c.id === courseId);
-  const type   = course?.types.find(t => t.id === typeId);
-  const unit   = type?.units.find(u => u.id === unitId);
-  const el = document.getElementById('unit-title');
-  if (!el) return;
-  const parts = [course?.label, type?.label, unit?.label].filter(Boolean);
-  el.innerHTML = parts.map((p, i) => i === parts.length - 1 ? `<strong>${p}</strong>` : p).join(' &middot; ');
-}
+function renderUnitTitle() {}
 
 function goHome() { location.href = 'index.html'; }
 

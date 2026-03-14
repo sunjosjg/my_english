@@ -93,9 +93,7 @@
     .swr-speak { background: none; border: none; font-size: 17px; cursor: pointer; padding: 2px 4px; border-radius: 6px; opacity: 0.5; transition: opacity 0.15s; }
     .swr-speak:hover { opacity: 1; background: var(--primary-bg); }
 
-    /* UNIT TITLE */
-    .unit-title { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 4px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .unit-title strong { color: var(--primary); }
+
 
     /* MIC / VOICE */
     .ctrl-btn.mic-btn { border-color: #3b82f6; color: #3b82f6; }
@@ -153,12 +151,10 @@
         <div class="progress-text" id="study-count"></div>
       </div>
 
-      <div class="unit-title" id="unit-title"></div>
-
       <div class="flashcard-wrap" id="flashcard" onclick="flipCard()">
         <div class="fc-nav-zone">
           <div class="fc-nav-zone-left">
-            <button class="fc-nav-btn" id="fc-btn-autoplay" onclick="event.stopPropagation(); toggleAutoPlayBtn()" data-tip="이동 시 자동 읽기">🔊</button>
+            <button class="fc-nav-btn" id="fc-btn-autoplay" onclick="event.stopPropagation(); toggleAutoPlayBtn()" data-tip="이동 시 자동 읽기"><span style="position:relative;display:inline-block">🔊<span id="autoplay-slash" style="position:absolute;top:50%;left:55%;transform:translate(-50%,-50%) rotate(-20deg);color:#000;font-size:1.1em;font-weight:900;line-height:1;pointer-events:none;text-shadow:-1px 0 #000,1px 0 #000;display:none">╱</span></span></button>
           </div>
           <div class="fc-nav-zone-right">
             <button class="fc-nav-btn" id="fc-btn-prev" onclick="event.stopPropagation(); prevCard()" data-tip="이전 단어">←</button>
@@ -273,16 +269,21 @@ function speakWord() {
 
 // ── AUTO-PLAY ──
 let autoPlayOn = false;
+document.addEventListener('DOMContentLoaded', () => setAutoPlayUI && setAutoPlayUI());
+function setAutoPlayUI() {
+  const btn = document.getElementById('fc-btn-autoplay');
+  const slash = document.getElementById('autoplay-slash');
+  if (btn) btn.style.background = autoPlayOn ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.25)';
+  if (slash) slash.style.display = autoPlayOn ? 'none' : 'block';
+}
 function toggleAutoPlayBtn() {
   autoPlayOn = !autoPlayOn;
-  const btn = document.getElementById('fc-btn-autoplay');
-  if (btn) btn.style.background = autoPlayOn ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.25)';
+  setAutoPlayUI();
 }
 function stopAutoPlay() {
   autoPlayOn = false;
   speechSynthesis.cancel();
-  const btn = document.getElementById('fc-btn-autoplay');
-  if (btn) btn.style.background = 'rgba(255,255,255,0.25)';
+  setAutoPlayUI();
 }
 function autoReadCurrent() {
   if (!autoPlayOn) return;
@@ -299,10 +300,11 @@ function autoReadCurrent() {
 // ── HIDE/REVEAL/SHUFFLE ──
 let hideKorean = false, hideEnglish = false, enRevealed = false, krRevealed = false;
 let hideMode = 0;
+const EYE_SLASH = '<span style="position:relative;display:inline-block">👁<span style="position:absolute;top:50%;left:55%;transform:translate(-50%,-50%) rotate(-20deg);color:#000;font-size:1.1em;font-weight:900;line-height:1;pointer-events:none;text-shadow:-1px 0 #000,1px 0 #000">╱</span></span>';
 const hideModeConfig = [
-  { label: '👁 전체 보기',   hideKr: false, hideEn: false, on: false },
-  { label: '🙈 한글 숨기기', hideKr: true,  hideEn: false, on: true  },
-  { label: '🙈 영어 숨기기', hideKr: false, hideEn: true,  on: true  },
+  { label: '👁 전체 보기',                   hideKr: false, hideEn: false, on: false },
+  { label: EYE_SLASH + ' 한글 숨기기',       hideKr: true,  hideEn: false, on: true  },
+  { label: EYE_SLASH + ' 영어 숨기기',       hideKr: false, hideEn: true,  on: true  },
 ];
 
 function applyHideState() {
@@ -363,7 +365,7 @@ function cycleHideMode() {
   hideKorean = cfg.hideKr; hideEnglish = cfg.hideEn;
   enRevealed = false; krRevealed = false;
   const btn = document.getElementById('btn-hide-toggle');
-  btn.textContent = cfg.label;
+  btn.innerHTML = cfg.label;
   btn.classList.toggle('on', cfg.on);
   // 모드 전환 시 정답/오답 초기화 + 자동 섞기
   voiceResults  = new Map();
@@ -391,17 +393,7 @@ function shuffleWords() {
   showToast('🔀 단어 순서를 섞었습니다!');
 }
 
-// ── UNIT TITLE ──
-function renderUnitTitle() {
-  if (!manifest) return;
-  const course = manifest.courses.find(c => c.id === courseId);
-  const type   = course?.types.find(t => t.id === typeId);
-  const unit   = type?.units.find(u => u.id === unitId);
-  const el = document.getElementById('unit-title');
-  if (!el) return;
-  const parts = [course?.label, type?.label, unit?.label].filter(Boolean);
-  el.innerHTML = parts.map((p, i) => i === parts.length - 1 ? `<strong>${p}</strong>` : p).join(' &middot; ');
-}
+function renderUnitTitle() {}
 
 // ── STUDY ──
 function startStudy() {
@@ -414,7 +406,7 @@ function startStudy() {
   hideMode = 0; hideKorean = false; hideEnglish = false;
   enRevealed = false; krRevealed = false;
   const btn = document.getElementById('btn-hide-toggle');
-  btn.textContent = '👁 전체 보기'; btn.classList.remove('on');
+  btn.innerHTML = '👁 전체 보기'; btn.classList.remove('on');
   renderUnitTitle();
   renderWordList();
   const list = document.getElementById('study-word-list');
