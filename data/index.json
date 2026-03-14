@@ -1,20 +1,6 @@
 {
   "courses": [
     {
-      "id": "2025-12",
-      "label": "2025년 12월",
-      "types": [
-        {
-          "id": "speech",
-          "label": "SPEECH",
-          "units": [
-            { "id": "unit11", "short": "Unit 11", "label": "I Can't Wait to Get Older" },
-            { "id": "unit12", "short": "Unit 12", "label": "An Interview with David" }
-          ]
-        }
-      ]
-    },
-    {
       "id": "2026-03",
       "label": "2026년 3월",
       "types": [
