@@ -5,6 +5,10 @@
   // ── CSS ──
   const styleEl = document.createElement('style');
   styleEl.textContent = `
+    #nav-topbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 74px; z-index: 298;
+      background: var(--bg, #f1f5f9);
+    }
     #nav-btn {
       position: fixed; top: 14px; left: 14px; z-index: 300;
       background: var(--card, #fff); border: 2px solid var(--border, #e2e8f0);
@@ -61,9 +65,14 @@
     .nav-btn.nav-cur { border-color: var(--primary, #5b4fcf); background: var(--primary-bg, #eef2ff); color: var(--primary, #5b4fcf); }
     .nav-no-unit { text-align: center; padding: 48px 16px; color: var(--muted, #64748b); font-size: 17px; font-weight: 600; line-height: 1.8; }
   `;
+  styleEl.textContent += `\n body { padding-top: 76px !important; }`;
   document.head.appendChild(styleEl);
 
   // ── HTML ──
+  const topbar = document.createElement('div');
+  topbar.id = 'nav-topbar';
+  document.body.appendChild(topbar);
+
   const btn = document.createElement('button');
   btn.id = 'nav-btn';
   btn.setAttribute('aria-label', '메뉴');

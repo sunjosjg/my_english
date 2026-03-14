@@ -477,7 +477,7 @@ function renderWordList() {
       ${w.pos ? `<span class="swr-pos" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}">${w.pos}</span>` : ''}
       ${krHtml}
       <button class="swr-speak" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}" onclick="event.stopPropagation(); speakText('${w.english.replace(/'/g,"\\'")}')">🔊</button>`;
-    row.onclick = () => { studyIdx = i; renderStudyCard(); };
+    row.onclick = () => { studyIdx = i; renderStudyCard(); autoReadCurrent(); };
     list.appendChild(row);
   });
 }
