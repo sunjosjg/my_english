@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>문장 완성 — 찬희 영어 단어장</title>
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -12,10 +12,10 @@
       --green: #10b981; --yellow: #f59e0b; --red: #ef4444;
       --bg: #f1f5f9; --card: #ffffff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    body { font-family: 'Playpen Sans', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
     button, input, select, textarea { font-family: inherit; }
     html, body { height: 100%; }
-    #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+    #app { height: calc(100dvh - 76px); display: flex; flex-direction: column; overflow: hidden; }
     .page { height: 100%; display: flex; flex-direction: column; overflow: hidden; padding: 16px; padding-bottom: 0; max-width: 860px; margin: 0 auto; width: 100%; }
 
     /* HEADER */
@@ -25,16 +25,6 @@
     .header-title { flex: 1; font-size: 17px; font-weight: 700; }
     .progress-text { font-size: 14px; color: var(--muted); white-space: nowrap; font-weight: 600; }
 
-    /* 스크롤 시 헤더 숨김 */
-    .screen-header {
-      transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
-      overflow: hidden;
-    }
-    .header-hidden .screen-header {
-      max-height: 0 !important;
-      opacity: 0;
-      margin-bottom: 0 !important;
-    }
 
     /* CONTENT LAYOUT */
     .content-wrap { flex: 1; display: flex; gap: 12px; min-height: 0; overflow: hidden; }
@@ -129,12 +119,15 @@
     /* EMPTY STATE */
     .empty-msg { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 16px; line-height: 1.8; }
 
-    /* CELEBRATION (same as study.html) */
-    #celebration { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6, #3b82f6); background-size: 400% 400%; animation: bgShift 2s ease infinite; }
+    /* CELEBRATION */
+    #celebration { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background-size: 400% 400%; animation: bgShift 2s ease infinite; }
     #celebration.show { display: flex; }
-    @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-    .cele-main-emoji { font-size: 90px; animation: spin 1s linear infinite; display: block; }
-    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes bgShift  { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes spin     { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes bounce   { from{transform:translateY(0)} to{transform:translateY(-22px)} }
+    @keyframes float    { from{transform:translateY(-10px) rotate(-5deg)} to{transform:translateY(10px) rotate(5deg)} }
+    @keyframes shake    { 0%{transform:rotate(-8deg) scale(1.1)} 50%{transform:rotate(8deg) scale(0.9)} 100%{transform:rotate(-8deg) scale(1.1)} }
+    .cele-main-emoji { font-size: 90px; display: block; }
     .cele-msg { font-size: 46px; font-weight: 900; color: #fff; text-align: center; padding: 0 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.4); animation: cpulse 0.45s ease-in-out infinite alternate; margin: 16px 0 8px; }
     .cele-sub { font-size: 24px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 20px; animation: cpulse 0.45s 0.2s ease-in-out infinite alternate; }
     .cele-tap { position: absolute; bottom: 30px; font-size: 16px; color: rgba(255,255,255,0.7); }
@@ -231,12 +224,6 @@ function renderAll() {
   renderWordBank();
   renderSentences();
   updateProgress();
-  // 스크롤 시 헤더 숨김
-  const wrap = document.getElementById('sentences-wrap');
-  const page = document.querySelector('.page');
-  wrap.addEventListener('scroll', () => {
-    page.classList.toggle('header-hidden', wrap.scrollTop > 30);
-  }, { passive: true });
 }
 
 // ── WORD BANK ──
@@ -301,6 +288,10 @@ function renderSentences() {
 
     wrap.appendChild(row);
   });
+  const footer = document.createElement('div');
+  footer.style.cssText = 'height:48px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#e2e8f0';
+  footer.textContent = '· · ·';
+  wrap.appendChild(footer);
 }
 
 function updateProgress() {
@@ -463,25 +454,54 @@ const CELE_DONE = [
   { emoji: '😄', msg: '모두 완성!',   sub: '틀린 문제를 다시 확인해봐요 💪' },
   { emoji: '✅', msg: '전부 채웠어!', sub: '다음엔 퍼펙트 도전! 👍' },
 ];
-const FLY_EMOJIS = ['🎉','🎊','⭐','🌟','👍','🏆','😄','🥳','✨','💯','🎯','🔥','😍','🎈','🎁'];
+const CELE_THEMES = [
+  { bg:'linear-gradient(135deg,#f97316,#ec4899,#8b5cf6,#3b82f6)', fly:['🎉','🎊','⭐','🌟','👍','🏆','😄','🥳','✨','💯','🎯','🔥','😍','🎈','🎁'], anim:'spin 1s linear infinite' },
+  { bg:'linear-gradient(135deg,#f59e0b,#fcd34d,#b45309,#fde68a)', fly:['⭐','🌟','✨','🏆','👑','💛','🥇','💰','🔆','🎖️'],                         anim:'bounce 0.5s ease-in-out infinite alternate' },
+  { bg:'linear-gradient(135deg,#0ea5e9,#06b6d4,#3b82f6,#0284c7)', fly:['🌊','🐬','🐠','🌈','💎','🦀','🐟','⛵','🏄','🐋'],                         anim:'float 1s ease-in-out infinite alternate' },
+  { bg:'linear-gradient(135deg,#ef4444,#f97316,#dc2626,#ea580c)', fly:['🔥','⚡','💥','✨','🌋','🎆','💫','☄️','🌠','🏅'],                          anim:'shake 0.3s ease-in-out infinite' },
+  { bg:'linear-gradient(135deg,#1e1b4b,#312e81,#4c1d95,#1e3a5f)', fly:['🌟','⭐','💫','🌙','🪐','🚀','👽','🌌','✨','☄️'],                          anim:'spin 2s linear infinite' },
+  { bg:'linear-gradient(135deg,#10b981,#059669,#34d399,#065f46)', fly:['🌸','🌺','🌻','🍀','🌈','🦋','🌿','🌱','🍃','🌼'],                          anim:'bounce 0.6s ease-in-out infinite alternate' },
+  { bg:'linear-gradient(135deg,#f472b6,#fb7185,#e879f9,#a78bfa)', fly:['🍭','🍬','🎀','💕','🍡','🧁','🍰','🎂','🍩','💝'],                          anim:'spin 0.8s linear infinite' },
+];
+
+function getCeleWeekKey() {
+  const d = new Date(), s = new Date(d.getFullYear(), 0, 1);
+  const w = Math.ceil((((d - s) / 86400000) + s.getDay() + 1) / 7);
+  return `myeng_cele_${d.getFullYear()}_w${w}`;
+}
+function pickCeleTheme() {
+  const key = getCeleWeekKey();
+  let used = JSON.parse(localStorage.getItem(key) || '[]');
+  const avail = CELE_THEMES.filter((_, i) => !used.includes(i));
+  const pool  = avail.length > 0 ? avail : CELE_THEMES;
+  const theme = pool[Math.floor(Math.random() * pool.length)];
+  const idx   = CELE_THEMES.indexOf(theme);
+  if (avail.length === 0) used = [];
+  used.push(idx);
+  localStorage.setItem(key, JSON.stringify(used));
+  return theme;
+}
 
 function showCelebration(isPerfect) {
-  const pool = isPerfect ? CELE_PERFECT : CELE_DONE;
-  const pick = pool[Math.floor(Math.random() * pool.length)];
-  document.getElementById('cele-emoji').textContent = pick.emoji;
-  document.getElementById('cele-msg').textContent   = pick.msg;
-  document.getElementById('cele-sub').textContent   = pick.sub;
-  const cel = document.getElementById('celebration');
+  const theme = pickCeleTheme();
+  const pool  = isPerfect ? CELE_PERFECT : CELE_DONE;
+  const pick  = pool[Math.floor(Math.random() * pool.length)];
+  const cel   = document.getElementById('celebration');
+  cel.style.background = theme.bg;
+  cel.style.backgroundSize = '400% 400%';
+  const emojiEl = document.getElementById('cele-emoji');
+  emojiEl.textContent    = pick.emoji;
+  emojiEl.style.animation = theme.anim;
+  document.getElementById('cele-msg').textContent = pick.msg;
+  document.getElementById('cele-sub').textContent = pick.sub;
   cel.classList.add('show');
-  // 퍼펙트: 이모지 60개 빠르게 / 일반: 20개
-  const total    = isPerfect ? 60 : 20;
-  const interval = isPerfect ? 80 : 200;
+  const total = isPerfect ? 60 : 20, interval = isPerfect ? 80 : 200;
   let count = 0;
   const iv = setInterval(() => {
     if (count++ > total) { clearInterval(iv); return; }
     const el = document.createElement('span');
     el.className = 'fly-emoji';
-    el.textContent = FLY_EMOJIS[Math.floor(Math.random() * FLY_EMOJIS.length)];
+    el.textContent = theme.fly[Math.floor(Math.random() * theme.fly.length)];
     el.style.left = (Math.random() * 95) + 'vw';
     el.style.bottom = '-50px';
     el.style.animationDuration = (1.0 + Math.random() * 1.5) + 's';

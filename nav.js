@@ -65,7 +65,7 @@
     .nav-btn.nav-cur { border-color: var(--primary, #5b4fcf); background: var(--primary-bg, #eef2ff); color: var(--primary, #5b4fcf); }
     .nav-no-unit { text-align: center; padding: 48px 16px; color: var(--muted, #64748b); font-size: 17px; font-weight: 600; line-height: 1.8; }
   `;
-  styleEl.textContent += `\n body { padding-top: 76px !important; }`;
+  styleEl.textContent += `\n body { padding-top: 76px !important; } ::-webkit-scrollbar { display: none; } * { scrollbar-width: none; }`;
   document.head.appendChild(styleEl);
 
   // ── HTML ──

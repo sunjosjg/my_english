@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="찬희하이">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -17,7 +17,7 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Playpen Sans', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     button, input, select, textarea { font-family: inherit; }
     .page { padding: 16px; max-width: 860px; margin: 0 auto; }
     .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
@@ -70,17 +70,17 @@
       @page { margin: 0; size: A4; }
 
       /* ── 1페이지: 문장 빈칸 ── */
-      #pt-page1 { padding: 12mm 15mm; page-break-after: always; }
-      .pt-title { font-size: 15pt; font-weight: bold; text-align: center; margin-bottom: 2mm; }
-      .pt-meta  { font-size: 10pt; color: #555; text-align: center; margin-bottom: 6mm; }
+      #pt-page1 { padding: 8mm 12mm; page-break-after: always; }
+      .pt-title { font-size: 14pt; font-weight: bold; text-align: center; margin-bottom: 2mm; }
+      .pt-meta  { font-size: 9pt; color: #555; text-align: center; margin-bottom: 4mm; }
       .pt-grid  { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; }
-      .pt-item  { display: flex; align-items: baseline; gap: 5px; padding: 4mm 0; border-bottom: 1px dotted #ccc; break-inside: avoid; }
+      .pt-item  { display: flex; align-items: baseline; gap: 5px; padding: 2.5mm 0; border-bottom: 1px dotted #ccc; break-inside: avoid; }
       .pt-no       { color: #999; min-width: 18px; font-size: 9pt; }
-      .pt-sentence { flex: 1; line-height: 1.5; }
+      .pt-sentence { flex: 1; line-height: 1.4; font-size: 10pt; }
       .pt-blank    { display: inline-block; border-bottom: 1.2px solid #333; min-width: 40px; }
-      .pt-bank      { margin-top: 7mm; padding: 3mm 4mm; border: 1px solid #999; border-radius: 3px; }
-      .pt-bank-title { font-weight: bold; font-size: 10pt; margin-bottom: 2mm; }
-      .pt-bank-words { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 10pt; }
+      .pt-bank      { margin-top: 4mm; padding: 2mm 4mm; border: 1px solid #999; border-radius: 3px; }
+      .pt-bank-title { font-weight: bold; font-size: 9pt; margin-bottom: 1.5mm; }
+      .pt-bank-words { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 9pt; }
 
       /* ── 2페이지: 단어 쓰기 (반으로 잘라서 사용) ── */
       #pt-page2 { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; padding: 10mm 0 8mm; }
@@ -447,5 +447,6 @@ function showToast(msg) {
 </script>
 <script src="nav.js"></script>
 <script>initNav('index', { printFn: async () => { if (await loadWords()) startPrint(); } });</script>
+<footer style="height:56px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#e2e8f0">· · ·</footer>
 </body>
 </html>

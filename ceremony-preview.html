@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 세러머니 미리보기</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Playpen Sans', -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; padding: 20px 16px 60px; }
+    h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .desc { font-size: 14px; color: #64748b; margin-bottom: 24px; }
+    h2 { font-size: 16px; font-weight: 700; color: #5b4fcf; margin: 20px 0 10px; }
+    .btn-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .prev-btn {
+      padding: 10px 18px; font-size: 14px; font-weight: 700;
+      border: none; border-radius: 12px; cursor: pointer;
+      font-family: inherit; color: #fff; transition: transform 0.1s;
+    }
+    .prev-btn:active { transform: scale(0.95); }
+    .t100 { background: linear-gradient(135deg,#f59e0b,#ef4444); }
+    .t90  { background: linear-gradient(135deg,#8b5cf6,#6d28d9); }
+    .t80  { background: linear-gradient(135deg,#3b82f6,#10b981); }
+    .t70  { background: linear-gradient(135deg,#14b8a6,#0891b2); }
+    .tlow { background: linear-gradient(135deg,#f97316,#f59e0b); }
+    .sp   { background: linear-gradient(135deg,#ec4899,#8b5cf6); }
+    .sd   { background: linear-gradient(135deg,#10b981,#3b82f6); }
+    .close-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.55); color: #fff; padding: 8px 20px; border-radius: 20px; font-size: 13px; z-index: 20000; pointer-events: none; }
+
+    /* ── Daily ceremony ── */
+    #daily-cele { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; background-size: 400% 400%; overflow: hidden; cursor: pointer; }
+    #daily-cele.show { display: flex; animation: dcBg 1.5s ease infinite; }
+    @keyframes dcBg { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes dcSpin { 0%,100%{transform:rotate(-15deg) scale(1)} 50%{transform:rotate(15deg) scale(1.15)} }
+    @keyframes dcNormalSpin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    @keyframes dcCheer { from{transform:scale(1) rotate(-20deg)} to{transform:scale(1.5) rotate(20deg)} }
+    @keyframes dcBgFloat { from{transform:translateY(0) scale(1)} to{transform:translateY(-18px) scale(1.12)} }
+    .dc-100-wrap { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
+    .dc-main { font-size: 110px; z-index: 2; position: relative; animation: dcSpin 1.8s ease-in-out infinite; }
+    .dc-main-emoji { font-size: 90px; display: block; animation: dcNormalSpin 1.2s linear infinite; }
+    .dc-crowd { position: absolute; inset: 0; }
+    .dc-crowd-thumb { position: absolute; font-size: 30px; animation: dcCheer 1.0s ease-in-out infinite alternate; }
+    .dc-bg-thumb { position: absolute; animation: dcBgFloat 1.4s ease-in-out infinite alternate; pointer-events: none; z-index: 0; }
+    .dc-msg { font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-top: 16px; z-index: 2; text-align: center; padding: 0 20px; }
+    .dc-sub { font-size: 18px; color: rgba(255,255,255,0.9); margin-top: 8px; font-weight: 700; z-index: 2; text-align: center; padding: 0 24px; line-height: 1.5; }
+
+    /* ── Sentence ceremony ── */
+    #celebration { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background-size: 400% 400%; }
+    #celebration.show { display: flex; }
+    .cele-main-emoji { font-size: 90px; display: block; }
+    .cele-msg { font-size: 36px; font-weight: 900; color: #fff; text-align: center; padding: 0 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.4); margin: 14px 0 8px; }
+    .cele-sub { font-size: 20px; color: rgba(255,255,255,0.95); text-align: center; padding: 0 24px; line-height: 1.5; font-weight: 700; }
+    .fly-emoji { position: absolute; font-size: 36px; pointer-events: none; animation: flyUp linear forwards; }
+    @keyframes flyUp { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 100%{transform:translateY(-110vh) rotate(720deg) scale(0.5);opacity:0} }
+    @keyframes spin    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes bounce  { from{transform:scale(1)} to{transform:scale(1.3)} }
+    @keyframes float   { from{transform:translateY(0)} to{transform:translateY(-20px)} }
+    @keyframes shake   { 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} }
+  </style>
+</head>
+<body>
+<h1>🎉 세러머니 미리보기</h1>
+<p class="desc">버튼을 눌러 각 점수대별 세러머니를 확인하세요. 클릭하면 닫힙니다.</p>
+
+<h2>📝 데일리 테스트 세러머니</h2>
+<div class="btn-grid">
+  <button class="prev-btn t100" onclick="previewDaily(100,0)">💯 100점 퍼펙트</button>
+  <button class="prev-btn t90"  onclick="previewDaily(95,1)">🌟 90점대</button>
+  <button class="prev-btn t80"  onclick="previewDaily(85,2)">✨ 80점대</button>
+  <button class="prev-btn t70"  onclick="previewDaily(75,3)">👍 70점대</button>
+  <button class="prev-btn tlow" onclick="previewDaily(60,5)">💪 70점 미만</button>
+</div>
+
+<h2>🧩 문장 완성 세러머니</h2>
+<div class="btn-grid">
+  <button class="prev-btn sp" onclick="previewSentence(true)">🎊 퍼펙트 완성</button>
+  <button class="prev-btn sd" onclick="previewSentence(false)">🎉 완성 (오답 있음)</button>
+</div>
+
+<!-- Daily ceremony -->
+<div id="daily-cele" onclick="document.getElementById('daily-cele').className=''; document.getElementById('daily-cele').style.background='';"></div>
+
+<!-- Sentence ceremony -->
+<div id="celebration" onclick="hideCelebration()">
+  <span class="cele-main-emoji" id="cele-emoji"></span>
+  <div class="cele-msg" id="cele-msg"></div>
+  <div class="cele-sub" id="cele-sub"></div>
+</div>
+
+<div class="close-hint">👆 세러머니 화면을 탭하면 닫힙니다</div>
+
+<script>
+// ── DAILY TIERS (daily.html에서 복사) ──
+const DAILY_TIERS = {
+  100: {
+    type:'thumbs100', bgCount:20, bgEmojis:['👍','🏆','🥇','💯','🎉','⭐','👑','🔥'],
+    msgs:[
+      {emoji:'🥳',msg:'🎉🎉 100점 퍼펙트!! 🎉🎉',sub:'세상에!! 하나도 안 틀렸어!! 찬희 진짜 천재야!! 🔥🔥🔥'},
+      {emoji:'👑',msg:'👑 완전 완벽!! 100점!!',sub:'이게 바로 최강 찬희!! 역대급 최고기록!! 💯💯💯'},
+      {emoji:'💎',msg:'💎 다이아몬드 퍼펙트!!',sub:'실수 제로!! 노미스 클리어!! 넌 진짜 천재야!! ⭐⭐⭐⭐⭐'},
+      {emoji:'🚀',msg:'🚀 우주 최강 점수!!',sub:'하나도 안 틀리다니!! 믿기지 않아!! 엄청나다 찬희!! 🌟🌟🌟'},
+      {emoji:'🏆',msg:'🏆 트로피 받아!! 100점!!',sub:'완벽 그 자체!! 이런 점수는 처음 봤어!! 짱이야짱이야!! 🎊🎊🎊'},
+    ],
+    bgs:['linear-gradient(135deg,#ffd700,#ff4e50,#ffd700,#fc913a)','linear-gradient(135deg,#f59e0b,#ef4444,#b45309,#dc2626)','linear-gradient(135deg,#fbbf24,#f97316,#d97706,#ea580c)']
+  },
+  90: {
+    type:'emoji', bgCount:16, bgEmojis:['⭐','🌟','✨','💫','🎊','🎉','👏','🥈'],
+    msgs:[
+      {emoji:'🌟',msg:'🌟 와!! 거의 완벽해!!',sub:'딱 조금만 더!! 찬희 진짜 잘했어!! ✨✨✨'},
+      {emoji:'🥈',msg:'🎊 대단한 점수야!!',sub:'90점대라니!! 정말 훌륭해!! 조금만 더 하면 100점이야!! 🌟🌟'},
+      {emoji:'⭐',msg:'⭐ 엄청 잘했어!!',sub:'이 정도면 완전 최고 수준이야!! 찬희 짱!! 👏👏👏'},
+    ],
+    bgs:['linear-gradient(135deg,#8b5cf6,#a78bfa,#6d28d9,#7c3aed)','linear-gradient(135deg,#7c3aed,#6d28d9,#5b21b6,#8b5cf6)']
+  },
+  80: {
+    type:'emoji', bgCount:12, bgEmojis:['✨','🎯','💪','👍','🎈','🌈'],
+    msgs:[
+      {emoji:'💪',msg:'💪 잘했어!! 80점대!!',sub:'이정도면 훌륭해!! 조금 더 연습하면 완벽해질 거야!! 🌟🌟'},
+      {emoji:'🎯',msg:'🎯 좋은 점수야!!',sub:'80점대로 충분히 잘했어!! 다음엔 더 잘할 수 있어!! ✨✨'},
+    ],
+    bgs:['linear-gradient(135deg,#3b82f6,#10b981,#2563eb,#059669)','linear-gradient(135deg,#0ea5e9,#10b981,#0284c7,#059669)']
+  },
+  70: {
+    type:'emoji', bgCount:10, bgEmojis:['👍','🌱','🌿','✨','💫'],
+    msgs:[
+      {emoji:'🌱',msg:'🌱 조금씩 늘고 있어!!',sub:'70점대!! 꾸준히 하면 분명 올라갈 거야!! 화이팅!! 💪'},
+      {emoji:'👍',msg:'👍 계속 도전해!!',sub:'조금 어려웠지만 괜찮아!! 다시 해보면 더 잘할 수 있어!! 🌟'},
+    ],
+    bgs:['linear-gradient(135deg,#14b8a6,#0891b2,#0d9488,#0e7490)','linear-gradient(135deg,#06b6d4,#14b8a6,#0891b2,#0d9488)']
+  },
+  low: {
+    type:'emoji', bgCount:8, bgEmojis:['💪','🌱','🔥','✨'],
+    msgs:[
+      {emoji:'💪',msg:'💪 포기하지 마!!',sub:'틀려도 괜찮아!! 다시 도전하면 반드시 잘할 수 있어!! 찬희 화이팅!! 🌟'},
+      {emoji:'🌱',msg:'🌱 천천히 해봐!!',sub:'어렵지? 괜찮아!! 조금씩 하다 보면 분명 잘할 수 있어!! 💪💪'},
+    ],
+    bgs:['linear-gradient(135deg,#f97316,#fb923c,#ea580c,#f59e0b)','linear-gradient(135deg,#f59e0b,#f97316,#d97706,#ea580c)']
+  }
+};
+
+function getTierKey(pct, totalWrong) {
+  if (pct === 100 && totalWrong === 0) return 100;
+  if (pct >= 90) return 90;
+  if (pct >= 80) return 80;
+  if (pct >= 70) return 70;
+  return 'low';
+}
+
+function previewDaily(pct, totalWrong) {
+  const key  = getTierKey(pct, totalWrong);
+  const data = DAILY_TIERS[key];
+  const cel  = document.getElementById('daily-cele');
+  const msgs = data.msgs;
+  const pick = msgs[Math.floor(Math.random() * msgs.length)];
+  const allPos = [
+    [5,10],[15,80],[85,15],[90,75],[50,5],[30,90],[70,88],
+    [8,45],[92,45],[20,25],[75,30],[45,85],[60,10],[35,60],[80,55],
+    [25,50],[65,70],[40,20],[55,40],[78,25]
+  ];
+  const bgEmoji = data.type === 'thumbs100' ? '👍' : data.bgEmojis[Math.floor(Math.random() * data.bgEmojis.length)];
+  const bgHtml = allPos.slice(0, data.bgCount).map((p, i) => {
+    const sz = 22 + (i % 3) * 10;
+    return `<span class="dc-bg-thumb" style="left:${p[0]}%;top:${p[1]}%;font-size:${sz}px;animation-delay:${(i*0.11).toFixed(2)}s">${bgEmoji}</span>`;
+  }).join('');
+  const centerHtml = (data.type === 'thumbs100')
+    ? `<div class="dc-100-wrap"><div class="dc-crowd" id="dc-crowd"></div><div class="dc-main">👍</div></div>`
+    : `<span class="dc-main-emoji">${pick.emoji}</span>`;
+  cel.innerHTML = bgHtml + centerHtml +
+    `<div class="dc-msg">${pick.msg}</div><div class="dc-sub">${pick.sub}</div>`;
+  if (data.type === 'thumbs100') {
+    const crowd = cel.querySelector('#dc-crowd');
+    for (let i = 0; i < 10; i++) {
+      const angle = (i / 10) * Math.PI * 2;
+      const r = 105, x = 140 + r * Math.cos(angle) - 15, y = 140 + r * Math.sin(angle) - 15;
+      const sp = document.createElement('span');
+      sp.className = 'dc-crowd-thumb'; sp.textContent = '👍';
+      sp.style.left = x + 'px'; sp.style.top = y + 'px';
+      sp.style.animationDelay = (i * 0.07) + 's';
+      crowd.appendChild(sp);
+    }
+  }
+  const bg = data.bgs[Math.floor(Math.random() * data.bgs.length)];
+  cel.style.background = bg;
+  cel.style.backgroundSize = '400% 400%';
+  cel.className = 'show';
+}
+
+// ── SENTENCE CEREMONY ──
+const CELE_THEMES = [
+  {bg:'linear-gradient(135deg,#f97316,#ec4899,#8b5cf6,#3b82f6)',fly:['🎉','🎊','⭐','🌟','👍','🏆','😄','🥳','✨','💯'],anim:'spin 1s linear infinite'},
+  {bg:'linear-gradient(135deg,#f59e0b,#fcd34d,#b45309,#fde68a)',fly:['⭐','🌟','✨','🏆','👑','💛','🥇','💰'],anim:'bounce 0.5s ease-in-out infinite alternate'},
+  {bg:'linear-gradient(135deg,#0ea5e9,#06b6d4,#3b82f6,#0284c7)',fly:['🌊','🐬','🐠','🌈','💎','🦀','⛵'],anim:'float 1s ease-in-out infinite alternate'},
+  {bg:'linear-gradient(135deg,#ef4444,#f97316,#dc2626,#ea580c)',fly:['🔥','⚡','💥','✨','🌋','🎆','💫'],anim:'shake 0.3s ease-in-out infinite'},
+  {bg:'linear-gradient(135deg,#1e1b4b,#312e81,#4c1d95,#1e3a5f)',fly:['🌟','⭐','💫','🌙','🪐','🚀','👽'],anim:'spin 2s linear infinite'},
+  {bg:'linear-gradient(135deg,#10b981,#059669,#34d399,#065f46)',fly:['🌸','🌺','🌻','🍀','🌈','🦋','🌿'],anim:'bounce 0.6s ease-in-out infinite alternate'},
+  {bg:'linear-gradient(135deg,#f472b6,#fb7185,#e879f9,#a78bfa)',fly:['🍭','🍬','🎀','💕','🍡','🧁','🍰'],anim:'spin 0.8s linear infinite'},
+];
+const CELE_PERFECT = [
+  {emoji:'🥳',msg:'완벽해!! 전부 다 맞췄어!!',sub:'틀린 게 하나도 없어!! 찬희 최고!! 🏆🏆🏆'},
+  {emoji:'💯',msg:'퍼펙트!! 노미스 클리어!!',sub:'모든 문장을 완벽하게!! 정말 대단해!! ✨✨✨'},
+];
+const CELE_DONE = [
+  {emoji:'🎉',msg:'모든 문장 완성!!',sub:'다 채웠어!! 정말 잘했어!! 👏👏👏'},
+  {emoji:'⭐',msg:'문장 완성 성공!!',sub:'끝까지 포기하지 않았어!! 멋져!! 🌟🌟'},
+];
+
+function previewSentence(isPerfect) {
+  const theme = CELE_THEMES[Math.floor(Math.random() * CELE_THEMES.length)];
+  const pool  = isPerfect ? CELE_PERFECT : CELE_DONE;
+  const pick  = pool[Math.floor(Math.random() * pool.length)];
+  const cel   = document.getElementById('celebration');
+  cel.style.background = theme.bg;
+  cel.style.backgroundSize = '400% 400%';
+  const emojiEl = document.getElementById('cele-emoji');
+  emojiEl.textContent    = pick.emoji;
+  emojiEl.style.animation = theme.anim;
+  document.getElementById('cele-msg').textContent = pick.msg;
+  document.getElementById('cele-sub').textContent = pick.sub;
+  // 기존 fly 이모지 제거
+  cel.querySelectorAll('.fly-emoji').forEach(e => e.remove());
+  cel.classList.add('show');
+  const total = isPerfect ? 60 : 20, interval = isPerfect ? 80 : 200;
+  let count = 0;
+  const iv = setInterval(() => {
+    if (count++ > total) { clearInterval(iv); return; }
+    const el = document.createElement('span');
+    el.className = 'fly-emoji';
+    el.textContent = theme.fly[Math.floor(Math.random() * theme.fly.length)];
+    el.style.left = (Math.random() * 95) + 'vw';
+    el.style.bottom = '-50px';
+    el.style.animationDuration = (1.0 + Math.random() * 1.5) + 's';
+    cel.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }, interval);
+}
+function hideCelebration() { document.getElementById('celebration').classList.remove('show'); }
+</script>
+</body>
+</html>

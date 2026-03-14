@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>플래시카드 — 찬희 영어 단어장</title>
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -12,12 +12,12 @@
       --green: #10b981; --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff;
       --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); }
+    body { font-family: 'Playpen Sans', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
     button, input, select, textarea { font-family: inherit; }
 
     /* LAYOUT */
     html, body { height: 100%; }
-    #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+    #app { height: calc(100dvh - 76px); display: flex; flex-direction: column; overflow: hidden; }
     .page { height: 100%; display: flex; flex-direction: column; overflow: hidden; padding: 16px; padding-bottom: 0; max-width: 860px; margin: 0 auto; width: 100%; }
 
     /* HEADER */
@@ -71,7 +71,7 @@
     .ctrl-btn.done-btn.on { background: var(--green); color: #fff; border-color: var(--green); }
 
     /* WORD LIST */
-    .study-word-list { flex: 1; min-height: 0; width: 100%; overflow-y: auto; margin-top: 10px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); }
+    .study-word-list { flex: 1; min-height: 0; width: 100%; overflow-y: auto; margin-top: 10px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding-bottom: 20px; }
     .study-word-row { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; }
     .study-word-row:last-child { border-bottom: none; }
     .study-word-row:hover { background: var(--primary-bg); }
@@ -92,6 +92,8 @@
     .swr-kr { font-size: 15px; color: var(--muted); }
     .swr-speak { background: none; border: none; font-size: 17px; cursor: pointer; padding: 2px 4px; border-radius: 6px; opacity: 0.5; transition: opacity 0.15s; }
     .swr-speak:hover { opacity: 1; background: var(--primary-bg); }
+    .swr-sentence { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 3px; word-break: keep-all; padding-left: 28px; }
+    .swr-sentence u { color: var(--primary); font-weight: 700; text-decoration-color: var(--primary); text-underline-offset: 2px; }
 
 
 
@@ -182,6 +184,8 @@
         <button class="ctrl-btn" id="btn-hide-toggle" onclick="cycleHideMode()" data-tip="한글/영어 숨기기 전환">👁 전체 보기</button>
         <button class="ctrl-btn shuffle" onclick="shuffleWords()" data-tip="단어 순서 랜덤 섞기">🔀 섞기</button>
         <button class="ctrl-btn mic-btn" id="btn-mic" onclick="toggleMic()" data-tip="음성으로 정답 말하기">🎤 말하기</button>
+        <button class="ctrl-btn" id="btn-sentence" onclick="toggleSentenceMode()" data-tip="문장 전체 보기">📖 문장보기</button>
+        <button class="ctrl-btn" id="btn-sent-hide" style="display:none" onclick="toggleSentenceWordHide()">👁 단어보기</button>
       </div>
       <div class="voice-feedback" id="voice-feedback"></div>
     </div>
@@ -299,6 +303,7 @@ function autoReadCurrent() {
 
 // ── HIDE/REVEAL/SHUFFLE ──
 let hideKorean = false, hideEnglish = false, enRevealed = false, krRevealed = false;
+let rowRevealed = new Set(); // 숨기기 모드에서 개별 행 공개
 let hideMode = 0;
 const EYE_SLASH = '<span style="position:relative;display:inline-block">👁<span style="position:absolute;top:50%;left:55%;transform:translate(-50%,-50%) rotate(-20deg);color:#000;font-size:1.1em;font-weight:900;line-height:1;pointer-events:none;text-shadow:-1px 0 #000,1px 0 #000">╱</span></span>';
 const hideModeConfig = [
@@ -364,9 +369,11 @@ function cycleHideMode() {
   const cfg = hideModeConfig[hideMode];
   hideKorean = cfg.hideKr; hideEnglish = cfg.hideEn;
   enRevealed = false; krRevealed = false;
+  rowRevealed.clear();
   const btn = document.getElementById('btn-hide-toggle');
   btn.innerHTML = cfg.label;
   btn.classList.toggle('on', cfg.on);
+  document.getElementById('btn-mic').style.display = (hideMode !== 0) ? '' : 'none';
   // 모드 전환 시 정답/오답 초기화 + 자동 섞기
   voiceResults  = new Map();
   wrongWords    = new Set();
@@ -390,10 +397,61 @@ function shuffleWords() {
   enRevealed = false; krRevealed = false;
   renderStudyCard();
   renderWordList();
-  showToast('🔀 단어 순서를 섞었습니다!');
+  showToast(showSentence ? '🔀 문장 순서를 섞었습니다!' : '🔀 단어 순서를 섞었습니다!');
 }
 
 function renderUnitTitle() {}
+
+// ── 문장보기 모드 ──
+let showSentence     = false;
+let sentenceWordHide = false;
+let sentenceRevealed = new Set(); // 숨김 모드에서 개별 행 공개 상태
+
+function toggleSentenceMode() {
+  showSentence = !showSentence;
+  document.getElementById('btn-sentence').classList.toggle('on', showSentence);
+  const hideBtn = document.getElementById('btn-sent-hide');
+  const micBtn  = document.getElementById('btn-mic');
+  hideBtn.style.display = showSentence ? '' : 'none';
+  micBtn.style.display  = showSentence ? 'none' : '';
+  if (showSentence) { stopListening(); }
+  if (!showSentence) { sentenceWordHide = false; sentenceRevealed.clear(); hideBtn.innerHTML = '👁 단어보기'; hideBtn.classList.remove('on'); }
+  renderWordList();
+}
+
+function toggleSentenceWordHide() {
+  sentenceWordHide = !sentenceWordHide;
+  sentenceRevealed.clear();
+  const btn = document.getElementById('btn-sent-hide');
+  if (btn) { btn.innerHTML = sentenceWordHide ? EYE_SLASH + ' 단어숨김' : '👁 단어보기'; btn.classList.toggle('on', sentenceWordHide); }
+  renderWordList();
+}
+
+
+
+function buildSentenceHtml(w, forceShow) {
+  if (!w.sentence) return '';
+  const display = w.answer || w.english;
+  const word = display.toLowerCase();
+  let sent = w.sentence;
+  const hide = sentenceWordHide && !forceShow;
+  if (hide) {
+    const blank = '<u style="color:var(--border);text-decoration-color:var(--border)">______</u>';
+    sent = sent.replace('___', blank);
+    if (sent === w.sentence) {
+      const re = new RegExp('\\b' + word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + 's?\\b', 'i');
+      sent = sent.replace(re, blank);
+    }
+  } else {
+    const underlined = `<u>${display}</u>`;
+    sent = sent.replace('___', underlined);
+    if (sent === w.sentence) {
+      const re = new RegExp('\\b' + display.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + 's?\\b', 'i');
+      sent = sent.replace(re, underlined);
+    }
+  }
+  return sent;
+}
 
 // ── STUDY ──
 function startStudy() {
@@ -407,6 +465,7 @@ function startStudy() {
   enRevealed = false; krRevealed = false;
   const btn = document.getElementById('btn-hide-toggle');
   btn.innerHTML = '👁 전체 보기'; btn.classList.remove('on');
+  document.getElementById('btn-mic').style.display = 'none';
   renderUnitTitle();
   renderWordList();
   const list = document.getElementById('study-word-list');
@@ -467,19 +526,69 @@ function renderWordList() {
     const resultClass = vr ? ` result-${vr}` : '';
     const row = document.createElement('div');
     row.className = 'study-word-row' + (isCurrent ? ' current' : '') + resultClass;
-    const enHtml   = `<span class="swr-en" style="${hideEnglish ? 'color:transparent;user-select:none' : ''}">${w.english}</span>`;
-    const krHtml   = `<span class="swr-kr" style="${hideKorean ? 'color:transparent;user-select:none' : ''}">${w.korean}</span>`;
+    if (showSentence) {
+      const sentHtml = buildSentenceHtml(w);
+      if (sentenceWordHide) {
+        // 숨김 모드: 번호 + 문장만 한 줄, 클릭으로 개별 단어 공개
+        const revealed = sentenceRevealed.has(i);
+        const shownHtml = buildSentenceHtml(w, revealed);
+        row.style.alignItems = 'flex-start';
+        row.style.gap = '8px';
+        if (revealed) row.style.background = 'rgba(91,79,207,0.06)';
+        row.innerHTML = `
+          <span class="swr-no" style="flex-shrink:0;margin-top:2px">${i + 1}</span>
+          <div class="swr-sentence" style="padding-left:0;margin-top:0;flex:1">${shownHtml || w.english}</div>`;
+      } else {
+        // 보기 모드: 단어+한글 위, 문장 아래
+        row.style.flexDirection = 'column';
+        row.style.alignItems = 'flex-start';
+        row.style.gap = '2px';
+        row.innerHTML = `
+          <div style="display:flex;align-items:center;gap:8px;width:100%">
+            <span class="swr-no">${i + 1}</span>
+            <span class="swr-en" style="font-weight:700;font-size:15px">${w.english}</span>
+            <span class="swr-kr" style="font-size:13px;color:var(--muted);flex:1">${w.korean}</span>
+            <button class="swr-speak" onclick="event.stopPropagation(); speakText('${w.english.replace(/'/g,"\\'")}')">🔊</button>
+          </div>
+          ${sentHtml ? `<div class="swr-sentence">${sentHtml}</div>` : ''}`;
+      }
+    } else {
+    const rev = rowRevealed.has(i);
+    const showEn = !hideEnglish || rev;
+    const showKr = !hideKorean  || rev;
+    const enHtml   = `<span class="swr-en" style="${!showEn ? 'color:transparent;user-select:none' : ''}">${w.english}</span>`;
+    const krHtml   = `<span class="swr-kr" style="${!showKr ? 'color:transparent;user-select:none' : ''}">${w.korean}</span>`;
     const starHtml = (starWords.has(w.english) && hideMode === 0) ? '<span class="swr-star">★★★</span>' : '';
+    if (rev) row.style.background = 'rgba(91,79,207,0.06)';
     row.innerHTML = `
       <span class="swr-result">${resultIcon(w.english)}</span>
       <span class="swr-no">${i + 1}</span>
       <span class="swr-en-wrap">${enHtml}${starHtml}</span>
-      ${w.pos ? `<span class="swr-pos" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}">${w.pos}</span>` : ''}
+      ${w.pos ? `<span class="swr-pos" style="${(hideKorean || hideEnglish) && !rev ? 'visibility:hidden' : ''}">${w.pos}</span>` : ''}
       ${krHtml}
-      <button class="swr-speak" style="${hideKorean || hideEnglish ? 'visibility:hidden' : ''}" onclick="event.stopPropagation(); speakText('${w.english.replace(/'/g,"\\'")}')">🔊</button>`;
-    row.onclick = () => { studyIdx = i; renderStudyCard(); autoReadCurrent(); };
+      <button class="swr-speak" style="${(hideKorean || hideEnglish) && !rev ? 'visibility:hidden' : ''}" onclick="event.stopPropagation(); speakText('${w.english.replace(/'/g,"\\'")}')">🔊</button>`;
+    }
+    if (showSentence && sentenceWordHide) {
+      row.onclick = () => {
+        if (sentenceRevealed.has(i)) sentenceRevealed.delete(i);
+        else sentenceRevealed.add(i);
+        renderWordList();
+      };
+    } else if (hideMode !== 0) {
+      row.onclick = () => {
+        if (rowRevealed.has(i)) rowRevealed.delete(i);
+        else rowRevealed.add(i);
+        renderWordList();
+      };
+    } else {
+      row.onclick = () => { studyIdx = i; renderStudyCard(); autoReadCurrent(); };
+    }
     list.appendChild(row);
   });
+  const footer = document.createElement('div');
+  footer.style.cssText = 'height:48px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--border)';
+  footer.textContent = '· · ·';
+  list.appendChild(footer);
 }
 
 function flipCard() {

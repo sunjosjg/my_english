@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>데일리 테스트 — 찬희 영어 단어장</title>
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -13,15 +13,12 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Jua', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Playpen Sans', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     button, input, select, textarea { font-family: inherit; }
     /* ── 세레머니 ── */
     #daily-cele { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; background-size: 400% 400%; overflow: hidden; }
     #daily-cele.show { display: flex; }
-    #daily-cele.tier-100 { background: linear-gradient(135deg, #ffd700, #ff4e50, #ffd700, #fc913a); animation: dcBg 1.5s ease infinite; }
-    #daily-cele.tier-90  { background: linear-gradient(135deg, #8b5cf6, #a78bfa, #6d28d9, #7c3aed); animation: dcBg 2s ease infinite; }
-    #daily-cele.tier-80  { background: linear-gradient(135deg, #3b82f6, #10b981, #2563eb, #059669); animation: dcBg 2.5s ease infinite; }
-    #daily-cele.tier-low { background: linear-gradient(135deg, #f97316, #fb923c, #ea580c, #f59e0b); animation: dcBg 3s ease infinite; }
+    #daily-cele.show { animation: dcBg 1.5s ease infinite; }
     @keyframes dcBg { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
     .dc-100-wrap { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
     .dc-main { font-size: 110px; z-index: 2; position: relative; animation: dcSpin 1.8s ease-in-out infinite; }
@@ -682,17 +679,252 @@ function goHome() { location.href = 'index.html'; }
 
 // ── 세레머니 ──
 const DAILY_TIERS = {
-  100: { cls: 'tier-100', msg: '🎉 완벽!! 100점!! 🎉',         sub: '세 단계 모두 한 번에 다 맞췄어! 짱이야!!', type: 'thumbs100' },
-  90:  { cls: 'tier-90',  emoji: '⭐', msg: '🌟 대단해!! 거의 완벽해!',   sub: '조금만 더 하면 100점이야!! ⭐⭐⭐', type: 'emoji' },
-  80:  { cls: 'tier-80',  emoji: '👏', msg: '😊 잘했어! 좋은 점수야!',    sub: '틀린 단어 복습하면 완벽해! 💪',    type: 'emoji' },
-  low: { cls: 'tier-low', emoji: '💪', msg: '💪 포기하지 마! 할 수 있어!!', sub: '계속 연습하면 금방 늘어! 파이팅!! 🔥', type: 'emoji' },
+  100: {
+    type: 'thumbs100', bgCount: 20, bgEmojis: ['👍','🏆','🥇','💯','🎉','⭐','👑','🔥'],
+    msgs: [
+      { emoji:'🥳', msg:'🎉🎉 100점 퍼펙트!! 🎉🎉',         sub:'세상에!! 하나도 안 틀렸어!! 찬희 진짜 천재야!! 🔥🔥🔥' },
+      { emoji:'👑', msg:'👑 완전 완벽!! 100점!!',            sub:'이게 바로 최강 찬희!! 역대급 최고기록!! 💯💯💯' },
+      { emoji:'💎', msg:'💎 다이아몬드 퍼펙트!!',            sub:'실수 제로!! 노미스 클리어!! 넌 진짜 천재야!! ⭐⭐⭐⭐⭐' },
+      { emoji:'🚀', msg:'🚀 우주 최강 점수!!',               sub:'하나도 안 틀리다니!! 믿기지 않아!! 엄청나다 찬희!! 🌟🌟🌟' },
+      { emoji:'🏆', msg:'🏆 트로피 받아!! 100점!!',          sub:'완벽 그 자체!! 이런 점수는 처음 봤어!! 짱이야짱이야!! 🎊🎊🎊' },
+      { emoji:'🌈', msg:'🌈 무지개처럼 완벽해!!',            sub:'100점이라니!! 오늘 찬희는 신이야!! 최고 최고!! ✨✨✨' },
+      { emoji:'⚡', msg:'⚡ 번개 퍼펙트!! 100점!!',          sub:'이 세상 실력이 아니야!! 완전 대단해!! 짱짱짱!! 💥💥💥' },
+      { emoji:'🎯', msg:'🎯 퍼펙트 올 클리어!!',             sub:'단 하나도 빠짐없이 다 맞췄어!! 진짜 믿기지 않아!! 🎊🎊' },
+      { emoji:'💫', msg:'💫 별이 된 찬희!! 100점!!',         sub:'하늘의 별처럼 빛나는 점수야!! 완전 최고!! 🌟🌟🌟🌟' },
+      { emoji:'🎆', msg:'🎆 폭죽!! 폭죽!! 퍼펙트!!',         sub:'100점을 맞다니!! 오늘은 축제야!! 맞아맞아!! 🥳🥳🥳' },
+      { emoji:'🦋', msg:'🦋 찬희 나비처럼 완벽해!!',         sub:'한 문제도 빠짐없이!! 이런 실력이 어디서 나오는 거야!! 👏👏' },
+      { emoji:'🌠', msg:'🌠 유성처럼 빛나는 100점!!',        sub:'별똥별만큼 빛나는 찬희!! 완전 최고야!! 🌟🌟🌟🌟🌟' },
+      { emoji:'🎊', msg:'🎊 축제다 축제!! 100점!!',          sub:'이 점수는 파티감이야!! 찬희 최강!! 🥳🥳🥳🥳' },
+      { emoji:'🏅', msg:'🏅 금메달 찬희!!',                  sub:'올림픽이었으면 금메달이야!! 완벽한 100점!! 🥇🥇🥇' },
+      { emoji:'🌞', msg:'🌞 태양처럼 밝은 100점!!',          sub:'오늘 찬희는 태양이야!! 100점이라니 진짜 대단해!! ☀️☀️☀️' },
+      { emoji:'🦅', msg:'🦅 독수리처럼 날카로운 실력!!',     sub:'하나도 놓치지 않았어!! 정말 믿기지 않는 퍼펙트!! 💪💪💪' },
+      { emoji:'💥', msg:'💥 폭발적인 100점!!',               sub:'이건 그냥 실력이 아니야!! 천재 중의 천재 찬희!! 🔥🔥🔥' },
+      { emoji:'🎠', msg:'🎠 완벽한 회전목마처럼!!',          sub:'처음부터 끝까지 흔들림 없는 100점!! 짱이야!! ⭐⭐⭐' },
+      { emoji:'🌋', msg:'🌋 화산처럼 터져나온 실력!!',       sub:'100점이 터져 나왔어!! 찬희 진짜 대박이야!! 🔥💥🔥' },
+      { emoji:'🎡', msg:'🎡 놀이공원급 즐거움!! 100점!!',    sub:'완전 신났다!! 100점이라니!! 오늘 찬희는 레전드야!! 🎉🎉' },
+      { emoji:'🧠', msg:'🧠 천재 뇌!! 100점!!',              sub:'이 뇌는 뭔가 달라!! 하나도 안 틀리다니!! 대단해!! 💯💯' },
+      { emoji:'🌊', msg:'🌊 파도처럼 거침없는 100점!!',      sub:'막을 수 없는 찬희의 실력!! 퍼펙트 클리어!! 🌊🌊🌊' },
+      { emoji:'🦊', msg:'🦊 영리한 찬희 100점!!',            sub:'이 영리함은 타고난 거야!! 완벽한 점수 축하해!! ✨✨✨' },
+      { emoji:'🎸', msg:'🎸 록스타 100점!!',                 sub:'록스타처럼 폭발하는 실력!! 100점 퍼펙트!! 🎵🎵🎵' },
+      { emoji:'🌺', msg:'🌺 활짝 핀 100점!!',                sub:'꽃처럼 활짝 핀 실력!! 한 문제도 안 틀렸어!! 🌸🌸🌸' },
+      { emoji:'🐉', msg:'🐉 드래곤 찬희!! 100점!!',          sub:'드래곤처럼 강한 실력!! 퍼펙트 올 클리어!! 🔥🔥🔥' },
+      { emoji:'🎭', msg:'🎭 완벽한 퍼포먼스!! 100점!!',      sub:'시작부터 끝까지 완벽해!! 찬희는 진짜 대단한 아이야!! 👏👏' },
+      { emoji:'🦄', msg:'🦄 유니콘처럼 특별한 100점!!',      sub:'100점은 아무나 못 맞아!! 찬희는 특별해!! 💫💫💫' },
+      { emoji:'🎪', msg:'🎪 서커스급 실력!! 100점!!',        sub:'이건 마법이야!! 하나도 안 틀리는 마법사 찬희!! ✨✨✨' },
+      { emoji:'🌍', msg:'🌍 세계 최강!! 100점!!',            sub:'온 세상이 놀랄 점수야!! 찬희 진짜 최고!! 🏆🏆🏆' },
+      { emoji:'🎋', msg:'🎋 대나무처럼 쭉쭉 뻗는 실력!!',   sub:'100점이 나왔어!! 오늘 찬희 진짜 역대급!! 🌟🌟🌟' },
+    ],
+    bgs: ['linear-gradient(135deg,#ffd700,#ff4e50,#ffd700,#fc913a)',
+          'linear-gradient(135deg,#f59e0b,#fcd34d,#ff4e50,#ffd700)',
+          'linear-gradient(135deg,#ff6b6b,#feca57,#ff9ff3,#54a0ff)',
+          'linear-gradient(135deg,#f97316,#ec4899,#8b5cf6,#3b82f6)',
+          'linear-gradient(135deg,#fbbf24,#f59e0b,#d97706,#92400e)',
+          'linear-gradient(135deg,#ff0080,#ff8c00,#ffe600,#ff0080)'],
+  },
+  90: {
+    type: 'emoji', bgCount: 12, bgEmojis: ['⭐','🌟','✨','😍','🎯','👏','💪','🔥'],
+    msgs: [
+      { emoji:'🌟', msg:'🌟 대단해!! 거의 완벽!!',           sub:'조금만 더 하면 100점이야!! 진짜 잘했어!! ⭐⭐⭐' },
+      { emoji:'😍', msg:'😍 와~~ 엄청 잘했는데!!',           sub:'90점대면 완전 우수야!! 한 번 더 하면 100점!! 🔥🔥' },
+      { emoji:'🎯', msg:'🎯 거의 다 맞췄어!!',               sub:'조금만 더 집중하면 퍼펙트!! 진짜 잘하고 있어!! 💪💪' },
+      { emoji:'⚡', msg:'⚡ 번개처럼 빠른 실력!!',           sub:'90% 이상이라니!! 최고야 최고!! 계속 이렇게!! 🌟🌟🌟' },
+      { emoji:'🏅', msg:'🏅 은메달급 실력!!',                sub:'조금만 더 하면 금메달이야!! 포기하지 마!! 💫💫' },
+      { emoji:'💥', msg:'💥 폭발적인 실력!!',                sub:'90점대가 이렇게 쉽다니!! 찬희 진짜 대단해!! 👊👊' },
+      { emoji:'🎪', msg:'🎪 서커스급 실력!!',                sub:'이 점수는 보통이 아니야!! 거의 퍼펙트!! 🌈🌈' },
+      { emoji:'🦁', msg:'🦁 사자처럼 강한 실력!!',           sub:'90% 이상!! 정말 대단해!! 한 번만 더 도전해봐!! 🔥🔥' },
+      { emoji:'🌊', msg:'🌊 파도처럼 밀려오는 실력!!',       sub:'90점대 클리어!! 한 걸음만 더 가면 100점이야!! 💪' },
+      { emoji:'🦋', msg:'🦋 나비처럼 높이 날아!!',           sub:'90점 이상은 진짜 대단한 거야!! 조금만 더 집중!! 🌸' },
+      { emoji:'🎸', msg:'🎸 록스타 실력!!',                  sub:'90점대!! 찬희 진짜 잘한다!! 한 번 더 도전해봐!! 🎵' },
+      { emoji:'🌺', msg:'🌺 거의 만개한 실력!!',             sub:'90점이면 정말 잘한 거야!! 조금만 더 하면 100점!! 🌸' },
+      { emoji:'🦅', msg:'🦅 독수리처럼 날카롭게!!',          sub:'거의 다 맞췄어!! 이 정도면 최고 중에 최고야!! ✨✨' },
+      { emoji:'🎵', msg:'🎵 리듬감 있는 실력!!',             sub:'90점 이상!! 찬희 진짜 감이 좋아!! 파이팅!! 🎶🎶' },
+      { emoji:'🌈', msg:'🌈 무지개빛 실력!!',                sub:'거의 완벽해!! 한 번만 더 하면 100점 퍼펙트야!! 💫💫' },
+      { emoji:'🦊', msg:'🦊 영리한 찬희!!',                  sub:'90점대면 충분히 대단한 거야!! 조금만 더 집중해봐!! 💡' },
+      { emoji:'🌙', msg:'🌙 달처럼 빛나는 실력!!',           sub:'90점 이상!! 달빛처럼 아름다운 점수야!! 계속 해봐!! ⭐' },
+      { emoji:'🎭', msg:'🎭 거의 완벽한 퍼포먼스!!',         sub:'조금만 더 집중하면 완벽해!! 찬희 진짜 잘하고 있어!! 👏' },
+      { emoji:'🐬', msg:'🐬 돌고래처럼 빠른 실력!!',         sub:'90점대 클리어!! 한 번 더 도전하면 100점이야!! 🌊🌊' },
+      { emoji:'🎀', msg:'🎀 예쁜 90점!!',                    sub:'거의 완벽해!! 찬희 정말 대단해!! 조금만 더 해봐!! 💕' },
+      { emoji:'🔮', msg:'🔮 마법사 찬희!!',                  sub:'90점 이상이라는 건 마법의 실력!! 한 번 더 도전!! ✨✨' },
+      { emoji:'🎲', msg:'🎲 행운과 실력이 함께!!',           sub:'90점대!! 이 점수는 그냥 나오는 게 아니야!! 짱이야!! 🌟' },
+      { emoji:'🚁', msg:'🚁 하늘 높이 날아오르는 실력!!',   sub:'90점대면 충분히 높이 날고 있어!! 계속 화이팅!! 💪💪' },
+      { emoji:'🌻', msg:'🌻 해바라기처럼 빛나!!',            sub:'90점 이상!! 밝게 빛나는 찬희의 실력!! 최고야!! ☀️☀️' },
+      { emoji:'🦓', msg:'🦓 특별한 찬희의 90점!!',           sub:'90점대는 아무나 못 맞아!! 찬희 진짜 대단해!! 🌟🌟' },
+      { emoji:'🎃', msg:'🎃 90점 미션 클리어!!',             sub:'거의 완벽해!! 조금만 더 하면 100점이야!! 파이팅!! 🔥' },
+      { emoji:'🌍', msg:'🌍 세계 상위권 실력!!',             sub:'90점 이상이면 진짜 잘하는 거야!! 계속 이렇게!! 👊👊' },
+      { emoji:'🐯', msg:'🐯 호랑이처럼 강한 실력!!',         sub:'90점대!! 찬희 진짜 강해!! 한 번만 더 하면 100점!! 💪' },
+      { emoji:'🎋', msg:'🎋 쭉쭉 뻗는 90점!!',              sub:'90점 이상은 정말 잘하는 거야!! 조금만 더 집중해봐!! ⭐' },
+      { emoji:'🦜', msg:'🦜 영리한 앵무새 찬희!!',           sub:'90점대 클리어!! 거의 다 외웠어!! 한 번 더 도전!! 🎯🎯' },
+    ],
+    bgs: ['linear-gradient(135deg,#8b5cf6,#a78bfa,#6d28d9,#7c3aed)',
+          'linear-gradient(135deg,#6366f1,#818cf8,#4f46e5,#c026d3)',
+          'linear-gradient(135deg,#9333ea,#c084fc,#7e22ce,#e879f9)',
+          'linear-gradient(135deg,#1e1b4b,#312e81,#7c3aed,#a78bfa)',
+          'linear-gradient(135deg,#7c3aed,#ec4899,#6d28d9,#db2777)',
+          'linear-gradient(135deg,#4f46e5,#818cf8,#3730a3,#a5b4fc)'],
+  },
+  80: {
+    type: 'emoji', bgCount: 8, bgEmojis: ['👏','😊','💪','🌈','🎵','👍','🌟','✨'],
+    msgs: [
+      { emoji:'👏', msg:'👏 잘했어! 좋은 점수야!',            sub:'틀린 단어 한 번만 더 보면 90점대 금방이야!! 💪' },
+      { emoji:'😊', msg:'😊 오~ 80점대!! 훌륭해!',            sub:'꽤 많이 알고 있잖아!! 조금만 더 연습해봐!! 👍👍' },
+      { emoji:'🌈', msg:'🌈 80점 이상!! 잘하고 있어!',        sub:'이 정도면 정말 대단해!! 틀린 것만 복습하면 완벽!! 🌟' },
+      { emoji:'🎵', msg:'🎵 실력이 쑥쑥 늘고 있어!!',         sub:'80점대면 충분히 잘하는 거야!! 파이팅!! 🔥' },
+      { emoji:'🦊', msg:'🦊 영리한 찬희!! 잘했어!!',          sub:'80점 이상은 진짜 잘하는 거야!! 조금만 더 집중해봐!! 💡' },
+      { emoji:'🌊', msg:'🌊 파도처럼 밀려오는 실력!!',        sub:'80점대 클리어!! 꾸준히 하다보면 100점도 문제없어!! 💪' },
+      { emoji:'🎸', msg:'🎸 록스타 실력!!',                   sub:'80점이면 충분히 대단해!! 오늘도 수고했어!! 👊👊' },
+      { emoji:'🌺', msg:'🌺 활짝 핀 실력!!',                  sub:'한 번씩 더 보면 금방 90점대야!! 잘하고 있어!! 🌸' },
+      { emoji:'🦁', msg:'🦁 용감한 찬희!! 80점!!',            sub:'80점대면 충분히 대단해!! 조금만 더 하면 90점이야!! 🔥' },
+      { emoji:'🎯', msg:'🎯 조준 성공!! 80점!!',              sub:'틀린 단어만 집중하면 금방 올라가!! 잘하고 있어!! 💪' },
+      { emoji:'🌻', msg:'🌻 해바라기처럼 밝은 80점!!',        sub:'80점 이상이면 충분히 잘한 거야!! 파이팅!! ☀️☀️' },
+      { emoji:'🐬', msg:'🐬 돌고래처럼 유쾌한 실력!!',        sub:'80점대 클리어!! 오늘도 잘했어!! 계속 이렇게!! 🌊🌊' },
+      { emoji:'🎭', msg:'🎭 훌륭한 퍼포먼스!!',               sub:'80점이면 정말 잘한 거야!! 틀린 것만 복습해봐!! 👏👏' },
+      { emoji:'🦋', msg:'�butterfly 80점 클리어!!',           sub:'나비처럼 날개를 펼치는 중!! 조금만 더 하면 돼!! 🌸🌸' },
+      { emoji:'🌙', msg:'🌙 달처럼 차오르는 실력!!',          sub:'80점대!! 조금씩 차오르다 보면 보름달이 돼!! 🌕🌕' },
+      { emoji:'🎪', msg:'🎪 공연 성공!! 80점!!',              sub:'80점이면 훌륭해!! 틀린 단어 체크하고 다시 도전!! 🎠' },
+      { emoji:'🐯', msg:'🐯 호랑이 기운!! 80점!!',            sub:'호랑이처럼 강하게 달려!! 90점대도 금방이야!! 💪💪' },
+      { emoji:'🔮', msg:'🔮 80점 마법 성공!!',               sub:'이 점수도 실력이야!! 계속 하면 더 올라가!! ✨✨✨' },
+      { emoji:'🦅', msg:'🦅 높이 날고 있어!! 80점!!',         sub:'독수리처럼 더 높이!! 틀린 것 복습하면 90점이야!! 🔥' },
+      { emoji:'🎀', msg:'🎀 예쁜 80점!!',                    sub:'80점대면 충분히 잘한 거야!! 계속 파이팅!! 💕💕' },
+      { emoji:'🌍', msg:'🌍 평균 이상!! 잘하고 있어!!',       sub:'80점 이상은 진짜 잘하는 거야!! 오늘도 수고했어!! 🌟' },
+      { emoji:'🎲', msg:'🎲 80점 미션 클리어!!',             sub:'틀린 단어 확인하고 다음엔 더 높이!! 할 수 있어!! 💡' },
+      { emoji:'🌴', msg:'🌴 야자수처럼 시원한 80점!!',        sub:'80점대면 정말 대단해!! 조금만 더 집중해봐!! 🏖️🏖️' },
+      { emoji:'🦜', msg:'🦜 앵무새처럼 영리한 찬희!!',        sub:'80점 이상!! 잘 외우고 있어!! 계속 이렇게 해봐!! 🎯' },
+      { emoji:'🚀', msg:'🚀 발사!! 80점!!',                   sub:'80점대로 날아오르는 중!! 90점대도 금방이야!! 🌟🌟' },
+      { emoji:'🌠', msg:'🌠 유성처럼 빠른 실력!!',            sub:'80점이면 충분히 잘하는 거야!! 틀린 것 집중하면 완벽!! ⭐' },
+      { emoji:'🎆', msg:'🎆 80점 폭죽!!',                     sub:'이 점수도 축제감이야!! 조금만 더 하면 90점이야!! 🎊🎊' },
+      { emoji:'🌾', msg:'🌾 알찬 80점!!',                     sub:'80점대면 실력이 알차게 쌓이고 있어!! 파이팅!! 💪💪' },
+      { emoji:'🐧', msg:'🐧 귀여운 80점 펭귄!!',              sub:'꾸준히 하는 찬희!! 80점대면 충분해!! 계속 해봐!! ❄️❄️' },
+      { emoji:'🎡', msg:'🎡 즐겁게 80점!!',                   sub:'즐기면서 하다 보면 100점이야!! 오늘도 잘했어!! 🎠🎠' },
+    ],
+    bgs: ['linear-gradient(135deg,#3b82f6,#10b981,#2563eb,#059669)',
+          'linear-gradient(135deg,#0ea5e9,#06b6d4,#0284c7,#0891b2)',
+          'linear-gradient(135deg,#10b981,#34d399,#059669,#14b8a6)',
+          'linear-gradient(135deg,#2563eb,#7c3aed,#1d4ed8,#6d28d9)',
+          'linear-gradient(135deg,#0891b2,#0ea5e9,#0e7490,#38bdf8)',
+          'linear-gradient(135deg,#059669,#10b981,#047857,#34d399)'],
+  },
+  70: {
+    type: 'emoji', bgCount: 6, bgEmojis: ['💚','🌱','🎮','⭐','🙌','💡'],
+    msgs: [
+      { emoji:'💚', msg:'💚 70점대! 잘 하고 있어!',           sub:'조금씩 늘고 있어!! 포기하지 말고 한 번 더!! 💪' },
+      { emoji:'🌱', msg:'🌱 성장 중!! 조금만 더!',            sub:'7할 이상이면 충분히 잘하는 거야!! 다시 한 번 도전!! 👊' },
+      { emoji:'🎮', msg:'🎮 70점! 계속 도전해봐!',            sub:'오늘보다 내일이 더 잘 될 거야!! 할 수 있어!! 🔥' },
+      { emoji:'⭐', msg:'⭐ 70점대 클리어!!',                 sub:'절반 훨씬 넘게 맞췄어!! 틀린 단어 집중 복습해봐!! 💡' },
+      { emoji:'🙌', msg:'🙌 잘 하고 있어!! 조금만 더!!',      sub:'70점 이상이면 충분해!! 한 번 더 하면 80점이야!! 🌟' },
+      { emoji:'🦋', msg:'🦋 나비처럼 성장 중!!',              sub:'지금 이 순간도 실력이 늘고 있어!! 계속 도전해봐!! 💪' },
+      { emoji:'🎯', msg:'🎯 70점! 다음엔 더 높이!!',          sub:'틀린 단어들만 집중하면 금방 올라가!! 파이팅!! 🔥' },
+      { emoji:'🌙', msg:'🌙 조금씩 빛나고 있어!!',            sub:'70점이면 잘하고 있는 거야!! 꾸준히 하면 반드시 올라가!! ⭐' },
+      { emoji:'🌊', msg:'🌊 파도처럼 도전 중!!',              sub:'70점대!! 물결처럼 조금씩 높아지고 있어!! 파이팅!! 💪' },
+      { emoji:'🌻', msg:'🌻 자라나는 해바라기!!',             sub:'70점이면 충분히 잘하는 거야!! 계속 하면 반드시 올라가!! ☀️' },
+      { emoji:'🐢', msg:'🐢 꾸준한 찬희!!',                   sub:'천천히 가도 괜찮아!! 70점이면 잘하고 있는 거야!! 💪💪' },
+      { emoji:'🎵', msg:'🎵 리듬을 타며 성장 중!!',           sub:'70점대!! 리듬감 있게 계속 하다 보면 80점이야!! 🎶🎶' },
+      { emoji:'🌈', msg:'🌈 무지개를 향해!!',                 sub:'70점 이상이면 이미 절반 이상 온 거야!! 계속 파이팅!! 💫' },
+      { emoji:'🦊', msg:'🦊 영리하게 도전 중!!',              sub:'70점대!! 틀린 단어 집중하면 금방 80점이야!! 💡💡' },
+      { emoji:'🌿', msg:'🌿 싱싱하게 성장 중!!',              sub:'70점이면 실력이 쌓이고 있다는 증거야!! 계속 해봐!! 🌱' },
+      { emoji:'🎪', msg:'🎪 70점 미션 클리어!!',              sub:'절반 훨씬 넘게 맞췄어!! 다음엔 더 높이!! 도전!! 🎠' },
+      { emoji:'🐧', msg:'🐧 씩씩한 70점 펭귄!!',              sub:'꾸준히 하는 찬희!! 70점에서 80점은 금방이야!! ❄️💪' },
+      { emoji:'🎀', msg:'🎀 도전하는 찬희!!',                 sub:'70점대면 잘 하고 있어!! 틀린 것 복습하면 올라가!! 💕' },
+      { emoji:'🌴', msg:'🌴 야자수처럼 꿋꿋이!!',             sub:'70점이면 충분히 잘한 거야!! 한 번 더 하면 더 올라가!! 🏖️' },
+      { emoji:'🦁', msg:'🦁 용기 있는 70점!!',                sub:'도전 자체가 대단해!! 꾸준히 하면 반드시 올라가!! 🔥🔥' },
+      { emoji:'🚀', msg:'🚀 70점으로 출발!!',                 sub:'70점에서 시작해서 100점으로 가는 여정!! 파이팅!! 🌟' },
+      { emoji:'💫', msg:'💫 반짝반짝 70점!!',                 sub:'이미 절반 넘게 맞췄어!! 조금만 더 집중하면 돼!! ✨✨' },
+      { emoji:'🎭', msg:'🎭 70점 공연 성공!!',                sub:'70점대면 충분히 잘한 거야!! 틀린 단어 복습 한 번만!! 👏' },
+      { emoji:'🌍', msg:'🌍 70점! 세계 평균 이상!!',          sub:'7할 이상이면 진짜 잘하는 거야!! 포기하지 마!! 💪💪' },
+      { emoji:'🦜', msg:'🦜 영리하게 70점!!',                 sub:'앵무새처럼 반복하면 외워져!! 틀린 단어만 집중해봐!! 🎯' },
+      { emoji:'🎋', msg:'🎋 대나무처럼 성장 중!!',            sub:'70점!! 조금씩 자라나고 있어!! 꾸준히 하면 돼!! 🌿🌿' },
+      { emoji:'🌸', msg:'🌸 조금씩 피어나는 실력!!',          sub:'70점이면 꽃처럼 피어나는 중이야!! 계속 해봐!! 🌺🌺' },
+      { emoji:'🎲', msg:'🎲 70점 도전 완료!!',               sub:'어렵지만 해냈어!! 한 번 더 하면 더 올라가!! 파이팅!! 🔥' },
+      { emoji:'🐠', msg:'🐠 물고기처럼 헤엄치며!!',           sub:'70점이면 잘 헤엄치고 있어!! 계속 나아가면 돼!! 🌊🌊' },
+      { emoji:'🎡', msg:'🎡 즐기면서 70점!!',                 sub:'즐기면서 하면 실력이 늘어!! 오늘도 수고했어!! 🎠🎠' },
+    ],
+    bgs: ['linear-gradient(135deg,#14b8a6,#10b981,#0d9488,#059669)',
+          'linear-gradient(135deg,#22c55e,#4ade80,#16a34a,#86efac)',
+          'linear-gradient(135deg,#84cc16,#a3e635,#65a30d,#bef264)',
+          'linear-gradient(135deg,#0ea5e9,#38bdf8,#0284c7,#7dd3fc)',
+          'linear-gradient(135deg,#06b6d4,#67e8f9,#0891b2,#a5f3fc)',
+          'linear-gradient(135deg,#10b981,#6ee7b7,#059669,#a7f3d0)'],
+  },
+  low: {
+    type: 'emoji', bgCount: 4, bgEmojis: ['💪','🤗','🌟','🐢','🔥','❤️'],
+    msgs: [
+      { emoji:'💪', msg:'💪 포기하지 마!! 할 수 있어!!',      sub:'틀려도 괜찮아!! 계속 하다 보면 금방 늘어!! 파이팅!! 🔥' },
+      { emoji:'🤗', msg:'🤗 괜찮아!! 다시 해 보자!!',         sub:'한 번에 다 외우는 사람은 없어!! 반복이 실력이야!! 💡' },
+      { emoji:'🌟', msg:'🌟 오늘 연습이 내일의 실력!!',       sub:'지금 어렵더라도 계속 하면 반드시 늘어!! 응원해!! 👊' },
+      { emoji:'🐢', msg:'🐢 천천히 가도 괜찮아!!',            sub:'토끼보다 거북이가 이겼잖아!! 꾸준히 하면 돼!! 화이팅!! 🌈' },
+      { emoji:'🔥', msg:'🔥 지금 이 순간이 성장 중!!',        sub:'어려운 단어를 만났다는 건 실력이 늘고 있다는 거야!! 💪' },
+      { emoji:'❤️', msg:'❤️ 찬희 최고야!! 응원해!!',          sub:'오늘 어려웠어도 내일은 더 잘 될 거야!! 포기하지 마!! 🌟' },
+      { emoji:'🌈', msg:'🌈 비 온 뒤에 무지개!!',             sub:'지금 힘들수록 나중에 더 빛날 거야!! 할 수 있어!! 💪' },
+      { emoji:'🦁', msg:'🦁 용기 있는 찬희!!',                sub:'도전하는 것 자체가 대단한 거야!! 계속 해봐!! 🔥🔥' },
+      { emoji:'🌙', msg:'🌙 오늘도 수고했어!!',               sub:'매일 하는 게 중요해!! 내일은 더 잘 될 거야!! ⭐⭐' },
+      { emoji:'🎵', msg:'🎵 천천히 하나씩!!',                 sub:'조급해하지 마!! 꾸준히 하면 반드시 올라가!! 파이팅!! 🌟' },
+      { emoji:'🌱', msg:'🌱 씨앗을 심는 중!!',                sub:'지금 심은 씨앗이 나중에 큰 나무가 돼!! 계속 해봐!! 🌳' },
+      { emoji:'🌊', msg:'🌊 파도처럼 다시 일어나!!',          sub:'넘어져도 괜찮아!! 다시 도전하면 반드시 늘어!! 💪💪' },
+      { emoji:'🦋', msg:'🦋 변화하는 중이야!!',               sub:'애벌레가 나비가 되듯 찬희도 성장 중이야!! 포기하지 마!! 🌸' },
+      { emoji:'🎯', msg:'🎯 다음엔 더 잘 될 거야!!',          sub:'어려운 단어를 만났다는 건 배우고 있다는 거야!! 파이팅!! 🔥' },
+      { emoji:'🌺', msg:'🌺 꽃은 시간이 필요해!!',            sub:'찬희도 꽃처럼 시간이 지나면 활짝 필 거야!! 응원해!! 🌸' },
+      { emoji:'🚀', msg:'🚀 준비 중!! 곧 발사!!',             sub:'지금은 준비 단계야!! 꾸준히 하면 반드시 올라가!! 🌟🌟' },
+      { emoji:'🎭', msg:'🎭 오늘의 도전은 성공!!',            sub:'점수보다 도전하는 게 더 중요해!! 잘하고 있어!! 👏👏' },
+      { emoji:'🐥', msg:'🐥 아직 성장 중인 찬희!!',           sub:'병아리도 시간이 지나면 닭이 돼!! 조금만 기다려봐!! 🐔' },
+      { emoji:'🌍', msg:'🌍 계속 나아가고 있어!!',            sub:'지구도 매일 도네!! 찬희도 매일 조금씩 늘고 있어!! 💪' },
+      { emoji:'🎪', msg:'🎪 연습이 실력이야!!',               sub:'오늘 틀린 단어가 내일의 실력이야!! 포기하지 마!! 🎠🎠' },
+      { emoji:'🌴', msg:'🌴 야자수처럼 꿋꿋이!!',             sub:'바람에 흔들려도 뿌리는 튼튼해!! 찬희도 그래!! 💪💪' },
+      { emoji:'💡', msg:'💡 어두울수록 빛이 나!!',            sub:'틀린 단어를 알게 됐다는 게 오늘의 수확이야!! 👊👊' },
+      { emoji:'🎋', msg:'🎋 대나무처럼 쭉쭉!!',              sub:'대나무는 천천히 자라지만 가장 강해!! 찬희도 그래!! 🌿' },
+      { emoji:'🦜', msg:'🦜 반복이 답이야!!',                 sub:'앵무새처럼 반복하다 보면 외워져!! 포기하지 마!! 🎯🎯' },
+      { emoji:'🌠', msg:'🌠 별은 밤에 빛나!!',                sub:'지금 힘들더라도 반드시 빛날 날이 와!! 파이팅!! ✨✨' },
+      { emoji:'🐬', msg:'🐬 물 속에서도 숨을 참을 수 있어!!', sub:'힘들어도 조금만 더!! 찬희는 할 수 있어!! 🌊🌊' },
+      { emoji:'🎸', msg:'🎸 연주는 연습에서 나와!!',          sub:'기타도 처음엔 어렵잖아!! 계속 하면 잘 돼!! 🎵🎵' },
+      { emoji:'🌞', msg:'🌞 내일은 더 밝아질 거야!!',         sub:'오늘 어려웠어도 내일은 달라질 거야!! 응원해!! ☀️☀️' },
+      { emoji:'🤩', msg:'🤩 도전 자체가 멋져!!',              sub:'어려운 걸 도전하는 찬희가 정말 대단해!! 계속 해봐!! 🌟' },
+      { emoji:'🎡', msg:'🎡 즐기면서 조금씩!!',               sub:'즐기면서 하다 보면 어느새 잘하게 돼!! 파이팅!! 🎠🎠' },
+    ],
+    bgs: ['linear-gradient(135deg,#f97316,#fb923c,#ea580c,#f59e0b)',
+          'linear-gradient(135deg,#ef4444,#f97316,#dc2626,#ea580c)',
+          'linear-gradient(135deg,#f43f5e,#fb7185,#e11d48,#f97316)',
+          'linear-gradient(135deg,#78716c,#a8a29e,#57534e,#d97706)',
+          'linear-gradient(135deg,#d97706,#fbbf24,#b45309,#f59e0b)',
+          'linear-gradient(135deg,#dc2626,#f87171,#b91c1c,#fca5a5)'],
+  },
 };
+
+function getDailyWeekKey(tier) {
+  const d = new Date(), s = new Date(d.getFullYear(), 0, 1);
+  const w = Math.ceil((((d - s) / 86400000) + s.getDay() + 1) / 7);
+  return `myeng_daily_${tier}_${d.getFullYear()}_w${w}`;
+}
+function pickDailyBg(tier, bgs) {
+  const key  = getDailyWeekKey(tier);
+  let used   = JSON.parse(localStorage.getItem(key) || '[]');
+  const avail = bgs.filter((_, i) => !used.includes(i));
+  const pool  = avail.length > 0 ? avail : bgs;
+  const idx   = bgs.indexOf(pool[Math.floor(Math.random() * pool.length)]);
+  if (avail.length === 0) used = [];
+  used.push(idx);
+  localStorage.setItem(key, JSON.stringify(used));
+  return bgs[idx];
+}
 
 function getTierKey(pct, totalWrong) {
   if (totalWrong === 0) return 100;
   if (pct >= 90) return 90;
   if (pct >= 80) return 80;
+  if (pct >= 70) return 70;
   return 'low';
+}
+
+function pickDailyMsg(tier) {
+  const msgs = DAILY_TIERS[tier].msgs;
+  const storageKey = `myeng_dmsg_${tier}`;
+  const monthKey = `${new Date().getFullYear()}_${new Date().getMonth()}`;
+  let saved = JSON.parse(localStorage.getItem(storageKey) || '{"month":"","used":[]}');
+  if (saved.month !== monthKey) saved = { month: monthKey, used: [] };
+  const avail = msgs.filter((_, i) => !saved.used.includes(i));
+  const pool  = avail.length > 0 ? avail : msgs;
+  const idx   = msgs.indexOf(pool[Math.floor(Math.random() * pool.length)]);
+  if (avail.length === 0) saved.used = [];
+  saved.used.push(idx);
+  localStorage.setItem(storageKey, JSON.stringify(saved));
+  return msgs[idx];
 }
 
 function showDailyCeremony(pct, totalWrong) {
@@ -700,23 +932,27 @@ function showDailyCeremony(pct, totalWrong) {
   const data = DAILY_TIERS[key];
   const cel  = document.getElementById('daily-cele');
 
-  // 배경 따봉 (군데군데)
-  const bgPos = [
+  const pick = pickDailyMsg(key);
+
+  // 배경 이모지 (bgCount 만큼)
+  const allPos = [
     [5,10],[15,80],[85,15],[90,75],[50,5],[30,90],[70,88],
-    [8,45],[92,45],[20,25],[75,30],[45,85],[60,10],[35,60],[80,55]
+    [8,45],[92,45],[20,25],[75,30],[45,85],[60,10],[35,60],[80,55],
+    [25,50],[65,70],[40,20],[55,40],[78,25]
   ];
-  const bgHtml = bgPos.map((p, i) => {
+  const bgEmoji = data.type === 'thumbs100' ? '👍' : data.bgEmojis[Math.floor(Math.random() * data.bgEmojis.length)];
+  const bgHtml = allPos.slice(0, data.bgCount).map((p, i) => {
     const sz = 22 + Math.floor(i % 3) * 10;
-    return `<span class="dc-bg-thumb" style="left:${p[0]}%;top:${p[1]}%;font-size:${sz}px;animation-delay:${(i*0.11).toFixed(2)}s">👍</span>`;
+    return `<span class="dc-bg-thumb" style="left:${p[0]}%;top:${p[1]}%;font-size:${sz}px;animation-delay:${(i*0.11).toFixed(2)}s">${bgEmoji}</span>`;
   }).join('');
 
   // 중앙 이모지
   const centerHtml = (data.type === 'thumbs100')
     ? `<div class="dc-100-wrap"><div class="dc-crowd" id="dc-crowd"></div><div class="dc-main">👍</div></div>`
-    : `<span class="dc-main-emoji">${data.emoji}</span>`;
+    : `<span class="dc-main-emoji">${pick.emoji}</span>`;
 
   cel.innerHTML = bgHtml + centerHtml +
-    `<div class="dc-msg">${data.msg}</div><div class="dc-sub">${data.sub}</div>`;
+    `<div class="dc-msg">${pick.msg}</div><div class="dc-sub">${pick.sub}</div>`;
 
   // 100점: 원형 따봉 군중
   if (data.type === 'thumbs100') {
@@ -734,8 +970,11 @@ function showDailyCeremony(pct, totalWrong) {
     }
   }
 
-  cel.className = 'show ' + data.cls;
-  setTimeout(() => { cel.className = ''; }, 5000);
+  const bg = pickDailyBg(key, data.bgs);
+  cel.style.background = bg;
+  cel.style.backgroundSize = '400% 400%';
+  cel.className = 'show';
+  setTimeout(() => { cel.className = ''; cel.style.background = ''; }, 5000);
 }
 
 
@@ -749,5 +988,6 @@ function shuffle(arr) {
 </script>
 <script src="nav.js"></script>
 <script>initNav('daily');</script>
+<footer style="height:56px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#e2e8f0">· · ·</footer>
 </body>
 </html>
