@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎉 세러머니 미리보기</title>
+  <script>if(new URLSearchParams(location.search).get('dev')!=='1'){document.documentElement.style.display='none';location.replace('index.html');}</script>
   <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,7 +42,26 @@
     .dc-main-emoji { font-size: 90px; display: block; animation: dcNormalSpin 1.2s linear infinite; }
     .dc-crowd { position: absolute; inset: 0; }
     .dc-crowd-thumb { position: absolute; font-size: 30px; animation: dcCheer 1.0s ease-in-out infinite alternate; }
-    .dc-bg-thumb { position: absolute; animation: dcBgFloat 1.4s ease-in-out infinite alternate; pointer-events: none; z-index: 0; }
+    .dc-bg-thumb { position: absolute; pointer-events: none; z-index: 0; font-family: 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif; font-variant-emoji: emoji; }
+    .dc-fly-emoji { position: absolute; pointer-events: none; z-index: 1; font-family: 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif; font-variant-emoji: emoji; animation: dc100FlyUp linear forwards; }
+    @keyframes dc100FlyUp { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 100%{transform:translateY(-110vh) rotate(540deg) scale(0.4);opacity:0} }
+    @keyframes dc100Spin     { 0%{transform:translate(0,0)       rotate(0)      scale(1);opacity:.6}  25%{transform:translate(30px,-40px)  rotate(90deg)  scale(1.5);opacity:1}  50%{transform:translate(-20px,-60px) rotate(180deg) scale(.8);opacity:.7}  75%{transform:translate(-35px,20px)  rotate(270deg) scale(1.6);opacity:1}  100%{transform:translate(0,0)       rotate(360deg) scale(1);opacity:.6} }
+    @keyframes dc100Pulse    { 0%{transform:translate(0,0)       scale(.4);opacity:.25}  33%{transform:translate(0,-50px)    scale(2.2);opacity:1}   66%{transform:translate(0,30px)     scale(.6);opacity:.5}  100%{transform:translate(0,0)       scale(.4);opacity:.25} }
+    @keyframes dc100Flash    { 0%{transform:translate(20px,0)    scale(.5);opacity:0}  20%{transform:translate(-15px,-30px) scale(1.5) rotate(20deg);opacity:1}  50%{transform:translate(10px,-50px)  scale(1);opacity:.7}  80%{transform:translate(-20px,-20px) scale(1.3) rotate(-15deg);opacity:1}  100%{transform:translate(20px,0)    scale(.5);opacity:0} }
+    @keyframes dc100Roll     { 0%{transform:translate(0,0)       rotate(0)      scale(1);opacity:.6}  40%{transform:translate(-30px,-50px) rotate(540deg) scale(1.8);opacity:1}  70%{transform:translate(25px,20px)   rotate(720deg) scale(.5);opacity:.5}  100%{transform:translate(0,0)       rotate(1080deg)scale(1);opacity:.6} }
+    @keyframes dc100Zoom     { 0%{transform:translate(15px,10px) scale(.15) rotate(-20deg);opacity:0}  45%{transform:translate(-20px,-40px) scale(2.8) rotate(15deg);opacity:1}  75%{transform:translate(30px,-20px)  scale(.7) rotate(-5deg);opacity:.6}  100%{transform:translate(15px,10px) scale(.15) rotate(-20deg);opacity:0} }
+    @keyframes dc100Swing    { 0%{transform:translate(0,0)       rotate(-45deg) scale(.6);opacity:.3}  25%{transform:translate(40px,-35px)  rotate(30deg)  scale(2.0);opacity:1}  50%{transform:translate(-30px,-55px) rotate(-20deg) scale(1.1);opacity:.7}  75%{transform:translate(35px,15px)   rotate(25deg)  scale(1.6);opacity:1}  100%{transform:translate(0,0)       rotate(-45deg) scale(.6);opacity:.3} }
+    @keyframes dc100Bounce   { 0%{transform:translate(0,0)       scale(1);opacity:.6}  20%{transform:translate(25px,-55px)  scale(1.4);opacity:1}  45%{transform:translate(-20px,-30px) scale(.9);opacity:.8}  65%{transform:translate(30px,20px)   scale(1.3);opacity:.9}  80%{transform:translate(-15px,10px)  scale(.8);opacity:.7}  100%{transform:translate(0,0)       scale(1);opacity:.6} }
+    @keyframes dc100Shake    { 0%{transform:translate(0,0)       rotate(0);opacity:.6}  20%{transform:translate(-30px,-20px) rotate(-25deg) scale(1.5);opacity:1}  40%{transform:translate(35px,-40px)  rotate(20deg)  scale(.7);opacity:.8}  60%{transform:translate(-25px,15px)  rotate(-15deg) scale(1.4);opacity:1}  80%{transform:translate(20px,-30px)  rotate(10deg)  scale(.9);opacity:.7}  100%{transform:translate(0,0)       rotate(0);opacity:.6} }
+    @keyframes dc100Spiral   { 0%{transform:translate(0,0)       rotate(0)      scale(1);opacity:.5}  25%{transform:translate(-35px,-40px) rotate(270deg) scale(1.7);opacity:1}  50%{transform:translate(30px,-55px)  rotate(540deg) scale(.5);opacity:.6}  75%{transform:translate(-20px,25px)  rotate(810deg) scale(1.4);opacity:.9}  100%{transform:translate(0,0)       rotate(1080deg)scale(1);opacity:.5} }
+    @keyframes dc100Flip     { 0%{transform:translate(0,0)       rotateY(0)   scale(1);opacity:.6}  30%{transform:translate(30px,-45px)  rotateY(180deg) scale(1.8);opacity:1}  60%{transform:translate(-25px,-20px) rotateY(360deg) scale(.5);opacity:.4}  80%{transform:translate(20px,15px)   rotateY(270deg) scale(1.2);opacity:.8}  100%{transform:translate(0,0)       rotateY(360deg) scale(1);opacity:.6} }
+    @keyframes dc100Wobble   { 0%{transform:translate(0,0)       rotate(0)    scale(1);opacity:.5}  15%{transform:translate(-20px,-35px) rotate(-20deg) scale(1.5);opacity:.9}  30%{transform:translate(25px,-50px)  rotate(18deg)  scale(.8);opacity:1}  50%{transform:translate(-30px,-20px) rotate(-12deg) scale(1.3);opacity:.8}  70%{transform:translate(20px,15px)   rotate(10deg)  scale(.9);opacity:.9}  100%{transform:translate(0,0)       rotate(0)      scale(1);opacity:.5} }
+    @keyframes dc100Heartbeat{ 0%{transform:translate(0,0)       scale(1);opacity:.6}  14%{transform:translate(0,-30px)    scale(1.6);opacity:1}  28%{transform:translate(20px,-45px)  scale(.9);opacity:.7}  42%{transform:translate(-15px,-60px) scale(1.7);opacity:1}  60%{transform:translate(25px,-35px)  scale(.85);opacity:.6}  80%{transform:translate(-10px,10px)  scale(1.2);opacity:.8}  100%{transform:translate(0,0)       scale(1);opacity:.6} }
+    @keyframes dc100Tada     { 0%{transform:translate(0,0)       scale(1)   rotate(0);opacity:.6}  15%{transform:translate(20px,-25px)  scale(1.5) rotate(-10deg);opacity:1}  30%{transform:translate(-15px,-45px) scale(1.5) rotate(10deg);opacity:1}  50%{transform:translate(25px,-55px)  scale(1.5) rotate(-8deg);opacity:1}  65%{transform:translate(-20px,-30px) scale(1.3) rotate(6deg);opacity:.9}  80%{transform:translate(10px,-15px)  scale(1.1) rotate(-3deg);opacity:.8}  100%{transform:translate(0,0)       scale(1)   rotate(0);opacity:.6} }
+    @keyframes dc100Jelly    { 0%{transform:translate(0,0)       scale(1,1);opacity:.6}  20%{transform:translate(0,-40px)    scale(.6,1.8);opacity:1}  40%{transform:translate(25px,-30px)  scale(1.8,.6);opacity:.8}  60%{transform:translate(-20px,-50px) scale(.75,1.35);opacity:.9}  80%{transform:translate(15px,-20px)  scale(1.2,.8);opacity:.8}  100%{transform:translate(0,0)       scale(1,1);opacity:.6} }
+    @keyframes dc100Rush     { 0%{transform:translate(0,50px)    scale(0)   rotate(-180deg);opacity:0}  35%{transform:translate(-20px,-40px) scale(2.2) rotate(15deg);opacity:1}  60%{transform:translate(25px,-60px)  scale(.7)  rotate(-5deg);opacity:.8}  80%{transform:translate(-15px,-35px) scale(1.2) rotate(5deg);opacity:.9}  100%{transform:translate(0,-80px)   scale(0)   rotate(180deg);opacity:0} }
+    @keyframes dc100PopPiece { 0%{transform:translate(0,0) rotate(0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) rotate(var(--dr)) scale(0);opacity:0} }
+    .dc-pop-piece { position:fixed; pointer-events:none; z-index:10000; font-size:24px; animation:dc100PopPiece 0.6s ease-out forwards; }
     .dc-msg { font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-top: 16px; z-index: 2; text-align: center; padding: 0 20px; }
     .dc-sub { font-size: 18px; color: rgba(255,255,255,0.9); margin-top: 8px; font-weight: 700; z-index: 2; text-align: center; padding: 0 24px; line-height: 1.5; }
 
@@ -147,22 +167,68 @@ function getTierKey(pct, totalWrong) {
   return 'low';
 }
 
+const ANIMS100 = [
+  {name:'dc100Spin',      dur:()=>(0.7+Math.random()*.7).toFixed(2)+'s', tf:'linear',      dir:'normal'},
+  {name:'dc100Spin',      dur:()=>(0.5+Math.random()*.5).toFixed(2)+'s', tf:'linear',      dir:'reverse'},
+  {name:'dc100Pulse',     dur:()=>(0.4+Math.random()*.5).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Pulse',     dur:()=>(0.8+Math.random()*.8).toFixed(2)+'s', tf:'ease-in',     dir:'alternate'},
+  {name:'dc100Flash',     dur:()=>(0.3+Math.random()*.4).toFixed(2)+'s', tf:'ease',        dir:'normal'},
+  {name:'dc100Flash',     dur:()=>(0.6+Math.random()*.5).toFixed(2)+'s', tf:'ease',        dir:'alternate'},
+  {name:'dc100Roll',      dur:()=>(0.9+Math.random()*.8).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Roll',      dur:()=>(0.6+Math.random()*.5).toFixed(2)+'s', tf:'linear',      dir:'reverse'},
+  {name:'dc100Zoom',      dur:()=>(0.6+Math.random()*.7).toFixed(2)+'s', tf:'ease',        dir:'normal'},
+  {name:'dc100Zoom',      dur:()=>(1.0+Math.random()*.8).toFixed(2)+'s', tf:'ease-in-out', dir:'alternate'},
+  {name:'dc100Swing',     dur:()=>(0.5+Math.random()*.6).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Swing',     dur:()=>(0.8+Math.random()*.6).toFixed(2)+'s', tf:'ease',        dir:'alternate-reverse'},
+  {name:'dc100Bounce',    dur:()=>(0.5+Math.random()*.5).toFixed(2)+'s', tf:'ease-out',    dir:'alternate'},
+  {name:'dc100Bounce',    dur:()=>(0.8+Math.random()*.7).toFixed(2)+'s', tf:'ease-out',    dir:'normal'},
+  {name:'dc100Shake',     dur:()=>(0.3+Math.random()*.4).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Shake',     dur:()=>(0.6+Math.random()*.5).toFixed(2)+'s', tf:'linear',      dir:'alternate'},
+  {name:'dc100Spiral',    dur:()=>(0.8+Math.random()*.8).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Spiral',    dur:()=>(0.6+Math.random()*.5).toFixed(2)+'s', tf:'linear',      dir:'reverse'},
+  {name:'dc100Flip',      dur:()=>(0.6+Math.random()*.6).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Flip',      dur:()=>(0.4+Math.random()*.4).toFixed(2)+'s', tf:'linear',      dir:'alternate'},
+  {name:'dc100Wobble',    dur:()=>(0.7+Math.random()*.6).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Wobble',    dur:()=>(1.0+Math.random()*.7).toFixed(2)+'s', tf:'ease',        dir:'alternate'},
+  {name:'dc100Heartbeat', dur:()=>(0.4+Math.random()*.4).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Heartbeat', dur:()=>(0.7+Math.random()*.5).toFixed(2)+'s', tf:'ease',        dir:'alternate'},
+  {name:'dc100Tada',      dur:()=>(0.6+Math.random()*.5).toFixed(2)+'s', tf:'ease-in-out', dir:'normal'},
+  {name:'dc100Tada',      dur:()=>(0.9+Math.random()*.6).toFixed(2)+'s', tf:'ease',        dir:'alternate'},
+  {name:'dc100Jelly',     dur:()=>(0.4+Math.random()*.4).toFixed(2)+'s', tf:'ease-in-out', dir:'alternate'},
+  {name:'dc100Jelly',     dur:()=>(0.7+Math.random()*.5).toFixed(2)+'s', tf:'linear',      dir:'normal'},
+  {name:'dc100Rush',      dur:()=>(0.7+Math.random()*.6).toFixed(2)+'s', tf:'ease',        dir:'normal'},
+  {name:'dc100Rush',      dur:()=>(0.5+Math.random()*.4).toFixed(2)+'s', tf:'ease-in-out', dir:'alternate'},
+];
+
 function previewDaily(pct, totalWrong) {
   const key  = getTierKey(pct, totalWrong);
   const data = DAILY_TIERS[key];
   const cel  = document.getElementById('daily-cele');
-  const msgs = data.msgs;
-  const pick = msgs[Math.floor(Math.random() * msgs.length)];
-  const allPos = [
-    [5,10],[15,80],[85,15],[90,75],[50,5],[30,90],[70,88],
-    [8,45],[92,45],[20,25],[75,30],[45,85],[60,10],[35,60],[80,55],
-    [25,50],[65,70],[40,20],[55,40],[78,25]
-  ];
-  const bgEmoji = data.type === 'thumbs100' ? '👍' : data.bgEmojis[Math.floor(Math.random() * data.bgEmojis.length)];
-  const bgHtml = allPos.slice(0, data.bgCount).map((p, i) => {
-    const sz = 22 + (i % 3) * 10;
-    return `<span class="dc-bg-thumb" style="left:${p[0]}%;top:${p[1]}%;font-size:${sz}px;animation-delay:${(i*0.11).toFixed(2)}s">${bgEmoji}</span>`;
-  }).join('');
+  const pick = data.msgs[Math.floor(Math.random() * data.msgs.length)];
+
+  let bgHtml = '';
+  if (data.type === 'thumbs100') {
+    const thumbVariants = ['👍','👍🏻','👍🏼','👍🏽','👍🏾','👍🏿','👍👍','👍🏻👍🏼','👍🏽👍🏾','👍👍👍','🤙','🤜🤛','✌️','🙌','👏'];
+    const positions = [];
+    for (let row = 0; row < 5; row++) for (let col = 0; col < 7; col++) {
+      positions.push([col*14+2+Math.random()*6, row*18+2+Math.random()*8]);
+    }
+    bgHtml = positions.map((p, i) => {
+      const a = ANIMS100[i % ANIMS100.length];
+      const dur = a.dur(), delay = (Math.random()*1.5).toFixed(2)+'s';
+      const sz = 18 + Math.floor(Math.random()*36);
+      const emoji = thumbVariants[Math.floor(Math.random()*thumbVariants.length)];
+      return `<span class="dc-bg-thumb dc-bg-pop" style="left:${p[0].toFixed(1)}%;top:${p[1].toFixed(1)}%;font-size:${sz}px;animation:${a.name} ${dur} ${a.tf} ${delay} infinite ${a.dir}">${emoji}</span>`;
+    }).join('');
+  } else {
+    const allPos = [[5,10],[15,80],[85,15],[90,75],[50,5],[30,90],[70,88],[8,45],[92,45],[20,25],[75,30],[45,85],[60,10],[35,60],[80,55],[25,50],[65,70],[40,20],[55,40],[78,25]];
+    const bgEmoji = data.bgEmojis[Math.floor(Math.random() * data.bgEmojis.length)];
+    bgHtml = allPos.slice(0, data.bgCount).map((p, i) => {
+      const sz = 22 + (i % 3) * 10;
+      return `<span class="dc-bg-thumb" style="left:${p[0]}%;top:${p[1]}%;font-size:${sz}px;animation:dcBgFloat 1.4s ease-in-out ${(i*0.11).toFixed(2)}s infinite alternate">${bgEmoji}</span>`;
+    }).join('');
+  }
+
   const centerHtml = (data.type === 'thumbs100')
     ? `<div class="dc-100-wrap"><div class="dc-crowd" id="dc-crowd"></div><div class="dc-main">👍</div></div>`
     : `<span class="dc-main-emoji">${pick.emoji}</span>`;
@@ -179,11 +245,52 @@ function previewDaily(pct, totalWrong) {
       sp.style.animationDelay = (i * 0.07) + 's';
       crowd.appendChild(sp);
     }
+    // 따봉 클릭 터지기
+    cel.querySelectorAll('.dc-bg-pop').forEach(el => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const rect = this.getBoundingClientRect();
+        const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+        const pieces = ['👍','✨','💥','⭐','🎉','🌟','💯'];
+        for (let k = 0; k < 8; k++) {
+          const p = document.createElement('span');
+          p.className = 'dc-pop-piece';
+          p.textContent = pieces[Math.floor(Math.random()*pieces.length)];
+          const angle = (k/8)*Math.PI*2, dist = 60+Math.random()*80;
+          p.style.setProperty('--dx', Math.cos(angle)*dist+'px');
+          p.style.setProperty('--dy', Math.sin(angle)*dist+'px');
+          p.style.setProperty('--dr', (Math.random()*720-360)+'deg');
+          p.style.left = cx+'px'; p.style.top = cy+'px';
+          document.body.appendChild(p);
+          p.addEventListener('animationend', () => p.remove());
+        }
+        this.style.animation = 'none'; this.style.opacity = '0';
+        setTimeout(() => this.remove(), 100);
+      }, {once: true});
+    });
   }
   const bg = data.bgs[Math.floor(Math.random() * data.bgs.length)];
   cel.style.background = bg;
   cel.style.backgroundSize = '400% 400%';
   cel.className = 'show';
+
+  if (data.type === 'thumbs100') {
+    const flyEmojis = ['👍','👍🏻','👍🏼','👍🏽','👍🏾','👍🏿','👍👍','🏆','💯','✨','🎉','⭐','🌟','🥇','💪','🙌','👏'];
+    let flyCount = 0;
+    const flyIv = setInterval(() => {
+      if (flyCount++ > 60 || !cel.classList.contains('show')) { clearInterval(flyIv); return; }
+      const el = document.createElement('span');
+      el.className = 'dc-fly-emoji';
+      el.textContent = flyEmojis[Math.floor(Math.random() * flyEmojis.length)];
+      el.style.left   = (Math.random() * 94) + 'vw';
+      el.style.bottom = '-60px';
+      el.style.fontSize = (24 + Math.floor(Math.random() * 28)) + 'px';
+      el.style.animationDuration = (1.2 + Math.random() * 1.5) + 's';
+      cel.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }, 80);
+  }
 }
 
 // ── SENTENCE CEREMONY ──

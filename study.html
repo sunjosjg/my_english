@@ -12,7 +12,7 @@
       --green: #10b981; --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff;
       --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Playpen Sans', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+    body { font-family: 'Playpen Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
     button, input, select, textarea { font-family: inherit; }
 
     /* LAYOUT */
@@ -410,10 +410,12 @@ let sentenceRevealed = new Set(); // 숨김 모드에서 개별 행 공개 상�
 function toggleSentenceMode() {
   showSentence = !showSentence;
   document.getElementById('btn-sentence').classList.toggle('on', showSentence);
-  const hideBtn = document.getElementById('btn-sent-hide');
-  const micBtn  = document.getElementById('btn-mic');
-  hideBtn.style.display = showSentence ? '' : 'none';
-  micBtn.style.display  = showSentence ? 'none' : '';
+  const hideBtn     = document.getElementById('btn-sent-hide');
+  const micBtn      = document.getElementById('btn-mic');
+  const hideToggle  = document.getElementById('btn-hide-toggle');
+  hideBtn.style.display    = showSentence ? '' : 'none';
+  micBtn.style.display     = showSentence ? 'none' : (hideMode !== 0 ? '' : 'none');
+  hideToggle.style.display = showSentence ? 'none' : '';
   if (showSentence) { stopListening(); }
   if (!showSentence) { sentenceWordHide = false; sentenceRevealed.clear(); hideBtn.innerHTML = '👁 단어보기'; hideBtn.classList.remove('on'); }
   renderWordList();
