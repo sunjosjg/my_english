@@ -46,6 +46,7 @@
     .unit-done-btn:hover { opacity: 1; transform: scale(1.2); }
     .unit-card.done .unit-done-btn { opacity: 1; }
     .mode-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
+    .mode-print-row { display: flex; gap: 8px; }
     .mode-card { padding: 10px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); text-align: center; cursor: pointer; transition: all 0.15s; }
     .mode-card:hover { border-color: var(--primary-light); }
     .mode-card.on { border-color: var(--primary); background: var(--primary-bg); }
@@ -67,7 +68,7 @@
     @media print {
       body > * { display: none !important; }
       #print-area { display: block !important; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; }
-      @page { margin: 0; size: A4; }
+      @page { margin: 0; size: A4; duplex: simplex; }
 
       /* ── 1페이지: 문장 빈칸 ── */
       #pt-page1 { padding: 8mm 12mm; page-break-after: always; }
@@ -76,11 +77,31 @@
       .pt-grid  { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; }
       .pt-item  { display: flex; align-items: baseline; gap: 5px; padding: 2.5mm 0; border-bottom: 1px dotted #ccc; break-inside: avoid; }
       .pt-no       { color: #999; min-width: 18px; font-size: 9pt; }
-      .pt-sentence { flex: 1; line-height: 1.4; font-size: 10pt; }
-      .pt-blank    { display: inline-block; border-bottom: 1.2px solid #333; min-width: 40px; }
-      .pt-bank      { margin-top: 4mm; padding: 2mm 4mm; border: 1px solid #999; border-radius: 3px; }
-      .pt-bank-title { font-weight: bold; font-size: 9pt; margin-bottom: 1.5mm; }
-      .pt-bank-words { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 9pt; }
+      .pt-sentence { flex: 1; line-height: 1.3; font-size: 9.5pt; }
+      .pt-blank    { display: inline-block; border-bottom: 1.2px solid #333; min-width: 40px; vertical-align: bottom; height: 1em; }
+      .pt-bank      { margin-top: 3mm; padding: 1.5mm 4mm; border: 1px solid #999; border-radius: 3px; }
+      .pt-bank-title { font-weight: bold; font-size: 9pt; margin-bottom: 1mm; }
+      .pt-bank-words { display: flex; flex-wrap: wrap; gap: 3px 10px; font-size: 9pt; }
+      /* ── 1페이지 정답 영역 ── */
+      .pt-ans-section { margin-top: 2mm; border-top: 1px dashed #bbb; padding-top: 3mm; display: flex; gap: 3mm; }
+      .pt-ans-col { flex: 1; }
+      .pt-ans-label { font-size: 8pt; font-weight: bold; color: #888; margin-bottom: 1.5mm; }
+      .pt-ans-list { columns: 2; column-gap: 6px; font-size: 8pt; color: #555; }
+      .pt-ans-item { display: block; line-height: 1.7; }
+
+      /* ── 3페이지: 전체 복습 (가로) ── */
+      @page landscape { size: A4 landscape; margin: 10mm; }
+      #pt-page3 { padding: 0; page-break-before: always; page: landscape; }
+      .pr-title { font-size: 13pt; font-weight: bold; text-align: center; margin-bottom: 4mm; }
+      .pr-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+      .pr-table th { background: #f0f0f0; font-weight: bold; text-align: center; padding: 1.5mm 2mm; border: 1px solid #ccc; font-size: 8.5pt; }
+      .pr-table td { padding: 1.5mm 3mm; border: 1px solid #ddd; vertical-align: middle; line-height: 1.2; }
+      .pr-table tr:nth-child(even) td { background: #fafafa; }
+      .pr-no    { width: 7mm; text-align: center; color: #999; font-size: 8pt; }
+      .pr-en    { width: 40mm; font-weight: 600; }
+      .pr-kr    { width: 40mm; color: #444; }
+      .pr-sent  { width: 80mm; color: #333; }
+      .pr-ans   { font-weight: bold; color: #5b4fcf; text-decoration: underline; }
 
       /* ── 2페이지: 단어 쓰기 (반으로 잘라서 사용) ── */
       #pt-page2 { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; padding: 10mm 0 8mm; }
@@ -135,9 +156,15 @@
       <div class="mc-top"><span class="mc-icon">📝</span><span class="mc-label">Daily Test</span></div>
       <span class="mc-desc">3단계 최종 테스트</span>
     </div>
-    <div class="mode-card" data-mode="print">
-      <div class="mc-top"><span class="mc-icon">🖨️</span><span class="mc-label">인쇄</span></div>
-      <span class="mc-desc">A4 워크시트</span>
+    <div class="mode-print-row">
+      <div class="mode-card" style="flex:1" data-mode="print-all">
+        <div class="mc-top"><span class="mc-icon">📖</span><span class="mc-label">전체 인쇄</span></div>
+        <span class="mc-desc">복습 포함 3페이지</span>
+      </div>
+      <div class="mode-card" style="flex:1" data-mode="print">
+        <div class="mc-top"><span class="mc-icon">🖨️</span><span class="mc-label">Test 인쇄</span></div>
+        <span class="mc-desc">2페이지 워크시트</span>
+      </div>
     </div>
   </div>
 
@@ -153,6 +180,20 @@
     <div class="pt-bank">
       <div class="pt-bank-title">✦ Word Bank</div>
       <div class="pt-bank-words" id="pt-bank-words"></div>
+    </div>
+    <div class="pt-ans-section">
+      <div class="pt-ans-col">
+        <div class="pt-ans-label">✂ 문장 정답</div>
+        <div class="pt-ans-list" id="pt-ans-sentence"></div>
+      </div>
+      <div class="pt-ans-col">
+        <div class="pt-ans-label" id="pt-ans-label-left"></div>
+        <div class="pt-ans-list" id="pt-ans-left"></div>
+      </div>
+      <div class="pt-ans-col">
+        <div class="pt-ans-label" id="pt-ans-label-right"></div>
+        <div class="pt-ans-list" id="pt-ans-right"></div>
+      </div>
     </div>
   </div>
   <!-- 2페이지: 단어 쓰기 (반으로 잘라서 사용) -->
@@ -170,6 +211,13 @@
         <div id="pw-kr-list"></div>
       </div>
     </div>
+  </div>
+  <!-- 3페이지: 전체 복습 (영어·한글·문장·쓰기) -->
+  <div id="pt-page3">
+    <div class="pr-title" id="pr-title"></div>
+    <table class="pr-table">
+      <tbody id="pr-tbody"></tbody>
+    </table>
   </div>
 </div>
 
@@ -335,26 +383,51 @@ function goCheck() {
 }
 
 
-function startPrint() {
-  const unitLabel = `${selCourse.label}  ${selType.label}  ${selUnit.short}. ${selUnit.label}`;
+function startPrint(showAll = true) {
+  document.getElementById('pt-page3').style.display = showAll ? '' : 'none';
+  const afterPrint = () => {
+    document.getElementById('pt-page3').style.display = '';
+    window.removeEventListener('afterprint', afterPrint);
+  };
+  window.addEventListener('afterprint', afterPrint);
+  const stripDate = s => s.replace(/\d{4}년\s*\d{1,2}월\s*/g, '').trim();
+  const unitLabel = `${stripDate(selCourse.label)}  ${stripDate(selType.label)}  ${selUnit.short}. ${stripDate(selUnit.label)}`;
+
+  // ── 매 인쇄마다 전체 셔플 ──
+  const printWords = shuffle([...words]);
 
   // ── 1페이지: 문장 빈칸 ──
   document.getElementById('pt-title').textContent = unitLabel;
-  document.getElementById('pt-meta').textContent =
-    `이름: ___________________    날짜: ___________________    점수: ________`;
+  document.getElementById('pt-meta').textContent = '';
   const grid = document.getElementById('pt-grid');
   grid.innerHTML = '';
-  words.forEach(w => {
+  printWords.forEach((w, i) => {
     const bw = (w.answer.length + 5) + 'ch';
     const sentHtml = w.sentence.replace('___', `<span class="pt-blank" style="min-width:${bw}"></span>`);
     const item = document.createElement('div');
     item.className = 'pt-item';
-    item.innerHTML = `<span class="pt-no">${w.no}.</span><span class="pt-sentence">${sentHtml}</span>`;
+    item.innerHTML = `<span class="pt-no">${i+1}.</span><span class="pt-sentence">${sentHtml}</span>`;
     grid.appendChild(item);
   });
-  const shuffled = shuffle([...words]);
+  const shuffled = shuffle([...printWords]);
   document.getElementById('pt-bank-words').innerHTML =
     shuffled.map(w => `<span>${w.answer}</span>`).join(' &nbsp;·&nbsp; ');
+
+  // ── 2페이지 데이터 (정답에서도 공유) ──
+  const swapped    = Math.random() < 0.5;
+  const leftWords  = shuffle([...printWords]);
+  const rightWords = shuffle([...printWords]);
+  const leftIsEn   = !swapped;
+
+  // ── 1페이지 하단 정답 ──
+  document.getElementById('pt-ans-sentence').innerHTML =
+    printWords.map((w, i) => `<span class="pt-ans-item">${i+1}. ${w.answer}</span>`).join('');
+  document.getElementById('pt-ans-label-left').textContent  = leftIsEn ? '영어→한글 정답' : '한글→영어 정답';
+  document.getElementById('pt-ans-label-right').textContent = leftIsEn ? '한글→영어 정답' : '영어→한글 정답';
+  document.getElementById('pt-ans-left').innerHTML =
+    leftWords.map((w, i) => `<span class="pt-ans-item">${i+1}. ${leftIsEn ? w.korean.split(',')[0].trim() : w.english}</span>`).join('');
+  document.getElementById('pt-ans-right').innerHTML =
+    rightWords.map((w, i) => `<span class="pt-ans-item">${i+1}. ${leftIsEn ? w.english : w.korean.split(',')[0].trim()}</span>`).join('');
 
   // ── 2페이지: 단어 쓰기 ──
   document.getElementById('pw-page-title').textContent = unitLabel + ' — 단어 쓰기';
@@ -368,11 +441,6 @@ function startPrint() {
   const krList = document.getElementById('pw-kr-list');
   enList.innerHTML = '';
   krList.innerHTML = '';
-
-  const swapped = Math.random() < 0.5;
-  const leftWords  = shuffle([...words]);
-  const rightWords = shuffle([...words]);
-  const leftIsEn   = !swapped;
 
   const leftHeader  = document.querySelector('#pt-page2 .pw-half:first-child .pw-section-header');
   const rightHeader = document.querySelector('#pt-page2 .pw-half:last-child .pw-section-header');
@@ -396,6 +464,21 @@ function startPrint() {
     row.innerHTML = `<span class="pw-no">${i + 1}.</span><span class="pw-word">${word}</span><span class="pw-line"></span>`;
     krList.appendChild(row);
   });
+
+  // ── 3페이지: 전체 복습 ──
+  document.getElementById('pr-title').textContent = unitLabel + ' — 전체';
+  document.getElementById('pr-tbody').innerHTML = printWords.map(w => {
+    const bw = (w.answer.length + 4) + 'ch';
+    const sentFull  = w.sentence.replace('___', `<span class="pr-ans">${w.answer}</span>`);
+    const blankSpaces = '\u00A0'.repeat((w.answer.length + 4) * 2);
+    const sentBlank = w.sentence.replace('___', `<u style="text-decoration-color:#333">${blankSpaces}</u>`);
+    return `<tr>
+      <td class="pr-en">${w.english}</td>
+      <td class="pr-kr">${w.korean.split(',')[0].trim()}</td>
+      <td class="pr-sent">${sentFull}</td>
+      <td class="pr-sent">${sentBlank}</td>
+    </tr>`;
+  }).join('');
 
   window.print();
 }
@@ -446,7 +529,10 @@ function showToast(msg) {
 }
 </script>
 <script src="nav.js"></script>
-<script>initNav('index', { printFn: async () => { if (await loadWords()) startPrint(); } });</script>
+<script>initNav('index', {
+  printFn:    async () => { if (await loadWords()) startPrint(false); },
+  printAllFn: async () => { if (await loadWords()) startPrint(true); }
+});</script>
 <footer style="height:56px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#e2e8f0">· · ·</footer>
 </body>
 </html>

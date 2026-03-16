@@ -109,6 +109,7 @@
   let _page = '';
   let _onLeave = null;
   let _printFn = null;
+  let _printAllFn = null;
   let _navUnit = null;
 
   // ── Public API ──
@@ -116,6 +117,7 @@
     _page = page;
     _onLeave = (opts && opts.onLeave) || null;
     _printFn = (opts && opts.printFn) || null;
+    _printAllFn = (opts && opts.printAllFn) || null;
     if (page === 'index') {
       homeBtn.style.display = 'none';
       unitBar.style.left = '70px';
@@ -199,7 +201,8 @@
     html += `<button class="nav-btn${cur('check')}" ${act('check')}>📷 정답 채점${_page === 'check' ? ' (현재)' : ''}</button>`;
 
     if (isIndex) {
-      html += `<button class="nav-btn" onclick="navGo('print')">🖨️ 인쇄</button>`;
+      html += `<button class="nav-btn" onclick="navGo('print')">🖨️ Test 인쇄</button>`;
+      html += `<button class="nav-btn" onclick="navGo('print-all')">📖 전체 인쇄</button>`;
     }
 
     return html;
@@ -211,6 +214,7 @@
 
     if (mode === 'home') { location.href = 'index.html'; return; }
     if (mode === 'print' && _printFn) { _printFn(); return; }
+    if (mode === 'print-all' && _printAllFn) { _printAllFn(); return; }
 
     let p;
     if (_page === 'index' && _navUnit) {
