@@ -74,7 +74,7 @@
       #pt-page1 { padding: 8mm 12mm; page-break-after: always; }
       .pt-title { font-size: 14pt; font-weight: bold; text-align: center; margin-bottom: 2mm; }
       .pt-meta  { font-size: 9pt; color: #555; text-align: center; margin-bottom: 4mm; }
-      .pt-grid  { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; }
+      .pt-grid  { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; grid-auto-flow: column; }
       .pt-item  { display: flex; align-items: baseline; gap: 5px; padding: 2.5mm 0; border-bottom: 1px dotted #ccc; break-inside: avoid; }
       .pt-no       { color: #999; min-width: 18px; font-size: 9pt; }
       .pt-sentence { flex: 1; line-height: 1.3; font-size: 9.5pt; }
@@ -401,6 +401,8 @@ function startPrint(showAll = true) {
   document.getElementById('pt-meta').textContent = '';
   const grid = document.getElementById('pt-grid');
   grid.innerHTML = '';
+  const half = Math.ceil(printWords.length / 2);
+  grid.style.gridTemplateRows = `repeat(${half}, auto)`;
   printWords.forEach((w, i) => {
     const bw = (w.answer.length + 5) + 'ch';
     const sentHtml = w.sentence.replace('___', `<span class="pt-blank" style="min-width:${bw}"></span>`);
