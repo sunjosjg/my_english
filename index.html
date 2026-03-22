@@ -8,7 +8,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="찬희하이">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -17,7 +16,7 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Playpen Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     button, input, select, textarea { font-family: inherit; }
     .page { padding: 16px; max-width: 860px; margin: 0 auto; }
     .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
@@ -50,10 +49,10 @@
     .mode-card { padding: 10px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); text-align: center; cursor: pointer; transition: all 0.15s; }
     .mode-card:hover { border-color: var(--primary-light); }
     .mode-card.on { border-color: var(--primary); background: var(--primary-bg); }
-    .mode-card .mc-top { display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .mode-card .mc-top { display: flex; align-items: center; justify-content: center; gap: 6px; line-height: 1; }
     .mode-card .mc-icon { font-size: 22px; flex-shrink: 0; }
     .mode-card .mc-label { font-size: 14px; font-weight: 700; }
-    .mode-card .mc-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .mode-card .mc-desc { font-size: 12px; color: var(--muted); margin-top: 3px; display: block; }
     .start-btn { width: 100%; padding: 16px; margin-top: 20px; margin-bottom: 32px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-size: 18px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
     .start-btn:hover { background: var(--primary-light); }
     .start-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
@@ -67,7 +66,7 @@
     #print-area { display: none; }
     @media print {
       body > * { display: none !important; }
-      #print-area { display: block !important; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; }
+      #print-area { display: block !important; font-family: sans-serif; }
       @page { margin: 0; size: A4; duplex: simplex; }
 
       /* ── 1페이지: 문장 빈칸 ── */
@@ -348,9 +347,10 @@ function renderUnits() {
     const el = document.createElement('div');
     el.className = 'unit-card' + (done ? ' done' : '');
     el.dataset.uid = u.id;
+    const fmtShort = s => s.replace(/(\d)\.(\d)/g, '$1·$2');
     el.innerHTML = `
-      <div class="uc-id">${u.short}</div>
-      <div class="uc-label">${u.label}</div>
+      <div class="uc-id">${fmtShort(u.short)}</div>
+      <div class="uc-label">${fmtShort(u.label)}</div>
       <button class="unit-done-btn" title="${done ? '완료 취소' : '완료 표시'}">${done ? '✅' : '⬜'}</button>`;
     el.onclick = () => {
       document.querySelectorAll('.unit-card').forEach(c => c.classList.remove('on'));
@@ -392,7 +392,8 @@ function startPrint(showAll = true) {
   };
   window.addEventListener('afterprint', afterPrint);
   const stripDate = s => s.replace(/\d{4}년\s*\d{1,2}월\s*/g, '').trim();
-  const unitLabel = `${stripDate(selCourse.label)}  ${stripDate(selType.label)}  ${selUnit.short}. ${stripDate(selUnit.label)}`;
+  const fmtDot = s => s.replace(/(\d)\.(\d)/g, '$1·$2');
+  const unitLabel = `${stripDate(selCourse.label)}  ${stripDate(selType.label)}  ${fmtDot(selUnit.short)}. ${fmtDot(stripDate(selUnit.label))}`;
 
   // ── 매 인쇄마다 전체 셔플 ──
   const printWords = shuffle([...words]);

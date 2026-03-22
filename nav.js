@@ -133,10 +133,11 @@
 
   function renderUnitBar(typeLabel, unitShort, unitLabel) {
     if (!typeLabel && !unitLabel) { return; }
+    const fmt = s => s ? s.replace(/(\d)\.(\d)/g, '$1·$2') : s;
     unitBar.innerHTML =
       `<span class="nub-type">${typeLabel || ''}</span>` +
       `<span class="nub-sep">·</span>` +
-      `<span class="nub-unit">${unitShort ? unitShort + '. ' : ''}${unitLabel || ''}</span>`;
+      `<span class="nub-unit">${unitShort ? fmt(unitShort) + '. ' : ''}${fmt(unitLabel) || ''}</span>`;
   }
 
   // 비index 페이지: URL params로 manifest 로드 후 바 업데이트

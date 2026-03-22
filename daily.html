@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>데일리 테스트 — 찬희 영어 단어장</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     :root {
@@ -13,7 +13,7 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Playpen Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     button, input, select, textarea { font-family: inherit; }
     /* ── 세레머니 ── */
     #daily-cele { display: none; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; background-size: 400% 400%; overflow: hidden; }
@@ -38,8 +38,8 @@
     .dc-crowd { position: absolute; inset: 0; }
     .dc-crowd-thumb { position: absolute; font-size: 30px; animation: dcCheer 1.0s ease-in-out infinite alternate; }
     @keyframes dcCheer { from{transform:scale(0.7) rotate(-20deg);opacity:0.75} to{transform:scale(1.5) rotate(20deg);opacity:1.0} }
-    .dc-bg-thumb { position: absolute; pointer-events: none; z-index: 0; font-family: 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif; font-variant-emoji: emoji; }
-    .dc-fly-emoji { position: absolute; pointer-events: none; z-index: 1; font-family: 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif; font-variant-emoji: emoji; animation: dc100FlyUp linear forwards; }
+    .dc-bg-thumb { position: absolute; pointer-events: none; z-index: 0; -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-variant-emoji: emoji; }
+    .dc-fly-emoji { position: absolute; pointer-events: none; z-index: 1; -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-variant-emoji: emoji; animation: dc100FlyUp linear forwards; }
     @keyframes dc100FlyUp { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 100%{transform:translateY(-110vh) rotate(540deg) scale(0.4);opacity:0} }
     @keyframes dcBgFloat  { from{transform:scale(0.8) rotate(-8deg);opacity:0.25} to{transform:scale(1.2) rotate(8deg);opacity:0.5} }
     /* 100점 전용 배경 따봉 애니메이션 15종 (상하좌우 이동 포함) */
