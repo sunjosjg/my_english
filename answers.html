@@ -88,57 +88,53 @@
 <div id="error" style="display:none;">❌ 정답을 찾을 수 없습니다.<br><small style="color:#94a3b8;font-size:13px;">QR 코드를 다시 스캔하거나<br>같은 Wi-Fi에 연결됐는지 확인하세요.</small></div>
 
 <script>
-async function submitCode(k) {
+function getStored() {
+  try { return JSON.parse(localStorage.getItem('myeng_answers') || '{}'); } catch { return {}; }
+}
+
+function submitCode(k) {
   k = k || document.getElementById('code-input').value.trim();
   if (!k) return;
   document.getElementById('code-error').style.display = 'none';
-  try {
-    const r = await fetch(`/api/answers?k=${k}`);
-    if (!r.ok) { document.getElementById('code-error').style.display = 'block'; return; }
-    const data = await r.json();
-    document.getElementById('code-form').style.display = 'none';
-    render(data);
-  } catch { document.getElementById('code-error').style.display = 'block'; }
+  const data = getStored()[k];
+  if (!data) { document.getElementById('code-error').style.display = 'block'; return; }
+  document.getElementById('code-form').style.display = 'none';
+  render(data);
 }
 
-async function loadCodeList() {
-  try {
-    const r = await fetch('/api/answers/list');
-    if (!r.ok) throw new Error('no server');
-    const list = await r.json();
-    const el = document.getElementById('code-list');
-    if (!list.length) { el.innerHTML = '<div style="color:#94a3b8;font-size:13px;">발행된 정답이 없습니다.</div>'; return; }
-    el.innerHTML = '';
-    list.forEach(item => {
-      const raw = item.key; // e.g. 20240324-001
-      const datePart = raw.slice(0,8);
-      const dateLabel = `${datePart.slice(0,4)}-${datePart.slice(4,6)}-${datePart.slice(6,8)}`;
-      const seq = parseInt(raw.split('-')[1] || '1', 10);
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e2e8f0;margin-bottom:7px;cursor:pointer;transition:all 0.15s;';
-      row.innerHTML = `
-        <div style="flex:1;">
-          <div style="font-size:13px;font-weight:700;color:#5b4fcf;">${dateLabel} <span style="color:#94a3b8;font-weight:400;">— ${seq}번</span></div>
-          <div style="font-size:12px;color:#64748b;margin-top:1px;">${item.title || ''}</div>
-        </div>
-        <div style="font-size:11px;color:#94a3b8;font-family:monospace;">${raw}</div>`;
-      row.onmouseenter = () => row.style.borderColor = '#5b4fcf';
-      row.onmouseleave = () => row.style.borderColor = '#e2e8f0';
-      row.onclick = () => submitCode(raw);
-      el.appendChild(row);
-    });
-  } catch {
-    // 서버 미연결(GitHub Pages 등) — 최근 발행 목록 섹션 숨김
-    const section = document.getElementById('code-list')?.closest('div[style*="border-radius:14px"]');
-    if (section) section.style.display = 'none';
-  }
+function loadCodeList() {
+  const stored = getStored();
+  const list = Object.entries(stored)
+    .map(([key, v]) => ({ key, title: v.title || '', created: v.created || 0 }))
+    .sort((a, b) => b.created - a.created);
+  const el = document.getElementById('code-list');
+  if (!list.length) { el.innerHTML = '<div style="color:#94a3b8;font-size:13px;">발행된 정답이 없습니다.</div>'; return; }
+  el.innerHTML = '';
+  list.forEach(item => {
+    const raw = item.key;
+    const dp = raw.slice(0,8);
+    const dateLabel = `${dp.slice(0,4)}-${dp.slice(4,6)}-${dp.slice(6,8)}`;
+    const seq = parseInt(raw.split('-')[1] || '1', 10);
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e2e8f0;margin-bottom:7px;cursor:pointer;transition:all 0.15s;';
+    row.innerHTML = `
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#5b4fcf;">${dateLabel} <span style="color:#94a3b8;font-weight:400;">— ${seq}번</span></div>
+        <div style="font-size:12px;color:#64748b;margin-top:1px;">${item.title || ''}</div>
+      </div>
+      <div style="font-size:11px;color:#94a3b8;font-family:monospace;">${raw}</div>`;
+    row.onmouseenter = () => row.style.borderColor = '#5b4fcf';
+    row.onmouseleave = () => row.style.borderColor = '#e2e8f0';
+    row.onclick = () => submitCode(raw);
+    el.appendChild(row);
+  });
 }
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') submitCode();
 });
 
-(async () => {
+(() => {
   const k = new URLSearchParams(location.search).get('k');
   if (!k) {
     document.getElementById('loading').style.display = 'none';
@@ -147,12 +143,8 @@ document.addEventListener('keydown', e => {
     loadCodeList();
     return;
   }
-  try {
-    const r = await fetch(`/api/answers?k=${k}`);
-    if (!r.ok) { showError(); return; }
-    const data = await r.json();
-    render(data);
-  } catch { showError(); }
+  const data = getStored()[k];
+  if (data) { render(data); } else { showError(); }
 })();
 
 function showError() {

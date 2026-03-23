@@ -515,28 +515,31 @@ async function doBatchPrint() {
   p1.style.cssText = 'display:flex; gap:3mm;';
   p1.appendChild(buildBatchTable(krWords, enWords, sentWords));
 
-  // ── 정답 서버 저장 → QR 코드 생성 ──
+  // ── 정답 localStorage 저장 ──
   const ansData = {
     title,
     kr:   krWords.map(w => w.english),
     en:   enWords.map(w => w.korean.split(',')[0].trim()),
     sent: sentWords.map(w => ({ b: bankNumMap[w.answer] || 0, a: w.answer }))
   };
-  let key = '------';
-  try {
-    const r = await fetch('/api/answers', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: ansData })
-    });
-    const j = await r.json();
-    if (j.key) key = j.key;
-  } catch {}
+  const stored = JSON.parse(localStorage.getItem('myeng_answers') || '{}');
+  // 5일 지난 항목 자동 삭제
+  const now = Date.now();
+  for (const k of Object.keys(stored)) {
+    if (now - (stored[k].created || 0) > 432000000) delete stored[k];
+  }
+  // 키 생성 (YYYYMMDD-NNN)
+  const dn = new Date();
+  const dateStr = dn.getFullYear().toString()
+    + String(dn.getMonth()+1).padStart(2,'0')
+    + String(dn.getDate()).padStart(2,'0');
+  const todaySeq = Object.keys(stored).filter(k => k.startsWith(dateStr)).length + 1;
+  const key = `${dateStr}-${String(todaySeq).padStart(3,'0')}`;
+  stored[key] = { ...ansData, created: now };
+  localStorage.setItem('myeng_answers', JSON.stringify(stored));
 
-  // 로컬 IP → QR URL
-  let ip = 'localhost';
-  try { const r = await fetch('/api/localip'); ip = (await r.json()).ip; } catch {}
-  const qrUrl = `http://${ip}:3050/answers.html?k=${key}`;
+  const base = location.href.replace(/\/[^/]*$/, '/');
+  const qrUrl = `${base}answers.html?k=${key}`;
 
   // 코드 + QR 박스
   const qrBox = document.createElement('div');
