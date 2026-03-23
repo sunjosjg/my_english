@@ -104,6 +104,7 @@ async function submitCode(k) {
 async function loadCodeList() {
   try {
     const r = await fetch('/api/answers/list');
+    if (!r.ok) throw new Error('no server');
     const list = await r.json();
     const el = document.getElementById('code-list');
     if (!list.length) { el.innerHTML = '<div style="color:#94a3b8;font-size:13px;">발행된 정답이 없습니다.</div>'; return; }
@@ -127,7 +128,9 @@ async function loadCodeList() {
       el.appendChild(row);
     });
   } catch {
-    document.getElementById('code-list').innerHTML = '<div style="color:#ef4444;font-size:13px;">목록을 불러올 수 없습니다.</div>';
+    // 서버 미연결(GitHub Pages 등) — 최근 발행 목록 섹션 숨김
+    const section = document.getElementById('code-list')?.closest('div[style*="border-radius:14px"]');
+    if (section) section.style.display = 'none';
   }
 }
 
