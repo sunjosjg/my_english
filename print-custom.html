@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>선택 인쇄</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #5b4fcf; --primary-light: #7c71e0; --primary-bg: #eef2ff;
+      --green: #10b981; --bg: #f1f5f9; --card: #fff;
+      --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --radius: 12px;
+    }
+    body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* ── 상단 바 ── */
+    #top-bar {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 20px; background: var(--card);
+      border-bottom: 2px solid var(--border); flex-shrink: 0;
+    }
+    #top-bar h1 { font-size: 18px; font-weight: 800; color: var(--primary); flex: 1; }
+    .btn {
+      padding: 9px 18px; border-radius: 10px; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: inherit; border: 2px solid var(--border);
+      background: var(--card); color: var(--text); transition: all 0.15s;
+    }
+    .btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── 메인 영역 ── */
+    #main { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ── 상단: 단원 목록 ── */
+    #unit-panel {
+      flex-shrink: 0; overflow-y: auto; max-height: 240px;
+      background: var(--card); border-bottom: 2px solid var(--border);
+      padding: 10px 16px;
+    }
+    #unit-panel h3 {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .course-group { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
+    .course-label { display: none; }
+    .type-group { display: flex; flex-direction: column; gap: 4px; }
+    .type-label {
+      font-size: 11px; font-weight: 700; color: var(--primary);
+      padding-bottom: 4px; border-bottom: 1.5px solid var(--border);
+      margin-bottom: 2px;
+    }
+    .unit-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 5px 10px; border-radius: 8px; cursor: pointer;
+      border: 1.5px solid var(--border); background: var(--bg);
+      user-select: none; transition: all 0.15s;
+    }
+    .unit-item:hover { border-color: var(--primary-light); background: var(--primary-bg); }
+    .unit-item.added { opacity: 0.35; cursor: default; pointer-events: none; }
+    .unit-short { font-size: 12px; font-weight: 700; color: var(--primary); min-width: 28px; flex-shrink: 0; }
+    .unit-name  { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .drag-grip  { display: none; }
+
+    /* ── 하단 패널 ── */
+    #right-panel {
+      flex: 1; display: flex; flex-direction: column;
+      padding: 16px 20px; gap: 14px; overflow: hidden;
+    }
+
+    /* ── 드롭 존 ── */
+    #drop-zone {
+      min-height: 80px; max-height: 160px;
+      border: 2px dashed var(--border); border-radius: var(--radius);
+      background: var(--card); padding: 12px 14px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      align-content: flex-start; transition: all 0.2s; overflow-y: auto; flex-shrink: 0;
+      position: relative;
+    }
+    #drop-zone.drag-over { border-color: var(--primary); background: var(--primary-bg); }
+    .drop-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 14px; pointer-events: none;
+    }
+    .drop-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--primary-bg); border: 1.5px solid var(--primary);
+      color: var(--primary); border-radius: 20px;
+      padding: 5px 10px 5px 14px; font-size: 13px; font-weight: 600;
+    }
+    .drop-chip button {
+      background: none; border: none; cursor: pointer;
+      color: var(--primary); font-size: 18px; line-height: 1; padding: 0;
+    }
+    .drop-chip button:hover { color: #ef4444; }
+
+    /* ── 인쇄 버튼 ── */
+    #print-btns { display: flex; gap: 10px; flex-shrink: 0; }
+    .print-btn {
+      padding: 10px 24px; border-radius: var(--radius);
+      border: 2px solid var(--border); background: var(--card);
+      font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
+      transition: all 0.15s; color: var(--text);
+    }
+    .print-btn:hover { border-color: var(--primary); background: var(--primary-bg); color: var(--primary); }
+    .print-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .pb-icon { display: none; }
+    .pb-desc { font-size: 11px; font-weight: 400; color: var(--muted); display: inline; margin-left: 6px; }
+
+    /* ── 선택 단원 요약 ── */
+    #summary {
+      font-size: 13px; color: var(--muted); flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    #summary strong { color: var(--primary); }
+
+    /* ── PRINT ── */
+    @media print {
+      @page { margin: 0; size: A4; }
+      body, html { height: auto; overflow: visible; display: block; background: #fff; }
+      #top-bar, #main { display: none !important; }
+      #print-output { display: block !important; }
+      /* 매 페이지 고정 헤더 */
+      #po-fixed-header {
+        position: fixed; top: 0; left: 0; right: 0;
+        background: #fff; padding: 6mm 4mm 3mm;
+        display: flex; justify-content: space-between; align-items: baseline;
+        border-bottom: 1.5px solid #333;
+        font-family: sans-serif;
+      }
+    }
+    #po-fixed-header { display: none; }
+    #print-output { display: none; }
+
+    /* ── 인쇄 레이아웃 ── */
+    .po-page {
+      width: 210mm; padding: 16mm 0 8mm; /* 상단 고정 헤더 높이만큼 여백, 좌우 여백 없음 */
+      font-family: sans-serif;
+    }
+    #po-fixed-header .po-title { font-size: 10pt; font-weight: bold; }
+    #po-fixed-header .po-type-tag { font-size: 8pt; color: #888; }
+
+    /* 섹션 (각 유형 블록) */
+    .po-section { margin-bottom: 5mm; }
+    .po-section-label {
+      font-size: 8.5pt; font-weight: bold; color: #555;
+      border-bottom: 1.5px solid #333; padding-bottom: 1mm; margin-bottom: 2mm;
+    }
+    .po-body  { display: flex; gap: 6mm; }
+    .po-main  { flex: 1; }
+
+    /* 정답 열 — 항상 우측 고정 너비 */
+    .po-answers {
+      width: 30mm; flex-shrink: 0;
+      border-left: 1px dashed #bbb; padding-left: 4mm;
+    }
+    .po-ans-title { font-size: 7.5pt; font-weight: bold; color: #888; margin-bottom: 1.5mm; }
+    .po-ans-item  { font-size: 8pt; color: #444; line-height: 1.85; display: block; white-space: nowrap; }
+    .po-bank { border-left-color: #10b981; width: 50mm !important; }
+    .po-bank .po-ans-title { color: #10b981; }
+    .po-bank-items { columns: 2; column-gap: 3mm; }
+
+    /* 정답 좌측 배치 */
+    .po-body.flipped { flex-direction: row-reverse; }
+    .po-body.flipped .po-answers { border-left: none; border-right: 1px dashed #bbb; padding-left: 0; padding-right: 4mm; }
+    .po-body.flipped .po-bank    { border-left: none; border-right: 1px dashed #10b981; padding-left: 0; padding-right: 4mm; }
+
+    /* 단어 (2열 그리드) */
+    .po-word-grid { columns: 2; column-gap: 6mm; }
+    .po-item { display: flex; align-items: center; gap: 5px; padding: 3.5mm 0; break-inside: avoid; }
+    .po-no   { font-size: 8pt; color: #999; min-width: 18px; flex-shrink: 0; }
+    .po-word { font-size: 10.5pt; font-weight: 600; flex-shrink: 0; padding-right: 4px; }
+    .po-line { flex: 1; border-bottom: 1px solid #bbb; margin: 0 3px 2px; align-self: flex-end; min-width: 20px; }
+
+    /* 문장 (1열) */
+    .po-sent-item { display: flex; align-items: baseline; gap: 5px; border-bottom: 1px dotted #ccc; padding: 3mm 0; min-height: 10mm; }
+    .po-sent  { font-size: 9pt; line-height: 1.35; flex: 1; }
+    .po-blank {
+      display: inline-block; border-bottom: 1.3px solid #333;
+      min-width: 40px; vertical-align: bottom; height: 1em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 상단 바 -->
+<div id="top-bar">
+  <button class="btn" onclick="history.back()">← 돌아가기</button>
+  <h1>📄 선택 인쇄</h1>
+</div>
+
+<!-- 메인 -->
+<div id="main">
+  <!-- 상단: 단원 목록 -->
+  <div id="unit-panel">
+    <h3>단원 목록 — 클릭하여 추가</h3>
+    <div id="unit-list">로딩 중…</div>
+  </div>
+
+  <!-- 하단 -->
+  <div id="right-panel">
+    <!-- 드롭 존 -->
+    <div id="drop-zone"
+      ondragover="onDragOver(event)"
+      ondragleave="onDragLeave(event)"
+      ondrop="onDrop(event)">
+      <div class="drop-placeholder" id="drop-placeholder">위 목록에서 단원을 클릭하여 추가하세요</div>
+    </div>
+
+    <!-- 요약 -->
+    <div id="summary">단원을 추가하면 인쇄 버튼이 활성화됩니다.</div>
+
+    <!-- 일괄 출력 버튼 -->
+    <button class="print-btn" onclick="doBatchPrint()" disabled id="btn-batch"
+      style="border-color:#f59e0b;color:#f59e0b;">
+      <span class="pb-icon">🗂️</span>
+      일괄 출력
+      <span class="pb-desc">한글 · 영어 · 문장 + QR 정답 코드</span>
+    </button>
+  </div>
+</div>
+
+<!-- 인쇄 고정 헤더 (모든 페이지에 반복) -->
+<div id="po-fixed-header">
+  <div class="po-title" id="po-hdr-title"></div>
+  <div class="po-type-tag" id="po-hdr-type"></div>
+</div>
+
+<!-- 인쇄 출력 (화면에서 숨김) -->
+<div id="print-output">
+  <div class="po-page" id="po-page"></div>
+</div>
+
+<script>
+let manifest = null;
+const addedUnits = new Map(); // key → { label, words[] }
+let dragData = null;
+
+(async () => {
+  try {
+    const r = await fetch('data/index.json');
+    manifest = await r.json();
+    renderUnitList();
+  } catch {
+    document.getElementById('unit-list').textContent = '⚠️ 데이터 로딩 실패';
+  }
+})();
+
+const fmtDot = s => s ? s.replace(/(\d)\.(\d)/g, '$1·$2') : s;
+const strip  = s => s ? s.replace(/\d{4}년\s*\d{1,2}월\s*/g, '').trim() : s;
+const makeKey = (c, t, u) => `${c}__${t}__${u}`;
+
+function renderUnitList() {
+  const wrap = document.getElementById('unit-list');
+  wrap.innerHTML = '';
+  manifest.courses.forEach(course => {
+    const cGroup = document.createElement('div');
+    cGroup.className = 'course-group';
+    course.types.forEach(type => {
+      const tGroup = document.createElement('div');
+      tGroup.className = 'type-group';
+      tGroup.innerHTML = `<div class="type-label">${strip(course.label)} · ${strip(type.label)}</div>`;
+      type.units.forEach(unit => {
+        const key   = makeKey(course.id, type.id, unit.id);
+        const label = `${strip(course.label)} ${strip(type.label)} ${fmtDot(unit.short)}`;
+        const el = document.createElement('div');
+        el.className = 'unit-item' + (addedUnits.has(key) ? ' added' : '');
+        el.draggable = true;
+        el.title = '클릭하거나 드래그해서 추가';
+        el.innerHTML = `
+          <span class="unit-short">${fmtDot(unit.short)}</span>
+          <span class="unit-name">${fmtDot(strip(unit.label))}</span>
+          <span class="drag-grip">⠿</span>`;
+        el.addEventListener('dragstart', e => {
+          if (addedUnits.has(key)) { e.preventDefault(); return; }
+          dragData = { key, cid: course.id, tid: type.id, uid: unit.id, label };
+          e.dataTransfer.effectAllowed = 'copy';
+        });
+        el.addEventListener('click', () => addUnit({ key, cid: course.id, tid: type.id, uid: unit.id, label }));
+        tGroup.appendChild(el);
+      });
+      cGroup.appendChild(tGroup);
+    });
+    wrap.appendChild(cGroup);
+  });
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.add('drag-over');
+}
+function onDragLeave(e) {
+  document.getElementById('drop-zone').classList.remove('drag-over');
+}
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  if (dragData) { addUnit(dragData); dragData = null; }
+}
+
+async function addUnit(data) {
+  if (addedUnits.has(data.key)) return;
+  let words = [];
+  try {
+    const r = await fetch(`data/${data.cid}/${data.tid}/${data.uid}.json`);
+    const json = await r.json();
+    words = json.words;
+  } catch {
+    alert('데이터를 불러올 수 없습니다.');
+    return;
+  }
+  addedUnits.set(data.key, { label: data.label, words });
+  renderDropZone();
+  renderUnitList();
+  updateButtons();
+}
+
+function removeUnit(key) {
+  addedUnits.delete(key);
+  renderDropZone();
+  renderUnitList();
+  updateButtons();
+}
+
+function renderDropZone() {
+  const zone = document.getElementById('drop-zone');
+  const placeholder = document.getElementById('drop-placeholder');
+  // 기존 chip들만 제거
+  zone.querySelectorAll('.drop-chip').forEach(c => c.remove());
+
+  if (addedUnits.size === 0) {
+    placeholder.style.display = '';
+    return;
+  }
+  placeholder.style.display = 'none';
+  addedUnits.forEach((u, key) => {
+    const chip = document.createElement('div');
+    chip.className = 'drop-chip';
+    chip.innerHTML = `<span>${u.label}</span><button onclick="removeUnit('${key}')" title="제거">×</button>`;
+    zone.appendChild(chip);
+  });
+}
+
+function updateButtons() {
+  const has = addedUnits.size > 0;
+  document.getElementById('btn-batch').disabled = !has;
+
+  let total = 0;
+  addedUnits.forEach(u => total += u.words.length);
+  document.getElementById('summary').innerHTML = has
+    ? `선택된 단원 <strong>${addedUnits.size}개</strong> · 총 <strong>${total}개</strong> 항목`
+    : '단원을 추가하면 인쇄 버튼이 활성화됩니다.';
+}
+
+
+function getWords() {
+  let words = [];
+  const labels = [];
+  addedUnits.forEach(u => { words = words.concat(u.words); labels.push(u.label); });
+  // 셔플
+  for (let i = words.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [words[i], words[j]] = [words[j], words[i]];
+  }
+  return { words, title: labels.join('  /  ') };
+}
+
+function buildSection(type, words) {
+  const labelMap = { en: '🔤 영어 단어 → 한글 쓰기', kr: '🈲 한글 단어 → 영어 쓰기', sent: '📝 빈칸 문장 채우기' };
+  const section = document.createElement('div');
+  section.className = 'po-section';
+
+  const secLabel = document.createElement('div');
+  secLabel.className = 'po-section-label';
+  secLabel.textContent = labelMap[type];
+  section.appendChild(secLabel);
+
+  const body = document.createElement('div');
+  body.className = 'po-body';
+
+  const main = document.createElement('div');
+  main.className = 'po-main';
+
+  const ansWrap = document.createElement('div');
+  ansWrap.className = 'po-answers';
+  ansWrap.innerHTML = '<div class="po-ans-title">✂ 정답</div>';
+
+  if (type === 'en' || type === 'kr') {
+    const grid = document.createElement('div');
+    grid.className = 'po-word-grid';
+    words.forEach((w, i) => {
+      const no   = i + 1;
+      const word = type === 'en' ? w.english : w.korean.split(',')[0].trim();
+      const ansW = type === 'en' ? w.korean.split(',')[0].trim() : w.english;
+      const item = document.createElement('div');
+      item.className = 'po-item';
+      item.innerHTML = `<span class="po-no">${no}.</span><span class="po-word">${word}</span><span class="po-line"></span>`;
+      grid.appendChild(item);
+      const aEl = document.createElement('span');
+      aEl.className = 'po-ans-item';
+      aEl.textContent = `${no}. ${ansW}`;
+      ansWrap.appendChild(aEl);
+    });
+    main.appendChild(grid);
+    body.appendChild(main);
+    body.appendChild(ansWrap);
+    section.appendChild(body);
+    return { section };
+  } else {
+    // ── 1페이지: 문장 2열 ──
+    const sentGrid = document.createElement('div');
+    sentGrid.style.cssText = 'columns:2; column-gap:8mm; column-fill:auto;';
+    words.forEach((w, i) => {
+      const bw = (w.answer.length + 4) + 'ch';
+      const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:${bw}"></span>`);
+      const item = document.createElement('div');
+      item.className = 'po-sent-item';
+      item.style.breakInside = 'avoid';
+      item.innerHTML = `<span class="po-no">${i + 1}.</span><span class="po-sent">${sentHtml}</span>`;
+      sentGrid.appendChild(item);
+    });
+    main.appendChild(sentGrid);
+    section.appendChild(main);
+
+    // ── Word Bank 셔플 ──
+    const bankWords = [...words];
+    for (let i = bankWords.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [bankWords[i], bankWords[j]] = [bankWords[j], bankWords[i]];
+    }
+    const bankNumMap = {};
+    bankWords.forEach((w, i) => { bankNumMap[w.answer] = i + 1; });
+
+    // ── 2페이지: Word Bank + 정답 (10개씩 세로 3열) ──
+    const page2 = document.createElement('div');
+    page2.style.pageBreakBefore = 'always';
+
+    function buildColGrid(items, labelText, labelColor) {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'margin-bottom:6mm;';
+      const lbl = document.createElement('div');
+      lbl.className = 'po-section-label';
+      lbl.style.color = labelColor;
+      lbl.textContent = labelText;
+      wrap.appendChild(lbl);
+      const grid = document.createElement('div');
+      grid.style.cssText = 'columns:3; column-gap:8mm; column-fill:auto;';
+      items.forEach(({no, text}) => {
+        const el = document.createElement('div');
+        el.style.cssText = 'font-size:9pt; line-height:2; color:#444; break-inside:avoid;';
+        el.innerHTML = `<span style="color:${labelColor};font-weight:700;min-width:22px;display:inline-block;">${no}.</span>${text}`;
+        grid.appendChild(el);
+      });
+      wrap.appendChild(grid);
+      return wrap;
+    }
+
+    // Word Bank 데이터
+    const bankData = bankWords.map((w, i) => ({ no: i + 1, text: w.answer }));
+    page2.appendChild(buildColGrid(bankData, '✦ Word Bank', '#10b981'));
+
+    // 정답 데이터 (문장 순, WB번호 파란색 + 단어)
+    const ansData = words.map((w, i) => ({
+      no: i + 1,
+      text: `<span style="color:#5b4fcf;font-weight:700">${bankNumMap[w.answer]}.</span> ${w.answer}`
+    }));
+    page2.appendChild(buildColGrid(ansData, '✂ 정답', '#5b4fcf'));
+
+    section.appendChild(page2);
+    return { section };
+  }
+
+  body.appendChild(main);
+  body.appendChild(ansWrap);
+  section.appendChild(body);
+  return section;
+}
+
+function doPrint(type) {
+  if (addedUnits.size === 0) return;
+  const { words, title } = getWords();
+  const typeLabel = { en: '영어 리스트', kr: '한글 리스트', sent: '문장 리스트' }[type];
+
+  document.getElementById('po-hdr-title').textContent = title;
+  document.getElementById('po-hdr-type').textContent  = typeLabel;
+
+  const page = document.getElementById('po-page');
+  page.innerHTML = '';
+  page.appendChild(buildSection(type, words).section);
+  window.print();
+}
+
+async function doBatchPrint() {
+  if (addedUnits.size === 0) return;
+  // 각 열 독립 셔플
+  const { words: krWords, title } = getWords();
+  const { words: enWords }        = getWords();
+  const { words: sentWords }      = getWords();
+  // 단어뱅크: sentWords 추가 셔플
+  const bankWords = [...sentWords];
+  for (let i = bankWords.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [bankWords[i], bankWords[j]] = [bankWords[j], bankWords[i]];
+  }
+  const bankNumMap = {};
+  bankWords.forEach((w, i) => { bankNumMap[w.answer] = i + 1; });
+
+  // 일괄 출력: 고정 헤더 숨기고 상단 여백 제거
+  document.getElementById('po-fixed-header').style.display = 'none';
+  const page = document.getElementById('po-page');
+  page.style.paddingTop = '4mm';
+  page.innerHTML = '';
+
+  // ── P1: 3열 테이블 + 우측 단어뱅크 독립 ──
+  const p1 = document.createElement('div');
+  p1.style.cssText = 'display:flex; gap:3mm;';
+  p1.appendChild(buildBatchTable(krWords, enWords, sentWords));
+
+  // ── 정답 서버 저장 → QR 코드 생성 ──
+  const ansData = {
+    title,
+    kr:   krWords.map(w => w.english),
+    en:   enWords.map(w => w.korean.split(',')[0].trim()),
+    sent: sentWords.map(w => ({ b: bankNumMap[w.answer] || 0, a: w.answer }))
+  };
+  let key = '------';
+  try {
+    const r = await fetch('/api/answers', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: ansData })
+    });
+    const j = await r.json();
+    if (j.key) key = j.key;
+  } catch {}
+
+  // 로컬 IP → QR URL
+  let ip = 'localhost';
+  try { const r = await fetch('/api/localip'); ip = (await r.json()).ip; } catch {}
+  const qrUrl = `http://${ip}:3050/answers.html?k=${key}`;
+
+  // 코드 + QR 박스
+  const qrBox = document.createElement('div');
+  qrBox.style.cssText = 'flex:0 0 20mm; display:flex; flex-direction:column; align-items:center; gap:0;';
+  qrBox.innerHTML = `
+    <div style="border:1.5px solid #5b4fcf;border-radius:4px;padding:2mm 3mm;text-align:center;margin-bottom:2mm;width:100%;">
+      <div style="font-size:6pt;color:#5b4fcf;font-weight:700;">정답 코드</div>
+      <div style="font-size:13pt;font-weight:900;color:#1e293b;letter-spacing:1px;">${key}</div>
+    </div>
+    <div id="qr-canvas"></div>
+    <div style="font-size:5.5pt;color:#aaa;margin-top:1mm;text-align:center;">QR 또는 코드 입력</div>`;
+
+  // 단어뱅크를 QR 아래에 이어붙임
+  const rightCol = document.createElement('div');
+  rightCol.style.cssText = 'flex:0 0 20mm; display:flex; flex-direction:column; gap:2mm;';
+  rightCol.appendChild(qrBox);
+  rightCol.appendChild(buildBankCol(bankWords));
+
+  // p1에서 기존 buildBankCol 제거 후 rightCol로 교체
+  p1.style.cssText = 'display:flex; gap:3mm;';
+  page.appendChild(p1);
+  p1.appendChild(rightCol);
+
+  // QRCode 라이브러리 로드 후 생성
+  try {
+    await loadQRLib();
+    new QRCode(document.getElementById('qr-canvas'), { text: qrUrl, width: 64, height: 64, correctLevel: QRCode.CorrectLevel.M });
+  } catch {
+    document.getElementById('qr-canvas').textContent = '(QR 생성 실패 — 인터넷 연결 확인)';
+  }
+
+  window.print();
+}
+
+function buildBatchTable(krWords, enWords, sentWords) {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'flex:1; min-width:0;';
+  const n = krWords.length;
+  const cut = 'border-right:1.5px dashed #aaa; padding-right:2mm; margin-right:1mm;';
+
+  for (let i = 0; i < n; i++) {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:grid; grid-template-columns:48mm 48mm 1fr; gap:0; border-bottom:1px dotted #ddd; padding:1.5mm 0; break-inside:avoid;';
+
+    const krWord   = krWords[i].korean.split(',')[0].trim();
+    const enWord   = enWords[i].english;
+    const bw       = Math.round((sentWords[i].answer.length + 4) * 0.67) + 'ch';
+    const sentHtml = sentWords[i].sentence.replace('___', `<span class="po-blank" style="min-width:${bw}"></span>`);
+
+    const no = `<span style="font-size:6.5pt;color:#bbb;min-width:13px;flex-shrink:0;">${i+1}.</span>`;
+    row.innerHTML =
+      `<div style="display:flex;align-items:center;gap:2px;overflow:hidden;${cut}">${no}<span style="font-size:8pt;font-weight:600;flex-shrink:0;white-space:nowrap;">${krWord}</span><span style="flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:4px;"></span></div>`
+    + `<div style="display:flex;align-items:center;gap:2px;overflow:hidden;${cut}">${no}<span style="font-size:8pt;font-weight:600;flex-shrink:0;white-space:nowrap;">${enWord}</span><span style="flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:4px;"></span></div>`
+    + `<div style="display:flex;align-items:baseline;gap:3px;">${no}<span style="font-size:8pt;line-height:1.3;">${sentHtml}</span></div>`;
+    wrap.appendChild(row);
+  }
+  return wrap;
+}
+
+function buildBankCol(bankWords) {
+  const col = document.createElement('div');
+  col.style.cssText = 'flex:0 0 20mm; border-left:1.5px dashed #10b981; padding-left:2mm;';
+  const lbl = document.createElement('div');
+  lbl.style.cssText = 'font-size:6pt;font-weight:700;color:#10b981;margin-bottom:1mm;';
+  lbl.textContent = '✦ W.Bank';
+  col.appendChild(lbl);
+  bankWords.forEach((w, i) => {
+    const el = document.createElement('div');
+    el.style.cssText = 'font-size:6.5pt;color:#333;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    el.innerHTML = `<span style="color:#10b981;font-weight:700;min-width:14px;display:inline-block;">${i+1}.</span>${w.answer}`;
+    col.appendChild(el);
+  });
+  return col;
+}
+
+function loadQRLib() {
+  return new Promise((resolve, reject) => {
+    if (window.QRCode) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+function doBankPrint() {
+  if (addedUnits.size === 0) return;
+  const { words, title } = getWords();
+
+  document.getElementById('po-hdr-title').textContent = title;
+  document.getElementById('po-hdr-type').textContent  = '워드뱅크 + 정답';
+
+  const page = document.getElementById('po-page');
+  page.innerHTML = '';
+
+  // Word Bank 셔플
+  const bankWords = [...words];
+  for (let i = bankWords.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [bankWords[i], bankWords[j]] = [bankWords[j], bankWords[i]];
+  }
+  const bankNumMap = {};
+  bankWords.forEach((w, i) => { bankNumMap[w.answer] = i + 1; });
+
+  function makeColGrid(items, labelText, labelColor) {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-bottom:6mm;';
+    const lbl = document.createElement('div');
+    lbl.className = 'po-section-label';
+    lbl.style.color = labelColor;
+    lbl.textContent = labelText;
+    wrap.appendChild(lbl);
+    const grid = document.createElement('div');
+    grid.style.cssText = 'columns:3; column-gap:8mm; column-fill:auto;';
+    items.forEach(({no, html}) => {
+      const el = document.createElement('div');
+      el.style.cssText = 'font-size:9pt; line-height:2; color:#444; break-inside:avoid;';
+      el.innerHTML = `<span style="color:${labelColor};font-weight:700;min-width:22px;display:inline-block;">${no}.</span>${html}`;
+      grid.appendChild(el);
+    });
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+  // Word Bank
+  page.appendChild(makeColGrid(
+    bankWords.map((w, i) => ({ no: i + 1, html: w.answer })),
+    '✦ Word Bank', '#10b981'
+  ));
+
+  // 정답 (원래 순서 번호 + WB번호 파란색 + 단어)
+  page.appendChild(makeColGrid(
+    words.map((w, i) => ({
+      no: i + 1,
+      html: `<span style="color:#5b4fcf;font-weight:700">${bankNumMap[w.answer]}.</span> ${w.answer}`
+    })),
+    '✂ 정답', '#5b4fcf'
+  ));
+
+  window.print();
+}
+
+</script>
+</body>
+</html>

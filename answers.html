@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정답 확인</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif;
+           background: #f1f5f9; color: #1e293b; height: 100vh;
+           display: flex; flex-direction: column; overflow: hidden; }
+    #header {
+      position: sticky; top: 0; background: #5b4fcf; color: #fff;
+      padding: 14px 16px; z-index: 10;
+      display: flex; align-items: center; gap: 10px;
+    }
+    #header h1 { font-size: 16px; font-weight: 700; flex: 1; }
+    #header .tag { font-size: 11px; background: rgba(255,255,255,0.2);
+                   padding: 3px 8px; border-radius: 20px; }
+    #loading { text-align: center; padding: 60px 20px; color: #64748b; font-size: 15px; }
+    #content { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+    .col-play-btn {
+      margin-left: auto; padding: 2px 8px; border-radius: 12px; border: none;
+      cursor: pointer; font-size: 11px; font-weight: 700; font-family: inherit;
+      background: rgba(255,255,255,0.35); color: inherit; flex-shrink: 0;
+    }
+    .col-play-btn:hover { background: rgba(255,255,255,0.6); }
+    .col-stop-btn {
+      padding: 2px 8px; border-radius: 12px; border: none;
+      cursor: pointer; font-size: 11px; font-weight: 700; font-family: inherit;
+      background: rgba(255,255,255,0.2); color: inherit; flex-shrink: 0;
+    }
+
+    #three-col { display: flex; gap: 0; flex: 1; overflow: hidden; }
+    .col-wrap { flex: 1; display: flex; flex-direction: column; min-width: 0;
+                border-right: 1px solid #e2e8f0; }
+    .col-wrap:last-child { border-right: none; }
+    .col-hdr { padding: 10px 10px 8px; font-size: 12px; font-weight: 700;
+               position: sticky; top: 0; z-index: 1; border-bottom: 2px solid; }
+    .col-hdr.kr { background: #eef2ff; color: #5b4fcf; border-color: #5b4fcf; }
+    .col-hdr.en { background: #fef3c7; color: #d97706; border-color: #d97706; }
+    .col-hdr.sent { background: #ecfdf5; color: #10b981; border-color: #10b981; }
+    .ans-item { padding: 6px 10px; border-bottom: 1px solid #f1f5f9;
+                display: flex; align-items: baseline; gap: 5px; cursor: pointer; transition: background 0.1s; }
+    .ans-item:hover { background: #f8fafc; }
+    .ans-item.sel { background: #fef9c3; border-left: 3px solid #f59e0b; padding-left: 7px; font-weight: 800; }
+    .ans-item.sel .ans-word { color: #1e293b; }
+    .ans-no { font-size: 10px; color: #94a3b8; min-width: 18px; flex-shrink: 0; }
+    .ans-word { font-size: 13px; font-weight: 600; word-break: break-all; }
+    .ans-bank { font-size: 10px; color: #5b4fcf; font-weight: 700; margin-right: 1px; }
+
+    #error { text-align: center; padding: 60px 20px; color: #ef4444; font-size: 15px; }
+  </style>
+</head>
+<body>
+<div id="header">
+  <button onclick="history.back()"
+    style="background:rgba(255,255,255,0.15);border:none;border-radius:8px;padding:4px 10px;color:#fff;font-size:13px;cursor:pointer;font-family:inherit;">← 뒤로</button>
+  <h1>✂ 정답 확인</h1>
+  <span class="tag" id="hdr-title"></span>
+  <button id="tts-toggle" onclick="toggleTts()"
+    style="background:rgba(255,255,255,0.2);border:none;border-radius:20px;padding:4px 12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">
+    🔊 읽기 ON
+  </button>
+</div>
+
+<!-- 코드 입력 + 목록 -->
+<div id="code-form" style="display:none; padding:16px; overflow-y:auto; flex:1;">
+  <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:14px;">
+    <div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:10px;">📋 직접 입력</div>
+    <div style="display:flex;gap:8px;">
+      <input id="code-input" type="text" placeholder="20240324-001"
+        style="flex:1;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:2px;text-align:center;font-family:inherit;outline:none;">
+      <button onclick="submitCode()"
+        style="padding:10px 18px;background:#5b4fcf;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">확인</button>
+    </div>
+    <div id="code-error" style="display:none;color:#ef4444;font-size:13px;margin-top:8px;">❌ 코드를 찾을 수 없습니다.</div>
+  </div>
+
+  <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:10px;">🕐 최근 발행 목록</div>
+    <div id="code-list"><div style="color:#94a3b8;font-size:13px;">불러오는 중…</div></div>
+  </div>
+</div>
+
+<div id="loading">불러오는 중…</div>
+<div id="content" style="display:none;"></div>
+<div id="error" style="display:none;">❌ 정답을 찾을 수 없습니다.<br><small style="color:#94a3b8;font-size:13px;">QR 코드를 다시 스캔하거나<br>같은 Wi-Fi에 연결됐는지 확인하세요.</small></div>
+
+<script>
+async function submitCode(k) {
+  k = k || document.getElementById('code-input').value.trim();
+  if (!k) return;
+  document.getElementById('code-error').style.display = 'none';
+  try {
+    const r = await fetch(`/api/answers?k=${k}`);
+    if (!r.ok) { document.getElementById('code-error').style.display = 'block'; return; }
+    const data = await r.json();
+    document.getElementById('code-form').style.display = 'none';
+    render(data);
+  } catch { document.getElementById('code-error').style.display = 'block'; }
+}
+
+async function loadCodeList() {
+  try {
+    const r = await fetch('/api/answers/list');
+    const list = await r.json();
+    const el = document.getElementById('code-list');
+    if (!list.length) { el.innerHTML = '<div style="color:#94a3b8;font-size:13px;">발행된 정답이 없습니다.</div>'; return; }
+    el.innerHTML = '';
+    list.forEach(item => {
+      const raw = item.key; // e.g. 20240324-001
+      const datePart = raw.slice(0,8);
+      const dateLabel = `${datePart.slice(0,4)}-${datePart.slice(4,6)}-${datePart.slice(6,8)}`;
+      const seq = parseInt(raw.split('-')[1] || '1', 10);
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e2e8f0;margin-bottom:7px;cursor:pointer;transition:all 0.15s;';
+      row.innerHTML = `
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#5b4fcf;">${dateLabel} <span style="color:#94a3b8;font-weight:400;">— ${seq}번</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:1px;">${item.title || ''}</div>
+        </div>
+        <div style="font-size:11px;color:#94a3b8;font-family:monospace;">${raw}</div>`;
+      row.onmouseenter = () => row.style.borderColor = '#5b4fcf';
+      row.onmouseleave = () => row.style.borderColor = '#e2e8f0';
+      row.onclick = () => submitCode(raw);
+      el.appendChild(row);
+    });
+  } catch {
+    document.getElementById('code-list').innerHTML = '<div style="color:#ef4444;font-size:13px;">목록을 불러올 수 없습니다.</div>';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitCode();
+});
+
+(async () => {
+  const k = new URLSearchParams(location.search).get('k');
+  if (!k) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('code-form').style.display = 'flex';
+    document.getElementById('code-form').style.flexDirection = 'column';
+    loadCodeList();
+    return;
+  }
+  try {
+    const r = await fetch(`/api/answers?k=${k}`);
+    if (!r.ok) { showError(); return; }
+    const data = await r.json();
+    render(data);
+  } catch { showError(); }
+})();
+
+function showError() {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('error').style.display = 'block';
+}
+
+function render(data) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('hdr-title').textContent = data.title || '';
+  const content = document.getElementById('content');
+  content.style.display = 'flex';
+
+  const three = document.createElement('div');
+  three.id = 'three-col';
+
+  if (data.kr?.length)   three.appendChild(makeCol('kr',   '🈲 한글→영어', data.kr.map((t,i) => `<span class="ans-no">${i+1}.</span><span class="ans-word">${t}</span>`)));
+  if (data.en?.length)   three.appendChild(makeCol('en',   '🔤 영어→한글', data.en.map((t,i) => `<span class="ans-no">${i+1}.</span><span class="ans-word">${t}</span>`)));
+  if (data.sent?.length) three.appendChild(makeCol('sent', '📝 문장',      data.sent.map((s,i) => `<span class="ans-no">${i+1}.</span><span class="ans-bank">${s.b}.</span><span class="ans-word">${s.a}</span>`)));
+
+  content.appendChild(three);
+}
+
+let _totalItems = 0;
+let _selIdx = { kr: -1, en: -1, sent: -1 }; // 열별 독립 선택
+
+// type: 'kr' → 정답은 영어(en-US), 'en' → 정답은 한글(ko-KR), 'sent' → 번호만
+const langMap = { kr: 'en-US', en: 'ko-KR', sent: 'en-US' };
+
+let _ttsOn = true;
+function toggleTts() {
+  _ttsOn = !_ttsOn;
+  if (!_ttsOn) stopSpeak();
+  const btn = document.getElementById('tts-toggle');
+  btn.textContent = _ttsOn ? '🔊 읽기 ON' : '🔇 읽기 OFF';
+  btn.style.background = _ttsOn ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)';
+  btn.style.opacity = _ttsOn ? '1' : '0.6';
+}
+
+function stopSpeak() {
+  window.speechSynthesis?.cancel();
+}
+
+function utter(text, lang, rate = 1.4) {
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = lang; u.rate = rate;
+  return u;
+}
+
+// 단어 발음 후 스펠링 읽기 (kr 열 전용)
+function speakEnWithSpelling(word) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter(word, 'en-US', 1.2));
+  window.speechSynthesis.speak(utter(word.split('').join(' '), 'en-US', 0.9));
+}
+
+function speak(text, lang) {
+  if (!window.speechSynthesis) return;
+  if (lang === 'en-US') { speakEnWithSpelling(text); return; }
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter(text, lang, 1.4));
+}
+
+// 열 전체를 현재 선택 행부터 순서대로 읽기 (읽는 행 자동 활성화)
+function speakCol(type) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const col = document.querySelector(`.col-wrap[data-col="${type}"]`);
+  if (!col) return;
+  const items = [...col.querySelectorAll('.ans-item')];
+  const start = Math.max(_selIdx[type] ?? 0, 0);
+  items.slice(start).forEach((el, offset) => {
+    const idx = start + offset;
+
+    function addHighlight(u) {
+      u.onstart = () => selectColIdx(type, idx, false);
+      return u;
+    }
+
+    if (type === 'sent') {
+      const no   = el.querySelector('.ans-no')?.textContent?.replace('.','').trim() || '';
+      const bank = el.querySelector('.ans-bank')?.textContent?.replace('.','').trim() || '';
+      window.speechSynthesis.speak(addHighlight(utter(`${no}, ${bank}`, 'ko-KR', 1.2)));
+    } else if (type === 'kr') {
+      const word = el.querySelector('.ans-word')?.textContent?.trim() || '';
+      window.speechSynthesis.speak(addHighlight(utter(word, 'en-US', 1.2)));
+      window.speechSynthesis.speak(utter(word.split('').join(' '), 'en-US', 0.9));
+    } else {
+      const word = el.querySelector('.ans-word')?.textContent?.trim() || '';
+      window.speechSynthesis.speak(addHighlight(utter(word, 'ko-KR', 1.4)));
+    }
+  });
+}
+
+function makeCol(type, title, htmlItems) {
+  _totalItems = Math.max(_totalItems, htmlItems.length);
+  const col = document.createElement('div');
+  col.className = 'col-wrap';
+  col.setAttribute('data-col', type);
+  col.innerHTML = `<div class="col-hdr ${type}" style="display:flex;align-items:center;gap:6px;">
+    <span style="flex:1;">${title}</span>
+    <button class="col-play-btn" onclick="speakCol('${type}')">▶</button>
+    <button class="col-stop-btn" onclick="stopSpeak()">■</button>
+  </div>`;
+  const list = document.createElement('div');
+  list.style.cssText = 'overflow-y:auto; flex:1;';
+  htmlItems.forEach((html, i) => {
+    const el = document.createElement('div');
+    el.className = 'ans-item';
+    el.dataset.idx = i;
+    el.innerHTML = html;
+    el.addEventListener('click', () => {
+      selectColIdx(type, i, _ttsOn);
+    });
+    list.appendChild(el);
+  });
+  col.appendChild(list);
+  return col;
+}
+
+// 특정 열만 선택 & 읽기
+function selectColIdx(type, idx, withSpeech = false) {
+  _selIdx[type] = idx;
+  const col = document.querySelector(`.col-wrap[data-col="${type}"]`);
+  if (!col) return;
+  col.querySelectorAll('.ans-item').forEach(el => {
+    el.classList.toggle('sel', +el.dataset.idx === idx);
+  });
+  const el = col.querySelector(`.ans-item[data-idx="${idx}"]`);
+  if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+  if (withSpeech) {
+    if (type === 'sent') {
+      const no   = el?.querySelector('.ans-no')?.textContent?.replace('.','').trim() || '';
+      const bank = el?.querySelector('.ans-bank')?.textContent?.replace('.','').trim() || '';
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utter(`${no}, ${bank}`, 'ko-KR', 1.2));
+    } else {
+      const word = el?.querySelector('.ans-word')?.textContent?.trim() || '';
+      speak(word, langMap[type]);
+    }
+  }
+}
+
+// 마지막 클릭된 열 추적 (화살표 키용)
+let _lastCol = 'kr';
+document.addEventListener('click', e => {
+  const col = e.target.closest('.col-wrap');
+  if (col) _lastCol = col.dataset.col;
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    const cur = _selIdx[_lastCol];
+    selectColIdx(_lastCol, Math.min(cur + 1, _totalItems - 1), _ttsOn);
+  }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    const cur = _selIdx[_lastCol];
+    selectColIdx(_lastCol, Math.max(cur - 1, 0), _ttsOn);
+  }
+});
+</script>
+</body>
+</html>

@@ -156,13 +156,17 @@
       <span class="mc-desc">3단계 최종 테스트</span>
     </div>
     <div class="mode-print-row">
-      <div class="mode-card" style="flex:1" data-mode="print-all">
-        <div class="mc-top"><span class="mc-icon">📖</span><span class="mc-label">전체 인쇄</span></div>
-        <span class="mc-desc">복습 포함 3페이지</span>
+      <div class="mode-card" style="flex:1" data-mode="print-page3">
+        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label">학습 인쇄</span></div>
+        <span class="mc-desc">전체 복습 페이지만</span>
       </div>
-      <div class="mode-card" style="flex:1" data-mode="print">
-        <div class="mc-top"><span class="mc-icon">🖨️</span><span class="mc-label">Test 인쇄</span></div>
-        <span class="mc-desc">2페이지 워크시트</span>
+      <div class="mode-card" style="flex:1" data-mode="print-custom">
+        <div class="mc-top"><span class="mc-icon">📄</span><span class="mc-label">선택 인쇄</span></div>
+        <span class="mc-desc">단원·유형 선택 후 인쇄</span>
+      </div>
+      <div class="mode-card" style="flex:1" data-mode="answers">
+        <div class="mc-top"><span class="mc-icon">✂</span><span class="mc-label">정답 확인</span></div>
+        <span class="mc-desc">코드 입력 후 정답 조회</span>
       </div>
     </div>
   </div>
@@ -367,6 +371,8 @@ function renderUnits() {
 
 document.querySelectorAll('.mode-card').forEach(mc => {
   mc.onclick = () => {
+    if (mc.dataset.mode === 'answers') { location.href = 'answers.html'; return; }
+    if (mc.dataset.mode === 'print-page3') { startPrintPage3Only(); return; }
     document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
     mc.classList.add('on');
     selMode = mc.dataset.mode;
@@ -383,6 +389,37 @@ function goCheck() {
   window.location.href = `check.html?${params}`;
 }
 
+
+async function startPrintPage3Only() {
+  if (!await loadWords()) return;
+  document.getElementById('pt-page1').style.display = 'none';
+  document.getElementById('pt-page2').style.display = 'none';
+  document.getElementById('pt-page3').style.display = '';
+  const afterPrint = () => {
+    document.getElementById('pt-page1').style.display = '';
+    document.getElementById('pt-page2').style.display = '';
+    window.removeEventListener('afterprint', afterPrint);
+  };
+  window.addEventListener('afterprint', afterPrint);
+
+  const stripDate = s => s.replace(/\d{4}년\s*\d{1,2}월\s*/g, '').trim();
+  const fmtDot = s => s.replace(/(\d)\.(\d)/g, '$1·$2');
+  const unitLabel = `${stripDate(selCourse.label)}  ${stripDate(selType.label)}  ${fmtDot(selUnit.short)}. ${fmtDot(stripDate(selUnit.label))}`;
+  const printWords = shuffle([...words]);
+  document.getElementById('pr-title').textContent = unitLabel + ' — 전체';
+  document.getElementById('pr-tbody').innerHTML = printWords.map(w => {
+    const blankSpaces = '\u00A0'.repeat((w.answer.length + 4) * 2);
+    const sentFull  = w.sentence.replace('___', `<span class="pr-ans">${w.answer}</span>`);
+    const sentBlank = w.sentence.replace('___', `<u style="text-decoration-color:#333">${blankSpaces}</u>`);
+    return `<tr>
+      <td class="pr-en">${w.english}</td>
+      <td class="pr-kr">${w.korean.split(',')[0].trim()}</td>
+      <td class="pr-sent">${sentFull}</td>
+      <td class="pr-sent">${sentBlank}</td>
+    </tr>`;
+  }).join('');
+  window.print();
+}
 
 function startPrint(showAll = true) {
   document.getElementById('pt-page3').style.display = showAll ? '' : 'none';

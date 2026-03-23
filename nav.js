@@ -225,6 +225,7 @@
       p = new URLSearchParams({ c: pp.get('c'), t: pp.get('t'), u: pp.get('u') });
     }
 
+    if (mode === 'print-custom') { location.href = 'print-custom.html'; return; }
     if (mode === 'daily')    { location.href = `daily.html?${p}`; return; }
     if (mode === 'sentence') { location.href = `sentence.html?${p}`; return; }
     if (mode === 'study')    { location.href = `study.html?${p}`; return; }
