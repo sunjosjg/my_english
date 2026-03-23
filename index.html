@@ -372,6 +372,7 @@ function renderUnits() {
 document.querySelectorAll('.mode-card').forEach(mc => {
   mc.onclick = () => {
     if (mc.dataset.mode === 'answers') { location.href = 'answers.html'; return; }
+    if (mc.dataset.mode === 'print-custom') { location.href = 'print-custom.html'; return; }
     if (mc.dataset.mode === 'print-page3') { startPrintPage3Only(); return; }
     document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
     mc.classList.add('on');
