@@ -553,7 +553,7 @@ async function doBatchPrint() {
 
   // 단어뱅크를 QR 아래에 이어붙임
   const rightCol = document.createElement('div');
-  rightCol.style.cssText = 'flex:0 0 20mm; display:flex; flex-direction:column; gap:2mm;';
+  rightCol.style.cssText = 'flex:0 0 30mm; display:flex; flex-direction:column; gap:2mm;';
   rightCol.appendChild(qrBox);
   rightCol.appendChild(buildBankCol(bankWords));
 
@@ -581,7 +581,7 @@ function buildBatchTable(krWords, enWords, sentWords) {
 
   for (let i = 0; i < n; i++) {
     const row = document.createElement('div');
-    row.style.cssText = 'display:grid; grid-template-columns:48mm 48mm 1fr; gap:0; padding:1.5mm 0; break-inside:avoid;';
+    row.style.cssText = 'display:grid; grid-template-columns:55mm 55mm 1fr; gap:0; padding:1.5mm 0; break-inside:avoid;';
 
     const krWord   = krWords[i].korean.split(',')[0].trim();
     const enWord   = enWords[i].english;
@@ -599,14 +599,14 @@ function buildBatchTable(krWords, enWords, sentWords) {
 
 function buildBankCol(bankWords) {
   const col = document.createElement('div');
-  col.style.cssText = 'flex:0 0 20mm; border-left:1.5px dashed #10b981; padding-left:2mm;';
+  col.style.cssText = 'flex:0 0 30mm; border-left:1.5px dashed #10b981; padding-left:2mm;';
   const lbl = document.createElement('div');
   lbl.style.cssText = 'font-size:6pt;font-weight:700;color:#10b981;margin-bottom:1mm;';
   lbl.textContent = '✦ W.Bank';
   col.appendChild(lbl);
   bankWords.forEach((w, i) => {
     const el = document.createElement('div');
-    el.style.cssText = 'font-size:6.5pt;color:#333;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    el.style.cssText = 'font-size:8pt;color:#333;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
     el.innerHTML = `<span style="color:#10b981;font-weight:700;min-width:14px;display:inline-block;">${i+1}.</span>${w.answer}`;
     col.appendChild(el);
   });
