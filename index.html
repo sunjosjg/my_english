@@ -157,11 +157,11 @@
     </div>
     <div class="mode-print-row">
       <div class="mode-card" style="flex:1" data-mode="print-custom">
-        <div class="mc-top"><span class="mc-icon">📄</span><span class="mc-label">선택 인쇄 (소)</span></div>
+        <div class="mc-top"><span class="mc-icon">📄</span><span class="mc-label">싱글 인쇄</span></div>
         <span class="mc-desc">단원·유형 선택 후 인쇄</span>
       </div>
       <div class="mode-card" style="flex:1" data-mode="print-custom-lg">
-        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label" id="lbl-print-lg">선택 인쇄</span></div>
+        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label" id="lbl-print-lg">멀티 인쇄</span></div>
         <span class="mc-desc">선택 단원 바로 인쇄</span>
       </div>
       <div class="mode-card" style="flex:1" data-mode="print-page3">
@@ -396,7 +396,7 @@ function updateStartBtn() {
   const lbl = document.getElementById('lbl-print-lg');
   if (lbl) {
     const fmtDot = s => s ? s.replace(/(\d)\.(\d)/g, '$1·$2') : s;
-    lbl.textContent = selUnit ? `선택 인쇄(${fmtDot(selUnit.short)})` : '선택 인쇄';
+    lbl.textContent = selUnit ? `멀티 인쇄(${fmtDot(selUnit.short)})` : '멀티 인쇄';
   }
 }
 
