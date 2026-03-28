@@ -156,17 +156,17 @@
       <span class="mc-desc">3단계 최종 테스트</span>
     </div>
     <div class="mode-print-row">
-      <div class="mode-card" style="flex:1" data-mode="print-page3">
-        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label">학습 인쇄</span></div>
-        <span class="mc-desc">전체 복습 페이지만</span>
-      </div>
       <div class="mode-card" style="flex:1" data-mode="print-custom">
         <div class="mc-top"><span class="mc-icon">📄</span><span class="mc-label">선택 인쇄 (소)</span></div>
         <span class="mc-desc">단원·유형 선택 후 인쇄</span>
       </div>
       <div class="mode-card" style="flex:1" data-mode="print-custom-lg">
-        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label">선택 인쇄 (대)</span></div>
-        <span class="mc-desc">단원·유형 선택 후 인쇄</span>
+        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label" id="lbl-print-lg">선택 인쇄</span></div>
+        <span class="mc-desc">선택 단원 바로 인쇄</span>
+      </div>
+      <div class="mode-card" style="flex:1" data-mode="print-page3">
+        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label">학습 인쇄</span></div>
+        <span class="mc-desc">전체 복습 페이지만</span>
       </div>
       <div class="mode-card" style="flex:1" data-mode="answers">
         <div class="mc-top"><span class="mc-icon">✂</span><span class="mc-label">정답 확인</span></div>
@@ -377,7 +377,11 @@ document.querySelectorAll('.mode-card').forEach(mc => {
   mc.onclick = () => {
     if (mc.dataset.mode === 'answers') { location.href = 'answers.html'; return; }
     if (mc.dataset.mode === 'print-custom') { location.href = 'print-custom.html'; return; }
-    if (mc.dataset.mode === 'print-custom-lg') { location.href = 'print-custom-lg.html'; return; }
+    if (mc.dataset.mode === 'print-custom-lg') {
+      if (!selUnit) { showToast('단원을 먼저 선택하세요'); return; }
+      location.href = `print-custom-lg.html?c=${selCourse.id}&t=${selType.id}&u=${selUnit.id}`;
+      return;
+    }
     if (mc.dataset.mode === 'print-page3') { startPrintPage3Only(); return; }
     document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
     mc.classList.add('on');
@@ -387,7 +391,14 @@ document.querySelectorAll('.mode-card').forEach(mc => {
   };
 });
 
-function updateStartBtn() { updateNavUnit(); }
+function updateStartBtn() {
+  updateNavUnit();
+  const lbl = document.getElementById('lbl-print-lg');
+  if (lbl) {
+    const fmtDot = s => s ? s.replace(/(\d)\.(\d)/g, '$1·$2') : s;
+    lbl.textContent = selUnit ? `선택 인쇄(${fmtDot(selUnit.short)})` : '선택 인쇄';
+  }
+}
 
 function goCheck() {
   if (!selUnit) return;
