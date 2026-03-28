@@ -377,7 +377,11 @@ document.querySelectorAll('.mode-card').forEach(mc => {
   mc.onclick = () => {
     if (mc.dataset.mode === 'answers') { location.href = 'answers.html'; return; }
     if (mc.dataset.mode === 'print-custom') { location.href = 'print-custom.html'; return; }
-    if (mc.dataset.mode === 'print-custom-lg') { location.href = 'print-custom-lg.html'; return; }
+    if (mc.dataset.mode === 'print-custom-lg') {
+      if (!selUnit) { showToast('단원을 먼저 선택하세요'); return; }
+      location.href = `print-custom-lg.html?c=${selCourse.id}&t=${selType.id}&u=${selUnit.id}`;
+      return;
+    }
     if (mc.dataset.mode === 'print-page3') { startPrintPage3Only(); return; }
     document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
     mc.classList.add('on');

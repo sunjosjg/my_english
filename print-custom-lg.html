@@ -240,6 +240,20 @@ let dragData = null;
     const r = await fetch('data/index.json');
     manifest = await r.json();
     renderUnitList();
+
+    // URL 파라미터로 단원이 넘어온 경우 자동 인쇄
+    const params = new URLSearchParams(location.search);
+    const pc = params.get('c'), pt = params.get('t'), pu = params.get('u');
+    if (pc && pt && pu) {
+      const course = manifest.courses.find(c => c.id === pc);
+      const type   = course?.types.find(t => t.id === pt);
+      const unit   = type?.units.find(u => u.id === pu);
+      if (unit) {
+        const label = `${strip(course.label)} ${strip(type.label)} ${fmtDot(unit.short)}`;
+        await addUnit({ key: makeKey(pc, pt, pu), cid: pc, tid: pt, uid: pu, label });
+        doBatchPrint();
+      }
+    }
   } catch {
     document.getElementById('unit-list').textContent = '⚠️ 데이터 로딩 실패';
   }
