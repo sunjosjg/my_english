@@ -410,8 +410,7 @@ function buildSection(type, words) {
     const sentGrid = document.createElement('div');
     sentGrid.style.cssText = 'columns:2; column-gap:8mm; column-fill:auto;';
     words.forEach((w, i) => {
-      const bw = (w.answer.length + 4) + 'ch';
-      const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:${bw}"></span>`);
+      const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:5ch;max-width:5ch;"></span>`);
       const item = document.createElement('div');
       item.className = 'po-sent-item';
       item.style.breakInside = 'avoid';
@@ -586,8 +585,7 @@ function buildBatchTable(krWords, enWords, sentWords) {
 
     const krWord   = krWords[i].korean.split(',')[0].trim();
     const enWord   = enWords[i].english;
-    const bw       = Math.round((sentWords[i].answer.length + 4) * 0.67) + 'ch';
-    const sentHtml = sentWords[i].sentence.replace('___', `<span class="po-blank" style="min-width:${bw}"></span>`);
+    const sentHtml = sentWords[i].sentence.replace('___', `<span class="po-blank" style="min-width:5ch;max-width:5ch;"></span>`);
 
     const no = `<span style="font-size:6.5pt;color:#bbb;min-width:13px;flex-shrink:0;">${i+1}.</span>`;
     row.innerHTML =
