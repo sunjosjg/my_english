@@ -489,11 +489,34 @@ function doPrint(type) {
   window.print();
 }
 
+function buildAnswerCol(enWords, krWords, sentWords) {
+  const col = document.createElement('div');
+  col.style.cssText = 'flex:0 0 18mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:6pt; line-height:1.55; color:#444;';
+
+  function section(label, color, items) {
+    const hd = document.createElement('div');
+    hd.style.cssText = `font-size:6pt;font-weight:700;color:${color};margin-bottom:0.5mm;margin-top:1.5mm;border-bottom:1px solid ${color};padding-bottom:0.3mm;`;
+    hd.textContent = label;
+    col.appendChild(hd);
+    items.forEach((text, i) => {
+      const el = document.createElement('div');
+      el.style.cssText = 'white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+      el.innerHTML = `<span style="color:#aaa;min-width:12px;display:inline-block;">${i+1}.</span>${text}`;
+      col.appendChild(el);
+    });
+  }
+
+  section('영어 정답', '#d97706', enWords.map(w => w.korean.split(',')[0].trim()));
+  section('한글 정답', '#5b4fcf', krWords.map(w => w.english));
+  section('문장 정답', '#10b981', sentWords.map(w => w.answer));
+  return col;
+}
+
 async function doBatchPrint() {
   if (addedUnits.size === 0) return;
-  const { words: enWords, title } = getWords();  // 영어 열
-  const { words: krWords }        = getWords();  // 한글 열
-  const { words: sentWords }      = getWords();  // 문장 열
+  const { words: enWords, title } = getWords();
+  const { words: krWords }        = getWords();
+  const { words: sentWords }      = getWords();
   const bankWords = [...sentWords];
   for (let i = bankWords.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -507,16 +530,10 @@ async function doBatchPrint() {
   page.style.paddingTop = '4mm';
   page.innerHTML = '';
 
-
-  const n = enWords.length;
   const itemStyle = 'display:flex;align-items:center;gap:3px;padding:2.8mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
   const noStyle   = 'font-size:8pt;color:#bbb;min-width:16px;flex-shrink:0;';
   const wordStyle = 'font-size:11pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
   const lineStyle = 'flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:6px;';
-
-  // ── 상단: 영어 | 한글 2등분 ──
-  const topRow = document.createElement('div');
-  topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:3mm;margin-bottom:3mm;';
 
   function buildWordCol(words, getWord) {
     const col = document.createElement('div');
@@ -530,19 +547,25 @@ async function doBatchPrint() {
     return col;
   }
 
+  // ── 전체 레이아웃: 본문 + 우측 정답 컬럼 ──
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;gap:0;';
+
+  const main = document.createElement('div');
+  main.style.cssText = 'flex:1;min-width:0;';
+
+  // 상단: 영어 | 한글
+  const topRow = document.createElement('div');
+  topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:3mm;margin-bottom:3mm;';
   const enCol = buildWordCol(enWords, w => w.english);
   enCol.style.cssText += 'border-right:1.5px dashed #ccc;padding-right:3mm;margin-right:3mm;';
   topRow.appendChild(enCol);
   topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim()));
-  page.appendChild(topRow);
+  main.appendChild(topRow);
 
-  // ── 하단: 문장 전체 너비 + 우측 QR/단어뱅크 ──
-  const bottomRow = document.createElement('div');
-  bottomRow.style.cssText = 'display:flex;gap:3mm;';
-
-  // 문장 영역 (2열)
+  // 하단: 문장 (2열)
   const sentWrap = document.createElement('div');
-  sentWrap.style.cssText = 'flex:1;min-width:0;columns:2;column-gap:6mm;';
+  sentWrap.style.cssText = 'columns:2;column-gap:6mm;';
   sentWords.forEach((w, i) => {
     const bw = Math.round((w.answer.length + 4) * 0.67) + 'ch';
     const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:${bw}"></span>`);
@@ -551,41 +574,11 @@ async function doBatchPrint() {
     el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="font-size:10pt;line-height:1.4;">${sentHtml}</span>`;
     sentWrap.appendChild(el);
   });
-  bottomRow.appendChild(sentWrap);
+  main.appendChild(sentWrap);
 
-  // 정답 코드 저장 (localStorage)
-  const ansData = {
-    title,
-    kr:   krWords.map(w => w.english),
-    en:   enWords.map(w => w.korean.split(',')[0].trim()),
-    sent: sentWords.map(w => ({ b: bankNumMap[w.answer] || 0, a: w.answer }))
-  };
-  const stored = JSON.parse(localStorage.getItem('myeng_answers') || '{}');
-  const now = Date.now();
-  for (const k of Object.keys(stored)) {
-    if (now - (stored[k].created || 0) > 432000000) delete stored[k];
-  }
-  const dn = new Date();
-  const dateStr = dn.getFullYear().toString()
-    + String(dn.getMonth()+1).padStart(2,'0')
-    + String(dn.getDate()).padStart(2,'0');
-  const todaySeq = Object.keys(stored).filter(k => k.startsWith(dateStr)).length + 1;
-  const key = `${dateStr}-${String(todaySeq).padStart(3,'0')}`;
-  stored[key] = { ...ansData, created: now };
-  localStorage.setItem('myeng_answers', JSON.stringify(stored));
-
-  // 코드 박스 + 단어뱅크
-  const codeBox = document.createElement('div');
-  codeBox.style.cssText = 'border:1.5px solid #5b4fcf;border-radius:4px;padding:2mm 3mm;text-align:center;margin-bottom:2mm;';
-  codeBox.innerHTML = `<div style="font-size:6pt;color:#5b4fcf;font-weight:700;">정답 코드</div>
-    <div style="font-size:11pt;font-weight:900;color:#1e293b;letter-spacing:1px;">${key}</div>`;
-
-  const rightCol = document.createElement('div');
-  rightCol.style.cssText = 'flex:0 0 20mm;display:flex;flex-direction:column;gap:2mm;';
-  rightCol.appendChild(codeBox);
-  rightCol.appendChild(buildBankCol(bankWords));
-  bottomRow.appendChild(rightCol);
-  page.appendChild(bottomRow);
+  wrap.appendChild(main);
+  wrap.appendChild(buildAnswerCol(enWords, krWords, sentWords));
+  page.appendChild(wrap);
 
   window.print();
 }
