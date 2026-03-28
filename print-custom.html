@@ -505,11 +505,9 @@ function doPrint(type) {
 
 async function doBatchPrint() {
   if (addedUnits.size === 0) return;
-  // 각 열 독립 셔플
-  const { words: krWords, title } = getWords();
-  const { words: enWords }        = getWords();
+  const { words: enWords, title } = getWords();
+  const { words: krWords }        = getWords();
   const { words: sentWords }      = getWords();
-  // 단어뱅크: sentWords 추가 셔플
   const bankWords = [...sentWords];
   for (let i = bankWords.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -517,17 +515,6 @@ async function doBatchPrint() {
   }
   const bankNumMap = {};
   bankWords.forEach((w, i) => { bankNumMap[w.answer] = i + 1; });
-
-  // 일괄 출력: 고정 헤더 숨기고 상단 여백 제거
-  document.getElementById('po-fixed-header').style.display = 'none';
-  const page = document.getElementById('po-page');
-  page.style.paddingTop = '4mm';
-  page.innerHTML = '';
-
-  // ── P1: 3열 테이블 + 우측 단어뱅크 독립 ──
-  const p1 = document.createElement('div');
-  p1.style.cssText = 'display:flex; gap:3mm;';
-  p1.appendChild(buildBatchTable(krWords, enWords, sentWords));
 
   // ── 정답 localStorage 저장 ──
   const ansData = {
@@ -537,52 +524,106 @@ async function doBatchPrint() {
     sent: sentWords.map(w => ({ b: bankNumMap[w.answer] || 0, a: w.answer }))
   };
   const stored = JSON.parse(localStorage.getItem('myeng_answers') || '{}');
-  // 5일 지난 항목 자동 삭제
   const now = Date.now();
   for (const k of Object.keys(stored)) {
     if (now - (stored[k].created || 0) > 432000000) delete stored[k];
   }
-  // 키 생성 (YYYYMMDD-NNN)
   const dn = new Date();
-  const dateStr = dn.getFullYear().toString()
-    + String(dn.getMonth()+1).padStart(2,'0')
-    + String(dn.getDate()).padStart(2,'0');
+  const dateStr = dn.getFullYear().toString() + String(dn.getMonth()+1).padStart(2,'0') + String(dn.getDate()).padStart(2,'0');
   const todaySeq = Object.keys(stored).filter(k => k.startsWith(dateStr)).length + 1;
   const key = `${dateStr}-${String(todaySeq).padStart(3,'0')}`;
   stored[key] = { ...ansData, created: now };
   localStorage.setItem('myeng_answers', JSON.stringify(stored));
 
+  document.getElementById('po-fixed-header').style.display = 'none';
+  const page = document.getElementById('po-page');
+  page.style.paddingTop = '4mm';
+  page.innerHTML = '';
+
+  const itemStyle = 'display:flex;align-items:center;gap:3px;padding:1.5mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
+  const noStyle   = 'font-size:8.5pt;color:#bbb;min-width:16px;flex-shrink:0;';
+  const wordStyle = 'font-size:11.5pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
+  const lineStyle = 'flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:6px;';
+
+  function buildWordCol(words, getWord) {
+    const col = document.createElement('div');
+    col.style.cssText = 'flex:1;min-width:0;';
+    words.forEach((w, i) => {
+      const el = document.createElement('div');
+      el.style.cssText = itemStyle;
+      el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="${wordStyle}">${getWord(w)}</span><span style="${lineStyle}"></span>`;
+      col.appendChild(el);
+    });
+    return col;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;gap:3mm;';
+
+  const main = document.createElement('div');
+  main.style.cssText = 'flex:1;min-width:0;';
+
+  // 상단: 영어 | 한글
+  const topRow = document.createElement('div');
+  topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:3mm;margin-bottom:3mm;';
+  const enCol = buildWordCol(enWords, w => w.english);
+  enCol.style.cssText += 'border-right:1.5px dashed #ccc;padding-right:3mm;margin-right:3mm;';
+  topRow.appendChild(enCol);
+  topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim()));
+  main.appendChild(topRow);
+
+  // 하단: 문장 (2열)
+  const sentWrap = document.createElement('div');
+  sentWrap.style.cssText = 'columns:2;column-gap:6mm;';
+  sentWords.forEach((w, i) => {
+    const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:5ch;max-width:5ch;"></span>`);
+    const el = document.createElement('div');
+    el.style.cssText = 'display:flex;align-items:baseline;gap:3px;border-bottom:1px dotted #ddd;padding:1.5mm 0;break-inside:avoid;';
+    el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="font-size:10.5pt;line-height:1.3;">${sentHtml}</span>`;
+    sentWrap.appendChild(el);
+  });
+  main.appendChild(sentWrap);
+
+  // Word Bank
+  const bankStrip = document.createElement('div');
+  bankStrip.style.cssText = 'margin-top:2mm;border-top:1.5px solid #10b981;padding-top:1.5mm;';
+  const bankLabel = document.createElement('div');
+  bankLabel.style.cssText = 'font-size:7pt;font-weight:700;color:#10b981;margin-bottom:1mm;';
+  bankLabel.textContent = '✦ Word Bank';
+  bankStrip.appendChild(bankLabel);
+  const bankGrid = document.createElement('div');
+  bankGrid.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5mm 5mm;';
+  bankWords.forEach((w, i) => {
+    const el = document.createElement('span');
+    el.style.cssText = 'font-size:8pt;color:#333;white-space:nowrap;';
+    el.innerHTML = `<span style="color:#10b981;font-weight:700;">${i+1}.</span> ${w.answer}`;
+    bankGrid.appendChild(el);
+  });
+  bankStrip.appendChild(bankGrid);
+  main.appendChild(bankStrip);
+
+  // QR + 정답 코드 (우측)
   const base = location.href.replace(/\/[^/]*$/, '/');
   const qrUrl = `${base}answers.html?k=${key}`;
-
-  // 코드 + QR 박스
   const qrBox = document.createElement('div');
-  qrBox.style.cssText = 'flex:0 0 20mm; display:flex; flex-direction:column; align-items:center; gap:0;';
+  qrBox.style.cssText = 'flex:0 0 22mm; display:flex; flex-direction:column; align-items:center; gap:0;';
   qrBox.innerHTML = `
     <div style="border:1.5px solid #5b4fcf;border-radius:4px;padding:2mm 3mm;text-align:center;margin-bottom:2mm;width:100%;">
       <div style="font-size:6pt;color:#5b4fcf;font-weight:700;">정답 코드</div>
-      <div style="font-size:13pt;font-weight:900;color:#1e293b;letter-spacing:1px;">${key}</div>
+      <div style="font-size:10pt;font-weight:900;color:#1e293b;letter-spacing:1px;">${key}</div>
     </div>
     <div id="qr-canvas"></div>
     <div style="font-size:5.5pt;color:#aaa;margin-top:1mm;text-align:center;">QR 또는 코드 입력</div>`;
 
-  // 단어뱅크를 QR 아래에 이어붙임
-  const rightCol = document.createElement('div');
-  rightCol.style.cssText = 'flex:0 0 20mm; display:flex; flex-direction:column; gap:2mm;';
-  rightCol.appendChild(qrBox);
-  rightCol.appendChild(buildBankCol(bankWords));
+  wrap.appendChild(main);
+  wrap.appendChild(qrBox);
+  page.appendChild(wrap);
 
-  // p1에서 기존 buildBankCol 제거 후 rightCol로 교체
-  p1.style.cssText = 'display:flex; gap:3mm;';
-  page.appendChild(p1);
-  p1.appendChild(rightCol);
-
-  // QRCode 라이브러리 로드 후 생성
   try {
     await loadQRLib();
     new QRCode(document.getElementById('qr-canvas'), { text: qrUrl, width: 64, height: 64, correctLevel: QRCode.CorrectLevel.M });
   } catch {
-    document.getElementById('qr-canvas').textContent = '(QR 생성 실패 — 인터넷 연결 확인)';
+    document.getElementById('qr-canvas').textContent = '(QR 생성 실패)';
   }
 
   window.print();
