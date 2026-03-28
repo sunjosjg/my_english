@@ -540,35 +540,19 @@ async function doBatchPrint() {
   const base = location.href.replace(/\/[^/]*$/, '/');
   const qrUrl = `${base}answers.html?k=${key}`;
 
-  // 코드 + QR 박스
-  const qrBox = document.createElement('div');
-  qrBox.style.cssText = 'flex:0 0 20mm; display:flex; flex-direction:column; align-items:center; gap:0;';
-  qrBox.innerHTML = `
-    <div style="border:1.5px solid #5b4fcf;border-radius:4px;padding:2mm 3mm;text-align:center;margin-bottom:2mm;width:100%;">
-      <div style="font-size:6pt;color:#5b4fcf;font-weight:700;">정답 코드</div>
-      <div style="font-size:13pt;font-weight:900;color:#1e293b;letter-spacing:1px;">${key}</div>
-    </div>
-    <div id="qr-canvas"></div>
-    <div style="font-size:5.5pt;color:#aaa;margin-top:1mm;text-align:center;">QR 또는 코드 입력</div>`;
-
-  // 단어뱅크를 QR 아래에 이어붙임
+  // 정답 코드 + 단어뱅크
   const rightCol = document.createElement('div');
   rightCol.style.cssText = 'flex:0 0 30mm; display:flex; flex-direction:column; gap:2mm;';
-  rightCol.appendChild(qrBox);
+
+  const codeBox = document.createElement('div');
+  codeBox.style.cssText = 'border:1px solid #5b4fcf;border-radius:4px;padding:1.5mm 2mm;text-align:center;';
+  codeBox.innerHTML = `<div style="font-size:5.5pt;color:#5b4fcf;font-weight:700;">정답 코드</div><div style="font-size:7pt;font-weight:700;color:#1e293b;letter-spacing:0.5px;">${key}</div>`;
+  rightCol.appendChild(codeBox);
   rightCol.appendChild(buildBankCol(bankWords));
 
-  // p1에서 기존 buildBankCol 제거 후 rightCol로 교체
   p1.style.cssText = 'display:flex; gap:3mm;';
   page.appendChild(p1);
   p1.appendChild(rightCol);
-
-  // QRCode 라이브러리 로드 후 생성
-  try {
-    await loadQRLib();
-    new QRCode(document.getElementById('qr-canvas'), { text: qrUrl, width: 64, height: 64, correctLevel: QRCode.CorrectLevel.M });
-  } catch {
-    document.getElementById('qr-canvas').textContent = '(QR 생성 실패 — 인터넷 연결 확인)';
-  }
 
   window.print();
 }
