@@ -606,7 +606,7 @@ async function doBatchPrint() {
   const sentWrap = document.createElement('div');
   sentWrap.style.cssText = 'columns:2;column-gap:6mm;';
   sentWords.forEach((w, i) => {
-    const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:5ch;max-width:5ch;"></span>`);
+    const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:3ch;max-width:3ch;"></span>`);
     const el = document.createElement('div');
     el.style.cssText = 'display:flex;align-items:baseline;gap:3px;padding:1.6mm 0;break-inside:avoid;';
     el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="font-size:10.5pt;line-height:1.4;">${sentHtml}</span>`;
