@@ -581,7 +581,7 @@ function buildBatchTable(krWords, enWords, sentWords) {
 
   for (let i = 0; i < n; i++) {
     const row = document.createElement('div');
-    row.style.cssText = 'display:grid; grid-template-columns:55mm 55mm 1fr; gap:0; padding:1.5mm 0; break-inside:avoid;';
+    row.style.cssText = 'display:grid; grid-template-columns:55mm 55mm 1fr; gap:0; padding:2.5mm 0; break-inside:avoid;';
 
     const krWord   = krWords[i].korean.split(',')[0].trim();
     const enWord   = enWords[i].english;
