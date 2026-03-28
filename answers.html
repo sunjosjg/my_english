@@ -267,8 +267,8 @@ function makeCol(type, title, htmlItems) {
       e.stopPropagation();
       el.classList.toggle('checked', cb.checked);
     });
-    const word = el.querySelector('.ans-word');
-    if (word) el.insertBefore(cb, word);
+    const anchor = el.querySelector(type === 'sent' ? '.ans-bank' : '.ans-word');
+    if (anchor) el.insertBefore(cb, anchor);
     else el.appendChild(cb);
     el.addEventListener('click', () => {
       selectColIdx(type, i, _ttsOn);
