@@ -504,12 +504,12 @@ function doPrint(type) {
   window.print();
 }
 
-function buildAnswerCol(enWords, krWords, sentWords, bankNumMap) {
+function buildAnswerCol(enWords, krWords, sentWords, bankNumMap, unitTitle) {
   const col = document.createElement('div');
   col.style.cssText = 'flex:0 0 24mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:8.5pt; line-height:1.5; color:#444;';
   const title = document.createElement('div');
   title.style.cssText = 'font-size:7pt;font-weight:700;color:#555;border-bottom:1.5px solid #555;padding-bottom:0.5mm;margin-bottom:0.5mm;';
-  title.textContent = `✂ 정답`;
+  title.textContent = `✂ 정답 — ${unitTitle}`;
   col.appendChild(title);
 
   function section(label, color, items) {
@@ -631,7 +631,7 @@ async function doBatchPrint() {
   main.appendChild(bankStrip);
 
   wrap.appendChild(main);
-  wrap.appendChild(buildAnswerCol(enWords, krWords, sentWords, bankNumMap));
+  wrap.appendChild(buildAnswerCol(enWords, krWords, sentWords, bankNumMap, title));
   page.appendChild(wrap);
 
   window.print();
