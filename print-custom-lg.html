@@ -529,7 +529,7 @@ function buildAnswerCol(enWords, krWords, sentWords, bankNumMap, unitTitle) {
   section('영어 정답', '#d97706', enWords.map(w => w.korean.split(',')[0].trim()));
   section('문장 정답', '#10b981', sentWords.map((w, i) => {
     const bn = bankNumMap ? bankNumMap[w.answer] : null;
-    return bn ? `<span style="color:#10b981;font-weight:700;">W${bn}</span> ${w.answer}` : w.answer;
+    return bn ? `<span style="color:#10b981;font-weight:700;">${bn}.</span> ${w.answer}` : w.answer;
   }));
   return col;
 }
@@ -553,12 +553,12 @@ async function doBatchPrint() {
   page.innerHTML = '';
 
 
-  const itemStyle = 'display:flex;align-items:center;gap:3px;padding:1.5mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
+  const itemStyle = 'display:flex;align-items:center;gap:3px;padding:1mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
   const noStyle   = 'font-size:8.5pt;color:#bbb;min-width:16px;flex-shrink:0;';
   const wordStyle = 'font-size:11.5pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
   const lineStyle = 'flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:6px;';
 
-  const secLabelStyle = 'font-size:7.5pt;font-weight:700;padding-bottom:1mm;margin-bottom:1mm;border-bottom:1.5px solid currentColor;';
+  const secLabelStyle = 'font-size:7pt;font-weight:700;padding-bottom:0.8mm;margin-bottom:0.8mm;border-bottom:1.5px solid currentColor;';
 
   function buildWordCol(words, getWord, label, color) {
     const col = document.createElement('div');
@@ -587,7 +587,7 @@ async function doBatchPrint() {
 
   // 상단: 영어 | 한글
   const topRow = document.createElement('div');
-  topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:3mm;margin-bottom:3mm;';
+  topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:2mm;margin-bottom:2mm;';
   const enCol = buildWordCol(enWords, w => w.english, `🔤 영어 단어 — ${title}`, '#d97706');
   enCol.style.cssText += 'border-right:1.5px dashed #ccc;padding-right:3mm;margin-right:3mm;';
   topRow.appendChild(enCol);
@@ -606,7 +606,7 @@ async function doBatchPrint() {
   sentWords.forEach((w, i) => {
     const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:5ch;max-width:5ch;"></span>`);
     const el = document.createElement('div');
-    el.style.cssText = 'display:flex;align-items:baseline;gap:3px;border-bottom:1px dotted #ddd;padding:1.5mm 0;break-inside:avoid;';
+    el.style.cssText = 'display:flex;align-items:baseline;gap:3px;border-bottom:1px dotted #ddd;padding:1mm 0;break-inside:avoid;';
     el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="font-size:10.5pt;line-height:1.3;">${sentHtml}</span>`;
     sentWrap.appendChild(el);
   });
@@ -614,7 +614,7 @@ async function doBatchPrint() {
 
   // ── Word Bank (셔플 순서) ──
   const bankStrip = document.createElement('div');
-  bankStrip.style.cssText = 'margin-top:2mm;border-top:1.5px solid #10b981;padding-top:1.5mm;';
+  bankStrip.style.cssText = 'margin-top:1.5mm;border-top:1.5px solid #10b981;padding-top:1mm;';
   const bankLabel = document.createElement('div');
   bankLabel.style.cssText = 'font-size:7pt;font-weight:700;color:#10b981;margin-bottom:1mm;';
   bankLabel.textContent = `✦ Word Bank — ${title}`;
