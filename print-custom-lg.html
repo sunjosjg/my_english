@@ -509,7 +509,7 @@ function buildAnswerCol(enWords, krWords, sentWords, bankNumMap) {
   col.style.cssText = 'flex:0 0 22mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:7.5pt; line-height:1.6; color:#444;';
   const title = document.createElement('div');
   title.style.cssText = 'font-size:7pt;font-weight:700;color:#555;border-bottom:1.5px solid #555;padding-bottom:0.5mm;margin-bottom:0.5mm;';
-  title.textContent = '✂ 정답';
+  title.textContent = `✂ 정답`;
   col.appendChild(title);
 
   function section(label, color, items) {
@@ -552,11 +552,6 @@ async function doBatchPrint() {
   page.style.paddingTop = '4mm';
   page.innerHTML = '';
 
-  // 단원명 표시
-  const titleEl = document.createElement('div');
-  titleEl.style.cssText = 'font-size:11pt;font-weight:800;color:#1e293b;border-bottom:2px solid #333;padding-bottom:2mm;margin-bottom:3mm;';
-  titleEl.textContent = title;
-  page.appendChild(titleEl);
 
   const itemStyle = 'display:flex;align-items:center;gap:3px;padding:1.5mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
   const noStyle   = 'font-size:8.5pt;color:#bbb;min-width:16px;flex-shrink:0;';
@@ -593,16 +588,16 @@ async function doBatchPrint() {
   // 상단: 영어 | 한글
   const topRow = document.createElement('div');
   topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:3mm;margin-bottom:3mm;';
-  const enCol = buildWordCol(enWords, w => w.english, '🔤 영어 단어', '#d97706');
+  const enCol = buildWordCol(enWords, w => w.english, `🔤 영어 단어 — ${title}`, '#d97706');
   enCol.style.cssText += 'border-right:1.5px dashed #ccc;padding-right:3mm;margin-right:3mm;';
   topRow.appendChild(enCol);
-  topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim(), '🈲 한글 단어', '#5b4fcf'));
+  topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim(), `🈲 한글 단어 — ${title}`, '#5b4fcf'));
   main.appendChild(topRow);
 
   // 하단: 문장 섹션 레이블
   const sentLabel = document.createElement('div');
   sentLabel.style.cssText = secLabelStyle + 'color:#10b981;margin-bottom:2mm;';
-  sentLabel.textContent = '📝 문장';
+  sentLabel.textContent = `📝 문장 — ${title}`;
   main.appendChild(sentLabel);
 
   // 하단: 문장 (2열)
@@ -622,7 +617,7 @@ async function doBatchPrint() {
   bankStrip.style.cssText = 'margin-top:2mm;border-top:1.5px solid #10b981;padding-top:1.5mm;';
   const bankLabel = document.createElement('div');
   bankLabel.style.cssText = 'font-size:7pt;font-weight:700;color:#10b981;margin-bottom:1mm;';
-  bankLabel.textContent = '✦ Word Bank';
+  bankLabel.textContent = `✦ Word Bank — ${title}`;
   bankStrip.appendChild(bankLabel);
   const bankGrid = document.createElement('div');
   bankGrid.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5mm 5mm;';
