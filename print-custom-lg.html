@@ -507,6 +507,10 @@ function doPrint(type) {
 function buildAnswerCol(enWords, krWords, sentWords, bankNumMap) {
   const col = document.createElement('div');
   col.style.cssText = 'flex:0 0 18mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:6pt; line-height:1.55; color:#444;';
+  const title = document.createElement('div');
+  title.style.cssText = 'font-size:7pt;font-weight:700;color:#555;border-bottom:1.5px solid #555;padding-bottom:0.5mm;margin-bottom:0.5mm;';
+  title.textContent = '✂ 정답';
+  col.appendChild(title);
 
   function section(label, color, items) {
     const hd = document.createElement('div');
@@ -553,9 +557,17 @@ async function doBatchPrint() {
   const wordStyle = 'font-size:11.5pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
   const lineStyle = 'flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:6px;';
 
-  function buildWordCol(words, getWord) {
+  const secLabelStyle = 'font-size:7.5pt;font-weight:700;padding-bottom:1mm;margin-bottom:1mm;border-bottom:1.5px solid currentColor;';
+
+  function buildWordCol(words, getWord, label, color) {
     const col = document.createElement('div');
     col.style.cssText = 'flex:1;min-width:0;';
+    if (label) {
+      const lbl = document.createElement('div');
+      lbl.style.cssText = secLabelStyle + `color:${color};`;
+      lbl.textContent = label;
+      col.appendChild(lbl);
+    }
     words.forEach((w, i) => {
       const el = document.createElement('div');
       el.style.cssText = itemStyle;
@@ -575,11 +587,17 @@ async function doBatchPrint() {
   // 상단: 영어 | 한글
   const topRow = document.createElement('div');
   topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:3mm;margin-bottom:3mm;';
-  const enCol = buildWordCol(enWords, w => w.english);
+  const enCol = buildWordCol(enWords, w => w.english, '🔤 영어 단어', '#d97706');
   enCol.style.cssText += 'border-right:1.5px dashed #ccc;padding-right:3mm;margin-right:3mm;';
   topRow.appendChild(enCol);
-  topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim()));
+  topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim(), '🈲 한글 단어', '#5b4fcf'));
   main.appendChild(topRow);
+
+  // 하단: 문장 섹션 레이블
+  const sentLabel = document.createElement('div');
+  sentLabel.style.cssText = secLabelStyle + 'color:#10b981;margin-bottom:2mm;';
+  sentLabel.textContent = '📝 문장';
+  main.appendChild(sentLabel);
 
   // 하단: 문장 (2열)
   const sentWrap = document.createElement('div');
