@@ -530,9 +530,9 @@ async function doBatchPrint() {
   page.style.paddingTop = '4mm';
   page.innerHTML = '';
 
-  const itemStyle = 'display:flex;align-items:center;gap:3px;padding:2.8mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
-  const noStyle   = 'font-size:8pt;color:#bbb;min-width:16px;flex-shrink:0;';
-  const wordStyle = 'font-size:11pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
+  const itemStyle = 'display:flex;align-items:center;gap:3px;padding:4mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
+  const noStyle   = 'font-size:9pt;color:#bbb;min-width:18px;flex-shrink:0;';
+  const wordStyle = 'font-size:13pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
   const lineStyle = 'flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:6px;';
 
   function buildWordCol(words, getWord) {
@@ -570,8 +570,8 @@ async function doBatchPrint() {
     const bw = Math.round((w.answer.length + 4) * 0.67) + 'ch';
     const sentHtml = w.sentence.replace('___', `<span class="po-blank" style="min-width:${bw}"></span>`);
     const el = document.createElement('div');
-    el.style.cssText = 'display:flex;align-items:baseline;gap:3px;border-bottom:1px dotted #ddd;padding:2.8mm 0;break-inside:avoid;';
-    el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="font-size:10pt;line-height:1.4;">${sentHtml}</span>`;
+    el.style.cssText = 'display:flex;align-items:baseline;gap:3px;border-bottom:1px dotted #ddd;padding:4mm 0;break-inside:avoid;';
+    el.innerHTML = `<span style="${noStyle}">${i+1}.</span><span style="font-size:12pt;line-height:1.5;">${sentHtml}</span>`;
     sentWrap.appendChild(el);
   });
   main.appendChild(sentWrap);
