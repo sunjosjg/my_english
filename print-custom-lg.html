@@ -525,8 +525,8 @@ function buildAnswerCol(enWords, krWords, sentWords, bankNumMap) {
     });
   }
 
-  section('영어 정답', '#d97706', enWords.map(w => w.korean.split(',')[0].trim()));
   section('한글 정답', '#5b4fcf', krWords.map(w => w.english));
+  section('영어 정답', '#d97706', enWords.map(w => w.korean.split(',')[0].trim()));
   section('문장 정답', '#10b981', sentWords.map((w, i) => {
     const bn = bankNumMap ? bankNumMap[w.answer] : null;
     return bn ? `<span style="color:#10b981;font-weight:700;">W${bn}</span> ${w.answer}` : w.answer;
