@@ -170,7 +170,7 @@
     .po-item { display: flex; align-items: center; gap: 5px; padding: 3.5mm 0; break-inside: avoid; }
     .po-no   { font-size: 8pt; color: #999; min-width: 18px; flex-shrink: 0; }
     .po-word { font-size: 10.5pt; font-weight: 600; flex-shrink: 0; padding-right: 4px; }
-    .po-line { flex: 1; border-bottom: 1px solid #bbb; margin: 0 3px 2px; align-self: flex-end; min-width: 20px; }
+    .po-line { width: 22mm; flex-shrink: 0; border-bottom: 1px solid #bbb; margin: 0 3px 2px; align-self: flex-end; }
 
     /* 문장 (1열) */
     .po-sent-item { display: flex; align-items: baseline; gap: 5px; border-bottom: 1px dotted #ccc; padding: 3mm 0; min-height: 10mm; }
@@ -558,7 +558,7 @@ async function doBatchPrint() {
   const itemStyle = 'display:flex;align-items:center;gap:3px;padding:1.6mm 0;break-inside:avoid;';
   const noStyle   = 'font-size:8.5pt;color:#bbb;min-width:16px;flex-shrink:0;';
   const wordStyle = 'font-size:11.5pt;font-weight:600;flex-shrink:0;white-space:nowrap;';
-  const lineStyle = 'flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:6px;';
+  const lineStyle = 'width:22mm;flex-shrink:0;border-bottom:1px solid #bbb;align-self:flex-end;';
 
   const secLabelStyle = 'font-size:7pt;font-weight:700;padding-bottom:0.8mm;margin-bottom:0.8mm;';
 
@@ -656,8 +656,8 @@ function buildBatchTable(krWords, enWords, sentWords) {
 
     const no = `<span style="font-size:6.5pt;color:#bbb;min-width:13px;flex-shrink:0;">${i+1}.</span>`;
     row.innerHTML =
-      `<div style="display:flex;align-items:center;gap:2px;overflow:hidden;${cut}">${no}<span style="font-size:8pt;font-weight:600;flex-shrink:0;white-space:nowrap;">${krWord}</span><span style="flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:4px;"></span></div>`
-    + `<div style="display:flex;align-items:center;gap:2px;overflow:hidden;${cut}">${no}<span style="font-size:8pt;font-weight:600;flex-shrink:0;white-space:nowrap;">${enWord}</span><span style="flex:1;border-bottom:1px solid #bbb;align-self:flex-end;min-width:4px;"></span></div>`
+      `<div style="display:flex;align-items:center;gap:2px;overflow:hidden;${cut}">${no}<span style="font-size:8pt;font-weight:600;flex-shrink:0;white-space:nowrap;">${krWord}</span><span style="width:18mm;flex-shrink:0;border-bottom:1px solid #bbb;align-self:flex-end;"></span></div>`
+    + `<div style="display:flex;align-items:center;gap:2px;overflow:hidden;${cut}">${no}<span style="font-size:8pt;font-weight:600;flex-shrink:0;white-space:nowrap;">${enWord}</span><span style="width:18mm;flex-shrink:0;border-bottom:1px solid #bbb;align-self:flex-end;"></span></div>`
     + `<div style="display:flex;align-items:baseline;gap:3px;">${no}<span style="font-size:8pt;line-height:1.3;">${sentHtml}</span></div>`;
     wrap.appendChild(row);
   }
