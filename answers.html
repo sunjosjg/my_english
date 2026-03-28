@@ -259,6 +259,7 @@ function makeCol(type, title, htmlItems) {
     const el = document.createElement('div');
     el.className = 'ans-item';
     el.dataset.idx = i;
+    el.insertAdjacentHTML('beforeend', html);
     const cb = document.createElement('input');
     cb.type = 'checkbox';
     cb.className = 'ans-cb';
@@ -266,8 +267,9 @@ function makeCol(type, title, htmlItems) {
       e.stopPropagation();
       el.classList.toggle('checked', cb.checked);
     });
-    el.appendChild(cb);
-    el.insertAdjacentHTML('beforeend', html);
+    const word = el.querySelector('.ans-word');
+    if (word) el.insertBefore(cb, word);
+    else el.appendChild(cb);
     el.addEventListener('click', () => {
       selectColIdx(type, i, _ttsOn);
     });
