@@ -251,6 +251,7 @@ let dragData = null;
       if (unit) {
         const label = `${strip(course.label)} ${strip(type.label)} ${fmtDot(unit.short)}`;
         await addUnit({ key: makeKey(pc, pt, pu), cid: pc, tid: pt, uid: pu, label });
+        window.addEventListener('afterprint', () => history.back());
         doBatchPrint();
       }
     }
