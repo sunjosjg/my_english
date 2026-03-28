@@ -506,7 +506,7 @@ function doPrint(type) {
 
 function buildAnswerCol(enWords, krWords, sentWords, bankNumMap) {
   const col = document.createElement('div');
-  col.style.cssText = 'flex:0 0 18mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:6pt; line-height:1.55; color:#444;';
+  col.style.cssText = 'flex:0 0 22mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:7.5pt; line-height:1.6; color:#444;';
   const title = document.createElement('div');
   title.style.cssText = 'font-size:7pt;font-weight:700;color:#555;border-bottom:1.5px solid #555;padding-bottom:0.5mm;margin-bottom:0.5mm;';
   title.textContent = '✂ 정답';
@@ -514,7 +514,7 @@ function buildAnswerCol(enWords, krWords, sentWords, bankNumMap) {
 
   function section(label, color, items) {
     const hd = document.createElement('div');
-    hd.style.cssText = `font-size:6pt;font-weight:700;color:${color};margin-bottom:0.5mm;margin-top:1.5mm;border-bottom:1px solid ${color};padding-bottom:0.3mm;`;
+    hd.style.cssText = `font-size:7pt;font-weight:700;color:${color};margin-bottom:0.5mm;margin-top:1.5mm;border-bottom:1px solid ${color};padding-bottom:0.3mm;`;
     hd.textContent = label;
     col.appendChild(hd);
     items.forEach((text, i) => {
