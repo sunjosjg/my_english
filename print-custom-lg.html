@@ -507,28 +507,6 @@ async function doBatchPrint() {
   page.style.paddingTop = '4mm';
   page.innerHTML = '';
 
-  // ── localStorage 저장 ──
-  const ansData = {
-    title,
-    kr:   krWords.map(w => w.english),
-    en:   enWords.map(w => w.korean.split(',')[0].trim()),
-    sent: sentWords.map(w => ({ b: bankNumMap[w.answer] || 0, a: w.answer }))
-  };
-  const stored = JSON.parse(localStorage.getItem('myeng_answers') || '{}');
-  const now = Date.now();
-  for (const k of Object.keys(stored)) {
-    if (now - (stored[k].created || 0) > 432000000) delete stored[k];
-  }
-  const dn = new Date();
-  const dateStr = dn.getFullYear().toString()
-    + String(dn.getMonth()+1).padStart(2,'0')
-    + String(dn.getDate()).padStart(2,'0');
-  const todaySeq = Object.keys(stored).filter(k => k.startsWith(dateStr)).length + 1;
-  const key = `${dateStr}-${String(todaySeq).padStart(3,'0')}`;
-  stored[key] = { ...ansData, created: now };
-  localStorage.setItem('myeng_answers', JSON.stringify(stored));
-  const base = location.href.replace(/\/[^/]*$/, '/');
-  const qrUrl = `${base}answers.html?k=${key}`;
 
   const n = enWords.length;
   const itemStyle = 'display:flex;align-items:center;gap:3px;padding:1.8mm 0;border-bottom:1px dotted #ddd;break-inside:avoid;';
@@ -575,30 +553,12 @@ async function doBatchPrint() {
   });
   bottomRow.appendChild(sentWrap);
 
-  // QR + 단어뱅크
-  const qrBox = document.createElement('div');
-  qrBox.style.cssText = 'flex:0 0 20mm;display:flex;flex-direction:column;align-items:center;gap:0;';
-  qrBox.innerHTML = `
-    <div style="border:1.5px solid #5b4fcf;border-radius:4px;padding:2mm 3mm;text-align:center;margin-bottom:2mm;width:100%;">
-      <div style="font-size:6pt;color:#5b4fcf;font-weight:700;">정답 코드</div>
-      <div style="font-size:11pt;font-weight:900;color:#1e293b;letter-spacing:1px;">${key}</div>
-    </div>
-    <div id="qr-canvas"></div>
-    <div style="font-size:5.5pt;color:#aaa;margin-top:1mm;text-align:center;">QR 또는 코드 입력</div>`;
-
+  // 단어뱅크
   const rightCol = document.createElement('div');
-  rightCol.style.cssText = 'flex:0 0 20mm;display:flex;flex-direction:column;gap:2mm;';
-  rightCol.appendChild(qrBox);
+  rightCol.style.cssText = 'flex:0 0 20mm;display:flex;flex-direction:column;';
   rightCol.appendChild(buildBankCol(bankWords));
   bottomRow.appendChild(rightCol);
   page.appendChild(bottomRow);
-
-  try {
-    await loadQRLib();
-    new QRCode(document.getElementById('qr-canvas'), { text: qrUrl, width: 64, height: 64, correctLevel: QRCode.CorrectLevel.M });
-  } catch {
-    document.getElementById('qr-canvas').textContent = '(QR 생성 실패)';
-  }
 
   window.print();
 }
