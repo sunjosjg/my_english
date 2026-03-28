@@ -507,7 +507,7 @@ function doPrint(type) {
 
 function buildAnswerCol(enWords, krWords, sentWords, bankNumMap, unitTitle) {
   const col = document.createElement('div');
-  col.style.cssText = 'flex:0 0 34mm; border-left:1.5px dashed #ccc; padding-left:2mm; font-size:8.5pt; line-height:1.5; color:#444;';
+  col.style.cssText = 'flex:0 0 34mm; padding-left:2mm; font-size:8.5pt; line-height:1.5; color:#444;';
   const title = document.createElement('div');
   title.style.cssText = 'font-size:7pt;font-weight:700;color:#555;padding-bottom:0.5mm;margin-bottom:0.5mm;';
   title.textContent = `✂ 정답 — ${unitTitle}`;
@@ -589,9 +589,9 @@ async function doBatchPrint() {
 
   // 상단: 영어 | 한글
   const topRow = document.createElement('div');
-  topRow.style.cssText = 'display:flex;gap:0;border-bottom:1.5px dashed #888;padding-bottom:2mm;margin-bottom:2mm;';
+  topRow.style.cssText = 'display:flex;gap:0;padding-bottom:2mm;margin-bottom:2mm;';
   const enCol = buildWordCol(enWords, w => w.english, `🔤 영어 단어 — ${title}`, '#d97706');
-  enCol.style.cssText += 'border-right:1.5px dashed #ccc;padding-right:3mm;margin-right:3mm;';
+  enCol.style.cssText += 'padding-right:3mm;margin-right:3mm;';
   topRow.appendChild(enCol);
   topRow.appendChild(buildWordCol(krWords, w => w.korean.split(',')[0].trim(), `🈲 한글 단어 — ${title}`, '#5b4fcf'));
   main.appendChild(topRow);
@@ -643,7 +643,7 @@ function buildBatchTable(krWords, enWords, sentWords) {
   const wrap = document.createElement('div');
   wrap.style.cssText = 'flex:1; min-width:0;';
   const n = krWords.length;
-  const cut = 'border-right:1.5px dashed #aaa; padding-right:2mm; margin-right:1mm;';
+  const cut = '';
 
   for (let i = 0; i < n; i++) {
     const row = document.createElement('div');
