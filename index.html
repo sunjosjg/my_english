@@ -16,7 +16,7 @@
       --yellow: #f59e0b; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b;
       --muted: #64748b; --border: #e2e8f0; --radius: 14px;
     }
-    body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-variant-numeric: lining-nums; }
     button, input, select, textarea { font-family: inherit; }
     .page { padding: 16px; max-width: 860px; margin: 0 auto; }
     .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
@@ -156,17 +156,17 @@
       <span class="mc-desc">3단계 최종 테스트</span>
     </div>
     <div class="mode-print-row">
-      <div class="mode-card" style="flex:1" data-mode="print-custom">
-        <div class="mc-top"><span class="mc-icon">📄</span><span class="mc-label">싱글 인쇄</span></div>
-        <span class="mc-desc">단원·유형 선택 후 인쇄</span>
-      </div>
-      <div class="mode-card" style="flex:1" data-mode="print-custom-lg">
-        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label" id="lbl-print-lg">멀티 인쇄</span></div>
-        <span class="mc-desc">선택 단원 바로 인쇄</span>
-      </div>
       <div class="mode-card" style="flex:1" data-mode="print-page3">
         <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label">학습 인쇄</span></div>
         <span class="mc-desc">전체 복습 페이지만</span>
+      </div>
+      <div class="mode-card" style="flex:1" data-mode="print-custom">
+        <div class="mc-top"><span class="mc-icon">📄</span><span class="mc-label" id="lbl-print-single">싱글 인쇄</span></div>
+        <span class="mc-desc">선택 단원 바로 인쇄</span>
+      </div>
+      <div class="mode-card" style="flex:1" data-mode="print-custom-lg">
+        <div class="mc-top"><span class="mc-icon">📋</span><span class="mc-label">멀티 인쇄</span></div>
+        <span class="mc-desc">단원 선택 후 인쇄</span>
       </div>
       <div class="mode-card" style="flex:1" data-mode="answers">
         <div class="mc-top"><span class="mc-icon">✂</span><span class="mc-label">정답 확인</span></div>
@@ -376,12 +376,12 @@ function renderUnits() {
 document.querySelectorAll('.mode-card').forEach(mc => {
   mc.onclick = () => {
     if (mc.dataset.mode === 'answers') { location.href = 'answers.html'; return; }
-    if (mc.dataset.mode === 'print-custom') { location.href = 'print-custom.html'; return; }
-    if (mc.dataset.mode === 'print-custom-lg') {
+    if (mc.dataset.mode === 'print-custom') {
       if (!selUnit) { showToast('단원을 먼저 선택하세요'); return; }
-      location.href = `print-custom-lg.html?c=${selCourse.id}&t=${selType.id}&u=${selUnit.id}`;
+      location.href = `print-custom.html?c=${selCourse.id}&t=${selType.id}&u=${selUnit.id}`;
       return;
     }
+    if (mc.dataset.mode === 'print-custom-lg') { location.href = 'print-custom-lg.html'; return; }
     if (mc.dataset.mode === 'print-page3') { startPrintPage3Only(); return; }
     document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('on'));
     mc.classList.add('on');
@@ -393,10 +393,10 @@ document.querySelectorAll('.mode-card').forEach(mc => {
 
 function updateStartBtn() {
   updateNavUnit();
-  const lbl = document.getElementById('lbl-print-lg');
+  const lbl = document.getElementById('lbl-print-single');
   if (lbl) {
     const fmtDot = s => s ? s.replace(/(\d)\.(\d)/g, '$1·$2') : s;
-    lbl.textContent = selUnit ? `멀티 인쇄(${fmtDot(selUnit.short)})` : '멀티 인쇄';
+    lbl.textContent = selUnit ? `싱글 인쇄(${fmtDot(selUnit.short)})` : '싱글 인쇄';
   }
 }
 
