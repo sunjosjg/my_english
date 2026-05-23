@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "3",
+  "title": "Speech - Unit 3. My Favorite Book",
+  "words": [
+    { "no": 1,  "english": "adventure",  "korean": "모험",               "sentence": "I like this book because it is full of ___.",            "answer": "adventure" },
+    { "no": 2,  "english": "alone",      "korean": "혼자서, 외로운",     "sentence": "In the story, Lisa feels sad and ___.",                 "answer": "alone" },
+    { "no": 3,  "english": "author",     "korean": "작가",               "sentence": "The ___ of this book is my favorite.",                  "answer": "author" },
+    { "no": 4,  "english": "be set in",  "korean": "~에 배경을 두다",    "sentence": "The story is ___ England in the 1800s.",                "answer": "set in" },
+    { "no": 5,  "english": "circus",     "korean": "서커스",             "sentence": "In the story, James joins a traveling ___.",            "answer": "circus" },
+    { "no": 6,  "english": "classic",    "korean": "고전, 명작",         "sentence": "This book is a ___.",                                   "answer": "classic" },
+    { "no": 7,  "english": "die",        "korean": "죽다, 사망하다",     "sentence": "He almost ___s.",                                       "answer": "die" },
+    { "no": 8,  "english": "difficult",  "korean": "어려운, 힘든",       "sentence": "He becomes more and more ___.",                         "answer": "difficult" },
+    { "no": 9,  "english": "ending",     "korean": "결말",               "sentence": "The ___ makes me feel hopeful.",                        "answer": "ending" },
+    { "no": 10, "english": "escape",     "korean": "탈출하다",           "sentence": "I like this book because I can ___ into a magical world.", "answer": "escape" },
+    { "no": 11, "english": "get hurt",   "korean": "다치다",             "sentence": "He works too much and ___.",                            "answer": "gets hurt" },
+    { "no": 12, "english": "hopeful",    "korean": "희망적인, 희망하는", "sentence": "The ending makes me feel ___.",                         "answer": "hopeful" },
+    { "no": 13, "english": "interesting","korean": "흥미로운",           "sentence": "The chapters are all very ___.",                        "answer": "interesting" },
+    { "no": 14, "english": "join",       "korean": "합류하다, 가입하다", "sentence": "In the story, James ___s a traveling circus.",          "answer": "join" },
+    { "no": 15, "english": "mean",       "korean": "못된, 심술궂은",     "sentence": "People are ___ to him.",                                "answer": "mean" },
+    { "no": 16, "english": "mystery",    "korean": "미스터리",           "sentence": "I like this book because it is full of ___.",          "answer": "mystery" },
+    { "no": 17, "english": "remind",     "korean": "상기시키다",         "sentence": "The story ___s me to be kind.",                        "answer": "remind" },
+    { "no": 18, "english": "surgery",    "korean": "수술",               "sentence": "In the story, Rick has to have ___.",                  "answer": "surgery" },
+    { "no": 19, "english": "title",      "korean": "제목",               "sentence": "The ___ of my favorite book is The Fault in Our Stars.", "answer": "title" },
+    { "no": 20, "english": "travel",     "korean": "이동하다",           "sentence": "Hazel ___s to Amsterdam with her mom.",                 "answer": "travel" }
+  ]
+}

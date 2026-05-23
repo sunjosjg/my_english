@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "2.2.2",
+  "title": "Integrated Reading - Word List 2.2.2",
+  "words": [
+    { "no": 1,  "english": "sequence",    "pos": "n.",    "korean": "순서",          "sentence": "Put the pictures in the right ___.",                "answer": "sequence" },
+    { "no": 2,  "english": "geyser",      "pos": "n.",    "korean": "주기적으로 물을 뿜는 샘","sentence": "The ___ comes out of the ground every hour.",  "answer": "geyser" },
+    { "no": 3,  "english": "official",    "pos": "n.",    "korean": "공무원",        "sentence": "A park ___ gave us a map.",                       "answer": "official" },
+    { "no": 4,  "english": "wildlife",    "pos": "n.",    "korean": "야생 동물",     "sentence": "Bears and deer are ___.",                         "answer": "wildlife" },
+    { "no": 5,  "english": "population",  "pos": "n.",    "korean": "인구",          "sentence": "The ___ of the town is growing.",                 "answer": "population" },
+    { "no": 6,  "english": "ranger",      "pos": "n.",    "korean": "공원 관리원",   "sentence": "The ___ told us about the animals.",              "answer": "ranger" },
+    { "no": 7,  "english": "elk",         "pos": "n.",    "korean": "엘크 (큰 사슴)","sentence": "The ___ ran through the trees.",                  "answer": "elk" },
+    { "no": 8,  "english": "predator",    "pos": "n.",    "korean": "포식자",        "sentence": "Some animals hide from ___s.",                   "answer": "predator" },
+    { "no": 9,  "english": "calf",        "pos": "n.",    "korean": "새끼",          "sentence": "The ___ stayed close to its mother.",             "answer": "calf" },
+    { "no": 10, "english": "fawn",        "pos": "n.",    "korean": "새끼 사슴",     "sentence": "We saw a cute ___ near the trees.",               "answer": "fawn" },
+    { "no": 11, "english": "suffer",      "pos": "v.",    "korean": "시달리다",      "sentence": "Plants ___ without water.",                      "answer": "suffer" },
+    { "no": 12, "english": "shoot",       "pos": "n.",    "korean": "(새로 돋아나는) 순","sentence": "A small ___ grew from the seed.",              "answer": "shoot" },
+    { "no": 13, "english": "bark",        "pos": "n.",    "korean": "나무껍질",      "sentence": "Don't peel the ___ off trees.",                  "answer": "bark" },
+    { "no": 14, "english": "eliminate",   "pos": "v.",    "korean": "제거하다",      "sentence": "He ___ sugar from his diet.",                    "answer": "eliminated" },
+    { "no": 15, "english": "predict",     "pos": "v.",    "korean": "예측하다",      "sentence": "I ___ it will rain tomorrow.",                   "answer": "predict" }
+  ]
+}

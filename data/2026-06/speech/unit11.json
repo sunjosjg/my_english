@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "11",
+  "title": "Speech - Unit 11. If I Were a Parent...",
+  "words": [
+    { "no": 1,  "english": "allow",            "korean": "허락하다",                   "sentence": "We are not ___ed to eat junk food.",                    "answer": "allow" },
+    { "no": 2,  "english": "break",            "korean": "휴식",                       "sentence": "Sometimes, you just need a ___.",                        "answer": "break" },
+    { "no": 3,  "english": "breakfast",        "korean": "아침식사",                   "sentence": "I must make sure to eat foods before ___.",              "answer": "breakfast" },
+    { "no": 4,  "english": "chore",            "korean": "집일, 허드렛일",             "sentence": "I would change ___s with my sister.",                    "answer": "chore" },
+    { "no": 5,  "english": "curfew",           "korean": "귀가 시간",                  "sentence": "I would change it to a 9:30 p.m. ___.",                  "answer": "curfew" },
+    { "no": 6,  "english": "device",           "korean": "기기",                       "sentence": "A ___ is a tool or machine used for a specific task.",   "answer": "device" },
+    { "no": 7,  "english": "do one's homework","korean": "숙제하다",                   "sentence": "I have to ___ every day.",                               "answer": "do one's homework" },
+    { "no": 8,  "english": "junk food",        "korean": "인스턴트 식품",              "sentence": "We are not allowed to eat ___.",                         "answer": "junk food" },
+    { "no": 9,  "english": "laundry",          "korean": "세탁",                       "sentence": "Everyone must take turns doing ___ every week.",          "answer": "laundry" },
+    { "no": 10, "english": "make one's bed",   "korean": "잠자리를 정돈하다",          "sentence": "I would ask my kids to ___ every morning.",               "answer": "make one's bed" },
+    { "no": 11, "english": "meal",             "korean": "식사",                       "sentence": "A ___ is an occasion when you eat food.",                 "answer": "meal" },
+    { "no": 12, "english": "must",             "korean": "~해야 한다",                 "sentence": "You ___ wear a helmet when you ride a bike.",             "answer": "must" },
+    { "no": 13, "english": "parent",           "korean": "부모",                       "sentence": "If I were a ___, the rules would be different.",           "answer": "parent" },
+    { "no": 14, "english": "respectful",       "korean": "공손한, 존중하는",           "sentence": "Everyone must be ___ to my mother and sister.",           "answer": "respectful" },
+    { "no": 15, "english": "rule",             "korean": "규칙",                       "sentence": "A ___ is a law or guide for what is allowed.",            "answer": "rule" },
+    { "no": 16, "english": "sleep in",         "korean": "늦잠 자다",                  "sentence": "My rule would be everyone must ___ on Sundays.",          "answer": "sleep in" },
+    { "no": 17, "english": "stay",             "korean": "머무르다",                   "sentence": "To ___ is to continue to be in a particular place.",       "answer": "stay" },
+    { "no": 18, "english": "take-out",         "korean": "외식이 가져 가는",           "sentence": "I ordered ___ because I didn't want to cook.",            "answer": "take-out" },
+    { "no": 19, "english": "take turns",       "korean": "교대로 하다",                "sentence": "Everyone must ___ doing laundry every week.",             "answer": "take turns" },
+    { "no": 20, "english": "weekend",          "korean": "주말",                       "sentence": "There is a ten o'clock curfew on ___s.",                  "answer": "weekend" }
+  ]
+}

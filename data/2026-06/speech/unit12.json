@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "12",
+  "title": "Speech - Unit 12. How We Can Help the World",
+  "words": [
+    { "no": 1,  "english": "amount",              "korean": "양",                     "sentence": "Choose the things with the least ___ of packaging.",      "answer": "amount" },
+    { "no": 2,  "english": "chemical",            "korean": "화학 물질",              "sentence": "A ___ is a substance used in or made by chemistry.",       "answer": "chemical" },
+    { "no": 3,  "english": "container",           "korean": "그릇, 용기",             "sentence": "A ___ is an object that holds something.",                "answer": "container" },
+    { "no": 4,  "english": "forget",              "korean": "잊다",                   "sentence": "Don't ___ to bring your reusable shopping bag!",           "answer": "forget" },
+    { "no": 5,  "english": "litter",              "korean": "쓰레기",                 "sentence": "___ is waste paper that people leave on the ground.",       "answer": "Litter" },
+    { "no": 6,  "english": "packaging",           "korean": "포장",                   "sentence": "___ is the material used to protect or cover a product.",   "answer": "Packaging" },
+    { "no": 7,  "english": "pick up",             "korean": "집다, 줍다",             "sentence": "I volunteer to ___ litter once a month.",                  "answer": "pick up" },
+    { "no": 8,  "english": "plastic-free",        "korean": "플라스틱이 없는",        "sentence": "We're going to shop in ___ stores.",                       "answer": "plastic-free" },
+    { "no": 9,  "english": "possible",            "korean": "가능한",                 "sentence": "It's ___ to finish your homework before dinner.",           "answer": "possible" },
+    { "no": 10, "english": "produce",             "korean": "생산하다",               "sentence": "To ___ is to make or grow something.",                     "answer": "produce" },
+    { "no": 11, "english": "public transportation","korean": "대중교통",              "sentence": "We can use ___ instead of driving.",                       "answer": "public transportation" },
+    { "no": 12, "english": "recycle",             "korean": "재활용하다",             "sentence": "Don't forget to ___ your cans and bottles.",               "answer": "recycle" },
+    { "no": 13, "english": "reusable",            "korean": "재사용 가능한",          "sentence": "Don't forget to bring your ___ shopping bags!",            "answer": "reusable" },
+    { "no": 14, "english": "reuse",               "korean": "재사용하다",             "sentence": "Don't forget to ___ shopping bags.",                       "answer": "reuse" },
+    { "no": 15, "english": "simple",              "korean": "간단한, 단순한",         "sentence": "These can be ___ things.",                                "answer": "simple" },
+    { "no": 16, "english": "throw away",          "korean": "버리다",                 "sentence": "Don't ___ your lunch box by mistake.",                     "answer": "throw away" },
+    { "no": 17, "english": "trash",               "korean": "쓰레기",                 "sentence": "___ is things that are no longer wanted.",                  "answer": "Trash" },
+    { "no": 18, "english": "try",                 "korean": "노력하다",               "sentence": "We can ___ a simple thing by reducing trash.",             "answer": "try" },
+    { "no": 19, "english": "upcycle",             "korean": "재료를 재사용하다",      "sentence": "To ___ is to reuse waste in a way that makes it more useful.", "answer": "upcycle" },
+    { "no": 20, "english": "zero-waste",          "korean": "제로 폐기스트",          "sentence": "A ___ lifestyle tries to produce no waste.",                "answer": "zero-waste" }
+  ]
+}

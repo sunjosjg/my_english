@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "1.1.2",
+  "title": "Integrated Reading - Word List 1.1.2",
+  "words": [
+    { "no": 1,  "english": "value",            "pos": "v.",    "korean": "소중히여기다",      "sentence": "I ___ my family very much.",                           "answer": "value" },
+    { "no": 2,  "english": "want",             "pos": "v.",    "korean": "원하다",            "sentence": "Do you ___ to play with me?",                         "answer": "want" },
+    { "no": 3,  "english": "high-tops",        "pos": "n.",    "korean": "발목까지 오는 운동화","sentence": "Her ___ are good for running.",                        "answer": "high-tops" },
+    { "no": 4,  "english": "no room for",      "pos": "phr.",  "korean": "~을 담을 수 없는",  "sentence": "Our class has ___ fighting.",                          "answer": "no room for" },
+    { "no": 5,  "english": "stripe",           "pos": "n.",    "korean": "줄무늬",            "sentence": "The zebra has black and white ___s.",                  "answer": "stripe" },
+    { "no": 6,  "english": "come along",       "pos": "phr.",  "korean": "생기다, 나타나다",  "sentence": "A new idea ___ during class.",                         "answer": "came along" },
+    { "no": 7,  "english": "kickball",         "pos": "n.",    "korean": "발야구",            "sentence": "Do you want to join our ___ team?",                   "answer": "kickball" },
+    { "no": 8,  "english": "come apart",       "pos": "phr.",  "korean": "달가지다, 풀어지다","sentence": "Don't push too hard or it will ___.",                  "answer": "come apart" },
+    { "no": 9,  "english": "guidance counselor","pos": "phr.", "korean": "지도 교사",         "sentence": "You can ask the ___ for advice.",                     "answer": "guidance counselor" },
+    { "no": 10, "english": "cartoon",          "pos": "n.",    "korean": "만화",              "sentence": "He drew a ___ in art class.",                         "answer": "cartoon" },
+    { "no": 11, "english": "nod",              "pos": "v.",    "korean": "끄덕이다",          "sentence": "I ___ to say yes.",                                   "answer": "nodded" },
+    { "no": 12, "english": "dumb",             "pos": "adj.",  "korean": "사치한",            "sentence": "That movie was kind of ___.",                         "answer": "dumb" },
+    { "no": 13, "english": "check out",        "pos": "phr.",  "korean": "살펴보다",          "sentence": "Let's ___ the new store.",                            "answer": "check out" },
+    { "no": 14, "english": "set aside",        "pos": "phr.",  "korean": "따로 떼어 두다",    "sentence": "I ___ some cookies for later.",                       "answer": "set aside" },
+    { "no": 15, "english": "you never know",   "pos": "phr.",  "korean": "누가 알겠냐?",      "sentence": "___ what will happen.",                              "answer": "You never know" }
+  ]
+}

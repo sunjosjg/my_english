@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "2.1.2",
+  "title": "Integrated Reading - Word List 2.1.2",
+  "words": [
+    { "no": 1,  "english": "humorous",    "pos": "adj.",  "korean": "재미있는",          "sentence": "He told a ___ story.",                            "answer": "humorous" },
+    { "no": 2,  "english": "caterpillar", "pos": "n.",    "korean": "애벌레",            "sentence": "The ___ crawled on a leaf.",                     "answer": "caterpillar" },
+    { "no": 3,  "english": "snap fingers","pos": "phr.",  "korean": "손가락을 튕기다",   "sentence": "She ___ to get attention.",                       "answer": "snapped fingers" },
+    { "no": 4,  "english": "shovel",      "pos": "n.",    "korean": "삽",               "sentence": "She carried sand with a ___.",                    "answer": "shovel" },
+    { "no": 5,  "english": "wheelbarrow", "pos": "n.",    "korean": "손수레",            "sentence": "He pushed the ___ full of soil.",                "answer": "wheelbarrow" },
+    { "no": 6,  "english": "meanwhile",   "pos": "adv.",  "korean": "한편",              "sentence": "___, my brother cleaned.",                        "answer": "Meanwhile" },
+    { "no": 7,  "english": "advice",      "pos": "n.",    "korean": "조언",              "sentence": "My teacher gave me good ___.",                   "answer": "advice" },
+    { "no": 8,  "english": "silly",       "pos": "adj.",  "korean": "어리석은",          "sentence": "Don't ask such a ___ question.",                 "answer": "silly" },
+    { "no": 9,  "english": "plead",       "pos": "v.",    "korean": "간절히 부탁하다",   "sentence": "He ___ to go outside.",                          "answer": "pleaded" },
+    { "no": 10, "english": "get rid of",  "pos": "phr.",  "korean": "제거하다",          "sentence": "Let's ___ this broken toy.",                     "answer": "get rid of" },
+    { "no": 11, "english": "sneer",       "pos": "v.",    "korean": "코웃음 치다",       "sentence": "He ___ at the idea.",                            "answer": "sneered" },
+    { "no": 12, "english": "glossy",      "pos": "adj.",  "korean": "윤이 나는",         "sentence": "The magazine has ___ pages.",                    "answer": "glossy" },
+    { "no": 13, "english": "beehive",     "pos": "n.",    "korean": "벌집",              "sentence": "We saw a ___ in the tree.",                      "answer": "beehive" },
+    { "no": 14, "english": "demand",      "pos": "v.",    "korean": "따지다",            "sentence": "She ___ to see the teacher.",                    "answer": "demanded" },
+    { "no": 15, "english": "resident",    "pos": "n.",    "korean": "어떤 곳에 사는 사람","sentence": "The new ___ moved in yesterday.",                 "answer": "resident" }
+  ]
+}

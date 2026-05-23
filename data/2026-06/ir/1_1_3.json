@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "1.1.3",
+  "title": "Integrated Reading - Word List 1.1.3",
+  "words": [
+    { "no": 1,  "english": "price",          "pos": "n.",    "korean": "가격",                   "sentence": "The ___ of the toy is five dollars.",               "answer": "price" },
+    { "no": 2,  "english": "thrift shop",    "pos": "phr.",  "korean": "중고품 가게",             "sentence": "I got this shirt at a ___.",                        "answer": "thrift shop" },
+    { "no": 3,  "english": "in sight",       "pos": "phr.",  "korean": "눈에 보이는",             "sentence": "The mountain is ___ now.",                          "answer": "in sight" },
+    { "no": 4,  "english": "shove",          "pos": "v.",    "korean": "밀어 넣다",               "sentence": "He ___ the box into the closet.",                   "answer": "shoved" },
+    { "no": 5,  "english": "fit",            "pos": "v.",    "korean": "(알맞게크기가) 맞다",     "sentence": "The key doesn't ___ the lock.",                     "answer": "fit" },
+    { "no": 6,  "english": "curl",           "pos": "v.",    "korean": "웅크리다",               "sentence": "The cat ___ up on the bed.",                        "answer": "curled" },
+    { "no": 7,  "english": "shuffle",        "pos": "v.",    "korean": "이리저리 움직이다",       "sentence": "The kids ___ their feet.",                          "answer": "shuffled" },
+    { "no": 8,  "english": "stretch",        "pos": "v.",    "korean": "늘어나다",               "sentence": "She ___ her arms.",                                 "answer": "stretched" },
+    { "no": 9,  "english": "glance",         "pos": "v.",    "korean": "훑어 보다",              "sentence": "She ___ out the window.",                           "answer": "glanced" },
+    { "no": 10, "english": "recess",         "pos": "n.",    "korean": "쉬는 시간",              "sentence": "We played soccer at ___.",                          "answer": "recess" },
+    { "no": 11, "english": "lean",           "pos": "v.",    "korean": "기대어있다",             "sentence": "He ___ against the wall.",                          "answer": "leaned" },
+    { "no": 12, "english": "nudge",          "pos": "v.",    "korean": "(팔꿈치로 슬쩍) 꾹 찌르기","sentence": "He gave me a small ___.",                          "answer": "nudge" },
+    { "no": 13, "english": "guardian angel", "pos": "phr.",  "korean": "수호천사",               "sentence": "My grandma is like a ___.",                         "answer": "guardian angel" },
+    { "no": 14, "english": "tender",         "pos": "adj.",  "korean": "다정한",                 "sentence": "She gave me a ___ hug.",                            "answer": "tender" },
+    { "no": 15, "english": "worry",          "pos": "v.",    "korean": "걱정하다",               "sentence": "Don't ___ about the test.",                         "answer": "worry" }
+  ]
+}

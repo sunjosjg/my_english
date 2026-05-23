@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "2.1.3",
+  "title": "Integrated Reading - Word List 2.1.3",
+  "words": [
+    { "no": 1,  "english": "happen upon",     "pos": "phr.",  "korean": "우연히 발견하다",    "sentence": "She ___ a lost dog.",                             "answer": "happened upon" },
+    { "no": 2,  "english": "upset",           "pos": "v.",    "korean": "을 이렇게 만들다",   "sentence": "Don't ___ the books on the table.",              "answer": "upset" },
+    { "no": 3,  "english": "disguise",        "pos": "v.",    "korean": "변장하다",           "sentence": "She ___ herself as a cat.",                      "answer": "disguised" },
+    { "no": 4,  "english": "prevent",         "pos": "v.",    "korean": "막다",               "sentence": "Wash your hands to ___ sickness.",               "answer": "prevent" },
+    { "no": 5,  "english": "entry",           "pos": "n.",    "korean": "입장",               "sentence": "The ___ to the museum was free.",                "answer": "entry" },
+    { "no": 6,  "english": "riddle",          "pos": "n.",    "korean": "수수께끼",           "sentence": "Can you solve this ___?",                        "answer": "riddle" },
+    { "no": 7,  "english": "come into contact","pos": "phr.", "korean": "접촉하다",           "sentence": "Don't ___ with poison.",                         "answer": "come into contact" },
+    { "no": 8,  "english": "hare",            "pos": "n.",    "korean": "토끼",               "sentence": "A ___ looks like a big rabbit.",                 "answer": "hare" },
+    { "no": 9,  "english": "pollution",       "pos": "n.",    "korean": "오염",               "sentence": "We should stop air ___.",                        "answer": "pollution" },
+    { "no": 10, "english": "herd",            "pos": "n.",    "korean": "(집승의) 떼",        "sentence": "A ___ of cows crossed the road.",                "answer": "herd" },
+    { "no": 11, "english": "go nuts",         "pos": "phr.",  "korean": "미친듯이 화내다",    "sentence": "Don't ___ over a small problem.",                "answer": "go nuts" },
+    { "no": 12, "english": "poison",          "pos": "n.",    "korean": "독",                 "sentence": "Some plants have ___.",                          "answer": "poison" },
+    { "no": 13, "english": "plain",           "pos": "n.",    "korean": "드넓은 들판",        "sentence": "Cows ate grass on the ___.",                     "answer": "plain" },
+    { "no": 14, "english": "acorn",           "pos": "n.",    "korean": "도토리",             "sentence": "Squirrels eat ___s.",                            "answer": "acorn" },
+    { "no": 15, "english": "baseball",        "pos": "n.",    "korean": "야구",               "sentence": "___ is my favorite sport.",                      "answer": "Baseball" }
+  ]
+}

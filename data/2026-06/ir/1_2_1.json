@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "1.2.1",
+  "title": "Integrated Reading - Word List 1.2.1",
+  "words": [
+    { "no": 1,  "english": "street",       "pos": "n.",    "korean": "거리",          "sentence": "Cars drive on the ___.",                              "answer": "street" },
+    { "no": 2,  "english": "trash",        "pos": "n.",    "korean": "쓰레기",        "sentence": "Please throw your ___ in the bin.",                  "answer": "trash" },
+    { "no": 3,  "english": "sweep",        "pos": "v.",    "korean": "쓸다",          "sentence": "I ___ the floor every day.",                         "answer": "sweep" },
+    { "no": 4,  "english": "messy",        "pos": "adj.",  "korean": "지저분한",      "sentence": "Don't leave your books in a ___ pile.",              "answer": "messy" },
+    { "no": 5,  "english": "neat",         "pos": "adj.",  "korean": "단정한",        "sentence": "He writes in ___ letters.",                          "answer": "neat" },
+    { "no": 6,  "english": "volunteer",    "pos": "n.",    "korean": "자원 봉사자",   "sentence": "___s help at the hospital.",                         "answer": "Volunteers" },
+    { "no": 7,  "english": "individual",   "pos": "n.",    "korean": "개인",          "sentence": "Each ___ has a job.",                                "answer": "individual" },
+    { "no": 8,  "english": "community",    "pos": "n.",    "korean": "지역 사회",     "sentence": "The whole ___ came to the event.",                   "answer": "community" },
+    { "no": 9,  "english": "improve",      "pos": "v.",    "korean": "향상시키다",    "sentence": "We worked hard to ___ the garden.",                  "answer": "improve" },
+    { "no": 10, "english": "neighborhood", "pos": "n.",    "korean": "지역, 동네",    "sentence": "Our ___ has many trees.",                            "answer": "neighborhood" },
+    { "no": 11, "english": "offer",        "pos": "v.",    "korean": "제공하다",      "sentence": "He ___ his snack to a friend.",                      "answer": "offered" },
+    { "no": 12, "english": "benefit",      "pos": "n.",    "korean": "이익, 도움",    "sentence": "One ___ of reading is learning new words.",          "answer": "benefit" },
+    { "no": 13, "english": "duty",         "pos": "n.",    "korean": "의무",          "sentence": "It's my ___ to help at home.",                      "answer": "duty" },
+    { "no": 14, "english": "identify",     "pos": "v.",    "korean": "확인하다",      "sentence": "The teacher helped me ___ the problem.",             "answer": "identify" },
+    { "no": 15, "english": "impact",       "pos": "n.",    "korean": "영향",          "sentence": "The movie made a strong ___.",                       "answer": "impact" }
+  ]
+}

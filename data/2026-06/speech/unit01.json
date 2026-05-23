@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "1",
+  "title": "Speech - Unit 1. The Best Day of My Life",
+  "words": [
+    { "no": 1,  "english": "actor",      "korean": "배우",                          "sentence": "The ___s were great!",                            "answer": "actor" },
+    { "no": 2,  "english": "amazing",    "korean": "놀라운",                        "sentence": "And the stage was ___.",                          "answer": "amazing" },
+    { "no": 3,  "english": "beat",       "korean": "이기다",                        "sentence": "We ___ our rivals and celebrated with pizza.",    "answer": "beat" },
+    { "no": 4,  "english": "celebrate",  "korean": "기념하다, 축하하다",             "sentence": "We ___ my birthday at home.",                    "answer": "celebrated" },
+    { "no": 5,  "english": "character",  "korean": "등장인물, 캐릭터",               "sentence": "We saw all our favorite ___s.",                   "answer": "character" },
+    { "no": 6,  "english": "cool",       "korean": "멋진",                          "sentence": "And the stage was super ___.",                    "answer": "cool" },
+    { "no": 7,  "english": "dress up",   "korean": "(옷을) 차려 입다",              "sentence": "I got ___ up.",                                   "answer": "dressed" },
+    { "no": 8,  "english": "fancy",      "korean": "화려한, 고급의",                "sentence": "We went out to dinner at a ___ restaurant.",      "answer": "fancy" },
+    { "no": 9,  "english": "flavor",     "korean": "맛",                            "sentence": "We chose our ice cream ___s.",                    "answer": "flavor" },
+    { "no": 10, "english": "inspire",    "korean": "영감을 주다",                   "sentence": "The play ___ me.",                               "answer": "inspired" },
+    { "no": 11, "english": "pillow",     "korean": "베개",                          "sentence": "We watched movies and had a ___ fight.",          "answer": "pillow" },
+    { "no": 12, "english": "rival",      "korean": "경쟁자",                        "sentence": "We beat our ___s and celebrated with pizza.",     "answer": "rival" },
+    { "no": 13, "english": "score",      "korean": "득점하다",                      "sentence": "I ___ the winning goal in our soccer game.",      "answer": "scored" },
+    { "no": 14, "english": "sleepover",  "korean": "친구 집에서 자는 파티",         "sentence": "It was the best ___ for my birthday.",            "answer": "sleepover" },
+    { "no": 15, "english": "slice",      "korean": "잘라 먹다",                     "sentence": "We ___ our bananas.",                            "answer": "sliced" },
+    { "no": 16, "english": "stage",      "korean": "무대",                          "sentence": "The ___ is where actors perform.",               "answer": "stage" },
+    { "no": 17, "english": "suit",       "korean": "정장",                          "sentence": "My dad even wore a ___.",                        "answer": "suit" },
+    { "no": 18, "english": "supply",     "korean": "용품, 필품",                    "sentence": "He had all the ___s.",                           "answer": "supply" },
+    { "no": 19, "english": "surprise",   "korean": "놀라운 일, 뜻밖의 일",          "sentence": "Everything was a ___ to me.",                    "answer": "surprise" },
+    { "no": 20, "english": "theater",    "korean": "극장",                          "sentence": "After dinner, we went to the ___.",              "answer": "theater" }
+  ]
+}

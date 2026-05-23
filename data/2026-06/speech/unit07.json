@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "7",
+  "title": "Speech - Unit 7. In the Future",
+  "words": [
+    { "no": 1,  "english": "better",       "korean": "더 좋은",         "sentence": "This movie is ___ than the one we watched last week.",    "answer": "better" },
+    { "no": 2,  "english": "change",       "korean": "변화",            "sentence": "There will be many ___s.",                               "answer": "change" },
+    { "no": 3,  "english": "computer",     "korean": "컴퓨터",          "sentence": "In the future, I think animals will use ___s.",          "answer": "computer" },
+    { "no": 4,  "english": "control",      "korean": "제어하다",        "sentence": "In the future, computers will ___ the cars.",            "answer": "control" },
+    { "no": 5,  "english": "different",    "korean": "다른",            "sentence": "What will be ___ in fifty years?",                       "answer": "different" },
+    { "no": 6,  "english": "drive",        "korean": "운전하다",        "sentence": "In the future, I think cars will ___ themselves.",        "answer": "drive" },
+    { "no": 7,  "english": "environment",  "korean": "환경",            "sentence": "People will care more about the ___.",                   "answer": "environment" },
+    { "no": 8,  "english": "garden",       "korean": "정원",            "sentence": "We will all have ___s on our roofs.",                   "answer": "garden" },
+    { "no": 9,  "english": "ground",       "korean": "땅바닥, 표면",    "sentence": "They will move without touching the ___.",               "answer": "ground" },
+    { "no": 10, "english": "live",         "korean": "살다",            "sentence": "I think people will ___ on Mars.",                       "answer": "live" },
+    { "no": 11, "english": "mind",         "korean": "마음",            "sentence": "In the future, I think computers will read our ___s.",   "answer": "mind" },
+    { "no": 12, "english": "move",         "korean": "움직이다, 이동하다","sentence": "They will ___ without touching the ground.",            "answer": "move" },
+    { "no": 13, "english": "paper",        "korean": "종이",            "sentence": "I think we won't use as much ___ in the future.",        "answer": "paper" },
+    { "no": 14, "english": "plastic",      "korean": "플라스틱",        "sentence": "There will be no more ___.",                             "answer": "plastic" },
+    { "no": 15, "english": "read",         "korean": "읽다",            "sentence": "In the future, I think computers will ___ our minds.",   "answer": "read" },
+    { "no": 16, "english": "robot",        "korean": "로봇",            "sentence": "In the future, I think we will work with ___s.",         "answer": "robot" },
+    { "no": 17, "english": "shower",       "korean": "샤워(하기)",      "sentence": "In the future, I think ___s won't use water.",           "answer": "shower" },
+    { "no": 18, "english": "tiny",         "korean": "아주 작은",       "sentence": "We will have ___ computers in our ears.",                "answer": "tiny" },
+    { "no": 19, "english": "touch",        "korean": "만지다",          "sentence": "They will move without ___ing the ground.",              "answer": "touch" },
+    { "no": 20, "english": "use",          "korean": "사용하다",        "sentence": "I think we won't ___ as much paper.",                   "answer": "use" }
+  ]
+}

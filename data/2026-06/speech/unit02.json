@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "2",
+  "title": "Speech - Unit 2. A Person I Admire",
+  "words": [
+    { "no": 1,  "english": "admire",           "korean": "존경하다",                   "sentence": "I ___ someone who works hard.",                  "answer": "admire" },
+    { "no": 2,  "english": "athlete",          "korean": "운동선수",                   "sentence": "I admire a person who is a great ___.",         "answer": "athlete" },
+    { "no": 3,  "english": "believe in",       "korean": "~을 믿다",                   "sentence": "I ___ something being good or right.",          "answer": "believe in" },
+    { "no": 4,  "english": "cancer",           "korean": "암",                         "sentence": "She is a ___ survivor.",                        "answer": "cancer" },
+    { "no": 5,  "english": "caring",           "korean": "배려하는",                   "sentence": "She is ___ and compassionate.",                  "answer": "caring" },
+    { "no": 6,  "english": "co-owner",         "korean": "공동 소유자",                "sentence": "Someone who owns something with another person is a ___.", "answer": "co-owner" },
+    { "no": 7,  "english": "compassionate",    "korean": "인정 많은",                  "sentence": "She is caring and ___.",                         "answer": "compassionate" },
+    { "no": 8,  "english": "confident",        "korean": "자신감 있는",                "sentence": "She is talented and ___.",                       "answer": "confident" },
+    { "no": 9,  "english": "dedicated",        "korean": "헌신적인",                   "sentence": "He is ___ and wise.",                           "answer": "dedicated" },
+    { "no": 10, "english": "health care",      "korean": "의료 서비스, 보건",          "sentence": "He works in ___.",                              "answer": "health care" },
+    { "no": 11, "english": "lifeguard",        "korean": "안전 구조원",                "sentence": "I admire Dave who is a ___.",                   "answer": "lifeguard" },
+    { "no": 12, "english": "passionate",       "korean": "열정적인, 열렬한",           "sentence": "She is strong and ___.",                         "answer": "passionate" },
+    { "no": 13, "english": "positive",         "korean": "긍정적인",                   "sentence": "Jackie Chan is a very ___ person.",              "answer": "positive" },
+    { "no": 14, "english": "sailor",           "korean": "선원",                       "sentence": "I admire him because he was a ___.",             "answer": "sailor" },
+    { "no": 15, "english": "save",             "korean": "구하다",                     "sentence": "He helped ___ people from danger.",              "answer": "save" },
+    { "no": 16, "english": "stand up for",     "korean": "~을 위해 나서다",            "sentence": "She always ___ others.",                         "answer": "stands up for" },
+    { "no": 17, "english": "successful",       "korean": "성공한",                     "sentence": "She became very ___ in her career.",             "answer": "successful" },
+    { "no": 18, "english": "survivor",         "korean": "생존자",                     "sentence": "She is a cancer ___.",                          "answer": "survivor" },
+    { "no": 19, "english": "talented",         "korean": "재능있는, 뛰어난",           "sentence": "She is ___ and confident.",                      "answer": "talented" },
+    { "no": 20, "english": "wise",             "korean": "현명한",                     "sentence": "He is dedicated and ___.",                       "answer": "wise" }
+  ]
+}

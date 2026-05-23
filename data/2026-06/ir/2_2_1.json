@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "2.2.1",
+  "title": "Integrated Reading - Word List 2.2.1",
+  "words": [
+    { "no": 1,  "english": "watch out",    "pos": "phr.",  "korean": "조심하다",                     "sentence": "You should ___ when crossing the street.",        "answer": "watch out" },
+    { "no": 2,  "english": "keep away",    "pos": "phr.",  "korean": "멀리하다",                     "sentence": "I told my dog to ___ from the food.",            "answer": "keep away" },
+    { "no": 3,  "english": "clam",         "pos": "n.",    "korean": "조개",                         "sentence": "We found a ___ at the beach.",                   "answer": "clam" },
+    { "no": 4,  "english": "tidepool",     "pos": "n.",    "korean": "바위물웅덩이",                  "sentence": "I saw a crab in a ___.",                          "answer": "tidepool" },
+    { "no": 5,  "english": "sea anemone",  "pos": "phr.",  "korean": "말미잘",                       "sentence": "Fish swim near the ___.",                         "answer": "sea anemone" },
+    { "no": 6,  "english": "ecosystem",    "pos": "n.",    "korean": "생태계",                       "sentence": "In an ___, all things live together.",            "answer": "ecosystem" },
+    { "no": 7,  "english": "food chain",   "pos": "phr.",  "korean": "먹이 사슬",                    "sentence": "In the ___, plants are first.",                   "answer": "food chain" },
+    { "no": 8,  "english": "drought",      "pos": "n.",    "korean": "가뭄",                         "sentence": "The plants died because of the ___.",             "answer": "drought" },
+    { "no": 9,  "english": "water level",  "pos": "phr.",  "korean": "물의 높이",                    "sentence": "The ___ went down in summer.",                    "answer": "water level" },
+    { "no": 10, "english": "competition",  "pos": "n.",    "korean": "경쟁",                         "sentence": "There was a running ___ at school.",              "answer": "competition" },
+    { "no": 11, "english": "nature",       "pos": "n.",    "korean": "자연",                         "sentence": "We must take care of ___.",                       "answer": "nature" },
+    { "no": 12, "english": "negative",     "pos": "adj.",  "korean": "부정적인",                     "sentence": "Don't say ___ things to others.",                 "answer": "negative" },
+    { "no": 13, "english": "positive",     "pos": "adj.",  "korean": "긍정적인",                     "sentence": "He has a ___ way of thinking.",                   "answer": "positive" },
+    { "no": 14, "english": "resource",     "pos": "n.",    "korean": "자원",                         "sentence": "Books are a good ___ for learning.",              "answer": "resource" },
+    { "no": 15, "english": "time line",    "pos": "phr.",  "korean": "사건들 발생 순서를 볼 수 있는 표","sentence": "Let's draw a ___ of history.",                  "answer": "time line" }
+  ]
+}

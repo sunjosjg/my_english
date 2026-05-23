@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "2.1.1",
+  "title": "Integrated Reading - Word List 2.1.1",
+  "words": [
+    { "no": 1,  "english": "gardener",  "pos": "n.",    "korean": "정원을 돌보는 사람", "sentence": "The ___ waters the flowers every day.",            "answer": "gardener" },
+    { "no": 2,  "english": "hobby",     "pos": "n.",    "korean": "취미",               "sentence": "Drawing is my favorite ___.",                    "answer": "hobby" },
+    { "no": 3,  "english": "gopher",    "pos": "n.",    "korean": "땅다람쥐",           "sentence": "A ___ dug holes in the yard.",                   "answer": "gopher" },
+    { "no": 4,  "english": "trap",      "pos": "n.",    "korean": "덫",                 "sentence": "The mouse ran into the ___.",                    "answer": "trap" },
+    { "no": 5,  "english": "amount",    "pos": "n.",    "korean": "(부량의) 양",         "sentence": "I drank a small ___ of water.",                  "answer": "amount" },
+    { "no": 6,  "english": "behavior",  "pos": "n.",    "korean": "행동",               "sentence": "Bad ___ is not allowed.",                        "answer": "behavior" },
+    { "no": 7,  "english": "decrease",  "pos": "v.",    "korean": "감소하다",           "sentence": "The number of birds ___d.",                      "answer": "decrease" },
+    { "no": 8,  "english": "increase",  "pos": "v.",    "korean": "증가하다",           "sentence": "Exercise can ___ your strength.",                "answer": "increase" },
+    { "no": 9,  "english": "supply",    "pos": "n.",    "korean": "공급",               "sentence": "The store ran out of their ___.",                "answer": "supply" },
+    { "no": 10, "english": "birdseed",  "pos": "n.",    "korean": "새에게 주는 먹이",   "sentence": "Birds came to eat the ___.",                     "answer": "birdseed" },
+    { "no": 11, "english": "balance",   "pos": "n.",    "korean": "균형",               "sentence": "He lost his ___ and fell.",                      "answer": "balance" },
+    { "no": 12, "english": "control",   "pos": "v.",    "korean": "통제하다",           "sentence": "She ___ the robot with a remote.",               "answer": "controlled" },
+    { "no": 13, "english": "interact",  "pos": "v.",    "korean": "소통하다",           "sentence": "The app helps kids ___ with learning games.",    "answer": "interact" },
+    { "no": 14, "english": "react",     "pos": "v.",    "korean": "반응하다",           "sentence": "How did you ___ to the surprise?",               "answer": "react" },
+    { "no": 15, "english": "scarce",    "pos": "adj.",  "korean": "부족한",             "sentence": "Food was ___ after the storm.",                  "answer": "scarce" }
+  ]
+}

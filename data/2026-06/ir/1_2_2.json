@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "1.2.2",
+  "title": "Integrated Reading - Word List 1.2.2",
+  "words": [
+    { "no": 1,  "english": "learn",          "pos": "v.",    "korean": "배우다",                   "sentence": "She is ___ing how to swim.",                         "answer": "learn" },
+    { "no": 2,  "english": "autobiography",  "pos": "n.",    "korean": "자신이 일생을 기록한 책",  "sentence": "I read an ___ about a famous artist.",              "answer": "autobiography" },
+    { "no": 3,  "english": "narrator",       "pos": "n.",    "korean": "이야기하는 사람",          "sentence": "The ___ told the story.",                           "answer": "narrator" },
+    { "no": 4,  "english": "underachiever",  "pos": "n.",    "korean": "자신 수준을 못하는 학생",  "sentence": "He was called an ___ in math.",                     "answer": "underachiever" },
+    { "no": 5,  "english": "first-person",   "pos": "adj.",  "korean": "1인칭으로 쓰인",           "sentence": "The story is written in ___.",                      "answer": "first-person" },
+    { "no": 6,  "english": "co-author",      "pos": "n.",    "korean": "함께 쓴 사람",            "sentence": "A ___ writes a book with someone.",                 "answer": "co-author" },
+    { "no": 7,  "english": "tutor",          "pos": "v.",    "korean": "(개별적으로) 가르치다",    "sentence": "Kim ___s kids after school.",                        "answer": "tutor" },
+    { "no": 8,  "english": "vanish",         "pos": "v.",    "korean": "사라지다",                "sentence": "The cat ___ behind the tree.",                      "answer": "vanished" },
+    { "no": 9,  "english": "list",           "pos": "n.",    "korean": "목록",                    "sentence": "I made a shopping ___.",                            "answer": "list" },
+    { "no": 10, "english": "terrific",       "pos": "adj.",  "korean": "아주 좋은",               "sentence": "This pizza tastes ___!",                            "answer": "terrific" },
+    { "no": 11, "english": "pass",           "pos": "v.",    "korean": "합격하다",                "sentence": "Did you ___ the spelling quiz?",                    "answer": "pass" },
+    { "no": 12, "english": "confident",      "pos": "adj.",  "korean": "자신감 있는",             "sentence": "She feels ___ about her speech.",                   "answer": "confident" },
+    { "no": 13, "english": "information",    "pos": "n.",    "korean": "정보",                    "sentence": "This website has a lot of ___.",                    "answer": "information" },
+    { "no": 14, "english": "self-image",     "pos": "n.",    "korean": "자기 모양에 대한 생각",   "sentence": "A positive ___ helps you feel happy.",              "answer": "self-image" },
+    { "no": 15, "english": "sense of humor", "pos": "phr.",  "korean": "유머 감각",               "sentence": "His ___ makes us laugh.",                           "answer": "sense of humor" }
+  ]
+}

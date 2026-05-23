@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "2.2.3",
+  "title": "Integrated Reading - Word List 2.2.3",
+  "words": [
+    { "no": 1,  "english": "pack",          "pos": "n.",    "korean": "무리(떼)",                 "sentence": "A ___ of wolves moved through the forest together.", "answer": "pack" },
+    { "no": 2,  "english": "linger",        "pos": "v.",    "korean": "오래 이곳다",              "sentence": "She ___ at the door.",                               "answer": "lingered" },
+    { "no": 3,  "english": "territory",     "pos": "n.",    "korean": "영역",                     "sentence": "Birds often fly to protect their ___.",              "answer": "territory" },
+    { "no": 4,  "english": "stingray",      "pos": "n.",    "korean": "노랑가오리",               "sentence": "___s use their flat bodies to hide in the sand.",   "answer": "Stingrays" },
+    { "no": 5,  "english": "rare",          "pos": "adj.",  "korean": "희귀한",                   "sentence": "This flower is ___ and only grows in one place.",    "answer": "rare" },
+    { "no": 6,  "english": "aquatic",       "pos": "adj.",  "korean": "물속 관련한",              "sentence": "___ sports like swimming take place in water.",      "answer": "Aquatic" },
+    { "no": 7,  "english": "ecologist",     "pos": "n.",    "korean": "생태학자",                 "sentence": "An ___ explained how pollution hurts nature.",       "answer": "ecologist" },
+    { "no": 8,  "english": "megafish",      "pos": "n.",    "korean": "대형 물고기",              "sentence": "A ___ can weigh more than 100 kilograms.",           "answer": "megafish" },
+    { "no": 9,  "english": "species",       "pos": "n.",    "korean": "종",                       "sentence": "Some ___ are endangered and need protection.",       "answer": "species" },
+    { "no": 10, "english": "indication",    "pos": "n.",    "korean": "어떤 일이 일어나고 있음을 알게 해주는 것","sentence": "Dark clouds are an ___ that it might rain.", "answer": "indication" },
+    { "no": 11, "english": "thrive",        "pos": "v.",    "korean": "잘 자라다",               "sentence": "Plants ___ when they get enough sun and water.",    "answer": "thrive" },
+    { "no": 12, "english": "out of balance","pos": "phr.",  "korean": "균형이 깨진",              "sentence": "When the food chain is ___, animals suffer.",        "answer": "out of balance" },
+    { "no": 13, "english": "overfishing",   "pos": "phr.",  "korean": "물고기를 너무 많이 잡기",  "sentence": "___ can make some fish disappear.",                  "answer": "Overfishing" },
+    { "no": 14, "english": "warning",       "pos": "n.",    "korean": "경고",                     "sentence": "That sound was a ___ of danger.",                    "answer": "warning" },
+    { "no": 15, "english": "depend on",     "pos": "phr.",  "korean": "~에 의존하다",             "sentence": "Many animals ___ trees for food and shelter.",       "answer": "depend on" }
+  ]
+}

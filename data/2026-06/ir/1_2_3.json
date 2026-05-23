@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "1.2.3",
+  "title": "Integrated Reading - Word List 1.2.3",
+  "words": [
+    { "no": 1,  "english": "principal",   "pos": "n.",    "korean": "교장",                            "sentence": "The ___ spoke at the assembly.",                 "answer": "principal" },
+    { "no": 2,  "english": "dyslexia",    "pos": "n.",    "korean": "글자를 읽거나 쓰기 어려운 특성", "sentence": "The boy has ___ and needs help reading.",       "answer": "dyslexia" },
+    { "no": 3,  "english": "disability",  "pos": "n.",    "korean": "장애",                            "sentence": "Some students with ___s get extra help.",       "answer": "disability" },
+    { "no": 4,  "english": "affect",      "pos": "v.",    "korean": "영향을 미치다",                   "sentence": "Noise can ___ my focus.",                       "answer": "affect" },
+    { "no": 5,  "english": "figure out",  "pos": "phr.",  "korean": "알아내다",                        "sentence": "I can't ___ the answer.",                       "answer": "figure out" },
+    { "no": 6,  "english": "biography",   "pos": "n.",    "korean": "전기",                            "sentence": "His ___ tells about his whole life.",           "answer": "biography" },
+    { "no": 7,  "english": "cattle",      "pos": "n.",    "korean": "소 떼",                           "sentence": "The farmer takes care of the ___.",             "answer": "cattle" },
+    { "no": 8,  "english": "important",   "pos": "adj.",  "korean": "중요한",                          "sentence": "Drinking water is ___ for your health.",        "answer": "important" },
+    { "no": 9,  "english": "decision",    "pos": "n.",    "korean": "결정",                            "sentence": "She helped me make a good ___.",                "answer": "decision" },
+    { "no": 10, "english": "faraway",     "pos": "adj.",  "korean": "멀리 떨어진",                     "sentence": "They live in a ___ village.",                   "answer": "faraway" },
+    { "no": 11, "english": "instead",     "pos": "adv.",  "korean": "대신에",                          "sentence": "I drank juice ___ of milk.",                    "answer": "instead" },
+    { "no": 12, "english": "scholarship", "pos": "n.",    "korean": "장학금",                          "sentence": "She won a ___ for her hard work.",              "answer": "scholarship" },
+    { "no": 13, "english": "educate",     "pos": "v.",    "korean": "교육하다",                        "sentence": "Teachers work hard to ___ students.",           "answer": "educate" },
+    { "no": 14, "english": "school fee",  "pos": "phr.",  "korean": "학비",                            "sentence": "We paid the ___ last week.",                    "answer": "school fee" },
+    { "no": 15, "english": "challenge",   "pos": "n.",    "korean": "난제, 어려움",                    "sentence": "Climbing the mountain was a ___.",               "answer": "challenge" }
+  ]
+}

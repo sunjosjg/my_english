@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "5",
+  "title": "Speech - Unit 5. My Favorite Thing",
+  "words": [
+    { "no": 1,  "english": "bookcase",    "korean": "책장",               "sentence": "One of my favorite things is my ___.",             "answer": "bookcase" },
+    { "no": 2,  "english": "bracelet",    "korean": "팔찌",               "sentence": "This is my grandmother's ___.",                    "answer": "bracelet" },
+    { "no": 3,  "english": "collection",  "korean": "수집품, 컬렉션",     "sentence": "My music ___ helps me relax.",                     "answer": "collection" },
+    { "no": 4,  "english": "color",       "korean": "색칠하다",           "sentence": "I love to ___ with crayons and paint.",           "answer": "color" },
+    { "no": 5,  "english": "digital",     "korean": "디지털 방식의",      "sentence": "I use a ___ sketchbook.",                          "answer": "digital" },
+    { "no": 6,  "english": "finish",      "korean": "끝내다",             "sentence": "I ___ my homework.",                              "answer": "finish" },
+    { "no": 7,  "english": "go camping",  "korean": "캠핑 가다",          "sentence": "It's my favorite because I love to ___.",         "answer": "go camping" },
+    { "no": 8,  "english": "hoop",        "korean": "(농구의) 림",        "sentence": "A ___ is a large ring used in games or sports.",  "answer": "hoop" },
+    { "no": 9,  "english": "nature",      "korean": "자연",               "sentence": "I love learning about ___ and sleeping in my tent.", "answer": "nature" },
+    { "no": 10, "english": "passport",    "korean": "여권",               "sentence": "One of my favorite things is my ___.",             "answer": "passport" },
+    { "no": 11, "english": "present",     "korean": "선물",               "sentence": "It was a birthday ___.",                           "answer": "present" },
+    { "no": 12, "english": "private",     "korean": "개인적",             "sentence": "I have my own ___ art teacher.",                   "answer": "private" },
+    { "no": 13, "english": "reason",      "korean": "이유",               "sentence": "Another ___ I like it is because it helps me relax.", "answer": "reason" },
+    { "no": 14, "english": "relax",       "korean": "조심을 풀다",        "sentence": "My music collection helps me ___.",                "answer": "relax" },
+    { "no": 15, "english": "shoot",       "korean": "쏘다, 던지다",       "sentence": "I love ___ing baskets after school.",             "answer": "shoot" },
+    { "no": 16, "english": "sketch",      "korean": "스케치, 밑그림",     "sentence": "A ___ is a simple drawing made quickly.",          "answer": "sketch" },
+    { "no": 17, "english": "tablet",      "korean": "태블릿피씨",         "sentence": "A ___ is a small computer with a touch screen.",  "answer": "tablet" },
+    { "no": 18, "english": "travel",      "korean": "이동하다",           "sentence": "I love using my passport to ___.",                 "answer": "travel" },
+    { "no": 19, "english": "watch",       "korean": "보다",               "sentence": "I love ___ing music videos on it.",               "answer": "watch" },
+    { "no": 20, "english": "wear",        "korean": "입다, 착용하다",     "sentence": "I love ___ing it on special occasions.",          "answer": "wear" }
+  ]
+}

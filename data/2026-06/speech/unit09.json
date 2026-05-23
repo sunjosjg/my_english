@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "9",
+  "title": "Speech - Unit 9. A Cool Future Job",
+  "words": [
+    { "no": 1,  "english": "avatar",       "korean": "(컴퓨터의) 아이콘",       "sentence": "One cool future job will be an ___ fashion designer.",    "answer": "avatar" },
+    { "no": 2,  "english": "builder",      "korean": "건축업자",                "sentence": "A ___ builds or repairs things like houses.",              "answer": "builder" },
+    { "no": 3,  "english": "career",       "korean": "직업",                    "sentence": "A ___ is a job that you have for a long time.",            "answer": "career" },
+    { "no": 4,  "english": "data",         "korean": "(컴퓨터에 저장된) 자료",  "sentence": "___ is facts or information used for understanding something.", "answer": "Data" },
+    { "no": 5,  "english": "detective",    "korean": "탐정",                    "sentence": "One cool future job will be a data ___.",                  "answer": "detective" },
+    { "no": 6,  "english": "drone",        "korean": "무인항공기, 드론",        "sentence": "One of those jobs will be a ___ pilot.",                  "answer": "drone" },
+    { "no": 7,  "english": "ecosystem",    "korean": "생태계",                  "sentence": "They will rebuild ___s to help heal the earth.",           "answer": "ecosystem" },
+    { "no": 8,  "english": "float",        "korean": "띄우다, 떠다니다",        "sentence": "They will collect garbage ___ing in space.",               "answer": "float" },
+    { "no": 9,  "english": "garbage",      "korean": "쓰레기",                  "sentence": "They will collect and recycle all the ___ floating in space.", "answer": "garbage" },
+    { "no": 10, "english": "heal",         "korean": "고치다, 낫게 하다",       "sentence": "They will rebuild ecosystems to help ___ the earth.",       "answer": "heal" },
+    { "no": 11, "english": "information",  "korean": "정보",                    "sentence": "They will find interesting ___ on the internet.",           "answer": "information" },
+    { "no": 12, "english": "latest",       "korean": "(가장) 최신의",           "sentence": "This is the ___ model of the phone.",                      "answer": "latest" },
+    { "no": 13, "english": "lawyer",       "korean": "변호사",                  "sentence": "One cool future job will be a social media ___.",          "answer": "lawyer" },
+    { "no": 14, "english": "manage",       "korean": "관리하다",                "sentence": "They will ___ teams of robot workers.",                    "answer": "manage" },
+    { "no": 15, "english": "metaverse",    "korean": "메타버스, 가상공간",      "sentence": "Another interesting future job will be a ___ world builder.", "answer": "metaverse" },
+    { "no": 16, "english": "peace",        "korean": "평화, 화평",              "sentence": "___ is a time without war or fighting.",                   "answer": "Peace" },
+    { "no": 17, "english": "protect",      "korean": "보호하다",                "sentence": "They will ___ people's social media rights.",              "answer": "protect" },
+    { "no": 18, "english": "therapy",      "korean": "치료, 요법",              "sentence": "___ is a way to help someone feel better.",                "answer": "Therapy" },
+    { "no": 19, "english": "tour guide",   "korean": "여행 가이드",             "sentence": "A ___ takes people on a tour and gives them information.",  "answer": "tour guide" },
+    { "no": 20, "english": "virtual",      "korean": "가상의",                  "sentence": "A ___ teacher exists on computers or the internet.",       "answer": "virtual" }
+  ]
+}

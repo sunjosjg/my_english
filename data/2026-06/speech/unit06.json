@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "6",
+  "title": "Speech - Unit 6. Current Social Issues",
+  "words": [
+    { "no": 1,  "english": "afford",              "korean": "~을 어가할 금액이다",        "sentence": "Not everyone can ___ to go to university.",         "answer": "afford" },
+    { "no": 2,  "english": "bully",               "korean": "협박시키다",                 "sentence": "___ing is a very serious social issue.",            "answer": "Bully" },
+    { "no": 3,  "english": "climate change",      "korean": "기후 변화",                  "sentence": "___ is caused by human activity.",                  "answer": "Climate change" },
+    { "no": 4,  "english": "cost",                "korean": "비용",                       "sentence": "The ___ of education is an issue in many countries.", "answer": "cost" },
+    { "no": 5,  "english": "crime",               "korean": "범죄",                       "sentence": "___ is one current social issue.",                  "answer": "Crime" },
+    { "no": 6,  "english": "disease",             "korean": "질병",                       "sentence": "___ is another social issue.",                      "answer": "Disease" },
+    { "no": 7,  "english": "education",           "korean": "교육",                       "sentence": "___ is the process of teaching or learning.",        "answer": "Education" },
+    { "no": 8,  "english": "equally",             "korean": "동등하게",                   "sentence": "Every person should be treated fairly and ___.",    "answer": "equally" },
+    { "no": 9,  "english": "expensive",           "korean": "비싼",                       "sentence": "This dress is very ___, so I didn't buy it.",       "answer": "expensive" },
+    { "no": 10, "english": "human rights",        "korean": "인권",                       "sentence": "I also want to talk about ___.",                    "answer": "human rights" },
+    { "no": 11, "english": "minority",            "korean": "소수, 소수집단",              "sentence": "A ___ is a smaller number or part of people.",       "answer": "minority" },
+    { "no": 12, "english": "obesity",             "korean": "비만",                       "sentence": "___ is also an issue in many countries.",           "answer": "Obesity" },
+    { "no": 13, "english": "poverty",             "korean": "가난, 빈곤",                 "sentence": "I also want to talk about ___.",                    "answer": "poverty" },
+    { "no": 14, "english": "racism",              "korean": "인종 차별",                  "sentence": "___ is an issue worldwide.",                        "answer": "Racism" },
+    { "no": 15, "english": "reduce",              "korean": "줄이다",                     "sentence": "Some people ___, reuse, and recycle.",              "answer": "reduce" },
+    { "no": 16, "english": "refugee",             "korean": "난민",                       "sentence": "___s need safe places to go.",                      "answer": "Refugee" },
+    { "no": 17, "english": "social issue",        "korean": "사회적 이슈",                "sentence": "Crime is one current ___.",                          "answer": "social issue" },
+    { "no": 18, "english": "steal",               "korean": "훔치다",                     "sentence": "People wouldn't ___ things.",                       "answer": "steal" },
+    { "no": 19, "english": "take care of",        "korean": "~를 돌보다",                 "sentence": "I ___ my little brother when my parents are busy.", "answer": "take care of" },
+    { "no": 20, "english": "treat",               "korean": "대우하다, 다루다",            "sentence": "Minorities are ___ unequally in most countries.",    "answer": "treated" }
+  ]
+}

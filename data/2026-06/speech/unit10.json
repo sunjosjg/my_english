@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "10",
+  "title": "Speech - Unit 10. The Greatest Thing Ever Invented",
+  "words": [
+    { "no": 1,  "english": "3D printer",       "korean": "3D 프린터",          "sentence": "I think ___ are the greatest thing ever invented.",        "answer": "3D printers" },
+    { "no": 2,  "english": "business",         "korean": "기업",               "sentence": "Many small ___es closed during the storm.",                "answer": "business" },
+    { "no": 3,  "english": "clothes",          "korean": "옷",                 "sentence": "She wears warm ___ in the winter.",                        "answer": "clothes" },
+    { "no": 4,  "english": "drinking water",   "korean": "식수",               "sentence": "We use it to clean our ___.",                              "answer": "drinking water" },
+    { "no": 5,  "english": "encourage",        "korean": "격려하다, 장려하다",  "sentence": "My teacher always ___s me to try my best.",               "answer": "encourage" },
+    { "no": 6,  "english": "exactly",          "korean": "정확히",             "sentence": "We don't know ___ who invented it.",                       "answer": "exactly" },
+    { "no": 7,  "english": "filter",           "korean": "필터, 여과기",       "sentence": "A ___ removes unwanted substances from liquids.",           "answer": "filter" },
+    { "no": 8,  "english": "fix",              "korean": "수리하다, 고치다",   "sentence": "They also help us ___ things.",                            "answer": "fix" },
+    { "no": 9,  "english": "healthy",          "korean": "건강한",             "sentence": "Water filters keep people ___.",                           "answer": "healthy" },
+    { "no": 10, "english": "imagination",      "korean": "상상력",             "sentence": "They encourage us to use our ___s.",                       "answer": "imagination" },
+    { "no": 11, "english": "invent",           "korean": "발명하다",           "sentence": "To ___ is to make something for the first time.",          "answer": "invent" },
+    { "no": 12, "english": "invention",        "korean": "발명품",             "sentence": "An ___ is a thing that has been made for the first time.",  "answer": "invention" },
+    { "no": 13, "english": "keep",             "korean": "유지하다",           "sentence": "Water filters ___ people healthy.",                        "answer": "keep" },
+    { "no": 14, "english": "light bulb",       "korean": "전구",               "sentence": "I think the ___ is the greatest thing ever invented.",      "answer": "light bulb" },
+    { "no": 15, "english": "parachute",        "korean": "낙하산",             "sentence": "The man jumped from the plane with a ___.",                "answer": "parachute" },
+    { "no": 16, "english": "print",            "korean": "인쇄하다",           "sentence": "To ___ is to make words or pictures on paper using a machine.", "answer": "print" },
+    { "no": 17, "english": "save",             "korean": "절약하다, 아끼다",   "sentence": "3D printers ___ time and make less waste.",                 "answer": "save" },
+    { "no": 18, "english": "thousands",        "korean": "수천",               "sentence": "___ of vaccines were invented years ago.",                  "answer": "Thousands" },
+    { "no": 19, "english": "vaccine",          "korean": "백신",               "sentence": "The first ___ was invented in 1796.",                      "answer": "vaccine" },
+    { "no": 20, "english": "waste",            "korean": "낭비",               "sentence": "Don't ___ the water when you brush your teeth.",            "answer": "waste" }
+  ]
+}

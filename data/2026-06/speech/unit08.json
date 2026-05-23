@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "8",
+  "title": "Speech - Unit 8. Fun Facts",
+  "words": [
+    { "no": 1,  "english": "adult",          "korean": "어른",               "sentence": "Did you know that babies blink less than ___s?",           "answer": "adult" },
+    { "no": 2,  "english": "blink",          "korean": "눈을 깜박이다",      "sentence": "Did you know that babies ___ less than adults?",           "answer": "blink" },
+    { "no": 3,  "english": "classmate",      "korean": "반 친구, 급우",      "sentence": "My ___ helped me with my homework.",                       "answer": "classmate" },
+    { "no": 4,  "english": "creature",       "korean": "생물",               "sentence": "A ___ is a living thing that can move.",                   "answer": "creature" },
+    { "no": 5,  "english": "electric",       "korean": "전기를 이용하는",    "sentence": "Did you know that there were ___ cars in the 1800s?",       "answer": "electric" },
+    { "no": 6,  "english": "fall asleep",    "korean": "잠들다",             "sentence": "Did you know that most people ___ in seven minutes?",      "answer": "fall asleep" },
+    { "no": 7,  "english": "fingerprint",    "korean": "지문",               "sentence": "A ___ is a mark left by the pattern of lines on your finger.", "answer": "fingerprint" },
+    { "no": 8,  "english": "internet",       "korean": "인터넷",             "sentence": "I will use the school library and the ___.",               "answer": "internet" },
+    { "no": 9,  "english": "lung",           "korean": "폐",                 "sentence": "Smoking is bad for your ___s.",                            "answer": "lung" },
+    { "no": 10, "english": "metal",          "korean": "금속",               "sentence": "___ is a type of solid, shiny substance such as iron or gold.", "answer": "Metal" },
+    { "no": 11, "english": "planet",         "korean": "행성",               "sentence": "I chose to research the ___s.",                            "answer": "planet" },
+    { "no": 12, "english": "research",       "korean": "연구하다",           "sentence": "I chose to ___ to learn more about it.",                   "answer": "research" },
+    { "no": 13, "english": "space",          "korean": "공간",               "sentence": "___ is the area outside the Earth's atmosphere.",           "answer": "Space" },
+    { "no": 14, "english": "stick out",      "korean": "수를 내밀다",        "sentence": "Did you know that crocodiles can't ___ their tongues?",     "answer": "stick out" },
+    { "no": 15, "english": "sure",           "korean": "확신하는",           "sentence": "I'm ___ you know that every person's fingerprints are unique.", "answer": "sure" },
+    { "no": 16, "english": "surround",       "korean": "에 둘러쌓이다",      "sentence": "Did you know that Venus is ___ed by clouds?",               "answer": "surround" },
+    { "no": 17, "english": "technology",     "korean": "기술",               "sentence": "___ is the use of science in solving problems or making new tools.", "answer": "Technology" },
+    { "no": 18, "english": "tongue",         "korean": "혀",                 "sentence": "The ___ is the soft part in the mouth used for tasting.",   "answer": "tongue" },
+    { "no": 19, "english": "topic",          "korean": "주제, 화제",         "sentence": "What are some ___s that you find interesting?",             "answer": "topic" },
+    { "no": 20, "english": "weather",        "korean": "날씨",               "sentence": "I chose to research the ___.",                             "answer": "weather" }
+  ]
+}

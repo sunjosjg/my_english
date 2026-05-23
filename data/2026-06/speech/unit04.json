@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "4",
+  "title": "Speech - Unit 4. An Interesting Country",
+  "words": [
+    { "no": 1,  "english": "border",             "korean": "국경",             "sentence": "Turkey shares ___s with eight different countries.",   "answer": "border" },
+    { "no": 2,  "english": "come from",          "korean": "~에서 생겨나다",   "sentence": "The name Brazil ___ a tree called brazilwood.",        "answer": "comes from" },
+    { "no": 3,  "english": "continent",          "korean": "대륙",             "sentence": "Australia is an island, a country, and a ___.",        "answer": "continent" },
+    { "no": 4,  "english": "desert",             "korean": "사막",             "sentence": "It has beautiful ___s and forests.",                   "answer": "desert" },
+    { "no": 5,  "english": "earthquake",         "korean": "지진",             "sentence": "Japan experiences frequent ___s.",                    "answer": "earthquake" },
+    { "no": 6,  "english": "experience",         "korean": "경험하다",         "sentence": "Japan ___s frequent earthquakes.",                    "answer": "experiences" },
+    { "no": 7,  "english": "forest",             "korean": "숲",               "sentence": "It has beautiful deserts and ___s.",                  "answer": "forest" },
+    { "no": 8,  "english": "located",            "korean": "~에 위치한",       "sentence": "Where is it ___?",                                   "answer": "located" },
+    { "no": 9,  "english": "mammal",             "korean": "포유동물",         "sentence": "It is home to the world's smallest ___.",             "answer": "mammal" },
+    { "no": 10, "english": "national park",      "korean": "국립공원",         "sentence": "There are over 500 ___s.",                           "answer": "national parks" },
+    { "no": 11, "english": "official language",  "korean": "공용어",           "sentence": "What is the ___?",                                   "answer": "official language" },
+    { "no": 12, "english": "place",              "korean": "장소",             "sentence": "It is a very interesting ___.",                       "answer": "place" },
+    { "no": 13, "english": "population",         "korean": "인구",             "sentence": "India has the largest English-speaking ___ in the world.", "answer": "population" },
+    { "no": 14, "english": "share",              "korean": "공유하다",         "sentence": "Turkey ___s borders with eight different countries.",   "answer": "shares" },
+    { "no": 15, "english": "sunlight",           "korean": "햇빛",             "sentence": "Norway has some days with 20 hours of ___ in summer.",  "answer": "sunlight" },
+    { "no": 16, "english": "tourist",            "korean": "관광객",           "sentence": "Many ___s take cooking classes.",                      "answer": "tourist" },
+    { "no": 17, "english": "unique",             "korean": "독특한",           "sentence": "Australia has a lot of ___ plants and animals.",        "answer": "unique" },
+    { "no": 18, "english": "valuable",           "korean": "가치 있는, 유용한","sentence": "This is a ___ resource for learning.",                 "answer": "valuable" },
+    { "no": 19, "english": "venomous",           "korean": "독이 있는",        "sentence": "Australia has many ___ animals.",                      "answer": "venomous" },
+    { "no": 20, "english": "volcano",            "korean": "화산",             "sentence": "Iceland is home to over 100 ___es.",                   "answer": "volcano" }
+  ]
+}

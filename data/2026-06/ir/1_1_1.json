@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "1.1.1",
+  "title": "Integrated Reading - Word List 1.1.1",
+  "words": [
+    { "no": 1,  "english": "retell",          "pos": "v.",    "korean": "다시 말하다",     "sentence": "Can you ___ what happened in the book?",              "answer": "retell" },
+    { "no": 2,  "english": "search",          "pos": "v.",    "korean": "찾다",            "sentence": "Let's ___ for your lost toy.",                        "answer": "search" },
+    { "no": 3,  "english": "right",           "pos": "adv.",  "korean": "바로",            "sentence": "She went ___ to the door.",                          "answer": "right" },
+    { "no": 4,  "english": "find",            "pos": "v.",    "korean": "찾다",            "sentence": "I can't ___ my shoes.",                              "answer": "find" },
+    { "no": 5,  "english": "action",          "pos": "n.",    "korean": "행동",            "sentence": "Helping others is a kind ___.",                      "answer": "action" },
+    { "no": 6,  "english": "make a difference","pos": "phr.", "korean": "변화를 가져오다", "sentence": "Cleaning the park made a ___.",                       "answer": "difference" },
+    { "no": 7,  "english": "gift",            "pos": "n.",    "korean": "선물",            "sentence": "I got a ___ for my birthday.",                       "answer": "gift" },
+    { "no": 8,  "english": "problem",         "pos": "n.",    "korean": "문제",            "sentence": "We have a ___ with the computer.",                   "answer": "problem" },
+    { "no": 9,  "english": "receive",         "pos": "v.",    "korean": "받다",            "sentence": "Did you ___ my email?",                             "answer": "receive" },
+    { "no": 10, "english": "solution",        "pos": "n.",    "korean": "해결책",          "sentence": "Let's work together to find a ___.",                 "answer": "solution" },
+    { "no": 11, "english": "kindness",        "pos": "n.",    "korean": "친절",            "sentence": "We should show ___ to others.",                     "answer": "kindness" },
+    { "no": 12, "english": "fix",             "pos": "v.",    "korean": "수리하다",        "sentence": "My dad will ___ the bike.",                          "answer": "fix" },
+    { "no": 13, "english": "pup",             "pos": "n.",    "korean": "강아지",          "sentence": "The ___ followed its mother.",                       "answer": "pup" },
+    { "no": 14, "english": "need",            "pos": "v.",    "korean": "필요로 하다",     "sentence": "We ___ water every day.",                            "answer": "need" },
+    { "no": 15, "english": "understand",      "pos": "v.",    "korean": "이해하다",        "sentence": "He did not ___ the joke.",                          "answer": "understand" }
+  ]
+}
