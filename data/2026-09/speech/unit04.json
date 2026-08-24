@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "4",
+  "title": "Speech - Unit 4. In Public Places",
+  "words": [
+    { "no": 1,  "english": "the elderly",   "korean": "노인들",              "sentence": "We should respect the ___.",                     "answer": "elderly" },
+    { "no": 2,  "english": "follow",        "korean": "(규칙을) 따르다",     "sentence": "Please ___ the rules of the game.",              "answer": "follow" },
+    { "no": 3,  "english": "in public",     "korean": "공공 장소에서",       "sentence": "Don't shout in ___.",                            "answer": "public" },
+    { "no": 4,  "english": "annoying",      "korean": "짜증스러운",          "sentence": "The loud noise was very ___.",                   "answer": "annoying" },
+    { "no": 5,  "english": "ignore",        "korean": "무시하다",            "sentence": "Don't ___ my messages, please.",                 "answer": "ignore" },
+    { "no": 6,  "english": "passenger",     "korean": "승객",                "sentence": "Every ___ must wear a seat belt.",               "answer": "passenger" },
+    { "no": 7,  "english": "inconsiderate", "korean": "사려 깊지 못한",      "sentence": "It was ___ of him to arrive late.",              "answer": "inconsiderate" },
+    { "no": 8,  "english": "be mindful of", "korean": "~을 주의하다, 신경쓰다", "sentence": "Be ___ of your surroundings when you walk.",   "answer": "mindful" },
+    { "no": 9,  "english": "all the way up", "korean": "(볼륨을) 최대한으로", "sentence": "He turned the music all the way ___.",          "answer": "up" },
+    { "no": 10, "english": "irritate",      "korean": "짜증나게 하다",       "sentence": "The buzzing sound ___s me.",                     "answer": "irritates" },
+    { "no": 11, "english": "tap on",        "korean": "~을 가볍게 두드리다", "sentence": "She ___ped on the window softly.",               "answer": "tapped" },
+    { "no": 12, "english": "startling",     "korean": "깜짝 놀랄, 아주 놀라운", "sentence": "The loud bang was ___.",                        "answer": "startling" },
+    { "no": 13, "english": "spill",         "korean": "흘리다, 쏟다",        "sentence": "Be careful not to ___ your drink.",              "answer": "spill" },
+    { "no": 14, "english": "unpleasant",    "korean": "불쾌한",              "sentence": "That smell is very ___.",                        "answer": "unpleasant" },
+    { "no": 15, "english": "walk away",     "korean": "떠나 버리다",         "sentence": "She ___ed away without saying a word.",          "answer": "walked" },
+    { "no": 16, "english": "step on",       "korean": "~을 밟다",            "sentence": "Don't ___ on the flowers.",                      "answer": "step" },
+    { "no": 17, "english": "disrespectful", "korean": "무례한, 실례되는",    "sentence": "It's ___ to interrupt others.",                   "answer": "disrespectful" },
+    { "no": 18, "english": "sneeze",        "korean": "재채기하다",          "sentence": "Cover your mouth when you ___.",                  "answer": "sneeze" },
+    { "no": 19, "english": "cough",         "korean": "기침하다",            "sentence": "He began to ___ during the meeting.",             "answer": "cough" },
+    { "no": 20, "english": "reach",         "korean": "(손을) 뻗다, 내밀다", "sentence": "She ___ed for the book on the top shelf.",        "answer": "reached" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "4.1.3",
+  "title": "Integrated Reading - Word List 4.1.3",
+  "words": [
+    { "no": 1,  "english": "superior",   "pos": "adj.", "korean": "우월한",           "sentence": "This phone is ___ to the old one.",                  "answer": "superior" },
+    { "no": 2,  "english": "purchase",   "pos": "v.",   "korean": "구매하다",         "sentence": "He wants to ___ a computer online.",                 "answer": "purchase" },
+    { "no": 3,  "english": "repay",      "pos": "v.",   "korean": "갚다",             "sentence": "Did you ___ the money you borrowed?",                "answer": "repay" },
+    { "no": 4,  "english": "street fair", "pos": "phr.", "korean": "거리 축제",       "sentence": "The street ___ was full of music and food.",         "answer": "fair" },
+    { "no": 5,  "english": "booth",      "pos": "n.",   "korean": "작은 칸막이 공간", "sentence": "He sells fresh lemonade at his ___ every Saturday.", "answer": "booth" },
+    { "no": 6,  "english": "sigh",       "pos": "v.",   "korean": "한숨 쉬다",        "sentence": "She let out a long, tired ___ after class.",         "answer": "sigh" },
+    { "no": 7,  "english": "offer",      "pos": "v.",   "korean": "제공하다",         "sentence": "He ___ed his help during the meeting.",              "answer": "offered" },
+    { "no": 8,  "english": "piece",      "pos": "n.",   "korean": "조각",             "sentence": "He ate a big ___ of chocolate cake.",                "answer": "piece" },
+    { "no": 9,  "english": "every last", "pos": "phr.", "korean": "하나도 빠짐없이 모두", "sentence": "She cleaned every ___ corner of the room.",       "answer": "last" },
+    { "no": 10, "english": "nod",        "pos": "v.",   "korean": "고개를 끄덕이다",  "sentence": "She answered with a small ___ and smile.",           "answer": "nod" },
+    { "no": 11, "english": "grin",       "pos": "v.",   "korean": "활짝 웃다",        "sentence": "He ___ned when he saw the gift box.",                "answer": "grinned" },
+    { "no": 12, "english": "business",   "pos": "n.",   "korean": "사업",             "sentence": "She opened a new coffee ___ downtown.",              "answer": "business" },
+    { "no": 13, "english": "response",   "pos": "n.",   "korean": "반응",             "sentence": "Her quick ___ surprised everyone.",                  "answer": "response" },
+    { "no": 14, "english": "in line",    "pos": "phr.", "korean": "줄을 서 있는",     "sentence": "Please stay in ___ until your turn comes.",          "answer": "line" },
+    { "no": 15, "english": "realistic",  "pos": "adj.", "korean": "현실적인",         "sentence": "The painting looked almost too ___ to believe.",     "answer": "realistic" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "1",
+  "title": "Speech - Unit 1. My First Smart Device",
+  "words": [
+    { "no": 1,  "english": "emergency",                          "korean": "응급, 비상 상황",              "sentence": "Call 911 in an ___ situation.",                     "answer": "emergency" },
+    { "no": 2,  "english": "waste no time in",                   "korean": "당장 ~하다",                   "sentence": "He wasted no ___ in calling for help.",              "answer": "time" },
+    { "no": 3,  "english": "exchange",                           "korean": "교환하다",                     "sentence": "We ___d gifts at the party.",                        "answer": "exchanged" },
+    { "no": 4,  "english": "be used to",                         "korean": "~에 익숙하다",                 "sentence": "I am used ___ waking up early.",                     "answer": "to" },
+    { "no": 5,  "english": "at any time",                        "korean": "언제라도",                     "sentence": "You can call me ___ any time.",                      "answer": "at" },
+    { "no": 6,  "english": "replace",                            "korean": "교체하다",                     "sentence": "I need to ___ my broken phone.",                     "answer": "replace" },
+    { "no": 7,  "english": "have a special place in one's heart", "korean": "~의 마음속에 특별하게 자리 잡다", "sentence": "My old dog has a ___ place in my heart.",           "answer": "special" },
+    { "no": 8,  "english": "come with",                          "korean": "(기능이) 포함되다",            "sentence": "This phone ___s with a free case.",                  "answer": "come" },
+    { "no": 9,  "english": "remote learning",                    "korean": "원격 학습, 원격 수업",         "sentence": "We took ___ learning classes during the pandemic.",  "answer": "remote" },
+    { "no": 10, "english": "delighted",                          "korean": "아주 기뻐하는",                "sentence": "She was ___ to see her grandmother.",                "answer": "delighted" },
+    { "no": 11, "english": "brand-new",                          "korean": "완전 새 것인",                 "sentence": "He bought a ___ bike for his birthday.",             "answer": "brand-new" },
+    { "no": 12, "english": "disappointed",                       "korean": "실망한",                       "sentence": "I was ___ when the movie was canceled.",             "answer": "disappointed" },
+    { "no": 13, "english": "in seconds",                         "korean": "몇 초 안에",                   "sentence": "The photo was sent in ___.",                         "answer": "seconds" },
+    { "no": 14, "english": "decorate",                           "korean": "장식하다",                     "sentence": "We ___d the room with balloons.",                    "answer": "decorated" },
+    { "no": 15, "english": "convenient",                         "korean": "편리한",                       "sentence": "This app is very ___ to use.",                       "answer": "convenient" },
+    { "no": 16, "english": "at first",                           "korean": "처음에(는)",                   "sentence": "At ___, I didn't like the taste.",                   "answer": "first" },
+    { "no": 17, "english": "feature",                            "korean": "특징",                         "sentence": "The best ___ of this phone is the camera.",          "answer": "feature" },
+    { "no": 18, "english": "embarrassed",                        "korean": "당황스러운",                   "sentence": "I felt ___ when I forgot her name.",                 "answer": "embarrassed" },
+    { "no": 19, "english": "type",                               "korean": "타자 치다, 입력하다",          "sentence": "Please ___ your name on the screen.",                "answer": "type" },
+    { "no": 20, "english": "set up",                             "korean": "설정하다",                     "sentence": "I need to ___ up my new laptop.",                    "answer": "set" }
+  ]
+}

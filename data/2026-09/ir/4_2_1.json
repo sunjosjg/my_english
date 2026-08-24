@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "4.2.1",
+  "title": "Integrated Reading - Word List 4.2.1",
+  "words": [
+    { "no": 1,  "english": "herb",         "pos": "n.",   "korean": "허브",     "sentence": "We grow ___s like mint and basil in our garden.",      "answer": "herb" },
+    { "no": 2,  "english": "mineral",      "pos": "n.",   "korean": "무기질",   "sentence": "Vegetables are full of healthy ___s and vitamins.",    "answer": "mineral" },
+    { "no": 3,  "english": "superb",       "pos": "adj.", "korean": "뛰어난",   "sentence": "The cake tasted ___ with chocolate on top.",           "answer": "superb" },
+    { "no": 4,  "english": "agriculture",  "pos": "n.",   "korean": "농업",     "sentence": "___ includes farming and raising animals.",             "answer": "agriculture" },
+    { "no": 5,  "english": "crop",         "pos": "n.",   "korean": "농작물",   "sentence": "Rice is an important ___ in many countries.",           "answer": "crop" },
+    { "no": 6,  "english": "farmer",       "pos": "n.",   "korean": "농부",     "sentence": "That ___ grows fruit and vegetables to sell.",          "answer": "farmer" },
+    { "no": 7,  "english": "field",        "pos": "n.",   "korean": "들판",     "sentence": "The ___ was full of green plants and flowers.",         "answer": "field" },
+    { "no": 8,  "english": "harvest",      "pos": "v.",   "korean": "수확하다", "sentence": "We helped ___ the carrots from the garden.",            "answer": "harvest" },
+    { "no": 9,  "english": "plow",         "pos": "v.",   "korean": "경작하다", "sentence": "The farmer used a machine to ___ the land.",            "answer": "plow" },
+    { "no": 10, "english": "alternative",  "pos": "n.",   "korean": "대안",     "sentence": "Walking is a good ___ to driving a car.",                "answer": "alternative" },
+    { "no": 11, "english": "conservation", "pos": "n.",   "korean": "보존",     "sentence": "We talked about water ___ in science class.",           "answer": "conservation" },
+    { "no": 12, "english": "future",       "pos": "n.",   "korean": "미래",     "sentence": "We make choices today that shape the ___.",              "answer": "future" },
+    { "no": 13, "english": "method",       "pos": "n.",   "korean": "방법",     "sentence": "We learned a new ___ for studying words.",              "answer": "method" },
+    { "no": 14, "english": "sustain",      "pos": "v.",   "korean": "지속하다", "sentence": "Plants need water and sunlight to ___ life.",           "answer": "sustain" },
+    { "no": 15, "english": "existence",    "pos": "n.",   "korean": "생존",     "sentence": "They found signs of animal ___ in the cave.",           "answer": "existence" }
+  ]
+}

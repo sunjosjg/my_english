@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "2",
+  "title": "Speech - Unit 2. Apps on My Phone",
+  "words": [
+    { "no": 1,  "english": "productivity",  "korean": "생산성",                "sentence": "This app helps boost my ___.",                   "answer": "productivity" },
+    { "no": 2,  "english": "giant",         "korean": "거대한",                "sentence": "Google is a ___ tech company.",                  "answer": "giant" },
+    { "no": 3,  "english": "take notes",    "korean": "메모하다, 기록하다",    "sentence": "I ___ notes during every class.",                "answer": "take" },
+    { "no": 4,  "english": "explore",       "korean": "탐험하다",              "sentence": "Let's ___ the new museum today.",                "answer": "explore" },
+    { "no": 5,  "english": "detailed",      "korean": "정교한",                "sentence": "She gave a ___ report of the trip.",             "answer": "detailed" },
+    { "no": 6,  "english": "express",       "korean": "표현하다",              "sentence": "I use art to ___ my feelings.",                  "answer": "express" },
+    { "no": 7,  "english": "creativity",    "korean": "창의력",                "sentence": "Drawing helps develop ___.",                     "answer": "creativity" },
+    { "no": 8,  "english": "amusing",       "korean": "재미있는, 즐거운",      "sentence": "The story was really ___.",                      "answer": "amusing" },
+    { "no": 9,  "english": "organize",      "korean": "정리하다, 구조화하다",  "sentence": "I need to ___ my desk today.",                   "answer": "organize" },
+    { "no": 10, "english": "catch up with", "korean": "따라가다",              "sentence": "He ran fast to ___ up with his friend.",         "answer": "catch" },
+    { "no": 11, "english": "discover",      "korean": "발견하다",              "sentence": "We ___ed a hidden path in the forest.",          "answer": "discovered" },
+    { "no": 12, "english": "all sorts of",  "korean": "모든 종류의",           "sentence": "The store sells all ___ of toys.",               "answer": "sorts" },
+    { "no": 13, "english": "latest",        "korean": "최근의, 최신",          "sentence": "Have you heard the ___ news?",                   "answer": "latest" },
+    { "no": 14, "english": "useful",        "korean": "유용한",                "sentence": "This tool is very ___ for cooking.",             "answer": "useful" },
+    { "no": 15, "english": "take a class",  "korean": "수업을 듣다",           "sentence": "I ___ a class in Spanish every Monday.",         "answer": "take" },
+    { "no": 16, "english": "work on",       "korean": "~에 공을 들이다, 노력을 들이다", "sentence": "I need to ___ on my writing skills.",       "answer": "work" },
+    { "no": 17, "english": "keep track of", "korean": "기록하다",              "sentence": "I ___ track of my spending.",                    "answer": "keep" },
+    { "no": 18, "english": "feature",       "korean": "특별히 포함하다",       "sentence": "This magazine ___s a story about robots.",       "answer": "features" },
+    { "no": 19, "english": "effect",        "korean": "효과",                  "sentence": "Music has a calming ___ on me.",                 "answer": "effect" },
+    { "no": 20, "english": "daily life",    "korean": "일상 생활",             "sentence": "Exercise is a part of my ___ life.",             "answer": "daily" }
+  ]
+}

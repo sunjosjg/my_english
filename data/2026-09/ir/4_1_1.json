@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "4.1.1",
+  "title": "Integrated Reading - Word List 4.1.1",
+  "words": [
+    { "no": 1,  "english": "advertisement", "pos": "n.", "korean": "광고",     "sentence": "That ___ made me want the product.",              "answer": "advertisement" },
+    { "no": 2,  "english": "buyer",         "pos": "n.", "korean": "구매자",   "sentence": "The ___ paid for the shoes in cash.",              "answer": "buyer" },
+    { "no": 3,  "english": "market",        "pos": "n.", "korean": "시장",     "sentence": "We went to the ___ to buy fruits.",                "answer": "market" },
+    { "no": 4,  "english": "money",         "pos": "n.", "korean": "화폐",     "sentence": "___ is used to buy things we really need.",         "answer": "money" },
+    { "no": 5,  "english": "pay",           "pos": "v.", "korean": "지불하다", "sentence": "Did you ___ for the snacks already today?",        "answer": "pay" },
+    { "no": 6,  "english": "seller",        "pos": "n.", "korean": "판매자",   "sentence": "The ___ gave us a small discount on apples.",       "answer": "seller" },
+    { "no": 7,  "english": "accomplish",    "pos": "v.", "korean": "이루다",   "sentence": "They ___ed the mission together as a team.",       "answer": "accomplished" },
+    { "no": 8,  "english": "cooperation",   "pos": "n.", "korean": "협력",     "sentence": "Good ___ made the group project fun and easy.",    "answer": "cooperation" },
+    { "no": 9,  "english": "plenty",        "pos": "n.", "korean": "풍부함",   "sentence": "There was ___ of food at the birthday party.",     "answer": "plenty" },
+    { "no": 10, "english": "purpose",       "pos": "n.", "korean": "목적",     "sentence": "Her ___ is to become a great teacher.",             "answer": "purpose" },
+    { "no": 11, "english": "reward",        "pos": "n.", "korean": "보상",     "sentence": "She received a ___ for her honesty and effort.",   "answer": "reward" },
+    { "no": 12, "english": "celebrate",     "pos": "v.", "korean": "축하하다", "sentence": "We ___ our birthdays every single year.",          "answer": "celebrate" },
+    { "no": 13, "english": "decorate",      "pos": "v.", "korean": "장식하다", "sentence": "They ___d the classroom with colorful balloons.",  "answer": "decorated" },
+    { "no": 14, "english": "trumpet",       "pos": "n.", "korean": "트럼펫",   "sentence": "He played the ___ in the school band.",             "answer": "trumpet" },
+    { "no": 15, "english": "aid",           "pos": "v.", "korean": "돕다",     "sentence": "They ___ed the people after the strong storm.",    "answer": "aided" }
+  ]
+}

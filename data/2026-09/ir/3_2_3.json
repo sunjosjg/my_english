@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "3.2.3",
+  "title": "Integrated Reading - Word List 3.2.3",
+  "words": [
+    { "no": 1,  "english": "shelter",     "pos": "n.",   "korean": "피난처",   "sentence": "We stayed in a ___ during the heavy storm.",           "answer": "shelter" },
+    { "no": 2,  "english": "material",    "pos": "n.",   "korean": "물질",     "sentence": "Wood is a common building ___ for houses.",             "answer": "material" },
+    { "no": 3,  "english": "collect",     "pos": "v.",   "korean": "모으다",   "sentence": "I ___ed leaves from the park for my project.",          "answer": "collected" },
+    { "no": 4,  "english": "reserve",     "pos": "n.",   "korean": "보호구역", "sentence": "We visited a bird ___ near the river.",                 "answer": "reserve" },
+    { "no": 5,  "english": "rush",        "pos": "v.",   "korean": "서두르다", "sentence": "He ___ed to finish his homework before dinner.",        "answer": "rushed" },
+    { "no": 6,  "english": "grab",        "pos": "v.",   "korean": "잡다",     "sentence": "He ___bed the rope and started to climb.",              "answer": "grabbed" },
+    { "no": 7,  "english": "valuable",    "pos": "adj.", "korean": "귀중한",   "sentence": "We learned many ___ lessons in class.",                 "answer": "valuable" },
+    { "no": 8,  "english": "face",        "pos": "v.",   "korean": "직면하다", "sentence": "He ___d many challenges but didn't give up.",           "answer": "faced" },
+    { "no": 9,  "english": "take care of", "pos": "phr.", "korean": "돌보다",   "sentence": "The zookeeper ___s care of the baby elephants.",        "answer": "takes" },
+    { "no": 10, "english": "breed",       "pos": "v.",   "korean": "번식하다", "sentence": "Some animals ___ in spring and raise their babies.",    "answer": "breed" },
+    { "no": 11, "english": "gather",      "pos": "v.",   "korean": "모으다",   "sentence": "We ___ed around the table for lunch.",                  "answer": "gathered" },
+    { "no": 12, "english": "prepare",     "pos": "v.",   "korean": "준비하다", "sentence": "We ___d for the test by studying every day.",           "answer": "prepared" },
+    { "no": 13, "english": "machete",     "pos": "n.",   "korean": "큰 칼",    "sentence": "He used a ___ to cut vines in the forest.",             "answer": "machete" },
+    { "no": 14, "english": "feed",        "pos": "v.",   "korean": "먹이를 주다", "sentence": "Please ___ the baby with a small spoon.",             "answer": "feed" },
+    { "no": 15, "english": "bundle",      "pos": "n.",   "korean": "묶음",     "sentence": "She carried a ___ of clothes in her arms.",             "answer": "bundle" }
+  ]
+}

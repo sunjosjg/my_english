@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "3.1.2",
+  "title": "Integrated Reading - Word List 3.1.2",
+  "words": [
+    { "no": 1,  "english": "chirping", "pos": "adj.", "korean": "짹짹거리는", "sentence": "The ___ sound came from the tall trees.",              "answer": "chirping" },
+    { "no": 2,  "english": "likely",   "pos": "adj.", "korean": "~할 것 같은", "sentence": "That movie is ___ to be popular with kids.",           "answer": "likely" },
+    { "no": 3,  "english": "hang",     "pos": "v.",   "korean": "걸다",       "sentence": "Let's ___ the picture on the wall in the classroom.", "answer": "hang" },
+    { "no": 4,  "english": "reply",    "pos": "v.",   "korean": "대답하다",   "sentence": "She didn't ___ to the question in class.",             "answer": "reply" },
+    { "no": 5,  "english": "plant",    "pos": "v.",   "korean": "심다",       "sentence": "He wants to ___ vegetables in his backyard.",         "answer": "plant" },
+    { "no": 6,  "english": "badly",    "pos": "adv.", "korean": "매우",       "sentence": "I wanted to win the game so ___.",                     "answer": "badly" },
+    { "no": 7,  "english": "notice",   "pos": "v.",   "korean": "알아차리다", "sentence": "Did you ___ the new poster on the wall?",              "answer": "notice" },
+    { "no": 8,  "english": "ray",      "pos": "n.",   "korean": "광선",       "sentence": "A strong ___ from the sun warmed the ground.",         "answer": "ray" },
+    { "no": 9,  "english": "balcony",  "pos": "n.",   "korean": "발코니",     "sentence": "The hotel room has a big ___ with chairs.",            "answer": "balcony" },
+    { "no": 10, "english": "spade",    "pos": "n.",   "korean": "삽",         "sentence": "He used a ___ to dig a hole for the plant.",           "answer": "spade" },
+    { "no": 11, "english": "a dozen",  "pos": "phr.", "korean": "열두 개",    "sentence": "There were a ___ cookies on the plate.",               "answer": "dozen" },
+    { "no": 12, "english": "vine",     "pos": "n.",   "korean": "덩굴",       "sentence": "A green ___ grew up the side of the house.",           "answer": "vine" },
+    { "no": 13, "english": "beam",     "pos": "v.",   "korean": "활짝 웃다",  "sentence": "She ___ed with joy when she saw her prize.",           "answer": "beamed" },
+    { "no": 14, "english": "tangy",    "pos": "adj.", "korean": "톡 쏘는",    "sentence": "The lemonade had a strong ___ taste.",                  "answer": "tangy" },
+    { "no": 15, "english": "tasty",    "pos": "adj.", "korean": "맛있는",     "sentence": "That pizza was really ___ and cheesy.",                 "answer": "tasty" }
+  ]
+}

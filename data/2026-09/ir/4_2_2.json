@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "4.2.2",
+  "title": "Integrated Reading - Word List 4.2.2",
+  "words": [
+    { "no": 1,  "english": "acre",         "pos": "n.",   "korean": "에이커, 면적 단위", "sentence": "One ___ equals about 4,000 square meters.",              "answer": "acre" },
+    { "no": 2,  "english": "precious",     "pos": "adj.", "korean": "귀중한",           "sentence": "She wore a ___ necklace from her grandmother.",           "answer": "precious" },
+    { "no": 3,  "english": "cattle",       "pos": "n.",   "korean": "소",               "sentence": "___ provide milk, meat, and leather.",                    "answer": "cattle" },
+    { "no": 4,  "english": "disappear",    "pos": "v.",   "korean": "사라지다",         "sentence": "The rainbow started to ___ behind the clouds.",          "answer": "disappear" },
+    { "no": 5,  "english": "blame",        "pos": "v.",   "korean": "비난하다",         "sentence": "Don't ___ him without knowing the facts.",                "answer": "blame" },
+    { "no": 6,  "english": "solution",     "pos": "n.",   "korean": "해결책",           "sentence": "We found a smart ___ to the problem.",                    "answer": "solution" },
+    { "no": 7,  "english": "limited",      "pos": "adj.", "korean": "제한된",           "sentence": "There was only ___ space in the room.",                   "answer": "limited" },
+    { "no": 8,  "english": "provide",      "pos": "v.",   "korean": "제공하다",         "sentence": "The school will ___ free lunch every day.",               "answer": "provide" },
+    { "no": 9,  "english": "income",       "pos": "n.",   "korean": "소득",             "sentence": "Her ___ increased after getting a promotion.",           "answer": "income" },
+    { "no": 10, "english": "nutrient",     "pos": "n.",   "korean": "영양분",           "sentence": "___s help your body grow and stay strong.",               "answer": "nutrient" },
+    { "no": 11, "english": "ruin",         "pos": "v.",   "korean": "망치다",           "sentence": "The heavy rain may ___ our picnic plans.",                "answer": "ruin" },
+    { "no": 12, "english": "support",      "pos": "v.",   "korean": "지원하다",         "sentence": "My friends always ___ me when I'm sad.",                  "answer": "support" },
+    { "no": 13, "english": "sustainable",  "pos": "adj.", "korean": "지속 가능한",      "sentence": "___ energy is better for the planet.",                    "answer": "sustainable" },
+    { "no": 14, "english": "high-value",   "pos": "adj.", "korean": "가치가 높은",      "sentence": "They sell ___ products in that shop.",                    "answer": "high-value" },
+    { "no": 15, "english": "unemployment", "pos": "n.",   "korean": "실업",             "sentence": "___ is a serious issue in some countries.",               "answer": "unemployment" }
+  ]
+}

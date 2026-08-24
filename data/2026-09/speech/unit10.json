@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "10",
+  "title": "Speech - Unit 10. Paper Books vs. E-Books",
+  "words": [
+    { "no": 1,  "english": "e-books",       "korean": "전자책",                     "sentence": "I read ___ on my tablet.",                          "answer": "e-books" },
+    { "no": 2,  "english": "paper books",   "korean": "종이책",                     "sentence": "I prefer ___ books over e-books.",                  "answer": "paper" },
+    { "no": 3,  "english": "adjustable",    "korean": "조절[조정] 가능한",          "sentence": "The chair has an ___ height.",                      "answer": "adjustable" },
+    { "no": 4,  "english": "comfortable",   "korean": "편안한",                     "sentence": "This bed is very ___.",                             "answer": "comfortable" },
+    { "no": 5,  "english": "a variety of",  "korean": "다양한",                     "sentence": "The shop sells a ___ of shoes.",                    "answer": "variety" },
+    { "no": 6,  "english": "bother",        "korean": "신경 쓰이게 하다, 성가시게 하다", "sentence": "The loud music ___s me.",                        "answer": "bothers" },
+    { "no": 7,  "english": "carry around",  "korean": "~을 가지고 다니다",          "sentence": "I ___ my phone around all day.",                    "answer": "carry" },
+    { "no": 8,  "english": "convenient",    "korean": "편리한",                     "sentence": "This app is very ___.",                             "answer": "convenient" },
+    { "no": 9,  "english": "distraction",   "korean": "집중을 방해하는 것",         "sentence": "My phone is a big ___ during study time.",           "answer": "distraction" },
+    { "no": 10, "english": "automatically", "korean": "자동적으로",                 "sentence": "The lights turn on ___.",                           "answer": "automatically" },
+    { "no": 11, "english": "highlight",     "korean": "하이라이트[강조] 표시를 하다", "sentence": "Please ___ the important words.",                 "answer": "highlight" },
+    { "no": 12, "english": "flip through",  "korean": "(책장을) 휙휙 넘기다",       "sentence": "I ___ped through the magazine quickly.",             "answer": "flipped" },
+    { "no": 13, "english": "definition",    "korean": "정의, 의미",                 "sentence": "Look up the ___ of the word.",                       "answer": "definition" },
+    { "no": 14, "english": "take up",       "korean": "(공간을) 차지하다",          "sentence": "The big couch ___s up too much space.",              "answer": "takes" },
+    { "no": 15, "english": "all the time",  "korean": "항상",                       "sentence": "She talks about her cat ___ the time.",              "answer": "all" },
+    { "no": 16, "english": "environment",   "korean": "환경",                       "sentence": "We should protect the ___.",                         "answer": "environment" },
+    { "no": 17, "english": "readable",      "korean": "읽기 쉬운",                  "sentence": "The font size makes it very ___.",                   "answer": "readable" },
+    { "no": 18, "english": "enjoyable",     "korean": "즐거운",                     "sentence": "The trip was very ___.",                             "answer": "enjoyable" },
+    { "no": 19, "english": "unique",        "korean": "독특한, 특유의",             "sentence": "Every person has a ___ personality.",                "answer": "unique" },
+    { "no": 20, "english": "provide",       "korean": "제공하다",                   "sentence": "The hotel ___s free breakfast.",                     "answer": "provides" }
+  ]
+}

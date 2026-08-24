@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "11",
+  "title": "Speech - Unit 11. Classroom Learning vs. Online Learning",
+  "words": [
+    { "no": 1,  "english": "at one's own pace", "korean": "자신만의 속도로",     "sentence": "You can learn at your ___ pace.",                 "answer": "own" },
+    { "no": 2,  "english": "interact with",    "korean": "~과 상호작용하다",    "sentence": "Kids ___ with each other at school.",             "answer": "interact" },
+    { "no": 3,  "english": "directly",         "korean": "곧장, 즉시",          "sentence": "Please answer me ___.",                           "answer": "directly" },
+    { "no": 4,  "english": "struggle with",    "korean": "~으로 힘들어하다",    "sentence": "I ___ with math sometimes.",                      "answer": "struggle" },
+    { "no": 5,  "english": "face-to-face",     "korean": "마주보고, 대면하여",  "sentence": "We had a ___ meeting yesterday.",                 "answer": "face-to-face" },
+    { "no": 6,  "english": "structured",       "korean": "구조화된",            "sentence": "This class has a ___ schedule.",                  "answer": "structured" },
+    { "no": 7,  "english": "get distracted",   "korean": "정신이 산만해지다",   "sentence": "I ___ distracted by my phone.",                   "answer": "get" },
+    { "no": 8,  "english": "hands-on",         "korean": "직접 해 보는",        "sentence": "This is a ___ activity.",                         "answer": "hands-on" },
+    { "no": 9,  "english": "participate in",   "korean": "~에 참여하다",        "sentence": "I want to ___ in the contest.",                   "answer": "participate" },
+    { "no": 10, "english": "real-time",        "korean": "실시간의",            "sentence": "We had a ___ chat online.",                       "answer": "real-time" },
+    { "no": 11, "english": "social skills",    "korean": "사교 능력",           "sentence": "Sports help develop social ___.",                 "answer": "skills" },
+    { "no": 12, "english": "improve",          "korean": "개선하다, 향상시키다", "sentence": "I want to ___ my English.",                       "answer": "improve" },
+    { "no": 13, "english": "customize",        "korean": "원하는 대로 만들다",  "sentence": "You can ___ your profile picture.",               "answer": "customize" },
+    { "no": 14, "english": "ask for permission", "korean": "허락을 구하다",     "sentence": "Please ___ for permission first.",                "answer": "ask" },
+    { "no": 15, "english": "take a break",     "korean": "잠시 휴식을 취하다",  "sentence": "Let's ___ a break for ten minutes.",              "answer": "take" },
+    { "no": 16, "english": "lose focus",       "korean": "집중이 흐트러지다",   "sentence": "I ___ focus when I'm tired.",                     "answer": "lose" },
+    { "no": 17, "english": "feel pressure to", "korean": "~해야 한다는 압박감을 느끼다", "sentence": "I feel ___ to get good grades.",         "answer": "pressure" },
+    { "no": 18, "english": "keep up with",     "korean": "~을 따르다",          "sentence": "It's hard to ___ up with the news.",              "answer": "keep" },
+    { "no": 19, "english": "concentrate",      "korean": "집중하다",            "sentence": "Please ___ on your work.",                        "answer": "concentrate" },
+    { "no": 20, "english": "schoolwork",       "korean": "학업, 학교 공부",     "sentence": "I finished all my ___ today.",                    "answer": "schoolwork" }
+  ]
+}

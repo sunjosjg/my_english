@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "4.2.3",
+  "title": "Integrated Reading - Word List 4.2.3",
+  "words": [
+    { "no": 1,  "english": "fable",         "pos": "n.",   "korean": "우화",         "sentence": "The teacher read a short ___ about honesty.",           "answer": "fable" },
+    { "no": 2,  "english": "merry",         "pos": "adj.", "korean": "즐거운",       "sentence": "Her ___ laugh made everyone feel happy.",                "answer": "merry" },
+    { "no": 3,  "english": "fiddle",        "pos": "n.",   "korean": "바이올린",     "sentence": "The old man carried his ___ everywhere.",                "answer": "fiddle" },
+    { "no": 4,  "english": "enormous",      "pos": "adj.", "korean": "거대한",       "sentence": "An ___ elephant walked through the jungle.",             "answer": "enormous" },
+    { "no": 5,  "english": "kernel",        "pos": "n.",   "korean": "알맹이",       "sentence": "We found the ___ inside the hard shell.",                "answer": "kernel" },
+    { "no": 6,  "english": "urge",          "pos": "v.",   "korean": "촉구하다",     "sentence": "Doctors ___ people to exercise every day.",              "answer": "urge" },
+    { "no": 7,  "english": "nonsense",      "pos": "n.",   "korean": "허튼소리",     "sentence": "That story is complete ___, don't believe it.",          "answer": "nonsense" },
+    { "no": 8,  "english": "suit yourself", "pos": "phr.", "korean": "네 마음대로 해", "sentence": "If you don't want help, then ___ yourself.",             "answer": "suit" },
+    { "no": 9,  "english": "stagger",       "pos": "v.",   "korean": "휘청거리다",   "sentence": "She ___ed after spinning in circles too long.",          "answer": "staggered" },
+    { "no": 10, "english": "lament",        "pos": "v.",   "korean": "슬퍼하다",     "sentence": "Many people ___ed the closing of the library.",          "answer": "lamented" },
+    { "no": 11, "english": "admit",         "pos": "v.",   "korean": "받아들이다",   "sentence": "He finally ___ted he made a big mistake.",               "answer": "admitted" },
+    { "no": 12, "english": "heed",          "pos": "v.",   "korean": "주의를 기울이다", "sentence": "___ my words or you'll be in trouble.",                "answer": "Heed" },
+    { "no": 13, "english": "tiny",          "pos": "adj.", "korean": "아주 작은",    "sentence": "The bug was so ___ we almost missed it.",                "answer": "tiny" },
+    { "no": 14, "english": "classify",      "pos": "v.",   "korean": "분류하다",     "sentence": "Let's ___ these animals into four groups.",              "answer": "classify" },
+    { "no": 15, "english": "belong",        "pos": "v.",   "korean": "속하다",       "sentence": "She feels she ___s in that school.",                     "answer": "belongs" }
+  ]
+}

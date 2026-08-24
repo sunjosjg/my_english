@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "3.1.3",
+  "title": "Integrated Reading - Word List 3.1.3",
+  "words": [
+    { "no": 1,  "english": "multiple",  "pos": "adj.", "korean": "여러 가지의", "sentence": "The project needs ___ colors and tools.",         "answer": "multiple" },
+    { "no": 2,  "english": "context",   "pos": "n.",   "korean": "문맥",        "sentence": "Please read the whole ___ to understand the word.", "answer": "context" },
+    { "no": 3,  "english": "cheer for", "pos": "phr.", "korean": "~를 응원하다", "sentence": "We all ___ed for our soccer team at the game.",   "answer": "cheered" },
+    { "no": 4,  "english": "haiku",     "pos": "n.",   "korean": "짧은 시",     "sentence": "I wrote a ___ about spring flowers.",              "answer": "haiku" },
+    { "no": 5,  "english": "spiky",     "pos": "adj.", "korean": "가시가 있는", "sentence": "Don't touch the ___ part of the toy.",              "answer": "spiky" },
+    { "no": 6,  "english": "takeout",   "pos": "n.",   "korean": "포장 음식",   "sentence": "We ordered ___ from the chicken restaurant.",       "answer": "takeout" },
+    { "no": 7,  "english": "treat",     "pos": "n.",   "korean": "간식",        "sentence": "That cake is a special ___ for your birthday.",     "answer": "treat" },
+    { "no": 8,  "english": "crunch",    "pos": "v.",   "korean": "아삭아삭 씹다", "sentence": "I ___ed on a carrot while watching TV.",         "answer": "crunched" },
+    { "no": 9,  "english": "originate", "pos": "v.",   "korean": "기원하다",    "sentence": "This game ___d in Korea long ago.",                 "answer": "originated" },
+    { "no": 10, "english": "paddy",     "pos": "n.",   "korean": "논",          "sentence": "We walked near a green ___ after school.",          "answer": "paddy" },
+    { "no": 11, "english": "breeze",    "pos": "n.",   "korean": "산들바람",    "sentence": "A soft ___ came through the window.",               "answer": "breeze" },
+    { "no": 12, "english": "grain",     "pos": "n.",   "korean": "곡물",        "sentence": "Rice is an important ___ in many countries.",       "answer": "grain" },
+    { "no": 13, "english": "wheat",     "pos": "n.",   "korean": "밀",          "sentence": "___ is used to make bread and pasta.",               "answer": "wheat" },
+    { "no": 14, "english": "mild",      "pos": "adj.", "korean": "온화한",      "sentence": "The soup has a ___ flavor, not spicy.",             "answer": "mild" },
+    { "no": 15, "english": "common",    "pos": "adj.", "korean": "흔한",        "sentence": "It is ___ to shake hands when greeting.",           "answer": "common" }
+  ]
+}

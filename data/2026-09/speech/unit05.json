@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "5",
+  "title": "Speech - Unit 5. Between Friends",
+  "words": [
+    { "no": 1,  "english": "tough",                "korean": "힘든, 어려운",                   "sentence": "The test was really ___.",                         "answer": "tough" },
+    { "no": 2,  "english": "disagreement",         "korean": "의견 충돌, 다툼",                "sentence": "They had a small ___ about the plan.",             "answer": "disagreement" },
+    { "no": 3,  "english": "overcome",             "korean": "이겨내다, 극복하다",             "sentence": "She ___ many challenges in her life.",             "answer": "overcame" },
+    { "no": 4,  "english": "talk it out",          "korean": "(결정, 문제 해결 등을 위해) 대화하다", "sentence": "Let's ___ it out and find a solution.",        "answer": "talk" },
+    { "no": 5,  "english": "pay something back",   "korean": "(빌린 돈을) 갚다, 물려주다",     "sentence": "I need to ___ the money back next week.",          "answer": "pay" },
+    { "no": 6,  "english": "eventually",           "korean": "결국",                           "sentence": "He ___ apologized for his mistake.",               "answer": "eventually" },
+    { "no": 7,  "english": "apologize",            "korean": "사과하다",                       "sentence": "I want to ___ for being late.",                    "answer": "apologize" },
+    { "no": 8,  "english": "remove",               "korean": "지우다, 없애다",                 "sentence": "Please ___ the dirt from your shoes.",             "answer": "remove" },
+    { "no": 9,  "english": "look back",            "korean": "(과거를) 되돌아보다",            "sentence": "I like to ___ back on happy times.",               "answer": "look" },
+    { "no": 10, "english": "make the right decision", "korean": "올바른 결정을 하다",          "sentence": "You made the ___ decision to help her.",           "answer": "right" },
+    { "no": 11, "english": "find out",             "korean": "알아내다, 알게 되다",            "sentence": "I want to ___ out the truth.",                     "answer": "find" },
+    { "no": 12, "english": "make things worse",    "korean": "사태를 악화시키다",              "sentence": "Lying will only make things ___.",                 "answer": "worse" },
+    { "no": 13, "english": "tell the truth",       "korean": "사실대로 말하다",                "sentence": "It's important to ___ the truth.",                 "answer": "tell" },
+    { "no": 14, "english": "admit",                "korean": "인정하다",                       "sentence": "He finally ___ted his mistake.",                   "answer": "admitted" },
+    { "no": 15, "english": "closer",               "korean": "더 가까이",                      "sentence": "Please come ___ so I can hear you.",               "answer": "closer" },
+    { "no": 16, "english": "offended",             "korean": "기분이 상한",                    "sentence": "She was ___ by his rude comment.",                 "answer": "offended" },
+    { "no": 17, "english": "tease",                "korean": "놀리다, 장난하다",               "sentence": "Don't ___ your little brother.",                   "answer": "tease" },
+    { "no": 18, "english": "make fun of",          "korean": "~을 놀리다",                     "sentence": "It's not nice to make ___ of others.",             "answer": "fun" },
+    { "no": 19, "english": "appearance",           "korean": "외모",                           "sentence": "Don't judge people by their ___.",                 "answer": "appearance" },
+    { "no": 20, "english": "right",                "korean": "옳은, 올바른",                   "sentence": "You made the ___ choice.",                         "answer": "right" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "12",
+  "title": "Speech - Unit 12. Studying Smart",
+  "words": [
+    { "no": 1,  "english": "growing",              "korean": "커지는, 증가하는",        "sentence": "There is a ___ interest in AI.",                 "answer": "growing" },
+    { "no": 2,  "english": "brainstorm",           "korean": "브레인스토밍하다",         "sentence": "Let's ___ some new ideas.",                      "answer": "brainstorm" },
+    { "no": 3,  "english": "collaborate",          "korean": "협력하다",                "sentence": "We ___d on the science project.",                "answer": "collaborated" },
+    { "no": 4,  "english": "argue",                "korean": "주장하다",                "sentence": "Some ___ that homework is helpful.",             "answer": "argue" },
+    { "no": 5,  "english": "personalized learning", "korean": "맞춤형 학습",             "sentence": "___ learning helps each student differently.",   "answer": "Personalized" },
+    { "no": 6,  "english": "assist with",          "korean": "~을 돕다",                "sentence": "Can you ___ with my homework?",                  "answer": "assist" },
+    { "no": 7,  "english": "hinder",               "korean": "방해하다",                "sentence": "Bad habits can ___ your progress.",              "answer": "hinder" },
+    { "no": 8,  "english": "distracting",          "korean": "주의를 산만하게 하는",    "sentence": "The noise is very ___.",                         "answer": "distracting" },
+    { "no": 9,  "english": "end up",               "korean": "결국 ~해버리다",          "sentence": "We ___ up staying home all day.",                "answer": "ended" },
+    { "no": 10, "english": "undeniable",           "korean": "부정할 수 없는",          "sentence": "The results are ___.",                           "answer": "undeniable" },
+    { "no": 11, "english": "rely on",              "korean": "~에 기대다, 의존하다",    "sentence": "Don't ___ on others too much.",                  "answer": "rely" },
+    { "no": 12, "english": "especially",           "korean": "특히",                    "sentence": "I love fruits, ___ apples.",                     "answer": "especially" },
+    { "no": 13, "english": "on one's own",         "korean": "스스로, 혼자 힘으로",     "sentence": "She solved the problem on her ___.",             "answer": "own" },
+    { "no": 14, "english": "appropriate",          "korean": "적절한",                  "sentence": "Please wear ___ clothes for the event.",         "answer": "appropriate" },
+    { "no": 15, "english": "suggest",              "korean": "제안하다, 추천하다",      "sentence": "I ___ we take a break.",                         "answer": "suggest" },
+    { "no": 16, "english": "excellent",            "korean": "훌륭한, 탁월한",          "sentence": "Her speech was ___.",                            "answer": "excellent" },
+    { "no": 17, "english": "portable",             "korean": "휴대가 쉬운, 휴대용의",   "sentence": "This ___ speaker is easy to carry.",             "answer": "portable" },
+    { "no": 18, "english": "cheat",                "korean": "부정행위를 하다, 속임수를 쓰다", "sentence": "Never ___ on a test.",                     "answer": "cheat" },
+    { "no": 19, "english": "correct",              "korean": "바로잡다, 정정하다",      "sentence": "Please ___ my mistake.",                         "answer": "correct" },
+    { "no": 20, "english": "claim",                "korean": "주장하다",                "sentence": "He ___s that he saw a UFO.",                     "answer": "claims" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "3.2.2",
+  "title": "Integrated Reading - Word List 3.2.2",
+  "words": [
+    { "no": 1,  "english": "dense",      "pos": "adj.", "korean": "빽빽한",     "sentence": "The crowd was so ___ that we could hardly move.",       "answer": "dense" },
+    { "no": 2,  "english": "seep in",    "pos": "phr.", "korean": "스며들다",   "sentence": "Water began to ___ in through the walls after heavy rain.", "answer": "seep" },
+    { "no": 3,  "english": "species",    "pos": "n.",   "korean": "생물의 종류", "sentence": "That zoo has many different ___ of birds.",             "answer": "species" },
+    { "no": 4,  "english": "dangle",     "pos": "v.",   "korean": "매달리다",   "sentence": "I saw a monkey ___ from a tree by its tail.",            "answer": "dangle" },
+    { "no": 5,  "english": "related to", "pos": "phr.", "korean": "~와 관련된", "sentence": "Her job is ___ to animal care and training.",           "answer": "related" },
+    { "no": 6,  "english": "dim",        "pos": "adj.", "korean": "흐릿한",     "sentence": "The light in the cave was very ___.",                    "answer": "dim" },
+    { "no": 7,  "english": "munch",      "pos": "v.",   "korean": "우적우적 먹다", "sentence": "The boy ___ed on his apple during break time.",       "answer": "munched" },
+    { "no": 8,  "english": "botanist",   "pos": "n.",   "korean": "식물학자",   "sentence": "The ___ found a new kind of flower in the forest.",     "answer": "botanist" },
+    { "no": 9,  "english": "necessity",  "pos": "n.",   "korean": "필요",       "sentence": "A warm coat is a ___ in cold weather.",                  "answer": "necessity" },
+    { "no": 10, "english": "break out",  "pos": "phr.", "korean": "발생하다",   "sentence": "A fire ___ out in the building last night.",             "answer": "broke" },
+    { "no": 11, "english": "invade",     "pos": "v.",   "korean": "침입하다",   "sentence": "Soldiers planned to ___ the enemy's camp.",              "answer": "invade" },
+    { "no": 12, "english": "destroy",    "pos": "v.",   "korean": "파괴하다",   "sentence": "The fire ___ed the old wooden house.",                   "answer": "destroyed" },
+    { "no": 13, "english": "threat",     "pos": "n.",   "korean": "위협",       "sentence": "Pollution is a ___ to our environment.",                 "answer": "threat" },
+    { "no": 14, "english": "train",      "pos": "v.",   "korean": "훈련하다",   "sentence": "I ___ed my dog to sit and shake hands.",                 "answer": "trained" },
+    { "no": 15, "english": "generation", "pos": "n.",   "korean": "세대",       "sentence": "My grandmother's ___ didn't use smartphones.",           "answer": "generation" }
+  ]
+}

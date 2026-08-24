@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "7",
+  "title": "Speech - Unit 7. My Allowance",
+  "words": [
+    { "no": 1,  "english": "allowance",         "korean": "용돈",                     "sentence": "I get my ___ every Sunday.",                    "answer": "allowance" },
+    { "no": 2,  "english": "debit card",        "korean": "직불 카드",                "sentence": "I paid for lunch with my ___ card.",             "answer": "debit" },
+    { "no": 3,  "english": "spending",          "korean": "지출",                     "sentence": "My ___ this month was too high.",                "answer": "spending" },
+    { "no": 4,  "english": "savings",           "korean": "저축",                     "sentence": "I keep my ___ in a piggy bank.",                 "answer": "savings" },
+    { "no": 5,  "english": "turn",              "korean": "(어떤 나이가) 되다",       "sentence": "I ___ed thirteen last month.",                   "answer": "turned" },
+    { "no": 6,  "english": "additional",        "korean": "추가의",                   "sentence": "I need ___ time to finish.",                     "answer": "additional" },
+    { "no": 7,  "english": "spend on",          "korean": "~에 (돈을) 쓰다",          "sentence": "I ___ my money on books.",                       "answer": "spend" },
+    { "no": 8,  "english": "used to",           "korean": "~하곤 했다",               "sentence": "I ___ to live in Seoul.",                        "answer": "used" },
+    { "no": 9,  "english": "leave",             "korean": "남기다",                   "sentence": "Please ___ some cake for me.",                   "answer": "leave" },
+    { "no": 10, "english": "be grateful for",   "korean": "~에 감사하다",             "sentence": "I am grateful ___ my family.",                   "answer": "for" },
+    { "no": 11, "english": "amount",            "korean": "총액, 액수",               "sentence": "The ___ of money was surprising.",               "answer": "amount" },
+    { "no": 12, "english": "carelessly",        "korean": "부주의하게, 경솔하게",     "sentence": "He drove ___ and got in trouble.",               "answer": "carelessly" },
+    { "no": 13, "english": "school supplies",   "korean": "학용품",                   "sentence": "I bought new school ___ today.",                 "answer": "supplies" },
+    { "no": 14, "english": "waste",             "korean": "낭비하다, 헛되이 쓰다",    "sentence": "Don't ___ your money on junk food.",             "answer": "waste" },
+    { "no": 15, "english": "keep a money diary", "korean": "용돈 기입장을 쓰다",      "sentence": "I keep a money ___ to track my spending.",       "answer": "diary" },
+    { "no": 16, "english": "in advance",        "korean": "미리",                     "sentence": "Please pay in ___ for the trip.",                "answer": "advance" },
+    { "no": 17, "english": "kindness",          "korean": "친절, 다정함",             "sentence": "Her ___ warmed my heart.",                       "answer": "kindness" },
+    { "no": 18, "english": "definitely",        "korean": "분명히, 확실히",           "sentence": "I will ___ come to your party.",                 "answer": "definitely" },
+    { "no": 19, "english": "manage",            "korean": "관리하다",                 "sentence": "She ___s her time very well.",                   "answer": "manages" },
+    { "no": 20, "english": "on a monthly basis", "korean": "월 단위로",               "sentence": "We pay rent on a ___ basis.",                    "answer": "monthly" }
+  ]
+}

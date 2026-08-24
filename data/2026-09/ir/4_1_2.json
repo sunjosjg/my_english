@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "4.1.2",
+  "title": "Integrated Reading - Word List 4.1.2",
+  "words": [
+    { "no": 1,  "english": "favorite",   "pos": "n.",   "korean": "가장 좋아하는 것", "sentence": "Pizza is my ___ food to eat on weekends.",         "answer": "favorite" },
+    { "no": 2,  "english": "recipe",     "pos": "n.",   "korean": "조리법",           "sentence": "I used a new ___ to bake these cookies.",           "answer": "recipe" },
+    { "no": 3,  "english": "round up",   "pos": "phr.", "korean": "~을 모으다",       "sentence": "We ___ed up the toys and put them away.",            "answer": "rounded" },
+    { "no": 4,  "english": "ingredient", "pos": "n.",   "korean": "재료",             "sentence": "Sugar is one ___ in this sweet cake.",              "answer": "ingredient" },
+    { "no": 5,  "english": "cupboard",   "pos": "n.",   "korean": "수납장",           "sentence": "The dishes are inside the kitchen ___.",             "answer": "cupboard" },
+    { "no": 6,  "english": "whisk",      "pos": "n.",   "korean": "거품기",           "sentence": "Use a ___ to mix the eggs quickly.",                 "answer": "whisk" },
+    { "no": 7,  "english": "wail",       "pos": "v.",   "korean": "통곡하다",         "sentence": "The baby began to ___ loudly at night.",             "answer": "wail" },
+    { "no": 8,  "english": "set about",  "pos": "phr.", "korean": "~을 시작하다",     "sentence": "We ___ about cleaning the messy classroom.",         "answer": "set" },
+    { "no": 9,  "english": "sift",       "pos": "v.",   "korean": "체로 거르다",      "sentence": "I ___ed the sugar before baking cookies.",           "answer": "sifted" },
+    { "no": 10, "english": "exclaim",    "pos": "v.",   "korean": "외치다",           "sentence": "\"That's amazing!\" she ___ed with a smile.",         "answer": "exclaimed" },
+    { "no": 11, "english": "in time",    "pos": "phr.", "korean": "제시간에",         "sentence": "I finished my homework just in ___.",                "answer": "time" },
+    { "no": 12, "english": "out of",     "pos": "phr.", "korean": "~이 없는",         "sentence": "We are out of ___, so we can't draw.",                "answer": "paper" },
+    { "no": 13, "english": "sibling",    "pos": "n.",   "korean": "형제자매",         "sentence": "I play board games with my ___s.",                    "answer": "sibling" },
+    { "no": 14, "english": "batter",     "pos": "n.",   "korean": "반죽",             "sentence": "I poured the pancake ___ into the pan.",             "answer": "batter" },
+    { "no": 15, "english": "in unison",  "pos": "phr.", "korean": "일제히",           "sentence": "The students said \"Good morning\" in ___.",          "answer": "unison" }
+  ]
+}

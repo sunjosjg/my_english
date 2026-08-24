@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "6",
+  "title": "Speech - Unit 6. Online Etiquette",
+  "words": [
+    { "no": 1,  "english": "crucial",            "korean": "중대한, 결정적인",              "sentence": "Water is ___ for our survival.",                 "answer": "crucial" },
+    { "no": 2,  "english": "social interaction", "korean": "사회적 상호 작용",              "sentence": "Kids learn from social ___ at school.",          "answer": "interaction" },
+    { "no": 3,  "english": "in the age of",      "korean": "~의 시대에",                    "sentence": "We live in the ___ of technology.",              "answer": "age" },
+    { "no": 4,  "english": "perceive",           "korean": "~로 여기다",                    "sentence": "Others may ___ you differently.",                "answer": "perceive" },
+    { "no": 5,  "english": "excessive",          "korean": "지나친, 과도한",                "sentence": "___ screen time is bad for eyes.",                "answer": "Excessive" },
+    { "no": 6,  "english": "behave",             "korean": "행동하다",                      "sentence": "Please ___ nicely at the party.",                 "answer": "behave" },
+    { "no": 7,  "english": "make a joke",        "korean": "우스갯소리를 하다, 농담을 하다", "sentence": "He always makes a ___ to lighten the mood.",     "answer": "joke" },
+    { "no": 8,  "english": "comment",            "korean": "댓글",                          "sentence": "She left a nice ___ on my post.",                 "answer": "comment" },
+    { "no": 9,  "english": "face-to-face",       "korean": "마주보고, 대면하여",            "sentence": "Let's talk ___ instead of on the phone.",         "answer": "face-to-face" },
+    { "no": 10, "english": "similarly",          "korean": "비슷하게",                      "sentence": "Cats and dogs behave ___ in some ways.",          "answer": "similarly" },
+    { "no": 11, "english": "spell",              "korean": "철자를 말하다, 쓰다",           "sentence": "Can you ___ your name for me?",                   "answer": "spell" },
+    { "no": 12, "english": "incorrectly",        "korean": "부정확하게, 잘못",              "sentence": "He answered the question ___.",                   "answer": "incorrectly" },
+    { "no": 13, "english": "in the same way",    "korean": "마찬가지로",                    "sentence": "Treat others in the ___ way you want to be treated.", "answer": "same" },
+    { "no": 14, "english": "less often",         "korean": "덜 자주",                       "sentence": "I visit the mall ___ often now.",                 "answer": "less" },
+    { "no": 15, "english": "immature",           "korean": "미성숙한",                      "sentence": "His ___ behavior surprised us.",                  "answer": "immature" },
+    { "no": 16, "english": "carefully",          "korean": "조심스럽게, 주의 깊게",         "sentence": "Please read the instructions ___.",               "answer": "carefully" },
+    { "no": 17, "english": "likewise",           "korean": "비슷하게, 마찬가지로",          "sentence": "She smiled, and I did ___.",                      "answer": "likewise" },
+    { "no": 18, "english": "feel left out",      "korean": "소외감을 느끼다",               "sentence": "I felt left ___ at the party.",                   "answer": "out" },
+    { "no": 19, "english": "punctuation",        "korean": "구두점, 구두법",                "sentence": "Use correct ___ in your writing.",                "answer": "punctuation" },
+    { "no": 20, "english": "source",             "korean": "출처",                          "sentence": "Please check your ___ before quoting.",           "answer": "source" }
+  ]
+}

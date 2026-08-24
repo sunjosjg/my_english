@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "3.1.1",
+  "title": "Integrated Reading - Word List 3.1.1",
+  "words": [
+    { "no": 1,  "english": "stem",           "pos": "n.",    "korean": "줄기",       "sentence": "The ___ holds the flower up above the ground.",     "answer": "stem" },
+    { "no": 2,  "english": "blossom",        "pos": "n.",    "korean": "꽃",         "sentence": "The tree was full of white ___s in spring.",         "answer": "blossom" },
+    { "no": 3,  "english": "cycle",          "pos": "n.",    "korean": "주기",       "sentence": "Day and night follow the same ___ every day.",      "answer": "cycle" },
+    { "no": 4,  "english": "root",           "pos": "n.",    "korean": "뿌리",       "sentence": "The tree's ___s go deep under the soil.",           "answer": "root" },
+    { "no": 5,  "english": "seed",           "pos": "n.",    "korean": "씨앗",       "sentence": "This small ___ will grow into a flower.",           "answer": "seed" },
+    { "no": 6,  "english": "soil",           "pos": "n.",    "korean": "토양",       "sentence": "Worms live in the ___ and help the plants.",        "answer": "soil" },
+    { "no": 7,  "english": "sprout",         "pos": "n.",    "korean": "싹",         "sentence": "These green ___s will turn into tall plants.",       "answer": "sprout" },
+    { "no": 8,  "english": "characteristic", "pos": "n.",    "korean": "특징",       "sentence": "A long tail is a tiger's special ___.",              "answer": "characteristic" },
+    { "no": 9,  "english": "conditions",     "pos": "n.",    "korean": "상태",       "sentence": "Plants grow best in warm and wet ___.",              "answer": "conditions" },
+    { "no": 10, "english": "depend",         "pos": "v.",    "korean": "의존하다",   "sentence": "Plants ___ on sunlight and water to grow.",          "answer": "depend" },
+    { "no": 11, "english": "growth",         "pos": "n.",    "korean": "성장",       "sentence": "We checked the plant's ___ every week.",             "answer": "growth" },
+    { "no": 12, "english": "produce",        "pos": "v.",    "korean": "생산하다",   "sentence": "Factories ___ food, clothes, and toys.",             "answer": "produce" },
+    { "no": 13, "english": "bloom",          "pos": "v.",    "korean": "꽃이 피다",  "sentence": "These plants will ___ after some rain.",             "answer": "bloom" },
+    { "no": 14, "english": "terrible",       "pos": "adj.",  "korean": "형편없는",   "sentence": "That storm last night was really ___.",               "answer": "terrible" },
+    { "no": 15, "english": "expect",         "pos": "v.",    "korean": "기대하다",   "sentence": "I ___ it will rain this afternoon.",                 "answer": "expect" }
+  ]
+}

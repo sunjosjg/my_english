@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "3",
+  "title": "Speech - Unit 3. Social Media",
+  "words": [
+    { "no": 1,  "english": "misuse",        "korean": "남용하다, 오용하다",    "sentence": "Don't ___ your power over others.",              "answer": "misuse" },
+    { "no": 2,  "english": "minimum",       "korean": "최소한의",              "sentence": "The ___ age to sign up is 14.",                   "answer": "minimum" },
+    { "no": 3,  "english": "require",       "korean": "요구하다, 필요로 하다", "sentence": "This job ___s good English skills.",             "answer": "requires" },
+    { "no": 4,  "english": "account",       "korean": "계정",                  "sentence": "I made a new ___ on the app.",                   "answer": "account" },
+    { "no": 5,  "english": "advantage",     "korean": "장점",                  "sentence": "One ___ of this phone is the battery life.",     "answer": "advantage" },
+    { "no": 6,  "english": "disadvantage",  "korean": "단점",                  "sentence": "The main ___ is that it's too heavy.",           "answer": "disadvantage" },
+    { "no": 7,  "english": "stay in touch", "korean": "연락을 유지하다",       "sentence": "We ___ in touch through text messages.",         "answer": "stay" },
+    { "no": 8,  "english": "keep in touch", "korean": "연락하다",              "sentence": "Please ___ in touch after you move.",            "answer": "keep" },
+    { "no": 9,  "english": "spread",        "korean": "퍼지다",                "sentence": "The news ___ quickly online.",                   "answer": "spread" },
+    { "no": 10, "english": "expose",        "korean": "노출시키다",            "sentence": "Kids should not be ___d to bad content.",        "answer": "exposed" },
+    { "no": 11, "english": "harmful",       "korean": "해로운, 유해한",        "sentence": "Too much sugar is ___ to your health.",          "answer": "harmful" },
+    { "no": 12, "english": "get injured",   "korean": "부상을 당하다",         "sentence": "He got ___ during the soccer game.",             "answer": "injured" },
+    { "no": 13, "english": "certainly",     "korean": "틀림없이, 분명히",      "sentence": "I ___ agree with your idea.",                    "answer": "certainly" },
+    { "no": 14, "english": "downside",      "korean": "불리한 면",             "sentence": "The ___ of this plan is the high cost.",         "answer": "downside" },
+    { "no": 15, "english": "perspective",   "korean": "관점",                  "sentence": "From my ___, this idea is great.",               "answer": "perspective" },
+    { "no": 16, "english": "waste",         "korean": "낭비하다",              "sentence": "Don't ___ your time on that game.",              "answer": "waste" },
+    { "no": 17, "english": "undeniable",    "korean": "부인할 수 없는, 명백한", "sentence": "Her talent is ___.",                              "answer": "undeniable" },
+    { "no": 18, "english": "addictive",     "korean": "중독성의, 중독성이 있는", "sentence": "This game is very ___.",                          "answer": "addictive" },
+    { "no": 19, "english": "show off",      "korean": "뽐내다, 으스대다",      "sentence": "He likes to ___ off his new car.",               "answer": "show" },
+    { "no": 20, "english": "rumor",         "korean": "소문",                  "sentence": "I heard a ___ about the new teacher.",           "answer": "rumor" }
+  ]
+}

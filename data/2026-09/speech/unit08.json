@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "8",
+  "title": "Speech - Unit 8. Household Chores",
+  "words": [
+    { "no": 1,  "english": "do household chores", "korean": "집안일을 하다",                 "sentence": "I do household ___ every Saturday.",            "answer": "chores" },
+    { "no": 2,  "english": "be paid for",         "korean": "~에 대한 돈을 받다, 보상을 받다", "sentence": "He was ___ for his hard work.",                 "answer": "paid" },
+    { "no": 3,  "english": "quite",               "korean": "꽤",                            "sentence": "The room was ___ big.",                          "answer": "quite" },
+    { "no": 4,  "english": "vacuum",              "korean": "진공청소기로 청소하다",         "sentence": "I ___ the living room every week.",              "answer": "vacuum" },
+    { "no": 5,  "english": "load the dishwasher", "korean": "식기 세척기에 그릇을 넣다",     "sentence": "Please ___ the dishwasher after dinner.",        "answer": "load" },
+    { "no": 6,  "english": "point",               "korean": "의견, 주장",                    "sentence": "That's a good ___.",                             "answer": "point" },
+    { "no": 7,  "english": "motivate",            "korean": "동기를 부여하다",               "sentence": "Her words ___d me to try harder.",               "answer": "motivated" },
+    { "no": 8,  "english": "painful",             "korean": "고통스러운",                    "sentence": "The injection was ___.",                         "answer": "painful" },
+    { "no": 9,  "english": "for these reasons",   "korean": "이러한 이유로",                 "sentence": "For these ___, I agree with the plan.",          "answer": "reasons" },
+    { "no": 10, "english": "hardly",              "korean": "거의 아니다[없다]",             "sentence": "I ___ ever eat sweets.",                         "answer": "hardly" },
+    { "no": 11, "english": "get involved in",     "korean": "~에 관여하다",                  "sentence": "Don't get ___ in their fight.",                  "answer": "involved" },
+    { "no": 12, "english": "hang the laundry",    "korean": "빨래를 널다",                   "sentence": "I ___ the laundry outside on sunny days.",       "answer": "hang" },
+    { "no": 13, "english": "occasionally",        "korean": "가끔",                          "sentence": "I ___ visit my grandparents.",                   "answer": "occasionally" },
+    { "no": 14, "english": "mop",                 "korean": "대걸레로 닦다, 닦아 내다",      "sentence": "Please ___ the kitchen floor.",                  "answer": "mop" },
+    { "no": 15, "english": "for free",            "korean": "공짜로",                        "sentence": "The concert was ___ free.",                      "answer": "for" },
+    { "no": 16, "english": "encourage",           "korean": "격려하다",                      "sentence": "My teacher ___s me to read more.",               "answer": "encourages" },
+    { "no": 17, "english": "properly",            "korean": "제대로, 적절히",                "sentence": "Do your homework ___.",                          "answer": "properly" },
+    { "no": 18, "english": "compensation",        "korean": "보상",                          "sentence": "He received ___ for the damage.",                "answer": "compensation" },
+    { "no": 19, "english": "prevent",             "korean": "막다, 예방하다",                "sentence": "Wash your hands to ___ colds.",                  "answer": "prevent" },
+    { "no": 20, "english": "a sense of pride",    "korean": "자부심",                        "sentence": "She felt a ___ of pride after winning.",         "answer": "sense" }
+  ]
+}

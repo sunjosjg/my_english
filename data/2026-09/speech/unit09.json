@@ -1,0 +1,27 @@
+{
+  "type": "SPEECH",
+  "unit": "9",
+  "title": "Speech - Unit 9. Having a Part-Time Job",
+  "words": [
+    { "no": 1,  "english": "for a living",             "korean": "생계를 위해서, 밥벌이로", "sentence": "He works as a chef for a ___.",               "answer": "living" },
+    { "no": 2,  "english": "work ethic",               "korean": "노동관, 직업 윤리",       "sentence": "She has a strong work ___.",                  "answer": "ethic" },
+    { "no": 3,  "english": "pros and cons",            "korean": "장단점",                  "sentence": "Let's discuss the ___ and cons of the plan.", "answer": "pros" },
+    { "no": 4,  "english": "responsible",              "korean": "책임감 있는",             "sentence": "She is ___ for her actions.",                 "answer": "responsible" },
+    { "no": 5,  "english": "be on time",               "korean": "시간을 잘 지키다",        "sentence": "Please be ___ time for the meeting.",         "answer": "on" },
+    { "no": 6,  "english": "miss work",                "korean": "결근하다",                "sentence": "He ___ed work because of a cold.",            "answer": "missed" },
+    { "no": 7,  "english": "stress out",               "korean": "스트레스를 주다",         "sentence": "Exams always ___ me out.",                    "answer": "stress" },
+    { "no": 8,  "english": "valuable",                 "korean": "소중한, 귀중한",          "sentence": "Your advice is very ___.",                    "answer": "valuable" },
+    { "no": 9,  "english": "to add to that",           "korean": "덧붙이자면",              "sentence": "To ___ to that, it's also cheaper.",          "answer": "add" },
+    { "no": 10, "english": "take up",                  "korean": "(시간이) 들다, 소요되다", "sentence": "This project will ___ up a lot of time.",     "answer": "take" },
+    { "no": 11, "english": "depend on",                "korean": "~에 달려 있다",           "sentence": "It ___s on the weather.",                     "answer": "depend" },
+    { "no": 12, "english": "reasonable",               "korean": "적정한",                  "sentence": "The price is very ___.",                      "answer": "reasonable" },
+    { "no": 13, "english": "manageable",               "korean": "감당할 수 있는",          "sentence": "The workload is ___.",                        "answer": "manageable" },
+    { "no": 14, "english": "reduce",                   "korean": "줄이다",                  "sentence": "We must ___ plastic use.",                    "answer": "reduce" },
+    { "no": 15, "english": "cut into",                 "korean": "~을 줄이다",              "sentence": "Long meetings ___ into my work time.",        "answer": "cut" },
+    { "no": 16, "english": "instill",                  "korean": "불어넣다, 주입하다",      "sentence": "Parents ___ good values in their kids.",      "answer": "instill" },
+    { "no": 17, "english": "effectively",              "korean": "효과적으로",              "sentence": "She solved the problem ___.",                 "answer": "effectively" },
+    { "no": 18, "english": "independent",              "korean": "독립적인",                "sentence": "She is very ___ for her age.",                "answer": "independent" },
+    { "no": 19, "english": "figure out",               "korean": "알아내다, 이해하다",      "sentence": "I can't ___ out this puzzle.",                "answer": "figure" },
+    { "no": 20, "english": "have a negative impact on", "korean": "~에 나쁜 영향을 주다",   "sentence": "Junk food has a ___ impact on health.",       "answer": "negative" }
+  ]
+}

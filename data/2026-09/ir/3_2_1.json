@@ -1,0 +1,22 @@
+{
+  "type": "IR",
+  "unit": "3.2.1",
+  "title": "Integrated Reading - Word List 3.2.1",
+  "words": [
+    { "no": 1,  "english": "desert",      "pos": "n.",   "korean": "사막",    "sentence": "Camels can walk for many days in the hot, dry ___.",   "answer": "desert" },
+    { "no": 2,  "english": "unusual",     "pos": "adj.", "korean": "흔치 않은", "sentence": "It's ___ to see snow in hot summer.",                "answer": "unusual" },
+    { "no": 3,  "english": "store",       "pos": "v.",   "korean": "저장하다", "sentence": "We ___ snacks in the kitchen so we can eat them later.", "answer": "store" },
+    { "no": 4,  "english": "city",        "pos": "n.",   "korean": "도시",    "sentence": "I live in a big ___ with many cars and tall buildings.", "answer": "city" },
+    { "no": 5,  "english": "rainforest",  "pos": "n.",   "korean": "열대우림", "sentence": "The ___ has tall trees and many colorful plants.",     "answer": "rainforest" },
+    { "no": 6,  "english": "weed",        "pos": "n.",   "korean": "잡초",    "sentence": "We pulled all the ___s so the flowers could grow well.", "answer": "weed" },
+    { "no": 7,  "english": "diversity",   "pos": "n.",   "korean": "다양성",  "sentence": "There is great ___ of animals in the rainforest.",     "answer": "diversity" },
+    { "no": 8,  "english": "environment", "pos": "n.",   "korean": "환경",    "sentence": "Trees, water, and air are part of the ___.",           "answer": "environment" },
+    { "no": 9,  "english": "organism",    "pos": "n.",   "korean": "유기체",  "sentence": "A small ___ lives in the water and can't be seen easily.", "answer": "organism" },
+    { "no": 10, "english": "protect",     "pos": "v.",   "korean": "보호하다", "sentence": "We must ___ animals by keeping their homes safe.",    "answer": "protect" },
+    { "no": 11, "english": "unique",      "pos": "adj.", "korean": "독특한",  "sentence": "Every snowflake is special and ___.",                   "answer": "unique" },
+    { "no": 12, "english": "spine",       "pos": "n.",   "korean": "가시",    "sentence": "This cactus has long ___s that can hurt your hand.",    "answer": "spine" },
+    { "no": 13, "english": "branch",      "pos": "n.",   "korean": "나뭇가지", "sentence": "A squirrel ran quickly across the tree ___.",         "answer": "branch" },
+    { "no": 14, "english": "crack",       "pos": "n.",   "korean": "갈라짐",  "sentence": "There is a long ___ in the wall of the old house.",    "answer": "crack" },
+    { "no": 15, "english": "broad",       "pos": "adj.", "korean": "넓은",    "sentence": "The road is ___ enough for two big buses.",            "answer": "broad" }
+  ]
+}
