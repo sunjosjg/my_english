@@ -57,7 +57,7 @@
     .ps-left {
       flex: 0 0 54%;
       display: flex; flex-direction: column; overflow: hidden;
-      border-right: 5px solid #ff0000;
+      border-right: 1.5px dashed #ef4444;
       padding-right: 3mm;
     }
     .ps-section-label {
@@ -80,14 +80,14 @@
     /* ── 오른쪽: 단어 쓰기 (위/아래 절반) ── */
     .ps-right {
       flex: 1; display: flex; flex-direction: column; overflow: hidden;
-      border-right: 5px solid #ff0000;
+      border-right: 1.5px dashed #ef4444;
       padding-right: 3mm;
     }
     .ps-write-half {
       flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0;
     }
     .ps-write-half + .ps-write-half {
-      margin-top: 3mm; padding-top: 3mm; border-top: 5px solid #ff0000;
+      margin-top: 3mm; padding-top: 3mm; border-top: 1.5px dashed #ef4444;
     }
     #ps-write-left, #ps-write-right { flex: 1; overflow: hidden; }
     .ps-write-row {
@@ -102,19 +102,19 @@
     .ps-bank {
       margin-top: 3mm; padding: 1.5mm 4mm;
       border: 1px solid #999; border-radius: 3px; flex-shrink: 0;
-      border-top: 5px solid #ff0000;
+      border-top: 1.5px dashed #ef4444;
     }
     .ps-bank-title { font-size: 8pt; font-weight: bold; margin-bottom: 1mm; }
     #ps-bank-words { display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 8pt; }
 
     /* ── 정답 ── */
     .ps-answers {
-      margin-top: 2.5mm; border-top: 5px solid #ff0000;
+      margin-top: 2.5mm; border-top: 1.5px dashed #ef4444;
       padding-top: 2mm; flex-shrink: 0;
     }
     .ps-ans-title { font-size: 7pt; font-weight: bold; color: #666; margin-bottom: 1.5mm; }
     .ps-ans-cols  { display: flex; gap: 4mm; }
-    .ps-ans-col   { flex: 1; border-left: 5px solid #ff0000; padding-left: 2mm; }
+    .ps-ans-col   { flex: 1; border-left: 1.5px dashed #ef4444; padding-left: 2mm; }
     .ps-ans-col:first-child { border-left: none; padding-left: 0; }
     .ps-ans-label { font-size: 7pt; font-weight: bold; color: #888; margin-bottom: 0.5mm; }
     .ps-ans-list  { columns: 2; column-gap: 4px; font-size: 7.5pt; color: #555; }
@@ -127,12 +127,12 @@
       #screen-bar  { display: none !important; }
       #preview-wrap { padding: 0; }
       #print-sheet  { box-shadow: none; min-height: 297mm; height: 297mm; overflow: hidden; }
-      .ps-left { border-right-color: #ff0000 !important; border-right-style: solid !important; }
-      .ps-right { border-right-color: #ff0000 !important; border-right-style: solid !important; }
-      .ps-write-half + .ps-write-half { border-top-color: #ff0000 !important; border-top-style: solid !important; }
-      .ps-bank { border-top-color: #ff0000 !important; border-top-style: solid !important; }
-      .ps-answers { border-top-color: #ff0000 !important; border-top-style: solid !important; }
-      .ps-ans-col { border-left-color: #ff0000 !important; border-left-style: solid !important; }
+      .ps-left { border-right-color: #ef4444 !important; border-right-style: dashed !important; }
+      .ps-right { border-right-color: #ef4444 !important; border-right-style: dashed !important; }
+      .ps-write-half + .ps-write-half { border-top-color: #ef4444 !important; border-top-style: dashed !important; }
+      .ps-bank { border-top-color: #ef4444 !important; border-top-style: dashed !important; }
+      .ps-answers { border-top-color: #ef4444 !important; border-top-style: dashed !important; }
+      .ps-ans-col { border-left-color: #ef4444 !important; border-left-style: dashed !important; }
     }
   </style>
 </head>
